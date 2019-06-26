@@ -1,0 +1,14 @@
+.container {
+    width: 60%;
+    margin: 2% 35%;
+}
+
+.side-nav {
+    margin: 5% 5%;
+    position: absolute;
+}
+.side-nav h2 {
+    font-family: 'Barlow Condensed', sans-serif;
+    color: rgb(51, 102, 214);
+    font-weight: 900px;
+}

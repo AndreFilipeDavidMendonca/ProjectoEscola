@@ -1,0 +1,83 @@
+<head>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons">
+</head>
+<body>
+       
+    <div class="row">
+        <div class="table-responsive">
+            <div class="col-md-12">
+                <ul>
+                    <li><h2>Tabela de Clientes</h2></li>
+                    <li><input type="text" class="searchClient" id="NomeClient" placeholder="Procurar Nome de Cliente"></li>
+                    <li><input type="text" class="searchClient" id="NumClient" placeholder="Procurar Número de Cliente"></li>
+                    <li><input type="text" class="searchClient" id="NifClient" placeholder="Procurar NIF"></li>
+                    <li style="margin-left: 5%;">Fraudulentos<input  type="checkbox" name="fraudulent" id="fraudulent" [value]="fraudulent"></li>
+                    <li >Desactivas<input type="checkbox" name="activatedAccount" id="activatedAccount" [value]="activatedAccount" ></li>
+                    <li><button class="btn-success">Search</button></li>
+                </ul>
+            </div>
+            <br>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Nome Completo</th>
+                    <th>Número de Cliente</th>
+                    <th>Morada</th>
+                    <th>Código-Postal</th>
+                    <th>NIF</th>
+                    <th>Data de Nascimento</th>
+                    <th>EMail</th>
+                    <th>Contacto</th>
+                    <th>Género</th>
+                    <th>Data de Inscrição</th>
+                    <th>Fim de Contracto</th>
+                    <th>Número de Serviços</th>
+                    <th>Mensalidade</th>
+                    <th>Serviço</th>
+                    <th>Estado</th>
+                    <th>Fraudulento</th>
+                    <th class="text-right">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let client of clients " >
+                    <td scope="row">{{ client.fullName }}</td>
+                    <td>{{ client.clientNumber }}</td>
+                    <td>{{ client.adress }}</td>
+                    <td>{{ client.postCode }}</td>
+                    <td>{{ client.nif }}</td>
+                    <td>{{ client.birthDate }}</td>
+                    <td>{{ client.email }}</td>
+                    <td>{{ client.phoneNumber }}</td>
+                    <td>{{ client.gender }}</td>
+                    <td>{{ client.contractDate }}</td>
+                    <td>{{ client.endContract }}</td>
+                    <td>{{ client.numberOfServices }}</td>
+                    <td>{{ client.monthlyPayment }}</td>
+                    <td>{{ client.serviceName }} </td>
+                    <td>{{ client.status }}</td>
+                    <td>{{ client.fraudulent }}</td>
+                    <td class="td-actions text-right">
+                        <button type="button" rel="tooltip" class="btn btn-success btn-just-icon btn-sm" data-original-title="" title="" [routerLink]="['/client', client.id]" (click)="getClient()">
+                            <i class="material-icons">person</i>
+                        </button>
+                        <button type="button" rel="tooltip" class="btn btn-primary btn-just-icon btn-sm" data-original-title="" title="" >
+                            <i class="material-icons">edit</i>
+                        </button>
+                        <button type="button" rel="tooltip" class="btn btn-danger btn-just-icon btn-sm" data-original-title="" title="" style="cursor: pointer;" (click)="onDeleteClient(client.id, client.fullName)">
+                            <i class="material-icons">close</i>
+                        </button>
+                    </td>
+                </tr>   
+                </tbody>
+            </table>
+        </div>
+    </div>
+            
+
+
+</body>
