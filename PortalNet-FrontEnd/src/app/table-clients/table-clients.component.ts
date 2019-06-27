@@ -35,10 +35,10 @@ export class TableClientsComponent implements OnInit {
 
 
 clients: Client [] = [
-   new Client('André Mendonça', '123455', 'Rua Francisco', '1495-062', '208786333', '18/01/1989', 'andredmendonca@gmail.com', '913471637', 'male', '25/06/2019', '25/06/2020',
-   '1', '50€', 'Pacote 4 Serviços', 'Activo', 'Não'),
-   new Client('André Mendonça', '123455', 'Rua Francisco', '1495-062', '208786333', '18/01/1989', 'andredmendonca@gmail.com', '913471637', 'male', '25/06/2019', '25/06/2020',
-   '1', '50€', 'Pacote 4 Serviços', 'Activo', 'Não')
+   new Client('André Mendonça', 123455, 'Algés', 'Rua Francisco', '1495-062', '208786333', '18/01/1989', 'andredmendonca@gmail.com', 913471637, 'male', '25/06/2019', '25/06/2020',
+   1, '50€', 'Pacote 4 Serviços', true, false),
+   new Client('André Mendonça', 123455, 'Algés', 'Rua Francisco', '1495-062', '208786333', '18/01/1989', 'andredmendonca@gmail.com', 913471637, 'male', '25/06/2019', '25/06/2020',
+   1, '50€', 'Pacote 4 Serviços', true, false)
 ];
 
 

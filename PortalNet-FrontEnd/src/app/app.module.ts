@@ -9,10 +9,10 @@ import { HomeComponent } from './home/home.component';
 import { TableClientsComponent } from './table-clients/table-clients.component';
 import { ClientComponent } from './client/client.component';
 import { AdministratorComponent } from './administrator/administrator.component';
-import { CreateServiceComponent } from './create-service/create-service.component';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ServicesTableComponent } from './services/services-table/services-table.component';
 
 
 
@@ -23,7 +23,7 @@ const appRoutes: Routes =  [
   { path: 'registration', component: RegistrationComponent },
   { path: 'clientTable', component: TableClientsComponent },
   { path: 'administrator', component: AdministratorComponent },
-  { path: 'createService', component: CreateServiceComponent }
+  { path: 'servicesTable', component: ServicesTableComponent }
   
    
 ];
@@ -37,7 +37,7 @@ const appRoutes: Routes =  [
     TableClientsComponent,
     AdministratorComponent,
     ClientComponent,
-    CreateServiceComponent
+    ServicesTableComponent
   ],
 
   imports: [

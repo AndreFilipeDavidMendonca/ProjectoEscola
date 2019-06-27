@@ -1,29 +1,31 @@
 export class Client {
     public fullName: string;
-    public clientNumber: string;
+    public clientNumber: number;
     public adress: string;
+    public city: string;
     public postCode: string;
     public nif: string;
     public birthDate: string;
     public email: string;
-    public phoneNumber: string;
+    public phoneNumber: number;
     public gender: string;
     public contractDate: string;
     public endContract: string;
-    public numberOfServices: string;
+    public numberOfServices: number;
     public monthlyPayment: string;
     public serviceName: string;
-    public status: string;
-    public fraudulent: string;
+    public status: boolean;
+    public fraudulent: boolean;
 
     
-    constructor(fullName: string, clientNumber: string, adress: string, postCode: string, nif: string, birthDate: string, email: string, phoneNumber: string, 
-                gender: string, contractDate: string, endContract: string, numberOfServices: string, monthlyPayment: string, 
-                serviceName: string, status: string, fraudulent: string){
+    constructor(fullName: string, clientNumber: number, adress: string, city: string, postCode: string, nif: string, birthDate: string, email: string, phoneNumber: number, 
+                gender: string, contractDate: string, endContract: string, numberOfServices: number, monthlyPayment: string, 
+                serviceName: string, status: boolean, fraudulent: boolean){
 
         this.fullName = fullName;
         this.clientNumber = clientNumber;
         this.adress = adress;
+        this.city = city;
         this.postCode = postCode;
         this.nif = nif;
         this.birthDate = birthDate;
