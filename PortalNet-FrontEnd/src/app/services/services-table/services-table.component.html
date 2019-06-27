@@ -26,14 +26,15 @@
               </tr>
           </thead>
           <tbody>
-              <tr *ngFor="let client of clients " >
+              <tr *ngFor="let service of services " >
                   <td scope="row">{{ service.id }}</td>
                   <td>{{ service.name }}</td>
                   <td>{{ service.internet }}</td>
                   <td>{{ service.tv }}</td>
                   <td>{{ service.mobilePhone }}</td>
                   <td>{{ service.phone }}</td>
-                  <td>{{ service.price }}</td>
+                  <td>{{ service.loyalty }}</td>
+                  <td>{{ service.price }}</td>                  
                   <td>{{ service.creationDate }}</td>
                   <td>{{ service.status }}</td>
                   <td class="td-actions text-right">
