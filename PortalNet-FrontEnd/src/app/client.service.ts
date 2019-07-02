@@ -44,7 +44,7 @@ API = 'http://localhost:4200';
   }
 
   getById(id: number) {
-    return this.http.get<Client>(this.API + '/clients/' + id);
+    return this.http.get<Client>(this.API + '/client/' + id);
   }
 
   addClient(user: string) {
@@ -52,11 +52,11 @@ API = 'http://localhost:4200';
   }
 
   updateClient(id: number, client: string) {
-    return this.http.put(this.API + '/clients/' + id, client);
+    return this.http.put(this.API + '/client/' + id, client);
   }
 
   deleteClient(id: number): Observable<{}> {
-    return this.http.delete(this.API + '/clients/' + id);
+    return this.http.delete(this.API + '/client/' + id);
   }
 }
 

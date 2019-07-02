@@ -29,6 +29,13 @@
             </div>
         </div>
         <div class="form-group">
+            <label for="adress" class="col-sm-4 control-label">Localidade*</label>
+            <div class="col-sm-12">
+                <input type="text" id="city" placeholder="Introduza a sua Morada" class="form-control" ngModel name="city" #city="ngModel" required>
+                <span class="help-block" *ngIf="!city.valid && city.touched">Introduza a sua Localidade!</span>
+            </div>
+        </div>
+        <div class="form-group">
             <label for="email" class="col-sm-4 control-label">Email* </label>
             <div class="col-sm-12">
                 <input type="email" id="email" placeholder="Introduza o seu Email" class="form-control" ngModel name="email" #email="ngModel" email autofocus required>
@@ -72,7 +79,7 @@
         <div class="form-group">
             <label for="phoneNumber" class="col-sm-5 control-label">Telemóvel</label>
             <div class="col-sm-12">
-                <input type="phoneNumber" id="phoneNumber" placeholder="Insira o seu número de telemóvel" class="form-control" ngModel name="phoneNumber">
+                <input type="text" id="phoneNumber" placeholder="Insira o seu número de telemóvel" class="form-control" ngModel name="phoneNumber">
             </div>
         </div>
         <div class="form-group">
@@ -105,7 +112,6 @@
         <button type="submit" class="btn btn-primary" [disabled]="!f.valid">Registar</button>
         <button type="reset" class="btn btn-danger" (click)="onReset()" style="margin-left: 1%;">Limpar</button>
     </form> 
-    <button class="btn btn-default" routerLink="/clientTable">Tabela de Clientes</button>
 </div> 
 </body>
 

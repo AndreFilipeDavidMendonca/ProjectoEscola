@@ -7,7 +7,7 @@ export class Client {
     public nif: string;
     public birthDate: string;
     public email: string;
-    public phoneNumber: number;
+    public mobilePhone: number;
     public gender: string;
     public contractDate: string;
     public endContract: string;
@@ -18,7 +18,7 @@ export class Client {
     public fraudulent: boolean;
 
     
-    constructor(fullName: string, clientNumber: number, adress: string, city: string, postCode: string, nif: string, birthDate: string, email: string, phoneNumber: number, 
+    constructor(fullName: string, clientNumber: number, adress: string, city: string, postCode: string, nif: string, birthDate: string, email: string, mobilePhone: number, 
                 gender: string, contractDate: string, endContract: string, numberOfServices: number, monthlyPayment: string, 
                 serviceName: string, status: boolean, fraudulent: boolean){
 
@@ -30,7 +30,7 @@ export class Client {
         this.nif = nif;
         this.birthDate = birthDate;
         this.email = email;
-        this.phoneNumber = phoneNumber;
+        this.mobilePhone = mobilePhone;
         this.gender = gender;
         this.contractDate = contractDate;
         this.endContract = endContract;

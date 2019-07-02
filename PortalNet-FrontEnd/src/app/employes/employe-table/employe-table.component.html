@@ -1,0 +1,44 @@
+<head>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons">
+  </head>
+  <body>
+       
+    <div class="row">
+        <div class="table-responsive">
+          <h2>Tabela de Funcionários</h2>
+          <button type="button" class="btn-success" style="margin-left: 1%; border-radius: 3px;" routerLink="/createEmploye">Criar Operador</button>
+          <br><br><br>
+          <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nome</th>
+                    <th>Cargo</th>
+                    <th>E-Mail</th>
+                    <th class="text-right">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let employe of employes " >
+                    <td scope="row">{{ employe.id }}</td>
+                    <td>{{ employe.name }}</td>
+                    <td>{{ employe.email }}</td>
+                    <td>{{ employe.role }}</td>
+                    <td class="td-actions text-right">
+                        <button type="button" rel="tooltip" class="btn btn-danger btn-just-icon btn-sm" data-original-title="" title="" style="cursor: pointer;" (click)="onDeleteEmploye(employe.id, employe.name)">
+                            <i class="material-icons">close</i>
+                        </button>
+                    </td>
+                </tr>   
+                </tbody>
+            </table>
+        </div>
+    </div>
+            
+  
+  
+  </body>
+  

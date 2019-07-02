@@ -1,7 +1,7 @@
 <head>
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
-  <link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
+ 
+ 
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons">
 </head>
@@ -9,7 +9,9 @@
      
   <div class="row">
       <div class="table-responsive">
-      <table class="table">
+        <h2>Tabela de Serviços</h2>
+        <br>
+        <table class="table">
           <thead>
               <tr>
                   <th>Id Serviço</th>
@@ -38,7 +40,7 @@
                   <td>{{ service.creationDate }}</td>
                   <td>{{ service.status }}</td>
                   <td class="td-actions text-right">
-                      <button type="button" rel="tooltip" class="btn btn-primary btn-just-icon btn-sm" data-original-title="" title=""  [routerLink]="['/serviceForm', service.id]" (click)="getService()">
+                      <button type="button" rel="tooltip" class="btn btn-primary btn-just-icon btn-sm" data-original-title="" title=""  routerLink="/createService" (click)="getService()">
                           <i class="material-icons">edit</i>
                       </button>
                       <button type="button" rel="tooltip" class="btn btn-danger btn-just-icon btn-sm" data-original-title="" title="" style="cursor: pointer;" (click)="onDeleteCService(service.id, service.name)">

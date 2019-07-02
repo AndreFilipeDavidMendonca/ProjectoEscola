@@ -5,5 +5,25 @@
 body {
     position: absolute;
     margin: 5% 0 0 10%;
+    width: 80%;
 }
 
+
+
+img {
+    width: 250px;
+    height: 200px;
+    margin: 0 auto;
+}
+
+
+
+.col-md-4 {
+    width: 100%;
+}
+
+
+
+p.card-text {
+    width: 100%;
+}

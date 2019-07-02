@@ -9,12 +9,16 @@ nav {
 }
 
 .nav-link {
-    text-transform: capitalize;
-    color: blue;
-    font-size: 15px;
+    text-transform: uppercase;
+    color:  rgb(43, 75, 255);
+    font-size: 25px;
+}
+
+.nav-link:hover {
+    color:  rgb(112, 133, 253);
 
 }
 
 .navbar-toggler-icon {
-    color: blue;
+    color:  rgb(43, 75, 255);
 }

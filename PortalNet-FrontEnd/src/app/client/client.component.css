@@ -12,3 +12,13 @@
     color: rgb(51, 102, 214);
     font-weight: 900px;
 }
+
+
+ input.ng-invalid.ng-touched, select.ng-invalid.ng-touched {
+    border: 1px solid red;
+ }
+ 
+ span {
+    font-size: 13px;
+    color: red;
+ }
