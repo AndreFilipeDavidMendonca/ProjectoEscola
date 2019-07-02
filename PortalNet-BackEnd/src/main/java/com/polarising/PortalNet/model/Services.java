@@ -2,78 +2,126 @@ package com.polarising.PortalNet.model;
 
 import java.util.Date;
 
+import javax.annotation.Generated;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+
+import org.springframework.data.annotation.Id;
 import org.springframework.stereotype.Component;
 
+@Entity
 @Component
 public class Services {
 
-    private int serviceID;
+	@javax.persistence.Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+    private Long serviceID;
     private String name;
-    private String netSpeed;
-    private String numOfChannels;
-    private String housePhonePlan;
-    private String mobilePhonePlan;
+    private String internet;
+    private String tv;
+    private String phone;
+    private String mobilePhone;
     private int loyalty;
     private float price;
-    private Date contractCreationDate;
-    private boolean active;
+    private String creationDate;
+    private boolean status;
+    
+    
+    public Services() {}
 
-    public Services(int serviceID, String name, String netSpeed, String numOfChannels, String housePhonePlan, String mobilePhonePlan, int loyalty, float price, Date contractCreationDate, boolean active) {
-        this.serviceID = serviceID;
+    public Services(String name, String internet, String tv, String phone, String mobilePhone, int loyalty, float price, String creationDate, boolean status) {
         this.name = name;
-        this.netSpeed = netSpeed;
-        this.numOfChannels = numOfChannels;
-        this.housePhonePlan = housePhonePlan;
-        this.mobilePhonePlan = mobilePhonePlan;
+        this.internet = internet;
+        this.tv = tv;
+        this.phone = phone;
+        this.mobilePhone = mobilePhone;
         this.loyalty = loyalty;
         this.price = price;
-        this.contractCreationDate = contractCreationDate;
-        this.active = active;
+        this.creationDate = creationDate;
+        this.status = status;
     }
 
-    public int getServiceID() {
-        return serviceID;
-    }
+	public Long getServiceID() {
+		return serviceID;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public void setServiceID(Long serviceID) {
+		this.serviceID = serviceID;
+	}
 
-    public String getNetSpeed() {
-        return netSpeed;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public String getNumOfChannels() {
-        return numOfChannels;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public String getHousePhonePlan() {
-        return housePhonePlan;
-    }
+	public String getInternet() {
+		return internet;
+	}
 
-    public String getMobilePhonePlan() {
-        return mobilePhonePlan;
-    }
+	public void setInternet(String internet) {
+		this.internet = internet;
+	}
 
-    public int getLoyalty() {
-        return loyalty;
-    }
+	public String getTv() {
+		return tv;
+	}
 
-    public float getPrice() {
-        return price;
-    }
+	public void setTv(String tv) {
+		this.tv = tv;
+	}
 
-    public Date getContractCreationDate() {
-        return contractCreationDate;
-    }
+	public String getPhone() {
+		return phone;
+	}
 
-    public boolean isActive() {
-        return active;
-    }
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
 
-    public void setActive(boolean active) {
-        this.active = active;
-    }
+	public String getMobilePhone() {
+		return mobilePhone;
+	}
 
+	public void setMobilePhone(String mobilePhone) {
+		this.mobilePhone = mobilePhone;
+	}
+
+	public int getLoyalty() {
+		return loyalty;
+	}
+
+	public void setLoyalty(int loyalty) {
+		this.loyalty = loyalty;
+	}
+
+	public float getPrice() {
+		return price;
+	}
+
+	public void setPrice(float price) {
+		this.price = price;
+	}
+
+	public String getCreationDate() {
+		return creationDate;
+	}
+
+	public void setCreationDate(String creationDate) {
+		this.creationDate = creationDate;
+	}
+
+	public boolean isStatus() {
+		return status;
+	}
+
+	public void setStatus(boolean status) {
+		this.status = status;
+	}
+
+   
 }
 

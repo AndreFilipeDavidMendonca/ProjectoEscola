@@ -11,134 +11,211 @@ import org.hibernate.validator.internal.IgnoreForbiddenApisErrors;
 import org.springframework.stereotype.Component;
 
 @Entity
+@Component
 public class Client {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-    private int clientID;
-    
+    private long clientID;
+	private int clientNumber;
     private int nif;
-    private int clientNumber;
-    private String fullName;
+    private String name;
     private String address;
-    private int postalCode;
+    private String postalCode;
     private String city;
-    private int phoneNumber;
+    private int mobilePhone;
     private String email;
-    private String password;
     private String gender;
-    private String contractDate;
-    private String endOfContract;
-    private float monthlyPayment;
+    private String password;
+    private String entryDate;
+    private String endContract;
+    private int numberOfServices;
+    private String serviceName;
+    private String monthlyPay;
     private boolean fraudulent;
-    private boolean active;
-    private boolean awaitsConfirmation;
+    private boolean status;
+    private String birthDate;
+
     
     public Client() {}
 
-    public Client(int nif, int clientNumber, String fullName, String address, int postalCode, String city,
-                   int phoneNumber, String email, String password, String gender, String contractDate, String endOfContract,
-                   float monthlyPayment, boolean fraudulent, boolean active, boolean awaitsConfirmation) {
+    public Client( int clientNumber, int nif, String name, String address, String postalCode, String city,
+                   int mobilePhone, String email, String gender, String password, String entryDate, String endContract, int numberOfServices, String serviceName,
+                   String monthlyPay, boolean fraudulent, boolean status, String birthDate) {
+    	
+    
+    	this.clientNumber = clientNumber;
         this.nif = nif;
-        this.clientNumber = clientNumber;
-        this.fullName = fullName;
+        this.name = name;
         this.address = address;
         this.postalCode = postalCode;
         this.city = city;
-        this.phoneNumber = phoneNumber;
+        this.mobilePhone = mobilePhone;
         this.email = email;
-        this.password = password;
         this.gender = gender;
-        this.contractDate = contractDate;
-        this.endOfContract = endOfContract;
-        this.monthlyPayment = monthlyPayment;
+        this.password = password;
+        this.entryDate = entryDate;
+        this.numberOfServices = numberOfServices;
+        this.serviceName = serviceName;
+        this.endContract = endContract;
+        this.monthlyPay = monthlyPay;
         this.fraudulent = fraudulent;
-        this.active = active;
-        this.awaitsConfirmation = awaitsConfirmation;
+        this.status= status;
+        this.birthDate = birthDate;
     }
 
-    public int getClientNumber() {
-        return clientNumber;
-    }
-    
+	public String getBirthDate() {
+		return birthDate;
+	}
 
+	public void setBirthDate(String birthDate) {
+		this.birthDate = birthDate;
+	}
 
-    public int getNIF() {
-        return nif;
-    }
+	public long getClientID() {
+		return clientID;
+	}
 
-    public String getName() {
-        return fullName;
-    }
+	public void setClientID(long clientID) {
+		this.clientID = clientID;
+	}
 
-    public String getAddress() {
-        return address;
-    }
+	public int getClientNumber() {
+		return clientNumber;
+	}
 
-    public int getPostalCode() {
-        return postalCode;
-    }
+	public void setClientNumber(int clientNumber) {
+		this.clientNumber = clientNumber;
+	}
 
-    public String getCity() {
-        return city;
-    }
+	public int getNif() {
+		return nif;
+	}
 
-    public int getMobilePhone() {
-        return phoneNumber;
-    }
+	public void setNif(int nif) {
+		this.nif = nif;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public String getPassword() {
-        return password;
-    }
-    
-    public String getEndOfContract() {
-        return endOfContract;
-    }
-    
-    public String getGender() {
-        return gender;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public String getContractDate() {
-        return contractDate;
-    }
+	public String getAddress() {
+		return address;
+	}
 
-    public float getMonthlyPayment() {
-        return monthlyPayment;
-    }
+	public void setAddress(String address) {
+		this.address = address;
+	}
 
-    public boolean isFraudulent() {
-        return fraudulent;
-    }
+	public String getPostalCode() {
+		return postalCode;
+	}
 
-    public boolean isActive() {
-        return active;
-    }
+	public void setPostalCode(String postalCode) {
+		this.postalCode = postalCode;
+	}
 
-    public boolean isAwaitsConfirmation() {
-        return awaitsConfirmation;
-    }
+	public String getCity() {
+		return city;
+	}
 
-    public void setFraudulent(boolean fraudulent) {
-        this.fraudulent = fraudulent;
-    }
+	public void setCity(String city) {
+		this.city = city;
+	}
 
-    public void setActive(boolean active) {
-        this.active = active;
-    }
+	public int getMobilePhone() {
+		return mobilePhone;
+	}
 
-    public void setAwaitsConfirmation(boolean awaitsConfirmation) {
-        this.awaitsConfirmation = awaitsConfirmation;
-    }
+	public void setMobilePhone(int mobilePhone) {
+		this.mobilePhone = mobilePhone;
+	}
 
-    public void setMonthlyPay(float monthlyPayment) {
-        this.monthlyPayment = monthlyPayment;
-    }
-    
-   
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getEntryDate() {
+		return entryDate;
+	}
+
+	public void setEntryDate(String entryDate) {
+		this.entryDate = entryDate;
+	}
+
+	public String getEndContract() {
+		return endContract;
+	}
+
+	public void setEndContract(String endContract) {
+		this.endContract = endContract;
+	}
+
+	public int getNumberOfServices() {
+		return numberOfServices;
+	}
+
+	public void setNumberOfServices(int numberOfServices) {
+		this.numberOfServices = numberOfServices;
+	}
+
+	public String getServiceName() {
+		return serviceName;
+	}
+
+	public void setServiceName(String serviceName) {
+		this.serviceName = serviceName;
+	}
+
+	public String getMonthlyPay() {
+		return monthlyPay;
+	}
+
+	public void setMonthlyPay(String monthlyPay) {
+		this.monthlyPay = monthlyPay;
+	}
+
+	public boolean isFraudulent() {
+		return fraudulent;
+	}
+
+	public void setFraudulent(boolean fraudulent) {
+		this.fraudulent = fraudulent;
+	}
+
+	public boolean isStatus() {
+		return status;
+	}
+
+	public void setStatus(boolean status) {
+		this.status = status;
+	}
+
+	
 }
 

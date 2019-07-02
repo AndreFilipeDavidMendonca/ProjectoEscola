@@ -16,6 +16,7 @@ import { ServicesTableComponent } from './services/services-table/services-table
 import { CreateServiceComponent } from './services/create-service/create-service.component';
 import { CreateEmployeComponent } from './employes/create-employe/create-employe.component';
 import { EmployeTableComponent } from './employes/employe-table/employe-table.component';
+import { ClientService } from './client.service';
 
 
 
@@ -58,7 +59,7 @@ const appRoutes: Routes =  [
     NgbModule
   ],
   
-  providers: [NgbModalConfig, NgbModal, NgbModalModule],
+  providers: [NgbModalConfig, NgbModal, NgbModalModule, ClientService],
   bootstrap: [AppComponent, HomeComponent],
   exports: [ HomeComponent ]
 })

@@ -17,30 +17,15 @@ const httpOptions = {
 })
 
 export class ClientService {
-    clientSelected = new Subject<Client[]>();
-    onClientSelected = new Subject<number>();
-    private clients: Client[];
-    
-    constructor(private http: HttpClient, private errorService: ErrorService) { }
+      
+    constructor(private http: HttpClient) { }
 
-getClients() {
-    return this.clients.slice();
-}
 
-// addClient(client: Client) {
-//     this.clients.push(client);
-//     this.clientSelected.next(this.clients.slice());
-// }
 
-onClientAdded (clients: Client[]) {
-    this.clients.push(...clients);
-    this.clientSelected.next(this.clients.slice());
-}
-
-API = 'http://localhost:4200';
+API = 'http://localhost:8080';
 
   getAll() {
-    return this.http.get<Client[]>(this.API + '/clients')
+    return this.http.get<Client[]>(this.API + '/clientsTable')
   }
 
   getById(id: number) {

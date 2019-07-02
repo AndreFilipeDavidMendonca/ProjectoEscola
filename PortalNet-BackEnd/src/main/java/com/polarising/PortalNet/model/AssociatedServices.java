@@ -7,17 +7,19 @@ import org.springframework.stereotype.Component;
 @Component
 public class AssociatedServices {
 
-    private int ID;
-    private int clientID;
+    private int id;
+    private long clientID;
     private String serviceID;
     private String installationAddress;
     private int postalCode;
     private Date alterationDate;
     private Date contractEndDate;
     private int workerNumber;
+    
+    public AssociatedServices() {}
 
-    public AssociatedServices(int ID, int clientID, String serviceID, String installationAddress, int postalCode, Date alterationDate, Date contractEndDate, int workerNumber) {
-        this.ID = ID;
+    public AssociatedServices(int id, long clientID, String serviceID, String installationAddress, int postalCode, Date alterationDate, Date contractEndDate, int workerNumber) {
+        this.id = id;
         this.clientID = clientID;
         this.serviceID = serviceID;
         this.installationAddress = installationAddress;
@@ -27,11 +29,11 @@ public class AssociatedServices {
         this.workerNumber = workerNumber;
     }
 
-    public int getID() {
-        return ID;
+    public int getId() {
+        return id;
     }
 
-    public int getClientID() {
+    public long getClientID() {
         return clientID;
     }
 

@@ -6,43 +6,61 @@ import org.springframework.stereotype.Component;
 public class Workers {
 
     private int numID;
-    private String Name;
+    private String name;
     private String email;
-    private String position;
+    private String role;
     private String password;
-    private String gender;
+    
+    public Workers() {}
 
-    public Workers(int numID, String name, String email, String position, String password, String gender) {
+    public Workers(int numID, String name, String email, String role, String password) {
         this.numID = numID;
-        Name = name;
+        this.name = name;
         this.email = email;
-        this.position = position;
+        this.role = role;
         this.password = password;
-        this.gender = gender;
     }
 
-    public int getNumID() {
-        return numID;
-    }
+	public int getNumID() {
+		return numID;
+	}
 
-    public String getName() {
-        return Name;
-    }
+	public void setNumID(int numID) {
+		this.numID = numID;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public String getPosition() {
-        return position;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public String getPassword() {
-        return password;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public String getGender() {
-        return gender;
-    }
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+   
 }
 

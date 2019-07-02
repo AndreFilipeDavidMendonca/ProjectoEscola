@@ -24,6 +24,7 @@
         <table class="table">
             <thead>
                 <tr>
+                    <th>Client ID</th>
                     <th>Nome Completo</th>
                     <th>Número de Cliente</th>
                     <th>Morada</th>
@@ -46,20 +47,21 @@
             </thead>
             <tbody>
                 <tr *ngFor="let client of clients " >
-                    <td scope="row">{{ client.fullName }}</td>
+                    <td scope="row">{{ client.clientID }}</td>
+                    <td>{{ client.name }}</td>
                     <td>{{ client.clientNumber }}</td>
-                    <td>{{ client.adress }}</td>
+                    <td>{{ client.address }}</td>
                     <td>{{ client.city }}</td>
-                    <td>{{ client.postCode }}</td>
+                    <td>{{ client.postalCode }}</td>
                     <td>{{ client.nif }}</td>
                     <td>{{ client.birthDate }}</td>
                     <td>{{ client.email }}</td>
-                    <td>{{ client.phoneNumber }}</td>
+                    <td>{{ client.mobilePhone }}</td>
                     <td>{{ client.gender }}</td>
-                    <td>{{ client.contractDate }}</td>
+                    <td>{{ client.entryDate }}</td>
                     <td>{{ client.endContract }}</td>
                     <td>{{ client.numberOfServices }}</td>
-                    <td>{{ client.monthlyPayment }}</td>
+                    <td>{{ client.monthlyPay }}</td>
                     <td>{{ client.serviceName }} </td>
                     <td>{{ client.status }}</td>
                     <td>{{ client.fraudulent }}</td>

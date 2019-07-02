@@ -1,45 +1,52 @@
 export class Client {
-    public fullName: string;
+    
+    public clientID: number;
+    public name: string;
     public clientNumber: number;
     public adress: string;
     public city: string;
-    public postCode: string;
-    public nif: string;
+    public postalCode: string;
+    public nif: number;
     public birthDate: string;
     public email: string;
     public mobilePhone: number;
     public gender: string;
-    public contractDate: string;
+    public entryDate: string;
     public endContract: string;
     public numberOfServices: number;
-    public monthlyPayment: string;
+    public monthlyPay: string;
     public serviceName: string;
     public status: boolean;
     public fraudulent: boolean;
+    public password: string;
+   
 
     
-    constructor(fullName: string, clientNumber: number, adress: string, city: string, postCode: string, nif: string, birthDate: string, email: string, mobilePhone: number, 
-                gender: string, contractDate: string, endContract: string, numberOfServices: number, monthlyPayment: string, 
-                serviceName: string, status: boolean, fraudulent: boolean){
+    constructor(clientID: number, name: string, clientNumber: number, adress: string, city: string, postalCode: string, nif: number, birthDate: string, email: string, mobilePhone: number, 
+                gender: string, entryDate: string, endContract: string, numberOfServices: number, monthlyPay: string, 
+                serviceName: string, status: boolean, fraudulent: boolean, password: string){
 
-        this.fullName = fullName;
+            
+
+        this.clientID = clientID;    
+        this.name = name;
         this.clientNumber = clientNumber;
         this.adress = adress;
         this.city = city;
-        this.postCode = postCode;
+        this.postalCode = postalCode;
         this.nif = nif;
         this.birthDate = birthDate;
         this.email = email;
         this.mobilePhone = mobilePhone;
         this.gender = gender;
-        this.contractDate = contractDate;
+        this.entryDate = entryDate;
         this.endContract = endContract;
         this.numberOfServices = numberOfServices;
-        this.monthlyPayment = monthlyPayment;
+        this.monthlyPay = monthlyPay;
         this.serviceName = serviceName;
         this.status = status;
         this.fraudulent = fraudulent;
-        
+        this.password = password;
     }
 }
 

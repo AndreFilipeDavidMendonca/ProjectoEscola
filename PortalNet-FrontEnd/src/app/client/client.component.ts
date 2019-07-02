@@ -1,6 +1,9 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Client } from '../client.model';
+import { ClientService } from '../client.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { first } from 'rxjs/operators';
 
 
 @Component({
@@ -13,13 +16,9 @@ export class ClientComponent implements OnInit {
   placeHolder: string;
   nameToChange: string;
   
-  clients: Client [] = [
-    new Client('André Mendonça', 123455, 'Rua Francisco',  'Algés', '1495-062', '208786333', '18/01/1989', 'andredmendonca@gmail.com', 913471637, 'male', '25/06/2019', '25/06/2020',
-    1, '50€', 'Pacote 4 Serviços', true, false),
-    
- ];
+  clients: Client [] = [];
   
-  constructor(private modalService: NgbModal) {}
+  constructor(private modalService: NgbModal, private clientService: ClientService, private router: Router, private route: ActivatedRoute) {}
 
   openBackDropCustomClass(content) {
     this.modalService.open(content, {backdropClass: 'light-blue-backdrop'});
@@ -90,9 +89,15 @@ export class ClientComponent implements OnInit {
     this.modalService.open(content, { centered: true });
   }
 
-  
+  fetchUsers() {
+    this.clientService.getAll().pipe(first()).subscribe(clients => {
+      this.clients = clients;
+     });
+
+  }
 
   ngOnInit() {
+    this.fetchUsers();
   }
 
   

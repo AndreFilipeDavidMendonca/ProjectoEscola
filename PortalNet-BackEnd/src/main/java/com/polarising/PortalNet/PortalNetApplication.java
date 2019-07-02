@@ -1,4 +1,4 @@
-package com.polarising.PortalNet.Application;
+package com.polarising.PortalNet;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
