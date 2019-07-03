@@ -48,8 +48,7 @@ public class ClientController {
 	@RequestMapping(path = "/clientsTable", produces= {"application/json"})
 	public List<Client> getClients()
 	{	
-		List<Client> clients = (List<Client>) clientRepository.findAll();
-		return clients;
+		return (List<Client>) clientRepository.findAll();
 	}
 	
 	@GetMapping("/client/name/{name}")

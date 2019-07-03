@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Service } from 'src/app/service.model';
+import { first } from 'rxjs/operators';
+import { AlertService } from 'src/app/alert.service';
+import { ServicesService } from 'src/app/services.service';
 
 @Component({
   selector: 'app-services-table',
@@ -8,14 +11,21 @@ import { Service } from 'src/app/service.model';
   styleUrls: ['./services-table.component.css']
 })
 export class ServicesTableComponent implements OnInit {
-  services: Service[] = [
-    new Service(1, 'Pacote 4 Serviços', '100 MB/s', '100 canais', '3GB', 'Grátis para redes fixas', '50€', '3 anos', '27/06/2019', true)
-  ];
+  services: Service[] = [];
 
-  
-  constructor(private router: Router, private route: ActivatedRoute) { }
+  constructor(private servicesService: ServicesService, private alertService: AlertService, private router: Router, private route: ActivatedRoute) { }
+
+
+fetchServices() {
+    this.servicesService.getAll().pipe(first()).subscribe(services => {
+      this.services = services;
+     });
+
+  }
 
   ngOnInit() {
+    this.fetchServices();
   }
+
 
 }

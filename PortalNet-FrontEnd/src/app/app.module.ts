@@ -14,8 +14,8 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ServicesTableComponent } from './services/services-table/services-table.component';
 import { CreateServiceComponent } from './services/create-service/create-service.component';
-import { CreateEmployeComponent } from './employes/create-employe/create-employe.component';
-import { EmployeTableComponent } from './employes/employe-table/employe-table.component';
+import { CreateEmployeeComponent } from './employees/create-employee/create-employee.component';
+import { EmployeesTableComponent } from './employees/employees-table/employees-table.component';
 import { ClientService } from './client.service';
 
 
@@ -29,8 +29,8 @@ const appRoutes: Routes =  [
   { path: 'administrator', component: AdministratorComponent },
   { path: 'servicesTable', component: ServicesTableComponent },
   { path: 'createService', component: CreateServiceComponent },
-  { path: 'createEmploye', component: CreateEmployeComponent },
-  { path: 'employeTable', component: EmployeTableComponent }
+  { path: 'createEmployee', component: CreateEmployeeComponent },
+  { path: 'employeesTable', component: EmployeesTableComponent }
   
    
 ];
@@ -46,8 +46,8 @@ const appRoutes: Routes =  [
     ClientComponent,
     ServicesTableComponent,
     CreateServiceComponent,
-    CreateEmployeComponent,
-    EmployeTableComponent
+    CreateEmployeeComponent,
+    EmployeesTableComponent
   ],
 
   imports: [

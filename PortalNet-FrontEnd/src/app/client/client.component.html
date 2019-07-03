@@ -9,7 +9,7 @@
       <h2>Número de Cliente</h2>
       <h4>{{ client.clientNumber }}</h4><br><br><br>
       <h2>Nome Completo</h2>
-      <h4>{{ client.fullName }}</h4>
+      <h4>{{ client.name }}</h4>
       <br><br><br>
       <h2>Associar Serviço</h2>
       <button class="btn btn-primary btn-just-icon btn-sm" (click)="openModalAssociateService(ASModal)"><i class="material-icons">edit</i></button>
@@ -27,7 +27,7 @@
             </tr>
             <tr>
               <td>Data de Inscrição</td>
-              <td>{{ client.contractDate }}</td>
+              <td>{{ client.entryDate }}</td>
               <td>
               </td>
             </tr>
@@ -45,7 +45,7 @@
             </tr>
             <tr>
             <td>Mensalidade</td>
-            <td>{{ client.monthlyPayment }}</td>
+            <td>{{ client.monthlyPay }}</td>
             <td>
             </td>
           </tr>
@@ -57,7 +57,7 @@
           </tr>
           <tr>
             <td>Morada</td>
-            <td>{{ client.adress }}</td>
+            <td>{{ client.address }}</td>
             <td>
               <button type="button" rel="tooltip" class="btn btn-primary btn-just-icon btn-sm" data-original-title="" title="" (click)="openModalAdress(content)">
                 <i class="material-icons">edit</i>
@@ -75,7 +75,7 @@
           </tr>
           <tr>
             <td >Código-Postal</td>
-            <td>{{ client.postCode }}</td>
+            <td>{{ client.postalCode }}</td>
             <td>
               <button type="button" rel="tooltip" class="btn btn-primary btn-just-icon btn-sm" data-original-title="" title="" (click)="openModalPostalCode(content)">
                 <i class="material-icons">edit</i>

@@ -46,82 +46,40 @@ public class Services {
 		return serviceID;
 	}
 
-	public void setServiceID(Long serviceID) {
-		this.serviceID = serviceID;
-	}
-
 	public String getName() {
 		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public String getInternet() {
 		return internet;
 	}
 
-	public void setInternet(String internet) {
-		this.internet = internet;
-	}
-
 	public String getTv() {
 		return tv;
-	}
-
-	public void setTv(String tv) {
-		this.tv = tv;
 	}
 
 	public String getPhone() {
 		return phone;
 	}
 
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-
 	public String getMobilePhone() {
 		return mobilePhone;
-	}
-
-	public void setMobilePhone(String mobilePhone) {
-		this.mobilePhone = mobilePhone;
 	}
 
 	public int getLoyalty() {
 		return loyalty;
 	}
 
-	public void setLoyalty(int loyalty) {
-		this.loyalty = loyalty;
-	}
-
 	public float getPrice() {
 		return price;
-	}
-
-	public void setPrice(float price) {
-		this.price = price;
 	}
 
 	public String getCreationDate() {
 		return creationDate;
 	}
 
-	public void setCreationDate(String creationDate) {
-		this.creationDate = creationDate;
-	}
-
 	public boolean isStatus() {
 		return status;
 	}
-
-	public void setStatus(boolean status) {
-		this.status = status;
-	}
-
-   
 }
 

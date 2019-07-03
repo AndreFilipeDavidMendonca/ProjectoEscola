@@ -24,8 +24,7 @@ public class PortalNetHttpRequest {
 	private final RestTemplate restTemplate = new RestTemplate();
 	
 	public String get(String subPath)
-	{
-		
+	{	
 		HttpHeaders headers = new HttpHeaders();
 		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
 		HttpEntity<String> entity = new HttpEntity<String>(headers);
@@ -36,7 +35,6 @@ public class PortalNetHttpRequest {
 	
 	public String post(String subPath, Object body)
 	{
-		
 		HttpHeaders headers = new HttpHeaders();
 		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
 		HttpEntity<Object> entity = new HttpEntity<Object>(body, headers);
@@ -45,6 +43,16 @@ public class PortalNetHttpRequest {
 		return response.getBody();		
 	}
 	
+	public String postToTibco(String subPath, String body, String soapHeaderValue)
+	{
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_XML);
+		headers.add("SOAPAction", soapHeaderValue);
+		HttpEntity<Object> entity = new HttpEntity<Object>(body, headers);
+		ResponseEntity<String> response = restTemplate.exchange(url + subPath,HttpMethod.POST,entity,String.class);
+		
+		return response.getBody();
+	}
 	
 	
 }

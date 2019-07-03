@@ -4,14 +4,12 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.polarising.PortalNet.Repository.ServiceRepository;
 import com.polarising.PortalNet.Utilities.PortalNetHttpRequest;
-import com.polarising.PortalNet.model.Client;
 import com.polarising.PortalNet.model.Services;
 
 @RestController
@@ -26,12 +24,10 @@ public class ServicesController {
 	@Autowired
 	PortalNetHttpRequest httpRequest;
 	
-	@RequestMapping("/servicesTable", produces= {"application/json"});
+	@RequestMapping(path = "/servicesTable", produces= {"application/json"})
 	public List<Services> getServices()
 	{
-		List<Services> Service = (List<Services>) serviceRepository.findAll();
-		return Service;
-		
+		return (List<Services>) serviceRepository.findAll();
 	}
 
 }

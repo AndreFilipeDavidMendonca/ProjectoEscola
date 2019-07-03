@@ -9,28 +9,27 @@
     <div class="row">
         <div class="table-responsive">
           <h2>Tabela de Funcionários</h2>
-          <button type="button" class="btn-success" style="margin-left: 1%; border-radius: 3px;" routerLink="/createEmploye">Criar Operador</button>
+          <button type="button" class="btn-success" style="margin-left: 1%; border-radius: 3px;" routerLink="/createEmployee">Criar Operador</button>
           <br><br><br>
           <table class="table">
             <thead>
                 <tr>
-                    <th>Id</th>
+                    <th>Colaborador Id</th>
                     <th>Nome</th>
                     <th>Cargo</th>
                     <th>E-Mail</th>
-                    <th class="text-right">Actions</th>
+                    <th class="text-right">Ações</th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let employe of employes " >
-                    <td scope="row">{{ employe.id }}</td>
-                    <td>{{ employe.name }}</td>
-                    <td>{{ employe.email }}</td>
-                    <td>{{ employe.role }}</td>
+                <tr *ngFor="let employee of employees " >
+                    <td scope="row">{{ employee.employeeId }}</td>
+                    <td>{{ employee.name }}</td>
+                    <td>{{ employee.email }}</td>
+                    <td>{{ employee.role }}</td>
                     <td class="td-actions text-right">
-                        <button type="button" rel="tooltip" class="btn btn-danger btn-just-icon btn-sm" data-original-title="" title="" style="cursor: pointer;" (click)="onDeleteEmploye(employe.id, employe.name)">
-                            <i class="material-icons">close</i>
-                        </button>
+                        <span class="table-remove"><button type="button"
+                            class="btn btn-danger btn-rounded btn-sm my-0">Remover</button></span>
                     </td>
                 </tr>   
                 </tbody>

@@ -36,9 +36,6 @@ export class TableClientsComponent implements OnInit {
 
 clients: Client [] = [];
 
-
-// private subscription: Subscription;
-
 constructor(private clientService: ClientService, private alertService: AlertService, private router: Router, private route: ActivatedRoute) { }
 
 

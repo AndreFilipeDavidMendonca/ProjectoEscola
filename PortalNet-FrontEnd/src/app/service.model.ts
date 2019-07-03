@@ -1,5 +1,5 @@
 export class Service {
-    public id: number;
+    public serviceID: number;
     public name: string;
     public internet: string;
     public tv: string;
@@ -10,9 +10,9 @@ export class Service {
     public creationDate: string;
     public status: boolean;
     
-    constructor (id: number, name: string, internet: string, tv: string, mobilePhone: string, phone: string, price: string, loyalty: string, creationDate: string, status: boolean)  {
+    constructor (serviceID: number, name: string, internet: string, tv: string, mobilePhone: string, phone: string, price: string, loyalty: string, creationDate: string, status: boolean)  {
 
-        this.id = id;
+        this.serviceID = serviceID;
         this.name = name;
         this.internet = internet;
         this.tv = tv;
