@@ -19,10 +19,10 @@ public class ClientCommandLineRunner implements CommandLineRunner {
 
 	public void run(String... args) throws Exception {
 		
-		clientRepository.save(new Client(12345, 1111111, "Andre", "Rua da Alegria", "1000-245",
+		clientRepository.save(new Client(1, 12345, 1111111, "Andre", "Rua da Alegria", "1000-245",
 				"Lisboa", 911111111, "bernardo@polarising.com", "male",
 				"bernardoAdmin", "27/06/2019", "27/06/2020", 2, "Pacote 4 Serviços",  "100€", true, true, "18/01/1989"));
-		clientRepository.save(new Client(12345, 1111111, "Andre", "Rua da Alegria", "1000-245",
+		clientRepository.save(new Client(2, 12345, 1111111, "Bernardo", "Rua da Alegria", "1000-245",
 				"Lisboa", 911111111, "bernardo@polarising.com", "male",
 				"bernardoAdmin", "27/06/2019", "27/06/2020", 2, "Pacote 4 Serviços",  "100€", true, true, "18/01/1989"));
 		

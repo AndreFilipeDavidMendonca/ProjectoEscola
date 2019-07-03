@@ -1,6 +1,6 @@
 export class Client {
     
-    public clientID: number;
+    public clientID?: number;
     public name: string;
     public clientNumber: number;
     public adress: string;

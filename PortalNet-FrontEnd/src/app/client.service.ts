@@ -28,8 +28,8 @@ API = 'http://localhost:8080';
     return this.http.get<Client[]>(this.API + '/clientsTable')
   }
 
-  getById(id: number) {
-    return this.http.get<Client>(this.API + '/client/' + id);
+  getById(clientId: number) {
+    return this.http.get<Client>(this.API + '/client/' + clientId);
   }
 
   addClient(user: string) {

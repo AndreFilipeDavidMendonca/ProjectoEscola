@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, Input } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Client } from '../client.model';
 import { ClientService } from '../client.service';
@@ -12,11 +12,12 @@ import { first } from 'rxjs/operators';
   styleUrls: ['./client.component.css']
 })
 export class ClientComponent implements OnInit {
+  @Input() clientId: number;
   dataToChange: string;
   placeHolder: string;
   nameToChange: string;
   
-  clients: Client [] = [];
+  client: Client;
   
   constructor(private modalService: NgbModal, private clientService: ClientService, private router: Router, private route: ActivatedRoute) {}
 
@@ -27,13 +28,13 @@ export class ClientComponent implements OnInit {
 
   openModalAdress(content) {
     this.modalService.open(content, { windowClass: 'dark-modal' });
-    this.dataToChange = 'adress';
+    this.dataToChange = 'address';
     this.nameToChange = 'Morada';
     this.placeHolder = 'Introduza a nova Morada!'
   }
   openModalPostalCode(content) {
     this.modalService.open(content, { windowClass: 'dark-modal' });
-    this.dataToChange = 'postCode';
+    this.dataToChange = 'postalCode';
     this.nameToChange = 'Código-Postal';
     this.placeHolder = 'Introduza o novo Código-Postal!'
   }
@@ -88,18 +89,30 @@ export class ClientComponent implements OnInit {
   openVerticallyCentered(content) {
     this.modalService.open(content, { centered: true });
   }
+  ngOnInit() {
+  }
 
-  fetchUsers() {
-    this.clientService.getAll().pipe(first()).subscribe(clients => {
-      this.clients = clients;
-     });
-
+ /*
+  fetchUserById(){
+    this.clientService.getById(this.clientId)
+      .pipe(first())
+      .subscribe(client => {
+        this.client = client;
+      });
   }
 
   ngOnInit() {
-    this.fetchUsers();
+    this.route.paramMap.subscribe(data => {
+      this.clientId = +data.get('clientId');
+      this.fetchUserById();
+    }
+    );
   }
+*/
+
+   
+ }
 
   
 
-}
+

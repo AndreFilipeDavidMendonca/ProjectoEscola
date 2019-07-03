@@ -1,4 +1,4 @@
-import { Component, OnInit, Input} from '@angular/core';
+import { Component, OnInit, Input, Output} from '@angular/core';
 import { Client } from '../client.model';
 import { ClientService } from '../client.service';
 import { Subscription } from 'rxjs';
@@ -26,10 +26,10 @@ const options = {
 })
 
 export class TableClientsComponent implements OnInit {
-// @Input() id: number;
+@Output() clientId: number;
 // clients: Client[] = [];
 // isLoading = true;
-// currenClient: Client;
+currenClient: Client;
 // searchString: string;
 // error = '';
 
