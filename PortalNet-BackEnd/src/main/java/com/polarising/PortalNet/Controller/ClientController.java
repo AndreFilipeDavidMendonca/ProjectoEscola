@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
+//import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,7 +28,7 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.polarising.PortalNet.Repository.ClientCommandLineRunner;
+//import com.polarising.PortalNet.Repository.ClientCommandLineRunner;
 import com.polarising.PortalNet.Repository.ClientRepository;
 import com.polarising.PortalNet.Utilities.PortalNetHttpRequest;
 import com.polarising.PortalNet.model.Client;
@@ -37,7 +37,7 @@ import com.polarising.PortalNet.model.Client;
 @CrossOrigin(origins = "*")
 public class ClientController {
 	
-	private final ObjectMapper mapper = new ObjectMapper();
+
 	
 	@Autowired
 	ClientRepository clientRepository;
@@ -51,29 +51,12 @@ public class ClientController {
 		return (List<Client>) clientRepository.findAll();
 	}
 	
-	@GetMapping("/client/name/{name}")
-	public List<Client> findByName(@PathVariable String name)
+	@GetMapping(path = "/client/{clientId}", produces= {"application/json"})
+	public ResponseEntity<?> getClient(@PathVariable int clientId) throws IOException {
 	{
-		return clientRepository.findByName(name);
+		return new ResponseEntity<>(clientRepository.findByClientId(clientId), HttpStatus.OK);
 	}
 	
-	@GetMapping("/client/postalCode/{postalCode}")
-	public List<Client> findByPostalCode(@PathVariable int postalCode)  //Neste método, adiciono como teste o uso de um get ao Url /client/name/Andre, e faço print na consola.
-	{
-		String string = httpRequest.get("/client/name/Andre");
-		System.out.println(string);
-		return clientRepository.findByPostalCode(postalCode);
-	}	
 	
-	@GetMapping("client/name/{name}/exists")
-	public boolean existsByName(@PathVariable String name)
-	{
-		if (clientRepository.existsByName(name))
-		{
-			return true;
-		}
-		else{
-			return false;
-		}
-	}
+}
 }

@@ -47,7 +47,7 @@
             </thead>
             <tbody>
                 <tr *ngFor="let client of clients">
-                    <td scope="row">{{ client.clientID }}</td>
+                    <td scope="row">{{ client.clientId }}</td>
                     <td>{{ client.name }}</td>
                     <td>{{ client.clientNumber }}</td>
                     <td>{{ client.address }}</td>
@@ -66,7 +66,7 @@
                     <td>{{ client.status }}</td>
                     <td>{{ client.fraudulent }}</td>
                     <td class="td-actions text-right">
-                        <button type="button" rel="tooltip" class="btn btn-success btn-just-icon btn-sm" data-original-title="" title="" routerLink="/client">
+                        <button type="button" rel="tooltip" class="btn btn-success btn-just-icon btn-sm" data-original-title="" title="" [routerLink]="['/client/', client.clientId]">
                             <i class="material-icons">person</i>
                         </button>
                     </td>

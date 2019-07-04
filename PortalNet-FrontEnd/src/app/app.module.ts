@@ -23,7 +23,7 @@ import { ClientService } from './client.service';
 const appRoutes: Routes =  [
   { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
-  { path: 'client', component: ClientComponent},
+  { path: 'client/:clientId', component: ClientComponent},
   { path: 'registration', component: RegistrationComponent },
   { path: 'clientsTable', component: TableClientsComponent },
   { path: 'administrator', component: AdministratorComponent },

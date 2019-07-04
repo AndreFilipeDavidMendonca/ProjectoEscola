@@ -1,6 +1,6 @@
 export class Client {
     
-    public clientID?: number;
+    public clientId?: number;
     public name: string;
     public clientNumber: number;
     public adress: string;
@@ -22,13 +22,13 @@ export class Client {
    
 
     
-    constructor(clientID: number, name: string, clientNumber: number, adress: string, city: string, postalCode: string, nif: number, birthDate: string, email: string, mobilePhone: number, 
+    constructor(clientId: number, name: string, clientNumber: number, adress: string, city: string, postalCode: string, nif: number, birthDate: string, email: string, mobilePhone: number, 
                 gender: string, entryDate: string, endContract: string, numberOfServices: number, monthlyPay: string, 
                 serviceName: string, status: boolean, fraudulent: boolean, password: string){
 
             
 
-        this.clientID = clientID;    
+        this.clientId = clientId;    
         this.name = name;
         this.clientNumber = clientNumber;
         this.adress = adress;

@@ -89,26 +89,24 @@ export class ClientComponent implements OnInit {
   openVerticallyCentered(content) {
     this.modalService.open(content, { centered: true });
   }
-  ngOnInit() {
-  }
 
- /*
-  fetchUserById(){
+ 
+  fetchClientById(){
     this.clientService.getById(this.clientId)
       .pipe(first())
       .subscribe(client => {
-        this.client = client;
+        this.client = client[0];
       });
   }
 
   ngOnInit() {
     this.route.paramMap.subscribe(data => {
       this.clientId = +data.get('clientId');
-      this.fetchUserById();
+      this.fetchClientById();
     }
     );
   }
-*/
+
 
    
  }

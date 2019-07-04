@@ -10,7 +10,7 @@ import com.polarising.PortalNet.model.Client;
 @Repository
 public interface ClientRepository extends CrudRepository<Client, Long>{
 	
-	List<Client> findByName(String name);
+	List<Client> findByClientId(int clientId);
 	
 	Boolean existsByName(String name);
 	

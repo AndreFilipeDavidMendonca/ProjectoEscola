@@ -30,20 +30,20 @@ API = 'http://localhost:8080';
     return this.http.get<Employee[]>(this.API + '/employeesTable')
   }
 
-  getById(id: number) {
-    return this.http.get<Client>(this.API + '/client/' + id);
+  getById(employeeId: number) {
+    return this.http.get<Employee>(this.API + '/client/' + employeeId);
   }
 
-  addClient(user: string) {
-    return this.http.post(this.API + '/auth/signup', user, httpOptions);
+  addEmployee(employee: string) {
+    return this.http.post(this.API + '/auth/signup', employee, httpOptions);
   }
 
-  updateClient(id: number, client: string) {
-    return this.http.put(this.API + '/client/' + id, client);
+  updateEmployee(employeeId: number, employee: string) {
+    return this.http.put(this.API + '/employee/' + employeeId, employee);
   }
 
-  deleteClient(id: number): Observable<{}> {
-    return this.http.delete(this.API + '/client/' + id);
+  deleteEmployee(employeeId: number): Observable<{}> {
+    return this.http.delete(this.API + '/employee/' + employeeId);
   }
 }
 

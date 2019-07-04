@@ -26,7 +26,7 @@ const options = {
 })
 
 export class TableClientsComponent implements OnInit {
-@Output() clientId: number;
+@Input() clientId: number;
 // clients: Client[] = [];
 // isLoading = true;
 currenClient: Client;
@@ -39,7 +39,7 @@ clients: Client [] = [];
 constructor(private clientService: ClientService, private alertService: AlertService, private router: Router, private route: ActivatedRoute) { }
 
 
-fetchUsers() {
+fetchClients() {
     this.clientService.getAll().pipe(first()).subscribe(clients => {
       this.clients = clients;
      });
@@ -47,7 +47,7 @@ fetchUsers() {
   }
 
   ngOnInit() {
-    this.fetchUsers();
+    this.fetchClients();
   }
 
 
