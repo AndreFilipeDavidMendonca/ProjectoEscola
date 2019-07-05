@@ -6,11 +6,12 @@
 <div class="side-nav">
   <div class="row">
     <div class="col-ms-12" >
-      <h2>Número de Cliente</h2>
-      <h4>{{ client.clientNumber }}</h4><br><br><br>
       <h2>Nome Completo</h2>
       <h4>{{ client.name }}</h4>
-      <br><br><br>
+      <br><br>
+      <h2>Número de Cliente</h2>
+      <h4>{{ client.clientNumber }}</h4>
+      <br><br>
       <h2>Associar Serviço</h2>
       <button class="btn btn-primary btn-just-icon btn-sm" (click)="openModalAssociateService(ASModal)"><i class="material-icons">edit</i></button>
     </div>
@@ -18,7 +19,7 @@
 </div>
 <div class="container" >
   <div class="row" >
-    <table class="table table-striped table-light" >
+    <table class="table table-borderless" >
             <tr>
               <td>NIF</td>
               <td>{{ client.nif }}</td>

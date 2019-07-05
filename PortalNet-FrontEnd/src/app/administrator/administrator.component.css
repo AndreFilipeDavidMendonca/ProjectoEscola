@@ -4,11 +4,14 @@
 }
 body {
     position: absolute;
-    margin: 5% 0 0 10%;
+    margin: 7% 0 0 10%;
     width: 80%;
 }
 
-
+h3 {
+    color: rgb(51, 102, 214);
+    font-family: 'Barlow Condensed', sans-serif;
+}
 
 img {
     width: 250px;
@@ -27,3 +30,4 @@ img {
 p.card-text {
     width: 100%;
 }
+

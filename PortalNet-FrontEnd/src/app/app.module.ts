@@ -17,13 +17,14 @@ import { CreateServiceComponent } from './services/create-service/create-service
 import { CreateEmployeeComponent } from './employees/create-employee/create-employee.component';
 import { EmployeesTableComponent } from './employees/employees-table/employees-table.component';
 import { ClientService } from './client.service';
-
+import { FilterPipe} from './filters/filter.pipe';
 
 
 const appRoutes: Routes =  [
   { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
   { path: 'client/:clientId', component: ClientComponent},
+  { path: 'client/:email', component: ClientComponent},
   { path: 'registration', component: RegistrationComponent },
   { path: 'clientsTable', component: TableClientsComponent },
   { path: 'administrator', component: AdministratorComponent },
@@ -47,7 +48,9 @@ const appRoutes: Routes =  [
     ServicesTableComponent,
     CreateServiceComponent,
     CreateEmployeeComponent,
-    EmployeesTableComponent
+    EmployeesTableComponent,
+    FilterPipe
+ 
   ],
 
   imports: [

@@ -1,6 +1,7 @@
 .container {
     width: 60%;
     margin: 2% 35%;
+    font-size: 120%;
 }
 
 .side-nav {
@@ -8,9 +9,9 @@
     position: absolute;
 }
 .side-nav h2 {
-    font-family: 'Barlow Condensed', sans-serif;
+    font-family: 'DM Sans', sans-serif;
     color: rgb(51, 102, 214);
-    font-weight: 900px;
+
 }
 
 

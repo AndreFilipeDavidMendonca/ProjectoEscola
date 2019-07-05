@@ -1,9 +1,10 @@
-package com.polarising.PortalNet.Repository;
+package com.polarising.PortalNet.CommandLineRunner;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import com.polarising.PortalNet.Repository.WorkersRepository;
 import com.polarising.PortalNet.model.Workers;
 
 @Component

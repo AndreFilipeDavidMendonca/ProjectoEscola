@@ -28,8 +28,9 @@
                     <td>{{ employee.email }}</td>
                     <td>{{ employee.role }}</td>
                     <td class="td-actions text-right">
-                        <span class="table-remove"><button type="button"
-                            class="btn btn-danger btn-rounded btn-sm my-0">Remover</button></span>
+                        <a routerLink="/employeesTable"  class="delete">
+                            <i class="material-icons">delete</i>
+                        </a>
                     </td>
                 </tr>   
                 </tbody>

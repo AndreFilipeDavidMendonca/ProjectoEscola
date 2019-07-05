@@ -2,8 +2,7 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     
    
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons">
+   
 </head>
 <body>
        
@@ -11,71 +10,85 @@
         <div class="table-responsive">
             <div class="col-md-12">
                 <ul>
-                    <li><h2>Tabela de Clientes</h2></li>
-                    <li><input type="text" class="searchClient" id="NomeClient" placeholder="Procurar Nome de Cliente"></li>
-                    <li><input type="text" class="searchClient" id="NumClient" placeholder="Procurar Número de Cliente"></li>
-                    <li><input type="text" class="searchClient" id="NifClient" placeholder="Procurar NIF"></li>
-                    <li style="margin-left: 5%;">Fraudulentos<input  type="checkbox" name="fraudulent" id="fraudulent" [value]="fraudulent"></li>
-                    <li >Desactivas<input type="checkbox" name="activatedAccount" id="activatedAccount" [value]="activatedAccount" ></li>
-                    <li><button class="btn-success">Search</button></li>
+                    <li><h2>Tabela de Clientes</h2></li><br><br>
+                    <li><input type="text"  [(ngModel)]="searchText"  class="form-control searchBox" id="NomeClient" placeholder="Procurar Cliente"></li>
+                    <li  style="margin-left: 4%;"><div class="custom-control custom-checkbox">
+                        <input type="checkbox" checked="true"  class="custom-control-input"  [(ngModel)]="filter.fraudulent" (ngModelChange)="filterChange()" id="fraudulent" >
+                            <label class="custom-control-label" for="fraudulent">Fraudulentos</label>
+                        </div>
+                    </li>
+                    <li><div class="custom-control custom-checkbox">
+                        <input type="checkbox" checked="true" class="custom-control-input" [(ngModel)]="filter.status" (ngModelChange)="filterChange()" id="status" >
+                            <label class="custom-control-label" for="status">Activas</label>
+                        </div>
+                    </li>
                 </ul>
             </div>
             <br>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Client ID</th>
-                    <th>Nome Completo</th>
-                    <th>Número de Cliente</th>
-                    <th>Morada</th>
-                    <th>Cidade</th>
-                    <th>Código-Postal</th>
-                    <th>NIF</th>
-                    <th>Data de Nascimento</th>
-                    <th>E-Mail</th>
-                    <th>Contacto</th>
-                    <th>Género</th>
-                    <th>Data de Inscrição</th>
-                    <th>Fim de Contracto</th>
-                    <th>Número de Serviços</th>
-                    <th>Mensalidade</th>
-                    <th>Serviço</th>
-                    <th>Estado</th>
-                    <th>Fraudulento</th>
-                    <th class="text-right">Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let client of clients">
-                    <td scope="row">{{ client.clientId }}</td>
-                    <td>{{ client.name }}</td>
-                    <td>{{ client.clientNumber }}</td>
-                    <td>{{ client.address }}</td>
-                    <td>{{ client.city }}</td>
-                    <td>{{ client.postalCode }}</td>
-                    <td>{{ client.nif }}</td>
-                    <td>{{ client.birthDate }}</td>
-                    <td>{{ client.email }}</td>
-                    <td>{{ client.mobilePhone }}</td>
-                    <td>{{ client.gender }}</td>
-                    <td>{{ client.entryDate }}</td>
-                    <td>{{ client.endContract }}</td>
-                    <td>{{ client.numberOfServices }}</td>
-                    <td>{{ client.monthlyPay }}</td>
-                    <td>{{ client.serviceName }} </td>
-                    <td>{{ client.status }}</td>
-                    <td>{{ client.fraudulent }}</td>
-                    <td class="td-actions text-right">
-                        <button type="button" rel="tooltip" class="btn btn-success btn-just-icon btn-sm" data-original-title="" title="" [routerLink]="['/client/', client.clientId]">
-                            <i class="material-icons">person</i>
-                        </button>
-                    </td>
-                </tr>   
-                </tbody>
-            </table>
+            <div class="checked" *ngIf="filter.fraudulent || filter.status">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Nome Completo</th>
+                            <th>Número de Cliente</th>
+                            <th>NIF</th>
+                            <th>E-Mail</th>
+                            <th>Serviço</th>
+                            <th>Activa</th>
+                            <th>Fraudulenta</th>
+                            <th class="text-right">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let client of filteredClients   | filter: {name: searchText, clientNumber:searchText, nif: searchText}; let i=index;">
+                            <td scope="row">{{ client.name }}</td>
+                            <td>{{ client.clientNumber }}</td>
+                            <td>{{ client.nif }}</td>
+                            <td>{{ client.email }}</td>
+                            <td>{{ client.serviceName }} </td>
+                            <td>{{ client.status }}</td>
+                            <td>{{ client.fraudulent }}</td>
+                            <td class="td-actions text-right">
+                                <a [routerLink]="['/client/', client.clientId]" class="person">
+                                    <i class="material-icons">person</i>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="notChecked" *ngIf="!filter.status && !filter.fraudulent ">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Nome Completo</th>
+                                <th>Número de Cliente</th>
+                                <th>NIF</th>
+                                <th>E-Mail</th>
+                                <th>Serviço</th>
+                                <th>Activa</th>
+                                <th>Fraudulenta</th>
+                                <th class="text-right">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let client of clients | filter: {name: searchText, clientNumber:searchText, nif: searchText}; let i=index;">
+                                <td scope="row">{{ client.name }}</td>
+                                <td>{{ client.clientNumber }}</td>
+                                <td>{{ client.nif }}</td>
+                                <td>{{ client.email }}</td>
+                                <td>{{ client.serviceName }} </td>
+                                <td>{{ client.status }}</td>
+                                <td>{{ client.fraudulent }}</td>
+                                <td class="td-actions text-right">
+                                    <a [routerLink]="['/client/', client.clientId]" class="person">
+                                        <i class="material-icons" >person</i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
-    </div>
-            
-
-
 </body>

@@ -10,9 +10,9 @@ body {
 }
 
 .row  {
-    margin: 7% 0 0 0;
+    margin: 7% 0 0 1%;
     position: absolute;
-    width: 200%;
+    width: 95%;
  
 }
 
@@ -24,7 +24,7 @@ ul li{
 }
 
 input {
-    width: 120%;
+    width: 112%;
 }
 
 .col-ms-10 {

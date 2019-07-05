@@ -1,5 +1,4 @@
 body {
-    background-color: rgba(0, 0, 0, 0.7);
     position: fixed;
 }
 nav {
@@ -11,7 +10,7 @@ nav {
 .nav-link {
     text-transform: uppercase;
     color:  rgb(43, 75, 255);
-    font-size: 25px;
+    font-size: 22px;
 }
 
 .nav-link:hover {
@@ -22,3 +21,4 @@ nav {
 .navbar-toggler-icon {
     color:  rgb(43, 75, 255);
 }
+

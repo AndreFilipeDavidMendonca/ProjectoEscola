@@ -27,14 +27,36 @@ const options = {
 
 export class TableClientsComponent implements OnInit {
 @Input() clientId: number;
-// clients: Client[] = [];
 // isLoading = true;
 currenClient: Client;
-// searchString: string;
+
+searchText: string;
+
+
+filter = { fraudulent: false, status: false};
+
+clients: Client [] = []; 
+filteredClients: Client[] = [];
+notFilteredClients: Client[] = []; 
+
+  filterChange() {
+    this.filteredClients = this.clients.filter(x => 
+       (x.fraudulent === true && this.filter.fraudulent)
+       || (x.status === true && this.filter.status)
+    );
+
+    this.notFilteredClients = this.clients.filter(x => 
+      (x.fraudulent === false && this.filter.fraudulent)
+      || (x.status === false && this.filter.status)
+   );
+
+  }
+
+
 // error = '';
 
 
-clients: Client [] = [];
+
 
 constructor(private clientService: ClientService, private alertService: AlertService, private router: Router, private route: ActivatedRoute) { }
 
@@ -43,7 +65,6 @@ fetchClients() {
     this.clientService.getAll().pipe(first()).subscribe(clients => {
       this.clients = clients;
      });
-
   }
 
   ngOnInit() {

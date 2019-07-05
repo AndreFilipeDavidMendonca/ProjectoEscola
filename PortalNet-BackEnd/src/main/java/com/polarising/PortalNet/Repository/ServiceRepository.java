@@ -3,7 +3,6 @@ package com.polarising.PortalNet.Repository;
 import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Repository;
 
 import com.polarising.PortalNet.model.Services;

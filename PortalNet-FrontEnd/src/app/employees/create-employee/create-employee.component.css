@@ -7,8 +7,8 @@ html {
  }
  
  hr {
-    border: 1px solid  rgb(51, 102, 214);
-    background-color:  rgb(51, 102, 214);
+    border: 1px solid  lightgray;
+    background-color:  lightgray;
  }
  *[role="form"] {
     width: 100%;
@@ -23,13 +23,11 @@ html {
  }
  
  *[role="form"] h2 { 
-    font-family: 'Barlow Condensed', sans-serif;
+   font-family: 'DM Sans', sans-serif;
     color: rgb(51, 102, 214);
     font-size: 40px;
-    font-weight: 600;
     margin-top: -6%;
     text-align: center;
-    letter-spacing: 4px;
     text-transform: uppercase;
  }
  

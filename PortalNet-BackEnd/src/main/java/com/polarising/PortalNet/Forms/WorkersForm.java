@@ -1,6 +1,5 @@
 package com.polarising.PortalNet.Forms;
 
-import javax.persistence.Entity;
 import javax.validation.constraints.NotBlank;
 
 import org.springframework.stereotype.Component;

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 public class Client {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
     private int clientId;
 	private int clientNumber;
     private int nif;
@@ -35,11 +36,10 @@ public class Client {
     
     public Client() {}
 
-    public Client( int clientId, int clientNumber, int nif, String name, String address, String postalCode, String city,
+    public Client(int clientNumber, int nif, String name, String address, String postalCode, String city,
                    int mobilePhone, String email, String gender, String password, String entryDate, String endContract, int numberOfServices, String serviceName,
                    String monthlyPay, boolean fraudulent, boolean status, String birthDate) {
     	
-    	this.clientId = clientId;
     	this.clientNumber = clientNumber;
         this.nif = nif;
         this.name = name;
