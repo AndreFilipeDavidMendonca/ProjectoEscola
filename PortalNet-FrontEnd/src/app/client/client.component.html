@@ -1,5 +1,5 @@
 <body>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
+
 
 <br><br><br>
 
@@ -13,7 +13,9 @@
       <h4>{{ client.clientNumber }}</h4>
       <br><br>
       <h2>Associar Serviço</h2>
-      <button class="btn btn-primary btn-just-icon btn-sm" (click)="openModalAssociateService(ASModal)"><i class="material-icons">edit</i></button>
+      <a (click)="openModalAssociateService(ASModal)" class="edit">
+        <i class="material-icons">edit</i>
+      </a>
     </div>
   </div>
 </div>
@@ -60,63 +62,63 @@
             <td>Morada</td>
             <td>{{ client.address }}</td>
             <td>
-              <button type="button" rel="tooltip" class="btn btn-primary btn-just-icon btn-sm" data-original-title="" title="" (click)="openModalAdress(content)">
+              <a (click)="openModalAdress(content)" class="edit">
                 <i class="material-icons">edit</i>
-              </button>
+              </a>
             </td>
           </tr>
           <tr>
             <td>Localidade</td>
             <td>{{ client.city }}</td>
             <td>
-              <button type="button" rel="tooltip" class="btn btn-primary btn-just-icon btn-sm" data-original-title="" title="" (click)="openModalLocality(content)">
+              <a (click)="openModalLocality(content)" class="edit">
                 <i class="material-icons">edit</i>
-              </button>
+            </a>
             </td>
           </tr>
           <tr>
             <td >Código-Postal</td>
             <td>{{ client.postalCode }}</td>
             <td>
-              <button type="button" rel="tooltip" class="btn btn-primary btn-just-icon btn-sm" data-original-title="" title="" (click)="openModalPostalCode(content)">
+              <a (click)="openModalPostalCode(content)" class="edit">
                 <i class="material-icons">edit</i>
-              </button>
+              </a>
             </td>
           </tr>
           <tr>
             <td>Email</td>
             <td>{{ client.email }}</td>
             <td>
-              <button type="button" rel="tooltip" class="btn btn-primary btn-just-icon btn-sm" data-original-title="" title="" (click)="openModalEmail(content)">
+              <a (click)="openModalEmail(content)" class="edit">
                 <i class="material-icons">edit</i>
-              </button>
+              </a>
             </td>
           </tr>
           <tr>
             <td>Telemóvel</td>
             <td>{{ client.mobilePhone }}</td>
             <td>
-              <button type="button" rel="tooltip" class="btn btn-primary btn-just-icon btn-sm" data-original-title="" title="" (click)="openModalMobilePhone(content)">
+              <a (click)="openModalMobilePhone(content)" class="edit">
                 <i class="material-icons">edit</i>
-              </button>
+              </a>
             </td>
           </tr>
           <tr>
             <td>Serviço</td>
             <td>{{ client.serviceName }}</td>
             <td>
-              <button type="button" rel="tooltip" class="btn btn-primary btn-just-icon btn-sm" data-original-title="" title="" (click)="openModalService(service)">
+              <a (click)="openModalService(service)" class="edit">
                 <i class="material-icons">edit</i>
-              </button>
+              </a>
             </td>
           </tr>
           <tr>
             <td>Estado</td>
             <td>{{ client.status }}</td>
             <td>
-              <button type="button" rel="tooltip" class="btn btn-danger btn-just-icon btn-sm" data-original-title="" title="" >
+              <a class="delete">
                 <i class="material-icons">delete</i>
-              </button>
+              </a>
             </td>
           </tr>
           
@@ -203,17 +205,17 @@
   <div class="modal-body">
     <label for="moradaAS">Morada de Instalação</label>
       <input type="text" class="form-control" placeholder="Introduza a morada de instalação!" (input)="updateData($event)"  name="adress" id="adress" #adress="ngModel" ngModel required>
-      <span class="help-block" *ngIf="!adress.valid && adress.touched">Tem de introduzir uma morada para a nova instalação!</span>
+      <span class="help-block" *ngIf="!adress.valid && adress.touched">Introduza uma morada para a instalação!</span>
   </div>
   <div class="modal-body">
       <label for="postCode">Código-Postal</label>
         <input type="text" class="form-control" placeholder="Introduza o Código-Postal" (input)="updateData($event)"  name="postCode" id="postCode" #postCode="ngModel" ngModel required>
-        <span class="help-block" *ngIf="!postCode.valid && postCode.touched">Tem de introduzir um código-postal!</span>
+        <span class="help-block" *ngIf="!postCode.valid && postCode.touched">Introduza um código-postal!</span>
   </div>
   <div class="modal-body">
       <label for="postCode">Localidade</label>
         <input type="text" class="form-control" placeholder="Introduza a Localidade!" (input)="updateData($event)" name="city" id="city" #city="ngModel" ngModel required>
-        <span class="help-block" *ngIf="!city.valid && city.touched">Tem de introduzir uma localidade!</span>
+        <span class="help-block" *ngIf="!city.valid && city.touched">introduza uma localidade!</span>
   </div>
   <div class="modal-body">
     <label for="service">Serviço</label>

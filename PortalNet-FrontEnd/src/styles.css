@@ -1,7 +1,12 @@
-.table a.person .material-icons{
+.table a.person .material-icons {
     color: green;
 }
 
-.table  a.delete .material-icons{
+.table  a.delete .material-icons {
     color: red;
+}
+
+a.edit .material-icons {
+    color: rgb(51, 102, 214);
+    font-size: 150%;
 }
