@@ -17,6 +17,10 @@ import org.springframework.web.client.RestClientException;
 import com.polarising.PortalNet.Forms.WorkersForm;
 import com.polarising.PortalNet.Repository.WorkersRepository;
 import com.polarising.PortalNet.Utilities.PortalNetHttpRequest;
+<<<<<<< HEAD
+=======
+import com.polarising.PortalNet.model.Client;
+>>>>>>> PortalNet
 import com.polarising.PortalNet.model.Workers;
 
 @RestController
@@ -29,6 +33,7 @@ public class WorkersController {
 	@Autowired
 	PortalNetHttpRequest httpRequest;
 	
+<<<<<<< HEAD
 	@GetMapping(path = "/workersTable", produces = {"application/json"})
 	public ResponseEntity<?> getWorkers()
 	{
@@ -38,6 +43,20 @@ public class WorkersController {
 	}
 	
 	@PostMapping(path = "/worker/register")
+=======
+	@GetMapping(path = "/employeesTable", produces = {"application/json"})
+	public ResponseEntity<?> getWorkers()
+	{
+		
+		return new ResponseEntity<List<Workers>>((List<Workers>) workersRepository.findAll(), HttpStatus.OK);
+
+
+	}
+	
+	
+	
+	@PostMapping(path = "/createEmployee")
+>>>>>>> PortalNet
 	public ResponseEntity<?> registerWorker(@Valid @RequestBody WorkersForm workersForm)
 	{
 		try {

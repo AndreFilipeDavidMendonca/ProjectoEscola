@@ -1,0 +1,56 @@
+<head>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+ 
+ 
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons">
+</head>
+<body>
+     
+  <div class="row">
+      <div class="table-responsive">
+        <h2>Tabela de Serviços</h2>
+        <button type="button" class="btn-success" style="margin-left: 1%; border-radius: 3px;" routerLink="/createService">Criar Serviço</button>
+        <br><br><br>
+        <table class="table">
+          <thead>
+              <tr>
+                  <th>Id Serviço</th>
+                  <th>Nome Serviço</th>
+                  <th>Internet</th>
+                  <th>Tv</th>
+                  <th>Telemóvel</th>
+                  <th>Telefone</th>
+                  <th>Fidelização</th>
+                  <th>Preço</th>
+                  <th>Data de Criação</th>
+                  <th>Estado</th>
+                  <th class="text-right">Ações</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let service of services " >
+                  <td scope="row">{{ service.serviceID }}</td>
+                  <td>{{ service.name }}</td>
+                  <td>{{ service.internet }}</td>
+                  <td>{{ service.tv }}</td>
+                  <td>{{ service.mobilePhone }}</td>
+                  <td>{{ service.phone }}</td>
+                  <td>{{ service.loyalty }}</td>
+                  <td>{{ service.price }}</td>                  
+                  <td>{{ service.creationDate }}</td>
+                  <td>{{ service.status }}</td>
+                  <td class="td-actions text-right">
+                    <a routerLink="/servicesTable" class="delete">
+                      <i class="material-icons" >delete</i>
+                    </a>
+                  </td>
+              </tr>   
+              </tbody>
+          </table>
+      </div>
+  </div>
+          
+
+
+</body>

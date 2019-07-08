@@ -1,0 +1,49 @@
+
+<link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
+<body >
+  <br><br><br><br>
+
+<div class="container">
+    <form class="form-horizontal" role="form" (ngSubmit)="onSubmit(f)" #f="ngForm">
+        <h2 id="title">Criar Colaborador</h2>
+        <hr>
+        <br>
+        <div class="form-group">
+            <label for="name" class="col-sm-4 control-label">Nome do Colaborador*</label>
+            <div class="col-sm-12">
+                <input type="text" id="name" placeholder="Introduza o nome colaborador." class="form-control" ngModel name="name" #name="ngModel" autofocus required>
+                <span class="help-block" *ngIf="!name.valid && name.touched">Introduza o nome do colaborador!</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="internet" class="col-sm-4 control-label">E-Mail*</label>
+            <div class="col-sm-12">
+                <input type="text" id="email" placeholder="Introduza o e-mail do colaborador." class="form-control" ngModel name="email" #email="ngModel" autofocus required> 
+                <span class="help-block" *ngIf="!email.valid && email.touched">Introduza o e-mail do colaborador!</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="tv" class="col-sm-4 control-label">Cargo*</label>
+            <div class="col-sm-12">
+                <select type="text" id="role" class="form-control" ngModel name="role" #role="ngModel" required>
+                  <option value="1">Administrador</option>
+                  <option value="2">Operador</option>
+                </select>
+                <span class="help-block" *ngIf="!role.valid && role.touched">Introduza o cargo do colaborador!</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-9 col-sm-offset-3">
+                <span class="help-block" style="color: rgb(0, 0, 0);">*Campos Obrigatórios</span>
+            </div>
+        </div>
+        <br>  
+        <button type="submit" class="btn btn-primary" [disabled]="!f.valid">Registar</button>
+        <button type="reset" class="btn btn-danger" (click)="onReset()" style="margin-left: 1%;">Limpar</button>
+    </form> 
+</div> 
+</body>
+
+
+
+ 
