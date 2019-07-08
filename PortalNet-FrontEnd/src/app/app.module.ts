@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -18,6 +18,7 @@ import { CreateEmployeeComponent } from './employees/create-employee/create-empl
 import { EmployeesTableComponent } from './employees/employees-table/employees-table.component';
 import { ClientService } from './client.service';
 import { FilterPipe} from './filters/filter.pipe';
+
 
 
 const appRoutes: Routes =  [
@@ -59,7 +60,8 @@ const appRoutes: Routes =  [
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
     NgbModalModule.forRoot(),
-    NgbModule
+    NgbModule,
+    ReactiveFormsModule  
   ],
   
   providers: [NgbModalConfig, NgbModal, NgbModalModule, ClientService],

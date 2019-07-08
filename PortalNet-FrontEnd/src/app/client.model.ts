@@ -10,6 +10,7 @@ export class Client {
     public birthDate: string;
     public email: string;
     public mobilePhone: number;
+    public phone: number;
     public gender: string;
     public entryDate: string;
     public endContract: string;
@@ -23,7 +24,7 @@ export class Client {
 
     
     constructor(clientId: number, name: string, clientNumber: number, adress: string, city: string, postalCode: string, nif: number, birthDate: string, email: string, mobilePhone: number, 
-                gender: string, entryDate: string, endContract: string, numberOfServices: number, monthlyPay: string, 
+                gender: string, entryDate: string, phone: number, endContract: string, numberOfServices: number, monthlyPay: string, 
                 serviceName: string, status: boolean, fraudulent: boolean, password: string){
 
             
@@ -38,6 +39,7 @@ export class Client {
         this.birthDate = birthDate;
         this.email = email;
         this.mobilePhone = mobilePhone;
+        this.phone = phone;
         this.gender = gender;
         this.entryDate = entryDate;
         this.endContract = endContract;
