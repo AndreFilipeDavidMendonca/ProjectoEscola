@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import com.polarising.PortalNet.Repository.ClientRepository;
 import com.polarising.PortalNet.Utilities.PortalNetHttpRequest;
@@ -28,6 +29,12 @@ public class ClientController {
 	public ResponseEntity<?> getClients()
 	{	
 		return new ResponseEntity<List<Client>>((List<Client>) clientRepository.findAll(), HttpStatus.OK);
+	}
+	
+	@GetMapping(path = "/client/{clientId}", produces= {"application/json"})
+	public ResponseEntity<?> getClientById(@PathVariable int clientId)
+	{	
+		return new ResponseEntity<List<Client>>((List<Client>) clientRepository.findByClientId(clientId), HttpStatus.OK);
 	}
 	
 }
