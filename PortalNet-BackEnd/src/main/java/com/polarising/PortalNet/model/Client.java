@@ -14,13 +14,13 @@ public class Client {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
     private int clientId;
-	private int clientNumber;
+	private String clientNumber;
     private int nif;
     private String name;
     private String address;
     private String postalCode;
     private String city;
-    private int mobilePhone;
+    private Integer mobilePhone;
     private String email;
     private String gender;
     private String password;
@@ -35,30 +35,31 @@ public class Client {
 
     
     public Client() {}
-
-    public Client(int clientNumber, int nif, String name, String address, String postalCode, String city,
-                   int mobilePhone, String email, String gender, String password, String entryDate, String endContract, int numberOfServices, String serviceName,
-                   String monthlyPay, boolean fraudulent, boolean status, String birthDate) {
-    	
-    	this.clientNumber = clientNumber;
-        this.nif = nif;
-        this.name = name;
-        this.address = address;
-        this.postalCode = postalCode;
-        this.city = city;
-        this.mobilePhone = mobilePhone;
-        this.email = email;
-        this.gender = gender;
-        this.password = password;
-        this.entryDate = entryDate;
-        this.numberOfServices = numberOfServices;
-        this.serviceName = serviceName;
-        this.endContract = endContract;
-        this.monthlyPay = monthlyPay;
-        this.fraudulent = fraudulent;
-        this.status= status;
-        this.birthDate = birthDate;
-    }
+    
+    public Client(String clientNumber, int nif, String name, String address, String postalCode,
+			String city, Integer mobilePhone, String email, String gender, String password, String entryDate,
+			String endContract, int numberOfServices, String serviceName, String monthlyPay, boolean fraudulent,
+			boolean status, String birthDate) {
+		super();
+		this.clientNumber = clientNumber;
+		this.nif = nif;
+		this.name = name;
+		this.address = address;
+		this.postalCode = postalCode;
+		this.city = city;
+		this.mobilePhone = mobilePhone;
+		this.email = email;
+		this.gender = gender;
+		this.password = password;
+		this.entryDate = entryDate;
+		this.endContract = endContract;
+		this.numberOfServices = numberOfServices;
+		this.serviceName = serviceName;
+		this.monthlyPay = monthlyPay;
+		this.fraudulent = fraudulent;
+		this.status = status;
+		this.birthDate = birthDate;
+	}
 
 	public int getClientId() {
 		return clientId;
@@ -68,11 +69,11 @@ public class Client {
 		this.clientId = clientId;
 	}
 
-	public int getClientNumber() {
+	public String getClientNumber() {
 		return clientNumber;
 	}
 
-	public void setClientNumber(int clientNumber) {
+	public void setClientNumber(String clientNumber) {
 		this.clientNumber = clientNumber;
 	}
 
@@ -116,7 +117,7 @@ public class Client {
 		this.city = city;
 	}
 
-	public int getMobilePhone() {
+	public Integer getMobilePhone() {
 		return mobilePhone;
 	}
 

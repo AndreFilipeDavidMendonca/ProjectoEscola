@@ -17,7 +17,6 @@ import org.springframework.web.client.RestClientException;
 import com.polarising.PortalNet.Forms.WorkersForm;
 import com.polarising.PortalNet.Repository.WorkersRepository;
 import com.polarising.PortalNet.Utilities.PortalNetHttpRequest;
-import com.polarising.PortalNet.model.Client;
 import com.polarising.PortalNet.model.Workers;
 
 @RestController
@@ -33,10 +32,7 @@ public class WorkersController {
 	@GetMapping(path = "/employeesTable", produces = {"application/json"})
 	public ResponseEntity<?> getWorkers()
 	{
-		
 		return new ResponseEntity<List<Workers>>((List<Workers>) workersRepository.findAll(), HttpStatus.OK);
-
-
 	}
 	
 	

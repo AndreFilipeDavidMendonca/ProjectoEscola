@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { ErrorService } from './error.service';
 import { Service } from './service.model';
 
 

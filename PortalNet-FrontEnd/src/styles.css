@@ -10,3 +10,7 @@ a.edit .material-icons {
     color: rgb(51, 102, 214);
     font-size: 150%;
 }
+
+a.close .material-icons {
+    color: rgb(255, 0, 0);
+}

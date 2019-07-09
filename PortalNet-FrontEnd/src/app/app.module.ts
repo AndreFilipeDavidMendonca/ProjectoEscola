@@ -18,6 +18,7 @@ import { CreateEmployeeComponent } from './employees/create-employee/create-empl
 import { EmployeesTableComponent } from './employees/employees-table/employees-table.component';
 import { ClientService } from './client.service';
 import { FilterPipe} from './filters/filter.pipe';
+import { AlertComponent } from './alerts/alert.component';
 
 
 
@@ -50,6 +51,7 @@ const appRoutes: Routes =  [
     CreateServiceComponent,
     CreateEmployeeComponent,
     EmployeesTableComponent,
+    AlertComponent,
     FilterPipe
  
   ],

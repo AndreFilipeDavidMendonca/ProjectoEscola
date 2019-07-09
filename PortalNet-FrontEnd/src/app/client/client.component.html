@@ -130,13 +130,12 @@
 <ng-template #content let-modal>
   <div class="modal-header">
     <h4 class="modal-title">Alterar {{ nameToChange }}</h4>
-    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-      <span aria-hidden="true">&times;</span>
-    </button>
+    <a (click)="modal.dismiss('Cross click')" class="close">
+      <i class="material-icons">close</i>
+    </a>
   </div>
   <div class="modal-body">
     <input type="text" class="form-control" placeholder="{{ placeHolder }}" (input)="updateData($event)" id="{{ dataToChange }}" name="{{ dataToChange }}" required> 
-
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-success" (click)="modal.save('saveClick')">Save</button>
@@ -147,9 +146,9 @@
 <ng-template #service let-modal>
   <div class="modal-header">
     <h4 class="modal-title">Alterar Serviço</h4>
-    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-      <span aria-hidden="true">&times;</span>
-    </button>
+    <a (click)="modal.dismiss('Cross click')" class="close">
+        <i class="material-icons">close</i>
+    </a>
   </div>
   <div class="form-group">
     <div class="col-sm-9">
@@ -198,9 +197,9 @@
 <ng-template #ASModal let-modal>
   <div class="modal-header">
     <h4 class="modal-title">Associar Novo Serviço</h4>
-    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-      <span aria-hidden="true">&times;</span>
-    </button>
+    <a (click)="modal.dismiss('Cross click')" class="close">
+        <i class="material-icons">close</i>
+    </a>
   </div>
   <div class="modal-body">
     <label for="moradaAS">Morada de Instalação</label>

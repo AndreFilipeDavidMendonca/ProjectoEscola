@@ -22,3 +22,6 @@ nav {
     color:  rgb(43, 75, 255);
 }
 
+.navbar-brand {
+    margin-left: 80%;
+}

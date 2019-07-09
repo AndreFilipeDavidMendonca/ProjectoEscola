@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { ErrorService } from './error.service';
+
 
 
 const httpOptions = {
@@ -17,7 +17,6 @@ const httpOptions = {
 })
 
 export class ClientService {
-      
     constructor(private http: HttpClient) { }
 
 
@@ -32,9 +31,10 @@ API = 'http://localhost:8080';
     return this.http.get<Client>(this.API + '/client/' + clientId);
   }
 
-  addClient(user: string) {
-    return this.http.post(this.API + '/auth/signup', user, httpOptions);
+  addClient(client: string) {
+    return this.http.post<Client>(this.API + '/registration', client);
   }
+
 
   updateClient(id: number, client: string) {
     return this.http.put(this.API + '/client/' + id, client);

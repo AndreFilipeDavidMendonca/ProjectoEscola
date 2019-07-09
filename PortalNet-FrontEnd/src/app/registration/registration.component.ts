@@ -1,12 +1,11 @@
 import { Component, ViewChild, OnInit} from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { registerClient } from '../registerClient.model';
-import { RegisterClientService } from '../register-client.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ClientService } from '../client.service';
 import { AlertService } from '../alert.service';
 import { first } from 'rxjs/operators';
+import { AlertComponent } from '../alerts/alert.component';
+import { Client } from '../client.model';
 
 @Component({
   selector: 'app-registration',
@@ -16,9 +15,11 @@ import { first } from 'rxjs/operators';
 export class RegistrationComponent implements OnInit{
   genders = ['Male', 'Female'];
   submitted = false;
-  newClientForm: FormGroup;
+  ClientForm: FormGroup;
   clientToJSON: string;
   isLoading = false;
+  error = '';
+  client: Client;
 
   constructor(private route: ActivatedRoute,
     private router: Router,
@@ -29,17 +30,20 @@ export class RegistrationComponent implements OnInit{
 
 
   onReset() {
-
+    this.ClientForm.reset();
   }
 
   ngOnInit(){
-    this.newClientForm = this.formBuilder.group({
+    this.ClientForm = this.formBuilder.group({
       name: ['', Validators.required],
+      nif: ['', Validators.required],
       address: ['', Validators.required],
       postalCode: ['', Validators.required],
       city: ['', Validators.required],
       password: ['', Validators.required],
+      confirmPassword: ['', Validators.required],
       mobilePhone: ['', Validators.required],
+      phone: ['', Validators.required],
       gender: ['', Validators.required],
       birthDate: ['', Validators.required],
       serviceName: ['', Validators.required],
@@ -47,55 +51,48 @@ export class RegistrationComponent implements OnInit{
     });
   }
 
-  get f() {
-    return this.newClientForm.controls;
-  }
 
-  get id() {
-    return this.newClientForm.get('clientId');
-  }
   get email() {
-    return this.newClientForm.get('email');
+    return this.ClientForm.get('email');
   }
 
   get password() {
-    return this.newClientForm.get('password');
+    return this.ClientForm.get('password');
   }
 
-  onClear() {
-    this.newClientForm.reset();
-  }
 
   onSubmit() {
 
-    this.newClientForm.value.password = this.password;
-    console.log(this.newClientForm.value.password);
+    // this.ClientForm.value.password = this.password;
+    // console.log(this.ClientForm.value.password);
     this.submitted = true;
 
-    // reset alerts on submit
-    this.alertService.clear();
+    // // reset alerts on submit
+    // this.alertService.clear();
 
-    // stop here if form is invalid
-    if (this.newClientForm.invalid) {
-      return;
-    }
+    // // stop here if form is invalid
+    // if (this.ClientForm.invalid) {
+    //   return;
+    // }
 
-    this.isLoading = true;
-    // role array to string
-    this.newClientForm.value.role = [this.newClientForm.value.role.toString()];
     // user to JSON
-    this.clientToJSON = JSON.parse(JSON.stringify(this.newClientForm.value));
-    this.clientService.addClient(this.clientToJSON)
-      .pipe(first())
-      .subscribe(
-        data => {
-          this.alertService.success('User added successfully', true);
-          setTimeout(() => { this.router.navigate(['/users']); }, 1500);
-        },
-        error => {
-          this.alertService.error(JSON.parse(JSON.stringify(error)).message);
-          this.isLoading = false;
-        });
+    
+      this.clientToJSON = JSON.parse(JSON.stringify(this.ClientForm.value));
+      this.clientService.addClient(this.clientToJSON)
+        .pipe(first())
+          .subscribe(
+            data => {
+              this.alertService.success('User added successfully', true);
+              setTimeout(() => { this.router.navigate(['/client/', this.client.clientId]); }, 1500);
+            },
+            error => {
+              console.log(error);
+              this.alertService.error(JSON.parse(JSON.stringify(error)).message);
+              this.isLoading = false;
+      });
+      console.log(this.ClientForm.value);
   }
+
+
  
 }
