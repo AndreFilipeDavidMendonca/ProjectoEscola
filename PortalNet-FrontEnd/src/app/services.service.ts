@@ -28,20 +28,12 @@ API = 'http://localhost:8080';
     return this.http.get<Service[]>(this.API + '/servicesTable')
   }
 
-  getById(id: number) {
-    return this.http.get<Client>(this.API + '/client/' + id);
+  addService(service: string) {
+    return this.http.post(this.API + '/servicesTable', service, httpOptions);
   }
 
-  addClient(user: string) {
-    return this.http.post(this.API + '/auth/signup', user, httpOptions);
-  }
-
-  updateClient(id: number, client: string) {
-    return this.http.put(this.API + '/client/' + id, client);
-  }
-
-  deleteClient(id: number): Observable<{}> {
-    return this.http.delete(this.API + '/client/' + id);
+  deleteService(serviceId: number): Observable<{}> {
+    return this.http.delete(this.API + '/servicesTable/' + serviceId);
   }
 }
 

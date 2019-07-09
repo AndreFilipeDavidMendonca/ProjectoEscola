@@ -59,5 +59,9 @@ font-weight: 400px;
         margin: 15% 3%;
         
     }
+
+    form.form-group span {
+        color: red;
+    }
     
 }

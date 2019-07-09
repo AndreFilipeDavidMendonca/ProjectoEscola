@@ -6,6 +6,9 @@ import { AlertService } from '../alert.service';
 import { first } from 'rxjs/operators';
 import { AlertComponent } from '../alerts/alert.component';
 import { Client } from '../client.model';
+import { AuthenticationService } from '../authentication.service';
+import { ErrorInterceptor } from '../interceptors/error.interceptor';
+
 
 @Component({
   selector: 'app-registration',
@@ -63,17 +66,16 @@ export class RegistrationComponent implements OnInit{
 
   onSubmit() {
 
-    // this.ClientForm.value.password = this.password;
-    // console.log(this.ClientForm.value.password);
+  
     this.submitted = true;
 
-    // // reset alerts on submit
-    // this.alertService.clear();
+    // reset alerts on submit
+    this.alertService.clear();
 
-    // // stop here if form is invalid
-    // if (this.ClientForm.invalid) {
-    //   return;
-    // }
+    // stop here if form is invalid
+    if (this.ClientForm.invalid) {
+      return;
+    }
 
     // user to JSON
     
@@ -83,14 +85,14 @@ export class RegistrationComponent implements OnInit{
           .subscribe(
             data => {
               this.alertService.success('User added successfully', true);
-              setTimeout(() => { this.router.navigate(['/client/', this.client.clientId]); }, 1500);
+              // setTimeout(() => { this.router.navigate(['/client/', this.client.clientId]); }, 1500);
             },
             error => {
-              console.log(error);
-              this.alertService.error(JSON.parse(JSON.stringify(error)).message);
+              this.alertService.error(JSON.parse(JSON.stringify(error)));
               this.isLoading = false;
       });
       console.log(this.ClientForm.value);
+      
   }
 
 

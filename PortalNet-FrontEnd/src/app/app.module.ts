@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RegistrationComponent } from './registration/registration.component';
 import { HomeComponent } from './home/home.component';
 import { TableClientsComponent } from './table-clients/table-clients.component';
@@ -19,6 +19,9 @@ import { EmployeesTableComponent } from './employees/employees-table/employees-t
 import { ClientService } from './client.service';
 import { FilterPipe} from './filters/filter.pipe';
 import { AlertComponent } from './alerts/alert.component';
+import { JwtInterceptor } from './interceptors/jwt.interceptor';
+import { ErrorInterceptor } from './interceptors/error.interceptor';
+import { AuthGuard } from './guards/auth.guard';
 
 
 
@@ -66,7 +69,11 @@ const appRoutes: Routes =  [
     ReactiveFormsModule  
   ],
   
-  providers: [NgbModalConfig, NgbModal, NgbModalModule, ClientService],
+  providers: [NgbModalConfig, NgbModal, NgbModalModule, ClientService, AuthGuard,
+      { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+      { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+
+  ],
   bootstrap: [AppComponent, HomeComponent],
   exports: [ HomeComponent ]
 })

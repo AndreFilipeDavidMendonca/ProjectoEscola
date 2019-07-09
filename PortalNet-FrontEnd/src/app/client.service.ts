@@ -35,7 +35,6 @@ API = 'http://localhost:8080';
     return this.http.post<Client>(this.API + '/registration', client);
   }
 
-
   updateClient(id: number, client: string) {
     return this.http.put(this.API + '/client/' + id, client);
   }
