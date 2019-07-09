@@ -3,12 +3,7 @@
 <br><br><br>
 
 <app-alert></app-alert>
-<!-- <div class="portalnetLogo">
-    <div class="col-sm-4">
-        <img src="assets/img/polarising.png" width="150px" alt=""><br>
-        <h1>PortalNet</h1>
-    </div>
-</div> -->
+
 <div class="container">
     <form class="form-horizontal" role="form" [formGroup]="ClientForm" (ngSubmit)="onSubmit()">
         <h2 id="title">Registration</h2>
@@ -17,56 +12,57 @@
         <div class="form-group">
             <label for="name" class="col-sm-4 control-label">Nome Completo*</label>
             <div class="col-sm-12">
-                <input type="text" id="name" placeholder="Introduza o seu Nome Completo" class="form-control" formControlName="name" autofocus required>
+                <input type="text" id="name" placeholder="Introduza o seu Nome Completo" class="form-control" formControlName="name" autofocus>
                 <span class="help-block" *ngIf="ClientForm.controls['name'].hasError('required') && ClientForm.controls['name'].touched ">Introduza o seu nome!</span>
             </div>
         </div>
         <div class="form-group">
             <label for="nif" class="col-sm-4 control-label">NIF*</label>
             <div class="col-sm-12">
-                <input type="text" id="nif" placeholder="Introduza o seu NIF" class="form-control" formControlName="nif" required>
+                <input type="text" id="nif" placeholder="Introduza o seu NIF" class="form-control" formControlName="nif">
                 <span class="help-block" *ngIf="ClientForm.controls['nif'].hasError('required') && ClientForm.controls['nif'].touched ">Introduza o seu NIF!</span>
             </div>
         </div>
         <div class="form-group">
             <label for="postCode" class="col-sm-4 control-label">Código-Postal*</label>
             <div class="col-sm-12">
-                <input type="text" id="postalCode" placeholder="Introduza o seu Código-Postal" class="form-control" formControlName="postalCode" required> 
+                <input type="text" id="postalCode" placeholder="Introduza o seu Código-Postal" class="form-control" formControlName="postalCode"> 
                 <span class="help-block" *ngIf="ClientForm.controls['postalCode'].hasError('required') && ClientForm.controls['postalCode'].touched">Introduza o seu código-postal!</span>
             </div>
         </div>
         <div class="form-group">
             <label for="address" class="col-sm-4 control-label">Morada*</label>
             <div class="col-sm-12">
-                <input type="text" id="address" placeholder="Introduza a sua Morada" class="form-control" formControlName="address" required>
+                <input type="text" id="address" placeholder="Introduza a sua Morada" class="form-control" formControlName="address">
                 <span class="help-block" *ngIf="ClientForm.controls['address'].hasError('required') && ClientForm.controls['address'].touched">Introduza a sua morada!</span>
             </div>
         </div>
         <div class="form-group">
             <label for="city" class="col-sm-4 control-label">Localidade*</label>
             <div class="col-sm-12">
-                <input type="text" id="city" placeholder="Introduza a sua Morada" class="form-control" formControlName="city" required>
+                <input type="text" id="city" placeholder="Introduza a sua Morada" class="form-control" formControlName="city">
                 <span class="help-block" *ngIf="ClientForm.controls['city'].hasError('required') && ClientForm.controls['city'].touched">Introduza a sua Localidade!</span>
             </div>
         </div>
         <div class="form-group">
             <label for="email" class="col-sm-4 control-label">Email* </label>
             <div class="col-sm-12">
-                <input type="email" id="email" placeholder="Introduza o seu Email" class="form-control" formControlName="email"email required>
-                <span class="help-block" *ngIf="ClientForm.controls['email'].hasError('required') && ClientForm.controls['email'].touched">Introduza o seu email!</span>
+                <input type="email" id="email" placeholder="Introduza o seu Email" class="form-control" formControlName="email" email>
+                <span class="help-block" *ngIf="ClientForm.controls['email'].hasError('required') && ClientForm.controls['email'].touched">Introduza o seu E-Mail!</span>
+                <span class="help-block" *ngIf="ClientForm.controls['email'].hasError('email') && ClientForm.controls['email'].touched">Introduza um E-Mail válido!</span>
             </div>
         </div>
         <div class="form-group">
             <label for="password" class="col-sm-4 control-label">Palavra-Passe*</label>
             <div class="col-sm-12">
-                <input type="password" id="password" placeholder="Introduza a Palavra-Passe" class="form-control" formControlName="password" required>
+                <input type="password" id="password" placeholder="Introduza a Palavra-Passe" class="form-control" formControlName="password">
                 <span class="help-block" *ngIf="ClientForm.controls['password'].hasError('required') && ClientForm.controls['password'].touched">Introduza uma palavra-passe!</span>
             </div>
         </div>
         <div class="form-group">
             <label for="confirmPassword" class="col-sm-5 control-label">Confirmar Palavra-Passe*</label>
             <div class="col-sm-12">
-                <input type="password" id="confirmPassword" placeholder="Confirme a Palavra-Passe" class="form-control" formControlName="confirmPassword" required>
+                <input type="password" id="confirmPassword" placeholder="Confirme a Palavra-Passe" class="form-control" formControlName="confirmPassword">
                 <span class="help-block" *ngIf="ClientForm.controls['confirmPassword'].hasError('required') && ClientForm.controls['confirmPassword'].touched">Confirme a sua palavra-passe!</span>
             </div>
         </div>
@@ -92,17 +88,18 @@
         <div class="form-group">
             <label for="gender" class="col-sm-3 control-label">Género*</label>
             <div class="col-sm-5">
-                <select id="gender" class="form-control" formControlName="gender" required>
+                <select id="gender" class="form-control" formControlName="gender">
                     <option value="male">Male</option>
                     <option value="female">Female</option>
                 </select>
                 <span class="help-block" *ngIf="ClientForm.controls['gender'].hasError('required') && ClientForm.controls['gender'].touched">Selecione o seu género!</span>
             </div>
         </div>  
+        <br>
         <div class="form-group">
             <label for="serviceName" class="col-sm-3 control-label"><h3>Serviço*</h3></label>
             <div class="col-sm-5">
-                <select id="serviceName" class="form-control" formControlName="serviceName" required>
+                <select id="serviceName" class="form-control" formControlName="serviceName">
                     <option value="4">Pacote 4 Serviços</option>
                     <option value="3">Pacote 3 Serviços</option>
                     <option value="2">Pacote 2 Serviços</option>

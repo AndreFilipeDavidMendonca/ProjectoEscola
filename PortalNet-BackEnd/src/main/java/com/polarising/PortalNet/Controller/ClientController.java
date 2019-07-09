@@ -80,13 +80,13 @@ public class ClientController {
 				message = "Client already exists.";
 				
 				return new ResponseEntity<String> (message, HttpStatus.CONFLICT);
-			}else {
-				
-				clientRepository.save(newClient);
-				
-				message = "Client was successfully created!";
-				
-				return new ResponseEntity<String> (message, HttpStatus.CREATED);
-		} 
+			}
+		}
+		
+		clientRepository.save(newClient);
+		
+		message = "Client was successfully created!";
+		
+		return new ResponseEntity<String> (message, HttpStatus.CREATED);
 	}
 }

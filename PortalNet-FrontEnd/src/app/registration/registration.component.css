@@ -63,3 +63,12 @@ h1 {
    font-size: 500%;
    font-weight: 400px;
 }
+
+input.ng-invalid.ng-touched {
+   border: 1px solid red;
+}
+
+/* label {
+     font-family: 'DM Sans', sans-serif;
+   color: rgb(51, 102, 214);
+} */

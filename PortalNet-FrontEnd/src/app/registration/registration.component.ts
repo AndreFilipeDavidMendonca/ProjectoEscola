@@ -16,7 +16,6 @@ import { ErrorInterceptor } from '../interceptors/error.interceptor';
   styleUrls: ['./registration.component.css']
 })
 export class RegistrationComponent implements OnInit{
-  genders = ['Male', 'Female'];
   submitted = false;
   ClientForm: FormGroup;
   clientToJSON: string;
