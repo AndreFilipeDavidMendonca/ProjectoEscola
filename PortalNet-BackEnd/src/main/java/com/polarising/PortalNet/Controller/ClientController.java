@@ -3,6 +3,7 @@ package com.polarising.PortalNet.Controller;
 import java.util.Calendar;
 import java.util.List;
 
+import org.apache.logging.log4j.message.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.polarising.PortalNet.Exceptions.NifAlreadyExistsException;
 import com.polarising.PortalNet.Forms.ClientForm;
 import com.polarising.PortalNet.Repository.ClientRepository;
 import com.polarising.PortalNet.Utilities.PortalNetHttpRequest;
@@ -44,6 +46,8 @@ public class ClientController {
 	@PostMapping(path = "/registration", consumes = {"application/json"})
 	public ResponseEntity<?> registerClient(@RequestBody ClientForm clientForm)
 	{
+		try{
+
 		String today = Calendar.getInstance().getTime().toInstant().toString().substring(0, 10).replace("-", "");
 		
 		String random = String.format("%03d", (int) (Math.random() * 10000));
@@ -76,9 +80,7 @@ public class ClientController {
 		{
 			if (client.getNif() == (newClient.getNif()))
 			{
-				message = "Client already exists.";
-				
-				return new ResponseEntity<String> (message, HttpStatus.CONFLICT);
+				throw new NifAlreadyExistsException("Client already exists.");
 			}
 		}
 		
@@ -87,5 +89,11 @@ public class ClientController {
 		message = "Client was successfully created!";
 		
 		return new ResponseEntity<String> (message, HttpStatus.CREATED);
+		}
+		catch (NifAlreadyExistsException e)
+		{
+			String failureMessage = "Client already exists.";
+			return new ResponseEntity<String> (failureMessage, HttpStatus.CONFLICT);
+		}
 	}
 }

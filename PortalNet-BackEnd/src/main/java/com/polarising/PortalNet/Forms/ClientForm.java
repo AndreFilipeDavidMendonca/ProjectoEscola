@@ -23,14 +23,14 @@ public class ClientForm {
 	
 	private String password;
 	
-	private String birthDate;
-	
 	private String serviceName;
+	
+	private String birthDate;
 	
 	public ClientForm () {}
 
 	public ClientForm(int nif, String name, String address, String postalCode, String city, Integer mobilePhone,
-			String email, String gender, String password, String birthDate, String serviceName) {
+			String email, String gender, String password, String serviceName, String birthDate) {
 		super();
 		this.nif = nif;
 		this.name = name;
