@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.polarising.PortalNet.Exceptions.NifAlreadyExistsException;
 import com.polarising.PortalNet.Forms.ClientForm;
 import com.polarising.PortalNet.Repository.ClientRepository;
+import com.polarising.PortalNet.Response.ResponseMessage;
 import com.polarising.PortalNet.Utilities.PortalNetHttpRequest;
 import com.polarising.PortalNet.model.Client;
 
@@ -86,14 +87,14 @@ public class ClientController {
 		
 		clientRepository.save(newClient);
 		
-		message = "Client was successfully created!";
+		message = clientForm.getName() + " was successfully created!";
 		
-		return new ResponseEntity<String> (message, HttpStatus.CREATED);
+		return new ResponseEntity<String> (new ResponseMessage(message).getMessage(), HttpStatus.CREATED);
 		}
 		catch (NifAlreadyExistsException e)
 		{
-			String failureMessage = "Client already exists.";
-			return new ResponseEntity<String> (failureMessage, HttpStatus.CONFLICT);
+			String failureMessage = clientForm.getName() + " already exists.";
+			return new ResponseEntity<String> (failureMessage, HttpStatus.NOT_ACCEPTABLE);
 		}
 	}
 }
