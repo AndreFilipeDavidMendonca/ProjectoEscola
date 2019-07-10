@@ -6,8 +6,7 @@ import { AlertService } from '../alert.service';
 import { first } from 'rxjs/operators';
 import { AlertComponent } from '../alerts/alert.component';
 import { Client } from '../client.model';
-import { AuthenticationService } from '../authentication.service';
-import { ErrorInterceptor } from '../interceptors/error.interceptor';
+
 
 
 @Component({
@@ -84,10 +83,10 @@ export class RegistrationComponent implements OnInit{
           .subscribe(
             data => {
               this.alertService.success('User added successfully', true);
-              // setTimeout(() => { this.router.navigate(['/client/', this.client.clientId]); }, 1500);
+              setTimeout(() => { this.router.navigate(['/clientTable']); }, 1500);
             },
             error => {
-              this.alertService.error(JSON.parse(JSON.stringify(error)));
+              this.alertService.error(JSON.parse(JSON.stringify(error)).message);
               this.isLoading = false;
       });
       console.log(this.ClientForm.value);
