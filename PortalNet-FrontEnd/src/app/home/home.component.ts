@@ -4,6 +4,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { AuthenticationService } from '../authentication.service';
 import { ErrorInterceptor } from '../interceptors/error.interceptor';
+import { ServicesService } from '../services.service';
+import { AlertService } from '../alert.service';
+import { Service } from '../service.model';
 
 
 @Component({
@@ -14,25 +17,58 @@ import { ErrorInterceptor } from '../interceptors/error.interceptor';
 })
 
 export class HomeComponent implements OnInit {
-  images = [1, 2, 3].map(() => `https://picsum.photos/900/500?random&t=${Math.random()}`);
+  services: Service[] = [];
+
+  images = [
+    {
+      image: "../assets/img/servicesBackground0.png",
+    },
+    {
+      image: "../assets/img/servicesBackground1.png",
+    },
+    {
+      image: "../assets/img/servicesBackground2.png",
+    },
+    {
+      image: "../assets/img/servicesBackground3.png",
+    },
+    {
+      image: "../assets/img/servicesBackground4.png",
+    }
+
+  ];
+
   loginForm: FormGroup;
   loading = false;
   submitted = false;
   returnUrl: string;
   error = '';
 
+
     constructor(
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
         private router: Router,
-        private authenticationService: AuthenticationService
+        private authenticationService: AuthenticationService,
+        private servicesService: ServicesService,
+        private alertService: AlertService
     ) { }
 
+    
+    fetchServices() {
+      this.servicesService.getAll().pipe(first()).subscribe(services => {
+        this.services = services;
+       });
+  
+    }
+  
   ngOnInit() {
+    this.fetchServices();
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
   });
+
 
   // reset login status
   this.authenticationService.logout();
@@ -68,6 +104,12 @@ export class HomeComponent implements OnInit {
 
 
 
+  
+
+
+
+
+ 
 
 
     

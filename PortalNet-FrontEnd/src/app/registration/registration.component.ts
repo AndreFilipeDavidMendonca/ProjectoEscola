@@ -6,6 +6,8 @@ import { AlertService } from '../alert.service';
 import { first } from 'rxjs/operators';
 import { AlertComponent } from '../alerts/alert.component';
 import { Client } from '../client.model';
+import { Service } from '../service.model';
+import { ServicesService } from '../services.service';
 
 
 
@@ -15,6 +17,7 @@ import { Client } from '../client.model';
   styleUrls: ['./registration.component.css']
 })
 export class RegistrationComponent implements OnInit{
+  services: Service[] = [];
   submitted = false;
   ClientForm: FormGroup;
   clientToJSON: string;
@@ -28,7 +31,8 @@ export class RegistrationComponent implements OnInit{
     private router: Router,
     private formBuilder: FormBuilder,
     private clientService: ClientService,
-    private alertService: AlertService) { }
+    private alertService: AlertService,
+    private servicesService: ServicesService) { }
 
 
 
@@ -36,7 +40,15 @@ export class RegistrationComponent implements OnInit{
     this.ClientForm.reset();
   }
 
+  fetchServices() {
+    this.servicesService.getAll().pipe(first()).subscribe(services => {
+      this.services = services;
+     });
+
+  }
+
   ngOnInit(){
+    this.fetchServices();
     this.ClientForm = this.formBuilder.group({
       name: ['', Validators.required],
       nif: ['', Validators.required],

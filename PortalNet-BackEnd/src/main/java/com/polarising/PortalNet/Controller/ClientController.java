@@ -45,6 +45,10 @@ public class ClientController {
 	@PostMapping(path = "/registration", consumes = {"application/json"})
 	public ResponseEntity<?> registerClient(@RequestBody ClientForm clientForm)
 	{	
+		String message;
+		String clientName;
+		int clientNif;
+		String response = null;
 		
 		String today = Calendar.getInstance().getTime().toInstant().toString().substring(0, 10).replace("-", "");
 		
@@ -64,9 +68,7 @@ public class ClientController {
 		
 		boolean status = true;
 		
-		String message;
-		String clientName;
-		String response = null;
+	
 		
 		Client newClient = new Client(clientNumber, clientForm.getNif(), clientForm.getName(), clientForm.getAddress(),
 										clientForm.getPostalCode(), clientForm.getCity(), clientForm.getMobilePhone(),
@@ -76,19 +78,20 @@ public class ClientController {
 		
 		List<Client> clientsList = (List<Client>) clientRepository.findAll();
 		clientName = clientForm.getName();
+		clientNif = clientForm.getNif();
+		
 		for (Client client : clientsList)
 		{
 			if (client.getNif() == (newClient.getNif()))
 			{
-				message = clientName + " already exists.";
+				message = "Já existe um utilizador com este NIF!";
 				
 				return new ResponseEntity<String> (message, HttpStatus.CONFLICT);
 			} 
 		}
 		
 		clientRepository.save(newClient);		
-		message = clientName + " was successfully created!";
+		message = clientName + " foi registado com sucesso!";
 		return new ResponseEntity<>(new ResponseMessage(message), HttpStatus.OK);
-		//return new ResponseEntity<String> (message, HttpStatus.OK);
 	}
 }
