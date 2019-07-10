@@ -20,6 +20,7 @@ import com.polarising.PortalNet.model.Client;
 
 @RestController
 @CrossOrigin(origins = "*")
+
 public class ClientController {
 	
 	@Autowired
@@ -64,6 +65,8 @@ public class ClientController {
 		boolean status = true;
 		
 		String message;
+		String clientName;
+		String response = null;
 		
 		Client newClient = new Client(clientNumber, clientForm.getNif(), clientForm.getName(), clientForm.getAddress(),
 										clientForm.getPostalCode(), clientForm.getCity(), clientForm.getMobilePhone(),
@@ -72,21 +75,20 @@ public class ClientController {
 										monthlyPay, fraudulent, status, clientForm.getBirthDate());
 		
 		List<Client> clientsList = (List<Client>) clientRepository.findAll();
-		
+		clientName = clientForm.getName();
 		for (Client client : clientsList)
 		{
 			if (client.getNif() == (newClient.getNif()))
 			{
-				message = "Client already exists.";
+				message = clientName + " already exists.";
 				
 				return new ResponseEntity<String> (message, HttpStatus.CONFLICT);
-			}
+			} 
 		}
 		
-		clientRepository.save(newClient);
-		
-		message = "Client was successfully created!";
-		
-		return new ResponseEntity<String> (message, HttpStatus.CREATED);
+		clientRepository.save(newClient);		
+		message = clientName + " was successfully created!";
+		return new ResponseEntity<>(new ResponseMessage(message), HttpStatus.OK);
+		//return new ResponseEntity<String> (message, HttpStatus.OK);
 	}
 }

@@ -20,7 +20,9 @@ export class RegistrationComponent implements OnInit{
   clientToJSON: string;
   isLoading = false;
   error = '';
+  success = '';
   client: Client;
+  message: string;
 
   constructor(private route: ActivatedRoute,
     private router: Router,
@@ -52,6 +54,13 @@ export class RegistrationComponent implements OnInit{
     });
   }
 
+  get name() {
+    return this.ClientForm.get('name');
+  }
+
+  get nif() {
+    return this.ClientForm.get('nif');
+  }
 
   get email() {
     return this.ClientForm.get('email');
@@ -81,12 +90,13 @@ export class RegistrationComponent implements OnInit{
       this.clientService.addClient(this.clientToJSON)
         .pipe(first())
           .subscribe(
-            data => {
-              this.alertService.success('User added successfully', true);
-              setTimeout(() => { this.router.navigate(['/clientTable']); }, 1500);
+            success => {
+              this.alertService.success(success.message);
+              console.log(success);
+              // setTimeout(() => { this.router.navigate(['/clientTable']); }, 1500);
             },
             error => {
-              this.alertService.error(JSON.parse(JSON.stringify(error)).message);
+              this.alertService.error(JSON.parse(JSON.stringify(error)));
               this.isLoading = false;
       });
       console.log(this.ClientForm.value);

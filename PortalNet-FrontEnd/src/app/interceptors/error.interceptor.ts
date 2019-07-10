@@ -14,7 +14,7 @@ export class ErrorInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(catchError(err => {
       let error = err.error;
 
-      if (err.status === 409) {
+      if (err.status === 400) {
         error.message = err.error.message.slice(1, err.error.message.length - 1).split(', ');
       }
       else if (err.status === 401) {
@@ -27,12 +27,16 @@ export class ErrorInterceptor implements HttpInterceptor {
         this.authenticationService.logout();
         this.router.navigate(['/login']);
       }
+    
       else if (err.statusText === 'Unknown Error' && err.name === 'HttpErrorResponse') {
         error.message = "Can't reach server";
       }
 
+      console.log(error);
+
 
       return throwError(error);
+
     }));
   }
 }

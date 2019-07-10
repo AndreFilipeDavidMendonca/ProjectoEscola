@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AlertService } from 'src/app/alert.service';
-import { ErrorInterceptor } from '../interceptors/error.interceptor';
+
 
 
 @Component({

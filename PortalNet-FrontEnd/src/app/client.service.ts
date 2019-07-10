@@ -32,7 +32,8 @@ API = 'http://localhost:8080';
   }
 
   addClient(client: string) {
-    return this.http.post<Client>(this.API + '/registration', client);
+    console.log(client);
+    return this.http.post<any>(this.API + '/registration', client);
   }
 
   updateClient(id: number, client: string) {
