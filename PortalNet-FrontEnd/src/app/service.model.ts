@@ -9,9 +9,10 @@ export class Service {
     public loyalty: string;
     public creationDate: string;
     public status: boolean;
+    public imgUrl: string;
     
-    constructor (serviceID: number, name: string, internet: string, tv: string, mobilePhone: string, phone: string, price: string, loyalty: string, creationDate: string, status: boolean)  {
-
+    constructor (serviceID: number, name: string, internet: string, tv: string, mobilePhone: string, phone: string, price: string, loyalty: string, creationDate: string, status: boolean, imgUrl: string)  {
+        this.imgUrl = imgUrl;
         this.serviceID = serviceID;
         this.name = name;
         this.internet = internet;
@@ -24,5 +25,7 @@ export class Service {
         this.status = status;
 
     }
+    
+    
 
 }

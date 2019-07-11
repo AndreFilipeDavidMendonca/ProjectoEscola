@@ -40,6 +40,10 @@ public class ServicesController {
 	{	
 		String message;
 		String name;
+
+		
+		name = serviceForm.getName();
+		String imgUrl = "assets/img/" + serviceForm.getImgName();
 		String creationDate = Calendar.getInstance().getTime().toString();
 		boolean status = true;
 		
@@ -47,10 +51,10 @@ public class ServicesController {
 	
 		
 		Services newService = new Services(serviceForm.getName(), serviceForm.getTv(), serviceForm.getInternet(), serviceForm.getMobilePhone(),
-											serviceForm.getPhone(), serviceForm.getLoyalty(), serviceForm.getPrice(), creationDate, status);
+											serviceForm.getPhone(), serviceForm.getLoyalty(), serviceForm.getPrice(), creationDate, status, imgUrl, serviceForm.getImgName());
 		
 		List<Services> servicesList = (List<Services>) serviceRepository.findAll();
-		name = serviceForm.getName();
+		
 		
 		for (Services service : servicesList)
 		{

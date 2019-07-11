@@ -67,7 +67,7 @@ export class ClientComponent implements OnInit {
   openModalStatus(status) {
     this.modalService.open(status, { windowClass: 'dark-modal' });
     this.dataToChange = 'status';
-    this.dataToChange = 'Estado da conta';
+    this.nameToChange = 'Estado da conta';
     this.placeHolder = 'Desactivar conta!'
   }
 

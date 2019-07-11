@@ -7,7 +7,7 @@
         <div class="services">
             <ngb-carousel>
                <ng-template *ngFor="let service of services; let i= index" ngbSlide>
-                 <img src="../assets/img/servicesBackground3.png" alt="Random first slide">
+                 <img src="{{service.imgUrl}}" alt="Random first slide">
                  <div class="carousel-caption">
                    <h1 class="serviceName">{{ service.name }}</h1>
                    <p>Televisão - {{ service.tv }} Canais <br> Internet - {{ service.internet }} <br> Telemóvel - {{ service.mobilePhone }} <br> Telefone - {{ service.phone }} </p>

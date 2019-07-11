@@ -9,11 +9,15 @@ public class ServiceForm {
 	private String phone;
 	private int loyalty;
 	private float price;
+	private String imgUrl;
+	private String imgName;
 	
+	
+
 	public ServiceForm () {}
 
 	public ServiceForm(String name, String tv, String internet, String mobilePhone, String phone, 
-			int loyalty, float price) {
+			int loyalty, float price, String imgUrl, String imgName) {
 		super();
 		this.name = name;
 		this.tv = tv;
@@ -22,10 +26,26 @@ public class ServiceForm {
 		this.phone = phone;
 		this.loyalty = loyalty;
 		this.price = price;
+		this.imgUrl = imgUrl;
+		this.imgName = imgName;
 		
 	}
 
+	public String getImgName() {
+		return imgName;
+	}
 
+	public void setImgName(String imgName) {
+		this.imgName = imgName;
+	}
+
+	public String getImgUrl() {
+		return imgUrl;
+	}
+
+	public void setImgUrl(String imgUrl) {
+		this.imgUrl = imgUrl;
+	}
 
 	public String getName() {
 		return name;

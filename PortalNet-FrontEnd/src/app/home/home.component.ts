@@ -19,24 +19,7 @@ import { Service } from '../service.model';
 export class HomeComponent implements OnInit {
   services: Service[] = [];
 
-  images = [
-    {
-      image: "../assets/img/servicesBackground0.png",
-    },
-    {
-      image: "../assets/img/servicesBackground1.png",
-    },
-    {
-      image: "../assets/img/servicesBackground2.png",
-    },
-    {
-      image: "../assets/img/servicesBackground3.png",
-    },
-    {
-      image: "../assets/img/servicesBackground4.png",
-    }
 
-  ];
 
   loginForm: FormGroup;
   loading = false;
@@ -63,12 +46,12 @@ export class HomeComponent implements OnInit {
     }
   
   ngOnInit() {
+   
     this.fetchServices();
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
   });
-
 
   // reset login status
   this.authenticationService.logout();
