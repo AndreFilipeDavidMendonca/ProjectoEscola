@@ -110,9 +110,7 @@ export class RegistrationComponent implements OnInit{
             error => {
               this.alertService.error(JSON.parse(JSON.stringify(error)));
               this.isLoading = false;
-      });
-      console.log(this.ClientForm.value);
-      
+      });      
   }
 
 

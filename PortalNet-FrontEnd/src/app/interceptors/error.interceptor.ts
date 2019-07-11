@@ -39,7 +39,8 @@ export class ErrorInterceptor implements HttpInterceptor {
       }
     
       else if (err.statusText === 'Unknown Error' && err.name === 'HttpErrorResponse') {
-        error.message = "Can't reach server";
+        error.message = "Não foi possível conectar ao servidor!";
+        return throwError(error.message);
       }
 
       console.log(error);

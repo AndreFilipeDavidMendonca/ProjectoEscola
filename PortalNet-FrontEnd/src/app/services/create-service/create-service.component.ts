@@ -75,9 +75,7 @@ export class CreateServiceComponent implements OnInit {
               error => {
                 this.alertService.error(JSON.parse(JSON.stringify(error)));
                 this.isLoading = false;
-        });
-        console.log(this.ServiceForm.value);
-        
+        });        
       }
   
 

@@ -74,7 +74,6 @@ export class CreateEmployeeComponent implements OnInit {
                 this.alertService.error(JSON.parse(JSON.stringify(error)));
                 this.isLoading = false;
         });
-        console.log(this.EmployeeForm.value);
         
       }
   
