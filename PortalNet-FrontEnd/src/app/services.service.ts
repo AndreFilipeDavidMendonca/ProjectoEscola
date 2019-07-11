@@ -29,7 +29,8 @@ API = 'http://localhost:8080';
   }
 
   addService(service: string) {
-    return this.http.post(this.API + '/servicesTable', service, httpOptions);
+    console.log(service);
+    return this.http.post<any>(this.API + '/createService', service);
   }
 
   deleteService(serviceId: number): Observable<{}> {

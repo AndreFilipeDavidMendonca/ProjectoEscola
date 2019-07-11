@@ -45,7 +45,7 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="email" class="col-sm-4 control-label">Email* </label>
+            <label for="email" class="col-sm-4 control-label">E-mail* </label>
             <div class="col-sm-12">
                 <input type="email" id="email" placeholder="Introduza o seu Email" class="form-control" formControlName="email" email>
                 <span class="help-block" *ngIf="ClientForm.controls['email'].hasError('required') && ClientForm.controls['email'].touched">Introduza o seu E-Mail!</span>
@@ -77,12 +77,14 @@
             <label for="phone" class="col-sm-5 control-label">Telefone</label>
             <div class="col-sm-12">
                 <input type="text" id="phone" placeholder="Insira o seu número de telefone" class="form-control" formControlName="phone">
+                <span class="help-block" *ngIf="ClientForm.controls['phone'].touched && !ClientForm.controls['phone'].dirty">Não introduziu um número de telefone</span>
             </div>
         </div>
         <div class="form-group">
             <label for="mobilePhone" class="col-sm-5 control-label">Telemóvel</label>
             <div class="col-sm-12">
                 <input type="text" id="mobilePhone" placeholder="Insira o seu número de telemóvel" class="form-control" formControlName="mobilePhone">
+                <span class="help-block" *ngIf="ClientForm.controls['mobilePhone'].touched && !ClientForm.controls['mobilePhone'].dirty">Não introduziu um número de telefone</span>
             </div>
         </div>
         <div class="form-group">

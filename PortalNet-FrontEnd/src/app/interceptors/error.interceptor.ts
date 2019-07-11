@@ -27,6 +27,16 @@ export class ErrorInterceptor implements HttpInterceptor {
         this.authenticationService.logout();
         this.router.navigate(['/login']);
       }
+
+      else if (err.status === 302) {
+        this.authenticationService.logout();
+        this.router.navigate(['/login']);
+      }
+
+      else if (err.status === 206) {
+        this.authenticationService.logout();
+        this.router.navigate(['/login']);
+      }
     
       else if (err.statusText === 'Unknown Error' && err.name === 'HttpErrorResponse') {
         error.message = "Can't reach server";

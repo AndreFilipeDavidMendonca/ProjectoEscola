@@ -1,4 +1,4 @@
-import { Component, ViewChild, OnInit} from '@angular/core';
+import { Component,  OnInit} from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ClientService } from '../client.service';
@@ -57,8 +57,8 @@ export class RegistrationComponent implements OnInit{
       city: ['', Validators.required],
       password: ['', Validators.required],
       confirmPassword: ['', Validators.required],
-      mobilePhone: ['', Validators.required],
-      phone: ['', Validators.required],
+      mobilePhone: [''],
+      phone: [''],
       gender: ['', Validators.required],
       birthDate: ['', Validators.required],
       serviceName: ['', Validators.required],

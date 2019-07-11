@@ -37,35 +37,34 @@ public class WorkersController {
 	
 	
 	
-	@PostMapping(path = "/createEmployee")
+	@PostMapping(path = "/createEmployee", consumes = {"application/json"})
 	public ResponseEntity<?> registerWorker(@Valid @RequestBody WorkersForm workersForm)
 	{
+		String message;
+		
 		try {
 			Workers worker = new Workers(workersForm.getName(), workersForm.getEmail()
 										, workersForm.getRole(), workersForm.getPassword());
 			
 			List<Workers> workersList = (List<Workers>) workersRepository.findAll();
-			
-/*			if (worker.getName().equals("") || worker.getEmail().equals("") || worker.getPassword().equals("") || worker.getRole().equals("") ||
-					worker.getName().equals(null) || worker.getEmail().equals(null) || worker.getPassword().equals(null) || worker.getRole().equals(null))
-			{
-				return new ResponseEntity<String>("Unable to create new worker.", HttpStatus.PARTIAL_CONTENT);
-			}*/
+
 			
 			for (Workers foundWorker : workersList)
 			{
-				if (foundWorker.getName().equals(worker.getName()))
+				if (foundWorker.getEmail().equals(worker.getEmail()))
 				{
-					return new ResponseEntity<String>("User already exists.", HttpStatus.FOUND);
+					return new ResponseEntity<String>("Colaborador com este e-mail já foi registado!.", HttpStatus.FOUND);
 				}
 			}
 			
 			workersRepository.save(worker);
+			message = "Colaborador registado!.";
+			return new ResponseEntity<>(new ResponseMessage(message), HttpStatus.OK);
 			
-			return new ResponseEntity<Workers>(worker, HttpStatus.CREATED);
 		} catch (RestClientException e) {
 			
-			return new ResponseEntity<String>("Unable to create new worker.", HttpStatus.PARTIAL_CONTENT);
+			message = "Não foi possivel registar o colaborador!.";
+			return new ResponseEntity<>(new ResponseMessage(message), HttpStatus.OK);
 		}
 		
 		

@@ -32,7 +32,7 @@ API = 'http://localhost:8080';
   }
 
   addEmployee(employee: string) {
-    return this.http.post(this.API + '/auth/signup', employee, httpOptions);
+    return this.http.post<any>(this.API + '/createEmployee', employee);
   }
 
   deleteEmployee(employeeId: number): Observable<{}> {
