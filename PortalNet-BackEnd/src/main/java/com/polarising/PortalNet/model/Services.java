@@ -22,12 +22,16 @@ public class Services {
     private float price;
     private String creationDate;
     private boolean status;
+    private String imgUrl;
+    private String imgName;
     
     
     public Services() {}
 
-    public Services(String name, String internet, String tv, String phone, String mobilePhone, int loyalty, float price, String creationDate, boolean status) {
-        this.name = name;
+    public Services(String name, String internet, String tv, String phone, String mobilePhone, int loyalty, float price, String creationDate, boolean status, String imgUrl, String imgName) {
+    	this.imgName = imgName;
+    	this.imgUrl = imgUrl;
+    	this.name = name;
         this.internet = internet;
         this.tv = tv;
         this.phone = phone;
@@ -37,6 +41,22 @@ public class Services {
         this.creationDate = creationDate;
         this.status = status;
     }
+
+	public String getImgName() {
+		return imgName;
+	}
+
+	public void setImgName(String imgName) {
+		this.imgName = imgName;
+	}
+
+	public String getImgUrl() {
+		return imgUrl;
+	}
+
+	public void setImgUrl(String imgUrl) {
+		this.imgUrl = imgUrl;
+	}
 
 	public Long getServiceID() {
 		return serviceID;

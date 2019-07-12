@@ -3,7 +3,6 @@ package com.polarising.PortalNet.Controller;
 import java.util.Calendar;
 import java.util.List;
 
-import org.apache.logging.log4j.message.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,8 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.polarising.PortalNet.Exceptions.NifAlreadyExistsException;
-import com.polarising.PortalNet.Forms.ClientFormRegistration;
+import com.polarising.PortalNet.Forms.ClientForm;
 import com.polarising.PortalNet.Repository.ClientRepository;
 import com.polarising.PortalNet.Response.ResponseMessage;
 import com.polarising.PortalNet.Utilities.PortalNetHttpRequest;
@@ -23,6 +21,7 @@ import com.polarising.PortalNet.model.Client;
 
 @RestController
 @CrossOrigin(origins = "*")
+
 public class ClientController {
 	
 	@Autowired
@@ -45,19 +44,32 @@ public class ClientController {
 	
 	
 	@PostMapping(path = "/registration", consumes = {"application/json"})
-	public ResponseEntity<?> registerClient(@RequestBody ClientFormRegistration clientForm)
-	{
-		try{
-		String today = Calendar.getInstance().getTime().toInstant().toString().substring(0, 10).replace("-", "");
-		String random = String.format("%03d", (int) (Math.random() * 10000));
-		String clientNumber = today + random;
-		String entryDate = Calendar.getInstance().getTime().toString();
-		String endContract = "08/07/2020";
-		int numberOfServices = 1;
-		String monthlyPay = "100€";
-		boolean fraudulent = false;
-		boolean status = true;
+	public ResponseEntity<?> registerClient(@RequestBody ClientForm clientForm)
+	{	
 		String message;
+		String clientName;
+		int clientNif;
+		String response = null;
+		
+		String today = Calendar.getInstance().getTime().toInstant().toString().substring(0, 10).replace("-", "");
+		
+		String random = String.format("%03d", (int) (Math.random() * 10000));
+	
+		String clientNumber = today + random;
+		
+		String entryDate = Calendar.getInstance().getTime().toString();
+		
+		String endContract = "08/07/2020";
+		
+		int numberOfServices = 1;
+		
+		String monthlyPay = "100€";
+		
+		boolean fraudulent = false;
+		
+		boolean status = true;
+		
+	
 		
 		Client newClient = new Client(clientNumber, clientForm.getNif(), clientForm.getName(), clientForm.getAddress(),
 										clientForm.getPostalCode(), clientForm.getCity(), clientForm.getMobilePhone(),
@@ -66,28 +78,21 @@ public class ClientController {
 										monthlyPay, fraudulent, status, clientForm.getBirthDate());
 		
 		List<Client> clientsList = (List<Client>) clientRepository.findAll();
+		clientName = clientForm.getName();
+		clientNif = clientForm.getNif();
 		
 		for (Client client : clientsList)
 		{
 			if (client.getNif() == (newClient.getNif()))
 			{
-				throw new NifAlreadyExistsException("Client already exists.");
-			}
+				message = "Já existe um utilizador com este NIF!";
+				
+				return new ResponseEntity<String> (message, HttpStatus.CONFLICT);
+			} 
 		}
 		
-		clientRepository.save(newClient);
-		message = clientForm.getName() + " was successfully created!";
-		
-		return new ResponseEntity<String> (new ResponseMessage(message).getMessage(), HttpStatus.CREATED);
-		
-		}
-		catch (NifAlreadyExistsException e)
-		{
-			String failureMessage = clientForm.getName() + " already exists.";
-			return new ResponseEntity<String> (failureMessage, HttpStatus.NOT_ACCEPTABLE);
-		}
+		clientRepository.save(newClient);		
+		message = clientName + " foi registado com sucesso!";
+		return new ResponseEntity<>(new ResponseMessage(message), HttpStatus.OK);
 	}
-	
-//	@PostMapping(path = "/home", consumes = {"application/json"})
-//	public ResponseEntity<?> loginClient(@RequestBody LoginClient loginClient)
 }
