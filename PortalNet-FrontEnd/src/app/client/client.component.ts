@@ -100,10 +100,8 @@ export class ClientComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.paramMap.subscribe(data => {
-      this.clientId = +data.get('clientId');
-      this.fetchClientById();
-    });
+    
+
   }
 
 

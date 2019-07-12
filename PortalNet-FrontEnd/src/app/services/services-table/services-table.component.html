@@ -6,7 +6,8 @@
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons">
 </head>
 <body>
-     
+<br><br><br>
+<app-alert></app-alert>
   <div class="row">
       <div class="table-responsive">
         <h2>Tabela de Serviços</h2>
@@ -41,7 +42,7 @@
                   <td>{{ service.creationDate }}</td>
                   <td>{{ service.status }}</td>
                   <td class="td-actions text-right">
-                    <a routerLink="/servicesTable" class="delete">
+                    <a routerLink="/servicesTable" class="delete" (click)="onDeleteService()">
                       <i class="material-icons" >delete</i>
                     </a>
                   </td>

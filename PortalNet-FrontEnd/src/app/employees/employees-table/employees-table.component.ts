@@ -22,6 +22,22 @@ export class EmployeesTableComponent implements OnInit {
 
   }
 
+  onDeleteEmployee(employeeId : number) {
+    this.alertService.clear();
+    let alert = confirm('Tem a certeza que deseja eliminar o colaborador ' + name + '?');
+    if (alert) {
+      this.employeesService.deleteEmployee(employeeId).subscribe(data => {
+        this.alertService.success('Colaborador eliminado com sucesso!', true);
+        setTimeout(() => { this.alertService.clear(); }, 2000);
+        this.fetchEmployees();
+      },
+        error => {
+          this.alertService.error(error);
+          this.fetchEmployees();
+        });
+    } 
+  }
+
   ngOnInit() {
     this.fetchEmployees();
   }

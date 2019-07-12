@@ -36,7 +36,7 @@ API = 'http://localhost:8080';
   }
 
   deleteEmployee(employeeId: number): Observable<{}> {
-    return this.http.delete(this.API + '/employeesTable');
+    return this.http.delete(this.API + '/employeesTable' + employeeId);
   }
 }
 
