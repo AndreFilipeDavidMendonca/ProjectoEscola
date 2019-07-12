@@ -53,17 +53,17 @@ public class WorkersController {
 			{
 				if (foundWorker.getEmail().equals(worker.getEmail()))
 				{
-					return new ResponseEntity<String>("Colaborador com este e-mail já foi registado!.", HttpStatus.FOUND);
+					return new ResponseEntity<String>("Colaborador com este e-mail já foi registado!", HttpStatus.FOUND);
 				}
 			}
 			
 			workersRepository.save(worker);
-			message = "Colaborador registado!.";
+			message = "Colaborador registado!";
 			return new ResponseEntity<>(new ResponseMessage(message), HttpStatus.OK);
 			
 		} catch (RestClientException e) {
 			
-			message = "Não foi possivel registar o colaborador!.";
+			message = "Não foi possivel registar o colaborador!";
 			return new ResponseEntity<>(new ResponseMessage(message), HttpStatus.OK);
 		}
 		
