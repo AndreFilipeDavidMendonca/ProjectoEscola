@@ -71,6 +71,12 @@ export class ClientComponent implements OnInit {
     this.placeHolder = 'Desactivar conta!'
   }
 
+  openModalPhone(content) {
+    this.modalService.open(content, { windowClass: 'dark-modal' });
+    this.dataToChange = 'phone';
+    this.nameToChange = 'Telefone';
+    this.placeHolder = 'Introduza o novo número de telefone!'
+  }
 
   openModalAssociateService(ASModal) {
     this.modalService.open(ASModal, { windowClass: 'dark-modal' });
@@ -100,7 +106,10 @@ export class ClientComponent implements OnInit {
   }
 
   ngOnInit() {
-    
+    this.route.paramMap.subscribe(data => {
+    this.clientId = +data.get('clientId');
+    this.fetchClientById();
+    }    );
 
   }
 

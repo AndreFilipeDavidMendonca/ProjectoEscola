@@ -101,6 +101,15 @@
             </td>
           </tr>
           <tr>
+              <td>Telefone</td>
+              <td>{{ client.phone }}</td>
+              <td>
+                <a (click)="openModalPhone(content)" class="edit">
+                  <i class="material-icons">edit</i>
+                </a>
+              </td>
+          </tr>
+          <tr>
             <td>Serviço</td>
             <td>{{ client.serviceName }}</td>
             <td>
