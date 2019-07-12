@@ -1,4 +1,4 @@
-package com.polarising.PortalNet.Controller;
+package com.polarising.PortalNet.Response;
 
 public class ResponseMessage {
 	private String message;

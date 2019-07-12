@@ -2,23 +2,21 @@ package com.polarising.PortalNet.Controller;
 
 import java.util.Calendar;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.polarising.PortalNet.Forms.ClientForm;
 import com.polarising.PortalNet.Forms.ServiceForm;
 import com.polarising.PortalNet.Repository.ServiceRepository;
+import com.polarising.PortalNet.Response.ResponseMessage;
 import com.polarising.PortalNet.Utilities.PortalNetHttpRequest;
-import com.polarising.PortalNet.model.Client;
 import com.polarising.PortalNet.model.Services;
 
 @RestController
@@ -77,6 +75,26 @@ public class ServicesController {
 		serviceRepository.save(newService);		
 		message = "O serviço " + name + " foi registado com sucesso!";
 		return new ResponseEntity<>(new ResponseMessage(message), HttpStatus.OK);
+	}
+	
+	@DeleteMapping(path = "/servicesTable/{serviceID}")
+	public ResponseEntity<?> deleteService (@PathVariable Long serviceID)
+	{
+		String message;
+		String serviceName;
+		
+		if (serviceRepository.existsById(serviceID))
+		{
+			serviceName = serviceRepository.findById(serviceID).get().getName();
+			serviceRepository.deleteById(serviceID);
+			message = serviceName + " foi eliminado.";
+			return new ResponseEntity<>(new ResponseMessage(message), HttpStatus.OK);
+		}
+		else
+		{
+			message = "O serviço não existe!";
+			return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+		}	
 	}
 }
 

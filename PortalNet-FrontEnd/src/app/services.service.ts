@@ -41,7 +41,7 @@ API = 'http://localhost:8080';
   }
 
   deleteService(serviceID: number): Observable<{}> {
-    return this.http.delete(this.API + '/servicesTable/' + serviceID);
+    return this.http.delete<any>(this.API + '/servicesTable/' + serviceID);
   }
 }
 

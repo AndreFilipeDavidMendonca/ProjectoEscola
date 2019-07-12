@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Employee } from 'src/app/employee.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AlertService } from 'src/app/alert.service';
@@ -11,7 +11,10 @@ import { EmployeesService } from 'src/app/employees.service';
   styleUrls: ['./employees-table.component.css']
 })
 export class EmployeesTableComponent implements OnInit {
+  @Input() employeeId: number;
   employees: Employee[] = [];
+  success = '';
+  message: string;
   
   constructor(private employeesService: EmployeesService, private alertService: AlertService, private router: Router, private route: ActivatedRoute) { }
 
@@ -23,12 +26,13 @@ export class EmployeesTableComponent implements OnInit {
   }
 
   onDeleteEmployee(employeeId : number) {
+    console.log(employeeId);
     this.alertService.clear();
     let alert = confirm('Tem a certeza que deseja eliminar o colaborador ' + name + '?');
     if (alert) {
-      this.employeesService.deleteEmployee(employeeId).subscribe(data => {
-        this.alertService.success('Colaborador eliminado com sucesso!', true);
-        setTimeout(() => { this.alertService.clear(); }, 2000);
+      this.employeesService.deleteEmployee(employeeId).subscribe(success => {
+        this.alertService.success(success.message);
+        // setTimeout(() => { this.alertService.clear(); }, 2000);
         this.fetchEmployees();
       },
         error => {

@@ -29,7 +29,7 @@
                     <td>{{ employee.email }}</td>
                     <td>{{ employee.role }}</td>
                     <td class="td-actions text-right">
-                        <a routerLink="/employeesTable"  class="delete" (click)="onDeleteEmployee()">
+                        <a routerLink="/employeesTable"  class="delete" (click)="onDeleteEmployee(employee.employeeId)">
                             <i class="material-icons">delete</i>
                         </a>
                     </td>

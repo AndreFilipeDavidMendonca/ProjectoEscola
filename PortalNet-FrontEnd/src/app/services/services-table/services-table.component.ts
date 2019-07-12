@@ -13,8 +13,8 @@ import { ServicesService } from 'src/app/services.service';
 export class ServicesTableComponent implements OnInit {
   @Input() serviceID: number;
   services: Service[] = [];
-  service: Service;
-  serviceName: string;
+  success = '';
+  message: string;
 
   constructor(private servicesService: ServicesService, private alertService: AlertService, private router: Router, private route: ActivatedRoute) { }
 
@@ -30,10 +30,10 @@ fetchServices() {
     this.alertService.clear();
     let alert = confirm('Tem a certeza que deseja eliminar o serviço ' + name + '?');
     if (alert) {
-      this.servicesService.deleteService(serviceID).subscribe(data => {
-        this.alertService.success('Serviço eliminado com sucesso!', true);
-        setTimeout(() => { this.alertService.clear(); }, 2000);
-        this.fetchServices();
+      this.servicesService.deleteService(serviceID).subscribe(success => {
+      this.alertService.success(success.message);
+      // setTimeout(() => { this.alertService.clear(); }, 2000);
+       this.fetchServices();
       },
         error => {
           this.alertService.error(error);

@@ -42,7 +42,7 @@
                   <td>{{ service.creationDate }}</td>
                   <td>{{ service.status }}</td>
                   <td class="td-actions text-right">
-                    <a routerLink="/servicesTable" class="delete" (click)="onDeleteService()">
+                    <a routerLink="/servicesTable" class="delete" (click)="onDeleteService(service.serviceID)">
                       <i class="material-icons" >delete</i>
                     </a>
                   </td>

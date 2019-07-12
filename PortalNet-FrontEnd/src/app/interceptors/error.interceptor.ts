@@ -24,8 +24,14 @@ export class ErrorInterceptor implements HttpInterceptor {
       }
       // auto logout if 403 response returned from api
       else if (err.status === 403) {
+        console.log(error.message);
         this.authenticationService.logout();
         this.router.navigate(['/login']);
+      }
+
+      else if (err.status === 404) {
+        console.log(error.message);
+        return throwError(error.message);
       }
 
       else if (err.status === 302) {
@@ -38,12 +44,11 @@ export class ErrorInterceptor implements HttpInterceptor {
         this.router.navigate(['/login']);
       }
     
-      else if (err.statusText === 'Unknown Error' && err.name === 'HttpErrorResponse') {
-        error.message = "Não foi possível conectar ao servidor!";
-        return throwError(error.message);
-      }
+      // else if (err.statusText === 'Unknown Error' && err.name === 'HttpErrorResponse') {
+      //   error.message = "Não foi possível conectar ao servidor!";
+      //   return throwError(error.message);
+      // }
 
-      console.log(error);
 
 
       return throwError(error);

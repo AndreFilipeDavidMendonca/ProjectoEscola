@@ -48,7 +48,6 @@ export class CreateEmployeeComponent implements OnInit {
 
 
   onSubmit() {
-    console.log(this.EmployeeForm.value);
       this.submitted = true;
       
       // reset alerts on submit
