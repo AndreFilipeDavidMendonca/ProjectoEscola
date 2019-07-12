@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,6 +36,12 @@ public class ServicesController {
 	{
 		return (List<Services>) serviceRepository.findAll();
 	}
+	
+	@GetMapping(path = "/registration/{name}", produces= {"application/json"})
+	public ResponseEntity<?> getByName(@PathVariable String name)
+	{	
+		return new ResponseEntity<List<Services>>((List<Services>) serviceRepository.findByName(name), HttpStatus.OK);
+	} 
 	
 	@PostMapping(path = "/createService", consumes = {"application/json"})
 	public ResponseEntity<?> registerService(@RequestBody ServiceForm serviceForm)

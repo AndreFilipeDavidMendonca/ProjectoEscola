@@ -1,4 +1,4 @@
-import { Component,  OnInit} from '@angular/core';
+import { Component,  OnInit, Input} from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ClientService } from '../client.service';
@@ -8,6 +8,7 @@ import { AlertComponent } from '../alerts/alert.component';
 import { Client } from '../client.model';
 import { Service } from '../service.model';
 import { ServicesService } from '../services.service';
+import { stringify } from '@angular/core/src/render3/util';
 
 
 
@@ -17,15 +18,20 @@ import { ServicesService } from '../services.service';
   styleUrls: ['./registration.component.css']
 })
 export class RegistrationComponent implements OnInit{
+  serviceData: Service;
+  service: Service;
+  servicePrice: number;
   services: Service[] = [];
   submitted = false;
   ClientForm: FormGroup;
+  selectedService: string;
   clientToJSON: string;
   isLoading = false;
   error = '';
   success = '';
   client: Client;
   message: string;
+
 
   constructor(private route: ActivatedRoute,
     private router: Router,
@@ -47,7 +53,19 @@ export class RegistrationComponent implements OnInit{
 
   }
 
+  fetchServiceByName(){
+    this.selectedService = this.ClientForm.get('serviceName').value;
+    this.servicesService.getByName(this.selectedService)
+      .pipe(first())
+      .subscribe(service => {
+        this.service = service[0];
+        this.servicePrice = this.service.price;
+        return this.servicePrice;
+      });
+  }
+
   ngOnInit(){
+
     this.fetchServices();
     this.ClientForm = this.formBuilder.group({
       name: ['', Validators.required],
@@ -85,7 +103,7 @@ export class RegistrationComponent implements OnInit{
 
   onSubmit() {
 
-  
+
     this.submitted = true;
 
     // reset alerts on submit
@@ -97,7 +115,7 @@ export class RegistrationComponent implements OnInit{
     }
 
     // user to JSON
-    
+
       this.clientToJSON = JSON.parse(JSON.stringify(this.ClientForm.value));
       this.clientService.addClient(this.clientToJSON)
         .pipe(first())
@@ -110,9 +128,9 @@ export class RegistrationComponent implements OnInit{
             error => {
               this.alertService.error(JSON.parse(JSON.stringify(error)));
               this.isLoading = false;
-      });      
+      });
   }
 
 
- 
+
 }

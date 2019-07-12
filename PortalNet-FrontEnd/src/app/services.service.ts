@@ -28,6 +28,14 @@ API = 'http://localhost:8080';
     return this.http.get<Service[]>(this.API + '/servicesTable')
   }
 
+  getById(serviceID: number) {
+    return this.http.get<Service>(this.API + '/registration' + serviceID);
+  }
+
+  getByName(name: string) {
+    return this.http.get<Service>(this.API + '/registration/' + name);
+  }
+
   addService(service: string) {
     console.log(service);
     return this.http.post<any>(this.API + '/createService', service);

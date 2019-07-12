@@ -103,8 +103,7 @@ export class ClientComponent implements OnInit {
     this.route.paramMap.subscribe(data => {
       this.clientId = +data.get('clientId');
       this.fetchClientById();
-    }
-    );
+    });
   }
 
 
