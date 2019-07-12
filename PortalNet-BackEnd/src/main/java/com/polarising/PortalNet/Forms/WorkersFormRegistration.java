@@ -5,7 +5,7 @@ import javax.validation.constraints.NotBlank;
 import org.springframework.stereotype.Component;
 
 @Component
-public class WorkersForm {
+public class WorkersFormRegistration {
 	
 	@NotBlank
     private String name;
@@ -19,9 +19,9 @@ public class WorkersForm {
 	@NotBlank
     private String password;
     
-    public WorkersForm() {}
+    public WorkersFormRegistration() {}
 
-    public WorkersForm(String name, String email, String role, String password) {
+    public WorkersFormRegistration(String name, String email, String role, String password) {
         this.name = name;
         this.email = email;
         this.role = role;

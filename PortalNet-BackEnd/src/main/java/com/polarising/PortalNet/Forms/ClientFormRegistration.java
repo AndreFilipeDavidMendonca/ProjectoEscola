@@ -3,7 +3,7 @@ package com.polarising.PortalNet.Forms;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ClientForm {
+public class ClientFormRegistration {
 
 	private int nif;
 	
@@ -27,9 +27,9 @@ public class ClientForm {
 	
 	private String birthDate;
 	
-	public ClientForm () {}
+	public ClientFormRegistration () {}
 
-	public ClientForm(int nif, String name, String address, String postalCode, String city, Integer mobilePhone,
+	public ClientFormRegistration(int nif, String name, String address, String postalCode, String city, Integer mobilePhone,
 			String email, String gender, String password, String serviceName, String birthDate) {
 		super();
 		this.nif = nif;

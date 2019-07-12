@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.polarising.PortalNet.Exceptions.NifAlreadyExistsException;
-import com.polarising.PortalNet.Forms.ClientForm;
+import com.polarising.PortalNet.Forms.ClientFormRegistration;
 import com.polarising.PortalNet.Repository.ClientRepository;
 import com.polarising.PortalNet.Response.ResponseMessage;
 import com.polarising.PortalNet.Utilities.PortalNetHttpRequest;
@@ -45,28 +45,18 @@ public class ClientController {
 	
 	
 	@PostMapping(path = "/registration", consumes = {"application/json"})
-	public ResponseEntity<?> registerClient(@RequestBody ClientForm clientForm)
+	public ResponseEntity<?> registerClient(@RequestBody ClientFormRegistration clientForm)
 	{
 		try{
-
 		String today = Calendar.getInstance().getTime().toInstant().toString().substring(0, 10).replace("-", "");
-		
 		String random = String.format("%03d", (int) (Math.random() * 10000));
-	
 		String clientNumber = today + random;
-		
 		String entryDate = Calendar.getInstance().getTime().toString();
-		
 		String endContract = "08/07/2020";
-		
 		int numberOfServices = 1;
-		
 		String monthlyPay = "100€";
-		
 		boolean fraudulent = false;
-		
 		boolean status = true;
-		
 		String message;
 		
 		Client newClient = new Client(clientNumber, clientForm.getNif(), clientForm.getName(), clientForm.getAddress(),
@@ -86,10 +76,10 @@ public class ClientController {
 		}
 		
 		clientRepository.save(newClient);
-		
 		message = clientForm.getName() + " was successfully created!";
 		
 		return new ResponseEntity<String> (new ResponseMessage(message).getMessage(), HttpStatus.CREATED);
+		
 		}
 		catch (NifAlreadyExistsException e)
 		{
@@ -97,4 +87,7 @@ public class ClientController {
 			return new ResponseEntity<String> (failureMessage, HttpStatus.NOT_ACCEPTABLE);
 		}
 	}
+	
+//	@PostMapping(path = "/home", consumes = {"application/json"})
+//	public ResponseEntity<?> loginClient(@RequestBody LoginClient loginClient)
 }
