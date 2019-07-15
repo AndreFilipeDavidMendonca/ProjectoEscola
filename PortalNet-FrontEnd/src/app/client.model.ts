@@ -3,7 +3,7 @@ export class Client {
     public clientId?: number;
     public name: string;
     public clientNumber: number;
-    public adress: string;
+    public address: string;
     public city: string;
     public postalCode: string;
     public nif: number;
@@ -23,7 +23,7 @@ export class Client {
    
 
     
-    constructor(clientId: number, name: string, clientNumber: number, adress: string, city: string, postalCode: string, nif: number, birthDate: string, email: string, mobilePhone: number, 
+    constructor(clientId: number, name: string, clientNumber: number, address: string, city: string, postalCode: string, nif: number, birthDate: string, email: string, mobilePhone: number, 
                 gender: string, entryDate: string, phone: number, endContract: string, numberOfServices: number, monthlyPay: string, 
                 serviceName: string, status: boolean, fraudulent: boolean, password: string){
 
@@ -32,7 +32,7 @@ export class Client {
         this.clientId = clientId;    
         this.name = name;
         this.clientNumber = clientNumber;
-        this.adress = adress;
+        this.address = address;
         this.city = city;
         this.postalCode = postalCode;
         this.nif = nif;
