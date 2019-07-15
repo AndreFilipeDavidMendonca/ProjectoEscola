@@ -34,7 +34,8 @@ export class ClientComponent implements OnInit {
     
   }
 
-  openModalAdress(content) {
+  openModalAddress(content) {
+    console.log(this.client);
     this.modalService.open(content, { windowClass: 'dark-modal' });
     this.dataToChange = 'address';
     this.nameToChange = 'Morada';
@@ -120,9 +121,10 @@ export class ClientComponent implements OnInit {
     this.fetchClientById();
     });   
   }
-
+  
   saveChanges() {
-
+    this.passEntry.emit(this.client);
+    console.log(this.client);
   }
 
   createForm() {
@@ -187,7 +189,7 @@ export class ClientComponent implements OnInit {
 
     // user to JSON
 
-      this.clientToJSON = JSON.parse(JSON.stringify(this.ClientUpdateForm.value));
+      this.clientToJSON = JSON.parse(JSON.stringify(this.client));
       this.clientService.updateClient(this.clientId, this.clientToJSON)
         .pipe(first())
           .subscribe(
