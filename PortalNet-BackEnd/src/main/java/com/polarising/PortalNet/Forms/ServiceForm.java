@@ -1,6 +1,8 @@
 package com.polarising.PortalNet.Forms;
+
 import org.springframework.stereotype.Component;
 
+@Component
 public class ServiceForm {
 	private String name;
 	private String tv;

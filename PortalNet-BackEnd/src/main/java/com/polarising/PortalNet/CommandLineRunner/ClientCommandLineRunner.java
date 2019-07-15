@@ -25,19 +25,24 @@ public class ClientCommandLineRunner implements CommandLineRunner {
 		
 		String entryDate = Calendar.getInstance().getTime().toString();
 		
+		@SuppressWarnings("unused")
 		String endContract = "08/07/2020";
 		
+		@SuppressWarnings("unused")
 		int numberOfServices = 1;
 		
+		@SuppressWarnings("unused")
 		String monthlyPay = "100€";
 		
+		@SuppressWarnings("unused")
 		boolean fraudulent = false;
 		
+		@SuppressWarnings("unused")
 		boolean status = true;
 		
 		clientRepository.save(new Client(clientNumber, 1111111, "Andre", "Rua da Alegria", "1000-245",
 				"Lisboa", 911111111, "andre@polarising.com", "male",
-				"bernardoAdmin", entryDate, "27/06/2020", 2, "Pacote 4 Serviços",  "100€", true, true, "18/01/1989"));
+				"bernardoAdmin", entryDate, "27/06/2020", 2, "Blue Master 1",  "100€", true, true, "18/01/1989"));
 		
 		clientNumber = ("" + (Long.parseLong(clientNumber) + 1));
 		
