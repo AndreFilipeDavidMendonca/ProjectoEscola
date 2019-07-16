@@ -81,11 +81,11 @@ public class WorkersController {
 		{
 			workerName = workersRepository.findById(employeeId).get().getName();
 			workersRepository.deleteById(employeeId);
-			message = workerName + " foi eliminado!";
+			message = workerName + " foi eliminado.";
 			return new ResponseEntity<>(new ResponseMessage(message), HttpStatus.OK);
 		}
 		else{
-			message = "O trabalhador não existe.";
+			message = "O trabalhador com o Id: \"" + employeeId + "\" não existe.";
 			return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
 		}		
 	}

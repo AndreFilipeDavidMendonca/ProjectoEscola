@@ -8,7 +8,7 @@ import { AlertComponent } from '../alerts/alert.component';
 import { Client } from '../client.model';
 import { Service } from '../service.model';
 import { ServicesService } from '../services.service';
-import { stringify } from '@angular/core/src/render3/util';
+
 
 
 

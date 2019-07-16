@@ -1,5 +1,6 @@
 <body>
 <br><br><br>
+<app-alert></app-alert>
 <div class="side-nav">
   <div class="row">
     <div class="col-ms-12" >
@@ -149,7 +150,7 @@
   </div>
 </div>
 
-<ng-template #content let-modal>
+<ng-template #content id="addressModal" let-modal>
   <div class="modal-header">
     <h4 class="modal-title">Alterar {{ nameToChange }}</h4>
     <a (click)="modal.dismiss('Cross click')" class="close">

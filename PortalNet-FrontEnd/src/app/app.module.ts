@@ -22,6 +22,9 @@ import { AlertComponent } from './alerts/alert.component';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { AuthGuard } from './guards/auth.guard';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+
+
 
 
 
@@ -69,11 +72,19 @@ const appRoutes: Routes =  [
     ReactiveFormsModule  
   ],
   
-  providers: [NgbModalConfig, NgbModal, NgbModalModule, ClientService, AuthGuard,
-      { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-      { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
-
+  providers: [
+    NgbModalConfig,
+    NgbModal, 
+    NgModule, 
+    NgbModule, 
+    NgbModalModule, 
+    ClientService, 
+    AuthGuard,
+    NgbActiveModal,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],
+
   bootstrap: [AppComponent, HomeComponent],
   exports: [ HomeComponent ]
 })
