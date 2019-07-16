@@ -27,3 +27,7 @@
  a {
      cursor: pointer;
  }
+
+ .modal-body input.custom-control-input {
+     margin-left: 50%;
+ }

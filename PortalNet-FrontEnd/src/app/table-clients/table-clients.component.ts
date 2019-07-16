@@ -37,7 +37,7 @@ filter = { fraudulent: false, status: false};
 
 clients: Client [] = []; 
 filteredClients: Client[] = [];
-notFilteredClients: Client[] = []; 
+bothFilteredClients: Client[] = [];
 
   filterChange() {
     this.filteredClients = this.clients.filter(x => 
@@ -45,9 +45,9 @@ notFilteredClients: Client[] = [];
        || (x.status === true && this.filter.status)
     );
 
-    this.notFilteredClients = this.clients.filter(x => 
-      (x.fraudulent === false && this.filter.fraudulent)
-      || (x.status === false && this.filter.status)
+    this.bothFilteredClients = this.clients.filter(x => 
+      (x.fraudulent === true && this.filter.fraudulent)
+      && (x.status === true && this.filter.status)
    );
 
   }

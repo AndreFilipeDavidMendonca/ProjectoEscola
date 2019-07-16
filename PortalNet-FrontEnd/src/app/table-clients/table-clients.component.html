@@ -22,7 +22,7 @@
                 </ul>
             </div>
             <br>
-            <div class="checked" *ngIf="filter.fraudulent || filter.status">
+            <div class="checked" *ngIf="(filter.fraudulent || filter.status) && !(filter.fraudulent && filter.status)">
                 <table class="table">
                     <thead>
                         <tr>
@@ -80,6 +80,39 @@
                                 <td class="td-actions text-right">
                                     <a [routerLink]="['/client/', client.clientId]" class="person">
                                         <i class="material-icons" >person</i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <br>
+                <div class="checked" *ngIf="filter.fraudulent && filter.status">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Nome Completo</th>
+                                <th>Número de Cliente</th>
+                                <th>NIF</th>
+                                <th>E-Mail</th>
+                                <th>Serviço</th>
+                                <th>Activa</th>
+                                <th>Fraudulenta</th>
+                                <th class="text-right">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let client of bothFilteredClients | filter: {name: searchText, clientNumber:searchText, nif: searchText}; let i=index;">
+                                <td scope="row">{{ client.name }}</td>
+                                <td>{{ client.clientNumber }}</td>
+                                <td>{{ client.nif }}</td>
+                                <td>{{ client.email }}</td>
+                                <td>{{ client.serviceName }} </td>
+                                <td>{{ client.status }}</td>
+                                <td>{{ client.fraudulent }}</td>
+                                <td class="td-actions text-right">
+                                    <a [routerLink]="['/client/', client.clientId]" class="person">
+                                        <i class="material-icons">person</i>
                                     </a>
                                 </td>
                             </tr>

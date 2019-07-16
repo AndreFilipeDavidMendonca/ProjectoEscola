@@ -5,6 +5,8 @@ import { ClientService } from '../client.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { AlertService } from '../alert.service';
+import { ServicesService } from '../services.service';
+import { Service } from '../service.model';
 
 
 
@@ -22,74 +24,71 @@ export class ClientComponent implements OnInit {
   @Output() passEntry: EventEmitter<any> = new EventEmitter();
   @Input() public client: Client;
   @Input() clientId: number;
-  dataToChange: string;
+  services: Service[] = [];
   placeHolder: string;
-  nameToChange: string;
   clientToJSON: string;
+  statusOutput: string;
+  fraudulentOutput: string;  
 
 
 
   // submitted = false;
   
   
-  constructor(private modalService: NgbModal, private clientService: ClientService, private router: Router, private route: ActivatedRoute, private alertService: AlertService) {}
+  constructor(private servicesService: ServicesService, private modalService: NgbModal, private clientService: ClientService, private router: Router, private route: ActivatedRoute, private alertService: AlertService) {}
   
+  fetchServices() {
+    this.servicesService.getAll().pipe(first()).subscribe(services => {
+      this.services = services;
+     });
+
+  }
+
   openBackDropCustomClass(content) {
     this.modalService.open(content, {backdropClass: 'light-blue-backdrop'});
     
   }
 
-  openModalAddress(content) {
-    console.log(this.client);
-    this.modalService.open(content, { windowClass: 'dark-modal' });
-    this.dataToChange = 'address';
-    this.nameToChange = 'Morada';
+  openModalAddress(address) {
+    this.modalService.open(address, { windowClass: 'dark-modal' });
     this.placeHolder = 'Introduza a nova Morada!'
   }
-  openModalPostalCode(content) {
-    this.modalService.open(content, { windowClass: 'dark-modal' });
-    this.dataToChange = 'postalCode';
-    this.nameToChange = 'Código-Postal';
+
+  openModalPostalCode(postalCode) {
+    this.modalService.open(postalCode, { windowClass: 'dark-modal' });
     this.placeHolder = 'Introduza o novo Código-Postal!'
   }
-  openModalEmail(content) {
-    this.modalService.open(content, { windowClass: 'dark-modal' });
-    this.dataToChange = 'email';
-    this.nameToChange = 'E-Mail';
+
+  openModalEmail(email) {
+    this.modalService.open(email, { windowClass: 'dark-modal' });
     this.placeHolder = 'Introduza o novo E-Mail!'
   }
-  openModalMobilePhone(content) {
-    this.modalService.open(content, { windowClass: 'dark-modal' });
-    this.dataToChange = 'mobilePhone';
-    this.nameToChange = 'Telemóvel';
-    this.placeHolder = 'Introduza o novo Telemóvel!'
+
+  openModalMobilePhone(mobilePhone) {
+    this.modalService.open(mobilePhone, { windowClass: 'dark-modal' });
+    this.placeHolder = 'Introduza o novo número de Telemóvel!'
   }
 
-  openModalLocality(content) {
-    this.modalService.open(content, { windowClass: 'dark-modal' });
-    this.dataToChange = 'city';
-    this.nameToChange = 'Localidade';
+  openModalLocality(city) {
+    this.modalService.open(city, { windowClass: 'dark-modal' });
     this.placeHolder = 'Introduza a nova Localidade!'
   }
   openModalService(service) {
     this.modalService.open(service, { windowClass: 'dark-modal' });
-    this.dataToChange = 'service';
-    this.nameToChange = 'Serviço';
   }
   
 
   openModalStatus(status) {
     this.modalService.open(status, { windowClass: 'dark-modal' });
-    this.dataToChange = 'status';
-    this.nameToChange = 'Estado da conta';
-    this.placeHolder = 'Desactivar conta!'
   }
 
-  openModalPhone(content) {
-    this.modalService.open(content, { windowClass: 'dark-modal' });
-    this.dataToChange = 'phone';
-    this.nameToChange = 'Telefone';
+  openModalPhone(phone) {
+    this.modalService.open(phone, { windowClass: 'dark-modal' });
     this.placeHolder = 'Introduza o novo número de telefone!'
+  }
+
+  openModalFraudulent(fraudulent) {
+    this.modalService.open(fraudulent, { windowClass: 'dark-modal' });
   }
 
   openModalAssociateService(ASModal) {
@@ -120,11 +119,29 @@ export class ClientComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.fetchServices();
     this.route.paramMap.subscribe(data => {
     this.clientId = +data.get('clientId');
     this.fetchClientById();
     });   
   }
+
+  changeFraudeOutputValue() {
+      if(this.client.fraudulent === true) {
+      this.fraudulentOutput = "Conta Integra!";
+    } else {
+      this.fraudulentOutput = "Conta Fraudulenta!";
+    }
+  }
+
+  changeStatusOutputValue() {
+    if(this.client.status === true) {
+      this.statusOutput = "Conta Desactivada!";
+    } else {
+      this.statusOutput = "Conta Activada!";
+    }
+  }
+
   
   saveChanges() {
     this.passEntry.emit(this.client);
