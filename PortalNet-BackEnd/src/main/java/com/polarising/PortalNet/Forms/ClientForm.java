@@ -15,7 +15,9 @@ public class ClientForm {
 	
 	private String city;
 	
-	private Integer mobilePhone;
+	private long mobilePhone;
+	
+	private long phone;
 	
 	private String email;
 	
@@ -29,7 +31,7 @@ public class ClientForm {
 	
 	public ClientForm () {}
 
-	public ClientForm(int nif, String name, String address, String postalCode, String city, Integer mobilePhone,
+	public ClientForm(int nif, String name, String address, String postalCode, String city, long mobilePhone, long phone,
 			String email, String gender, String password, String birthDate, String serviceName) {
 		super();
 		this.nif = nif;
@@ -38,6 +40,7 @@ public class ClientForm {
 		this.postalCode = postalCode;
 		this.city = city;
 		this.mobilePhone = mobilePhone;
+		this.phone = phone;
 		this.email = email;
 		this.gender = gender;
 		this.password = password;
@@ -65,8 +68,12 @@ public class ClientForm {
 		return city;
 	}
 
-	public Integer getMobilePhone() {
+	public long getMobilePhone() {
 		return mobilePhone;
+	}
+
+	public long getPhone() {
+		return phone;
 	}
 
 	public String getEmail() {
