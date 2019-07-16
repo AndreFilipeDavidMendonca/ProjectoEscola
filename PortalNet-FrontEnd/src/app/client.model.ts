@@ -9,8 +9,8 @@ export class Client {
     public nif: number;
     public birthDate: string;
     public email: string;
-    public mobilePhone: number;
-    public phone: number;
+    public mobilePhone?: number;
+    public phone?: number;
     public gender: string;
     public entryDate: string;
     public endContract: string;

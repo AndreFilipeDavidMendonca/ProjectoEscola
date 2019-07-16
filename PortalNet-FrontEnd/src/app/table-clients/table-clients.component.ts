@@ -25,7 +25,7 @@ const options = {
     styleUrls: ['./table-clients.component.css']
 })
 
-export class TableClientsComponent implements OnInit {
+export class TableClientsComponent implements OnInit { 
 @Input() clientId: number;
 // isLoading = true;
 currenClient: Client;

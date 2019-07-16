@@ -69,7 +69,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let client of clients | filter: {name: searchText, clientNumber:searchText, nif: searchText}; let i=index;">
+                            <tr *ngFor="let client of clients | paginate: { itemsPerPage: 10, currentPage: p } | filter: {name: searchText, clientNumber:searchText, nif: searchText}; let i=index;">
                                 <td scope="row">{{ client.name }}</td>
                                 <td>{{ client.clientNumber }}</td>
                                 <td>{{ client.nif }}</td>
@@ -84,6 +84,9 @@
                                 </td>
                             </tr>
                         </tbody>
+                        <div class="pagination">
+                            <pagination-controls (pageChange)="p = $event" class="myPagination"></pagination-controls>
+                        </div>
                     </table>
                 </div>
                 <br>

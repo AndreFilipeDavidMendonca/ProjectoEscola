@@ -13,14 +13,15 @@ public class Client {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-    private int clientId;
+    private Integer clientId;
 	private String clientNumber;
     private int nif;
     private String name;
     private String address;
     private String postalCode;
     private String city;
-    private Integer mobilePhone;
+    private long mobilePhone;
+    private long phone;
     private String email;
     private String gender;
     private String password;
@@ -37,7 +38,7 @@ public class Client {
     public Client() {}
     
     public Client(String clientNumber, int nif, String name, String address, String postalCode,
-			String city, Integer mobilePhone, String email, String gender, String password, String entryDate,
+			String city, long mobilePhone, long phone, String email, String gender, String password, String entryDate,
 			String endContract, int numberOfServices, String serviceName, String monthlyPay, boolean fraudulent,
 			boolean status, String birthDate) {
 		super();
@@ -48,6 +49,7 @@ public class Client {
 		this.postalCode = postalCode;
 		this.city = city;
 		this.mobilePhone = mobilePhone;
+		this.phone = phone;
 		this.email = email;
 		this.gender = gender;
 		this.password = password;
@@ -61,11 +63,11 @@ public class Client {
 		this.birthDate = birthDate;
 	}
 
-	public int getClientId() {
+	public Integer getClientId() {
 		return clientId;
 	}
 
-	public void setClientId(int clientId) {
+	public void setClientId(Integer clientId) {
 		this.clientId = clientId;
 	}
 
@@ -117,12 +119,20 @@ public class Client {
 		this.city = city;
 	}
 
-	public Integer getMobilePhone() {
+	public long getMobilePhone() {
 		return mobilePhone;
 	}
 
-	public void setMobilePhone(int mobilePhone) {
+	public void setMobilePhone(long mobilePhone) {
 		this.mobilePhone = mobilePhone;
+	}
+
+	public long getPhone() {
+		return phone;
+	}
+
+	public void setPhone(long phone) {
+		this.phone = phone;
 	}
 
 	public String getEmail() {

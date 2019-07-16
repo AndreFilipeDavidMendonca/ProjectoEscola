@@ -23,6 +23,8 @@ import { JwtInterceptor } from './interceptors/jwt.interceptor';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { AuthGuard } from './guards/auth.guard';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import {NgxPaginationModule} from 'ngx-pagination';
+
 
 
 
@@ -69,7 +71,8 @@ const appRoutes: Routes =  [
     RouterModule.forRoot(appRoutes),
     NgbModalModule.forRoot(),
     NgbModule,
-    ReactiveFormsModule  
+    ReactiveFormsModule,
+    NgxPaginationModule
   ],
   
   providers: [
