@@ -37,7 +37,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let client of filteredClients | filter: {name: searchText, clientNumber:searchText, nif: searchText}; let i=index;">
+                        <tr *ngFor="let client of filteredClients  | paginate: { itemsPerPage: 10, currentPage: p } | filter: {name: searchText, clientNumber:searchText, nif: searchText}; let i=index;">
                             <td scope="row">{{ client.name }}</td>
                             <td>{{ client.clientNumber }}</td>
                             <td>{{ client.nif }}</td>
@@ -53,6 +53,9 @@
                         </tr>
                     </tbody>
                 </table>
+                <div class="pagination">
+                    <pagination-controls (pageChange)="p = $event" class="myPagination"></pagination-controls>
+                </div>
             </div>
             <div class="notChecked" *ngIf="!filter.status && !filter.fraudulent ">
                     <table class="table">
@@ -84,10 +87,10 @@
                                 </td>
                             </tr>
                         </tbody>
-                        <div class="pagination">
-                            <pagination-controls (pageChange)="p = $event" class="myPagination"></pagination-controls>
-                        </div>
                     </table>
+                    <div class="pagination">
+                        <pagination-controls (pageChange)="p = $event" class="myPagination"></pagination-controls>
+                    </div>
                 </div>
                 <br>
                 <div class="checked" *ngIf="filter.fraudulent && filter.status">
@@ -105,7 +108,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let client of bothFilteredClients | filter: {name: searchText, clientNumber:searchText, nif: searchText}; let i=index;">
+                            <tr *ngFor="let client of bothFilteredClients  | paginate: { itemsPerPage: 10, currentPage: p } | filter: {name: searchText, clientNumber:searchText, nif: searchText}; let i=index;">
                                 <td scope="row">{{ client.name }}</td>
                                 <td>{{ client.clientNumber }}</td>
                                 <td>{{ client.nif }}</td>
@@ -121,6 +124,9 @@
                             </tr>
                         </tbody>
                     </table>
+                    <div class="pagination">
+                        <pagination-controls (pageChange)="p = $event" class="myPagination"></pagination-controls>
+                    </div>
                 </div>
             </div>
         </div>
