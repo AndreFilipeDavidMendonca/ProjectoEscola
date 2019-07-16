@@ -11,4 +11,6 @@ import com.polarising.PortalNet.model.Services;
 public interface ServiceRepository extends CrudRepository<Services, Long>{
 	
 	List<Services> findByName(String name);
+	
+	boolean existsByName(String name);
 }

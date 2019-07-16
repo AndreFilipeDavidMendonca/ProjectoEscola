@@ -1,14 +1,9 @@
 package com.polarising.PortalNet.Controller;
 
-import static org.junit.Assert.assertEquals;
-
 import java.util.Calendar;
 import java.util.List;
 
-import org.json.JSONException;
-import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.gson.GsonAutoConfiguration;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -19,7 +14,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.google.gson.Gson;
 import com.polarising.PortalNet.Forms.ClientForm;
 import com.polarising.PortalNet.Repository.ClientRepository;
 import com.polarising.PortalNet.Repository.ServiceRepository;
@@ -109,27 +103,43 @@ public class ClientController {
 	{
 		try{
 		
-//			Gson gson = new Gson();
-		
 		Client clientToUpdate = clientRepository.findByClientId(clientId).get(0);
-//		JSONAssert.assertEquals("{clientId:" + client.getClientId() + "}", gson.toJson(clientRepository.findByClientId(clientId).get(0)), false);
+
 		
-		String newServicePay = Float.toString(serviceRepository.findByName(client.getServiceName()).get(0).getPrice());
+//		if (!clientRepository.existsById(clientId))
+//				{
+//					throw new Exception();
+//				}
 		
-		clientToUpdate.setClientId(client.getClientId());
-		clientToUpdate.setAddress(client.getAddress());
-		clientToUpdate.setCity(client.getCity());
-		clientToUpdate.setEmail(client.getEmail());
-		clientToUpdate.setFraudulent(client.isFraudulent());
-		clientToUpdate.setMobilePhone(client.getMobilePhone());
-		clientToUpdate.setMonthlyPay(newServicePay);
-		clientToUpdate.setName(client.getName());
-		clientToUpdate.setPassword(client.getPassword());
-		clientToUpdate.setPostalCode(client.getPostalCode());
-		clientToUpdate.setServiceName(client.getServiceName());
-		clientToUpdate.setStatus(client.isStatus());
+		String newMonthlyPay = Float.toString(serviceRepository.findByName(client.getServiceName()).get(0).getPrice());
 		
-		clientRepository.deleteById(clientId);
+//		clientToUpdate.setClientId(client.getClientId());
+//		clientToUpdate.setAddress(client.getAddress());
+//		clientToUpdate.setCity(client.getCity());
+//		clientToUpdate.setEmail(client.getEmail());
+//		clientToUpdate.setFraudulent(client.isFraudulent());
+//		clientToUpdate.setMobilePhone(client.getMobilePhone());
+//		clientToUpdate.setMonthlyPay(newMonthlyPay);
+//		clientToUpdate.setName(client.getName());
+//		clientToUpdate.setPassword(client.getPassword());
+//		clientToUpdate.setPostalCode(client.getPostalCode());
+//		clientToUpdate.setServiceName(client.getServiceName());
+//		clientToUpdate.setStatus(client.isStatus());
+		
+		clientRepository.findByClientId(clientId).get(0).setName(client.getName());
+		clientRepository.findByClientId(clientId).get(0).setClientId(clientId);
+		clientRepository.findByClientId(clientId).get(0).setAddress(client.getAddress());
+		clientRepository.findByClientId(clientId).get(0).setCity(client.getCity());
+		clientRepository.findByClientId(clientId).get(0).setEmail(client.getEmail());
+		clientRepository.findByClientId(clientId).get(0).setFraudulent(client.isFraudulent());
+		clientRepository.findByClientId(clientId).get(0).setMobilePhone(client.getMobilePhone());
+		clientRepository.findByClientId(clientId).get(0).setMonthlyPay(newMonthlyPay);
+		clientRepository.findByClientId(clientId).get(0).setPassword(client.getPassword());
+		clientRepository.findByClientId(clientId).get(0).setPostalCode(client.getPostalCode());
+		clientRepository.findByClientId(clientId).get(0).setServiceName(client.getServiceName());
+		clientRepository.findByClientId(clientId).get(0).setStatus(client.isStatus());
+		
+//		clientRepository.deleteById(clientId);
 		clientRepository.save(clientToUpdate);
 		
 		String message = "Atualização bem sucedida.";
@@ -141,14 +151,30 @@ public class ClientController {
 			return new ResponseEntity<Client>(client, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		catch(IndexOutOfBoundsException e)
-		{
-			String message = "O nome do novo serviço não se encontra na lista de serviços disponíveis.";
+		{	
+			String message;
+			
+			if (!clientRepository.existsById(clientId))
+			{
+				message = "Id de cliente não existe.";
+			}
+			else if (!serviceRepository.existsByName(client.getServiceName()))
+			{
+				message = "O nome do novo serviço não se encontra na lista de serviços disponíveis.";
+			}
+			else {
+				message = null;
+			}
+//			Gson gson = new Gson();
+//			try {
+//				JSONAssert.assertEquals("{clientId:" + client.getClientId() + "}", gson.toJson(clientRepository.findByClientId(clientId).get(0)), false); // Aqui testo se o clientId se encontra na BD.
+//			} catch (JSONException | IndexOutOfBoundsException e2) {
+//				String message = "Id de cliente não existe.";
+//			return new ResponseEntity<String>(message,HttpStatus.INTERNAL_SERVER_ERROR);
+//			}
+//			
+//			String message = "O nome do novo serviço não se encontra na lista de serviços disponíveis.";
 			return new ResponseEntity<String>(message,HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-//		catch(JSONException e)
-//		{
-//			String message = "Id de cliente não existe.";
-//			return new ResponseEntity<String>(message,HttpStatus.INTERNAL_SERVER_ERROR);
-//		}
 	}
 }
