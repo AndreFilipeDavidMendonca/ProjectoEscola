@@ -5,8 +5,7 @@ import { AlertService } from 'src/app/alert.service';
 import { ServicesService } from 'src/app/services.service';
 import { Service } from 'src/app/service.model';
 import { first } from 'rxjs/operators';
-import { AlertComponent } from '../../alerts/alert.component';
-import { importType } from '@angular/compiler/src/output/output_ast';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({

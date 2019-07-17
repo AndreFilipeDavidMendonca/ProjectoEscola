@@ -27,8 +27,6 @@ export class ClientComponent implements OnInit {
   services: Service[] = [];
   placeHolder: string;
   clientToJSON: string;
-  statusOutput: string;
-  fraudulentOutput: string;  
   submitted = false;
   
   
@@ -133,8 +131,6 @@ export class ClientComponent implements OnInit {
  
   
   onSubmit() {
-
-
     this.submitted = true;
 
     // reset alerts on submit

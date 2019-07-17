@@ -16,7 +16,7 @@ export class ErrorInterceptor implements HttpInterceptor {
       let error = err.error;
 
       if (err.status === 400) {
-        this.message = "O registo não foi processado! Certifique se os seus dados estão correctos!"
+        // this.message = "O registo não foi processado! Certifique se os seus dados estão correctos!"
         return throwError(this.message);
         // error.message = err.error.message.slice(1, err.error.message.length - 1).split(', ');
       }
