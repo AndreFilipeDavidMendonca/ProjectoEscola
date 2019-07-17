@@ -120,25 +120,10 @@ export class ClientComponent implements OnInit {
     this.route.paramMap.subscribe(data => {
     this.clientId = +data.get('clientId');
     this.fetchClientById();
-    });   
+    });  
   }
 
-  changeFraudeOutputValue() {
-      if(this.client.fraudulent === true) {
-      this.fraudulentOutput = "Conta Integra!";
-    } else {
-      this.fraudulentOutput = "Conta Fraudulenta!";
-    }
-  }
-
-  changeStatusOutputValue() {
-    if(this.client.status === true) {
-      this.statusOutput = "Conta Desactivada!";
-    } else {
-      this.statusOutput = "Conta Activada!";
-    }
-  }
-
+  
   
   saveChanges() {
     this.passEntry.emit(this.client);

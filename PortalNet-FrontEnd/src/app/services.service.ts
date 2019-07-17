@@ -38,8 +38,8 @@ API = 'http://localhost:8080';
     return this.http.post<any>(this.API + '/createService', service);
   }
 
-  deleteService(serviceID: number): Observable<{}> {
-    return this.http.delete<any>(this.API + '/servicesTable/' + serviceID);
+  updateService(serviceID: number, service: string) {
+    return this.http.put<any>(this.API + '/servicesTable/' + serviceID, service);
   }
 }
 

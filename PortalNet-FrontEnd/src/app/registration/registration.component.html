@@ -21,7 +21,6 @@
             <div class="col-sm-12">
                 <input type="number" id="nif" placeholder="Introduza o seu NIF" class="form-control" formControlName="nif">
                 <span class="help-block" *ngIf="ClientForm.controls['nif'].hasError('required') && ClientForm.controls['nif'].touched ">Introduza o seu NIF!</span>
-                <span class="help-block" *ngIf="ClientForm.controls['nif'].hasError('minlength') && ClientForm.controls['nif'].touched ">Introduza o seu NIF!</span>
             </div>
         </div>
         <div class="form-group">

@@ -26,11 +26,11 @@ fetchServices() {
 
   }
 
-  onDeleteService(serviceID : number) {
+  onUpdateService(serviceID : number, service: string) {
     this.alertService.clear();
     let alert = confirm('Tem a certeza que deseja eliminar o serviço ' + name + '?');
     if (alert) {
-      this.servicesService.deleteService(serviceID).subscribe(success => {
+      this.servicesService.updateService(serviceID, service).subscribe(success => {
       this.alertService.success(success.message);
       // setTimeout(() => { this.alertService.clear(); }, 2000);
        this.fetchServices();

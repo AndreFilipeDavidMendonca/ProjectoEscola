@@ -43,8 +43,10 @@
                             <td>{{ client.nif }}</td>
                             <td>{{ client.email }}</td>
                             <td>{{ client.serviceName }} </td>
-                            <td>{{ client.status }}</td>
-                            <td>{{ client.fraudulent }}</td>
+                            <td *ngIf="client.status === false" style="color: red;">Desactiva</td>
+                            <td *ngIf="client.status === true">Activa</td>
+                            <td *ngIf="client.fraudulent === true" style="color: red;">Fraudulenta</td>
+                            <td *ngIf="client.fraudulent === false">Correcta</td>
                             <td class="td-actions text-right">
                                 <a [routerLink]="['/client/', client.clientId]" class="person">
                                     <i class="material-icons">person</i>
@@ -78,8 +80,10 @@
                                 <td>{{ client.nif }}</td>
                                 <td>{{ client.email }}</td>
                                 <td>{{ client.serviceName }} </td>
-                                <td>{{ client.status }}</td>
-                                <td>{{ client.fraudulent }}</td>
+                                <td *ngIf="client.status === false" style="color: red;">Desactiva</td>
+                                <td *ngIf="client.status === true">Activa</td>
+                                <td *ngIf="client.fraudulent === true" style="color: red;">Fraudulenta</td>
+                                <td *ngIf="client.fraudulent === false">Correcta</td>
                                 <td class="td-actions text-right">
                                     <a [routerLink]="['/client/', client.clientId]" class="person">
                                         <i class="material-icons" >person</i>
@@ -114,8 +118,10 @@
                                 <td>{{ client.nif }}</td>
                                 <td>{{ client.email }}</td>
                                 <td>{{ client.serviceName }} </td>
-                                <td>{{ client.status }}</td>
-                                <td>{{ client.fraudulent }}</td>
+                                <td *ngIf="client.status === false" style="color: red;">Desactiva</td>
+                                <td *ngIf="client.status === true">Activa</td>
+                                <td *ngIf="client.fraudulent === true" style="color: red;">Fraudulenta</td>
+                                <td *ngIf="client.fraudulent === false">Correcta</td>
                                 <td class="td-actions text-right">
                                     <a [routerLink]="['/client/', client.clientId]" class="person">
                                         <i class="material-icons">person</i>

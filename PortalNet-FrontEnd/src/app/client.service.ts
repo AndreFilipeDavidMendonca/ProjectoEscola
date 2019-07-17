@@ -39,8 +39,6 @@ API = 'http://localhost:8080';
     return this.http.put<any>(this.API + '/client/' + id, client);
   }
 
-  deleteClient(id: number): Observable<{}> {
-    return this.http.delete(this.API + '/client/' + id);
-  }
+ 
 }
 

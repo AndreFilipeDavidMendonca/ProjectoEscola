@@ -63,15 +63,6 @@
             </td>
           </tr>
           <tr>
-            <td>Fraudulento</td>
-            <td>{{ client.fraudulent }}</td>
-            <td>
-              <a (click)="openModalFraudulent(fraudulent)" class="edit">
-                  <i class="material-icons">edit</i>
-              </a>
-            </td>
-          </tr>
-          <tr>
             <td>Morada</td>
             <td>{{ client.address }}</td>
             <td>
@@ -135,8 +126,19 @@
             </td>
           </tr>
           <tr>
+            <td>Fraudulento</td>
+            <td *ngIf="client.fraudulent === true" style="color: red;">Fraudulenta</td>
+            <td *ngIf="client.fraudulent === false">Correcta</td>
+            <td>
+              <a (click)="openModalFraudulent(fraudulent)" class="edit">
+                  <i class="material-icons">edit</i>
+              </a>
+            </td>
+          </tr>
+          <tr>
             <td>Estado</td>
-            <td>{{ client.status }}</td>
+            <td *ngIf="client.status === false" style="color: red;">Desactiva</td>
+            <td *ngIf="client.status === true">Activa</td>
             <td>
               <a class="delete" (click)="openModalStatus(status)">
                 <i class="material-icons">delete</i>
