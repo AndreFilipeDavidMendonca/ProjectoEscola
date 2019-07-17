@@ -97,45 +97,5 @@ public class Services {
 	public boolean isStatus() {
 		return status;
 	}
-
-	public void setServiceID(Long serviceID) {
-		this.serviceID = serviceID;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public void setInternet(String internet) {
-		this.internet = internet;
-	}
-
-	public void setTv(String tv) {
-		this.tv = tv;
-	}
-
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-
-	public void setMobilePhone(String mobilePhone) {
-		this.mobilePhone = mobilePhone;
-	}
-
-	public void setLoyalty(int loyalty) {
-		this.loyalty = loyalty;
-	}
-
-	public void setPrice(float price) {
-		this.price = price;
-	}
-
-	public void setCreationDate(String creationDate) {
-		this.creationDate = creationDate;
-	}
-
-	public void setStatus(boolean status) {
-		this.status = status;
-	}
 }
 

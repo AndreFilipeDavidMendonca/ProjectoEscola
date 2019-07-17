@@ -11,6 +11,4 @@ import com.polarising.PortalNet.model.Workers;
 public interface WorkersRepository extends CrudRepository<Workers, Long>{
 
 	List<Workers> findByName(String name);
-	List<Workers> findByEmail(String email);
-	boolean existsByEmail(String email);
 }
