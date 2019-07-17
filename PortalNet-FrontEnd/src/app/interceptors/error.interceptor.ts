@@ -8,6 +8,7 @@ import { AlertService } from '../alert.service';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
+  message= '';
   constructor(private authenticationService: AuthenticationService, private router: Router, private alertService: AlertService) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -15,7 +16,9 @@ export class ErrorInterceptor implements HttpInterceptor {
       let error = err.error;
 
       if (err.status === 400) {
-        error.message = err.error.message.slice(1, err.error.message.length - 1).split(', ');
+        this.message = "O registo não foi processado! Certifique se os seus dados estão correctos!"
+        return throwError(this.message);
+        // error.message = err.error.message.slice(1, err.error.message.length - 1).split(', ');
       }
       else if (err.status === 401) {
         // auto logout if 401 response returned from api
@@ -24,13 +27,11 @@ export class ErrorInterceptor implements HttpInterceptor {
       }
       // auto logout if 403 response returned from api
       else if (err.status === 403) {
-        console.log(error.message);
         this.authenticationService.logout();
         this.router.navigate(['/login']);
       }
 
       else if (err.status === 404) {
-        console.log(error.message);
         return throwError(error.message);
       }
 
@@ -44,12 +45,10 @@ export class ErrorInterceptor implements HttpInterceptor {
         this.router.navigate(['/login']);
       }
     
-      // else if (err.statusText === 'Unknown Error' && err.name === 'HttpErrorResponse') {
-      //   error.message = "Não foi possível conectar ao servidor!";
-      //   return throwError(error.message);
-      // }
-
-
+      else if (err.statusText === 'Unknown Error' && err.name === 'HttpErrorResponse') {
+        error.message = "Não foi possível conectar ao servidor!";
+        return throwError(error.message);
+      }
 
       return throwError(error);
 

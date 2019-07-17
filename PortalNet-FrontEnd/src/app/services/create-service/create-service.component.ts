@@ -52,7 +52,6 @@ export class CreateServiceComponent implements OnInit {
 
 
   onSubmit() {
-    console.log(this.ServiceForm.value);
       this.submitted = true;
       
       // reset alerts on submit

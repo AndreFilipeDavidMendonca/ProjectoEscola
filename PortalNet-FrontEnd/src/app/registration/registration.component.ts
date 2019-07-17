@@ -1,5 +1,5 @@
 import { Component,  OnInit, Input} from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControlName } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ClientService } from '../client.service';
 import { AlertService } from '../alert.service';
@@ -65,18 +65,17 @@ export class RegistrationComponent implements OnInit{
   }
 
   ngOnInit(){
-
     this.fetchServices();
     this.ClientForm = this.formBuilder.group({
       name: ['', Validators.required],
-      nif: ['', Validators.required],
+      nif: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(9)]],
       address: ['', Validators.required],
       postalCode: ['', Validators.required],
       city: ['', Validators.required],
-      password: ['', Validators.required],
-      confirmPassword: ['', Validators.required],
-      mobilePhone: [''],
-      phone: [''],
+      password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(15)]],
+      confirmPassword: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(15)]],
+      mobilePhone: ['', [Validators.minLength(9), Validators.maxLength(9)]],
+      phone: ['', [Validators.minLength(9), Validators.maxLength(9)]],
       gender: ['', Validators.required],
       birthDate: ['', Validators.required],
       serviceName: ['', Validators.required],
@@ -100,8 +99,13 @@ export class RegistrationComponent implements OnInit{
     return this.ClientForm.get('password');
   }
 
+  get confirmPassword() {
+    return this.ClientForm.get('confirmPassword');
+  }
+
 
   onSubmit() {
+
 
 
     this.submitted = true;
@@ -128,8 +132,8 @@ export class RegistrationComponent implements OnInit{
               this.alertService.error(JSON.parse(JSON.stringify(error)));
               this.isLoading = false;
       });
+    }
   }
 
 
 
-}

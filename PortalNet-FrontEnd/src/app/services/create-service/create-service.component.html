@@ -31,14 +31,14 @@
         <div class="form-group">
             <label for="mobilePhone" class="col-sm-4 control-label">Telemóvel</label>
             <div class="col-sm-12">
-                <input type="text" id="mobilePhone" placeholder="Introduza os dados móveis!" class="form-control" formControlName="mobilePhone">
+                <input type="text" id="mobilePhone" placeholder="Introduza os dados móveis por mês!" class="form-control" formControlName="mobilePhone">
                 <span class="help-block" *ngIf="ServiceForm.controls['mobilePhone'].touched && !ServiceForm.controls['mobilePhone'].dirty">Não adicionou telémovel a este serviço!</span>
             </div>
         </div>
         <div class="form-group">
-            <label for="mobilePhone" class="col-sm-4 control-label">Telefone</label>
+            <label for="phone" class="col-sm-4 control-label">Telefone</label>
             <div class="col-sm-12">
-                <input type="text" id="phone" placeholder="Introduza os dados móveis!" class="form-control" formControlName="phone">
+                <input type="text" id="phone" placeholder="Introduza os minutos oferecidos por mês!" class="form-control" formControlName="phone">
                 <span class="help-block" *ngIf="ServiceForm.controls['phone'].touched && !ServiceForm.controls['phone'].dirty">Não adicionou telefone a este serviço!</span>
             </div>
         </div>

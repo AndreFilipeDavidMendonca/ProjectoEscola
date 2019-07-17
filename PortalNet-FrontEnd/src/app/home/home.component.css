@@ -37,7 +37,7 @@ font-weight: 400px;
 }
 
 .serviceName {
-    
+    margin-top: -4%;
     font-size: 350%;
     font-weight: 400px;
     text-align: center;
@@ -51,9 +51,12 @@ font-weight: 400px;
     font-weight: 600px;
 }
 
+.services .carousel-caption {
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
 .side-nav .services p, h3 {
     color: black;
-    background-color: rgba(255, 255, 255, 0.7);
     font-size: 150%;
     font-weight: 600px;
 }

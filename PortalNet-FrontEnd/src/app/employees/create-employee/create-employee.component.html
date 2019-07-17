@@ -16,10 +16,11 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="internet" class="col-sm-4 control-label">E-Mail*</label>
+            <label for="internet" class="col-sm-4 control-label">Email*</label>
             <div class="col-sm-12">
-                <input type="text" id="email" placeholder="Introduza o e-mail do colaborador." class="form-control" formControlName="email"> 
-                <span class="help-block" *ngIf="EmployeeForm.controls['email'].hasError('required') && EmployeeForm.controls['email'].touched">Introduza o e-mail do colaborador!</span>
+                <input type="text" id="email" placeholder="Introduza o email do colaborador." class="form-control" formControlName="email"> 
+                <span class="help-block" *ngIf="EmployeeForm.controls['email'].hasError('required') && EmployeeForm.controls['email'].touched">Introduza o Email do colaborador!</span>
+                <span class="help-block" *ngIf="EmployeeForm.controls['email'].hasError('email') && EmployeeForm.controls['email'].touched">Introduza um Email válido!</span>
             </div>
         </div>
         <div class="form-group">

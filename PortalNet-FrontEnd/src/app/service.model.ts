@@ -3,15 +3,15 @@ export class Service {
     public name: string;
     public internet: string;
     public tv: string;
-    public mobilePhone: string;
-    public phone: string;
+    public mobilePhone: number;
+    public phone: number;
     public price: number;
     public loyalty: string;
     public creationDate: string;
     public status: boolean;
     public imgUrl: string;
     
-    constructor (serviceID: number, name: string, internet: string, tv: string, mobilePhone: string, phone: string, price: number, loyalty: string, creationDate: string, status: boolean, imgUrl: string)  {
+    constructor (serviceID: number, name: string, internet: string, tv: string, mobilePhone: number, phone: number, price: number, loyalty: string, creationDate: string, status: boolean, imgUrl: string)  {
         this.imgUrl = imgUrl;
         this.serviceID = serviceID;
         this.name = name;

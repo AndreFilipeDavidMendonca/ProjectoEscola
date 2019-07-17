@@ -1,8 +1,8 @@
 import { Client } from './client.model';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, Subject } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+
 
 
 
@@ -36,7 +36,7 @@ API = 'http://localhost:8080';
   }
 
   updateClient(id: number, client: string) {
-    return this.http.put(this.API + '/client/' + id, client);
+    return this.http.put<any>(this.API + '/client/' + id, client);
   }
 
   deleteClient(id: number): Observable<{}> {

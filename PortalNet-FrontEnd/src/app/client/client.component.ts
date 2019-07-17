@@ -167,10 +167,9 @@ export class ClientComponent implements OnInit {
               // setTimeout(() => { this.router.navigate(['/clientTable']); }, 1500);
             },
             error => {
-              this.alertService.error(JSON.parse(JSON.stringify(error.message)));
+              this.alertService.error(JSON.parse(JSON.stringify(error)));
       });
   }
-
  }
    
  

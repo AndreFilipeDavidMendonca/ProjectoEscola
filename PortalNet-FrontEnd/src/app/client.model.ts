@@ -15,7 +15,7 @@ export class Client {
     public entryDate: string;
     public endContract: string;
     public numberOfServices: number;
-    public monthlyPay: string;
+    public monthlyPay: number;
     public serviceName: string;
     public status: boolean;
     public fraudulent: boolean;
@@ -24,7 +24,7 @@ export class Client {
 
     
     constructor(clientId: number, name: string, clientNumber: number, address: string, city: string, postalCode: string, nif: number, birthDate: string, email: string, mobilePhone: number, 
-                gender: string, entryDate: string, phone: number, endContract: string, numberOfServices: number, monthlyPay: string, 
+                gender: string, entryDate: string, phone: number, endContract: string, numberOfServices: number, monthlyPay: number, 
                 serviceName: string, status: boolean, fraudulent: boolean, password: string){
 
             
