@@ -72,13 +72,13 @@ public class ClientController {
 		
 		boolean status = true;
 		
-	
+		String role = "Client";
 		
 		Client newClient = new Client(clientNumber, clientForm.getNif(), clientForm.getName(), clientForm.getAddress(),
 										clientForm.getPostalCode(), clientForm.getCity(), clientForm.getMobilePhone(), clientForm.getPhone(),
 										clientForm.getEmail(), clientForm.getGender(), clientForm.getPassword(), entryDate, 
 										endContract, numberOfServices, clientForm.getServiceName(), 
-										monthlyPay, fraudulent, status, clientForm.getBirthDate());
+										monthlyPay, fraudulent, status, clientForm.getBirthDate(), role);
 		
 		List<Client> clientsList = (List<Client>) clientRepository.findAll();
 		clientName = clientForm.getName();
@@ -103,7 +103,7 @@ public class ClientController {
 	{
 		try{
 		
-		Client clientToUpdate = clientRepository.findByClientId(clientId).get(0);
+//		Client clientToUpdate = clientRepository.findByClientId(clientId).get(0);
 		
 		String newMonthlyPay = Float.toString(serviceRepository.findByName(client.getServiceName()).get(0).getPrice());
 		
@@ -120,22 +120,22 @@ public class ClientController {
 //		clientToUpdate.setServiceName(client.getServiceName());
 //		clientToUpdate.setStatus(client.isStatus());
 		
-		clientRepository.findByClientId(clientId).get(0).setName(client.getName());
-		clientRepository.findByClientId(clientId).get(0).setClientId(clientId);
-		clientRepository.findByClientId(clientId).get(0).setAddress(client.getAddress());
-		clientRepository.findByClientId(clientId).get(0).setCity(client.getCity());
-		clientRepository.findByClientId(clientId).get(0).setEmail(client.getEmail());
-		clientRepository.findByClientId(clientId).get(0).setFraudulent(client.isFraudulent());
-		clientRepository.findByClientId(clientId).get(0).setMobilePhone(client.getMobilePhone());
-		clientRepository.findByClientId(clientId).get(0).setPhone(client.getPhone());
-		clientRepository.findByClientId(clientId).get(0).setMonthlyPay(newMonthlyPay);
-		clientRepository.findByClientId(clientId).get(0).setPassword(client.getPassword());
-		clientRepository.findByClientId(clientId).get(0).setPostalCode(client.getPostalCode());
-		clientRepository.findByClientId(clientId).get(0).setServiceName(client.getServiceName());
-		clientRepository.findByClientId(clientId).get(0).setStatus(client.isStatus());
+//		clientRepository.findByClientId(clientId).get(0).setName(client.getName());
+//		clientRepository.findByClientId(clientId).get(0).setClientId(clientId);
+//		clientRepository.findByClientId(clientId).get(0).setAddress(client.getAddress());
+//		clientRepository.findByClientId(clientId).get(0).setCity(client.getCity());
+//		clientRepository.findByClientId(clientId).get(0).setEmail(client.getEmail());
+//		clientRepository.findByClientId(clientId).get(0).setFraudulent(client.isFraudulent());
+//		clientRepository.findByClientId(clientId).get(0).setMobilePhone(client.getMobilePhone());
+//		clientRepository.findByClientId(clientId).get(0).setPhone(client.getPhone());
+//		clientRepository.findByClientId(clientId).get(0).setMonthlyPay(newMonthlyPay);
+//		clientRepository.findByClientId(clientId).get(0).setPassword(client.getPassword());
+//		clientRepository.findByClientId(clientId).get(0).setPostalCode(client.getPostalCode());
+//		clientRepository.findByClientId(clientId).get(0).setServiceName(client.getServiceName());
+//		clientRepository.findByClientId(clientId).get(0).setStatus(client.isStatus());
 		
 //		clientRepository.deleteById(clientId);
-		clientRepository.save(clientToUpdate);
+		clientRepository.save(client);
 		
 		String message = "Atualização bem sucedida.";
 		
@@ -172,12 +172,4 @@ public class ClientController {
 			return new ResponseEntity<String>(message,HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
-	
-	
-//	@PostMapping(path = "/home")
-//	public ResponseEntity<?> loginClient(@RequestBody Object object)
-//	{
-//		
-//	}
 }

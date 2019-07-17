@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -56,8 +57,8 @@ public class ServicesController {
 		
 	
 		
-		Services newService = new Services(serviceForm.getName(), serviceForm.getTv(), serviceForm.getInternet(), serviceForm.getMobilePhone(),
-											serviceForm.getPhone(), serviceForm.getLoyalty(), serviceForm.getPrice(), creationDate, status, imgUrl, serviceForm.getImgName());
+		Services newService = new Services(serviceForm.getName(), serviceForm.getTv(), serviceForm.getInternet(), serviceForm.getPhone(),
+											serviceForm.getMobilePhone(), serviceForm.getLoyalty(), serviceForm.getPrice(), creationDate, status, imgUrl, serviceForm.getImgName());
 		
 		List<Services> servicesList = (List<Services>) serviceRepository.findAll();
 		
@@ -77,17 +78,19 @@ public class ServicesController {
 		return new ResponseEntity<>(new ResponseMessage(message), HttpStatus.OK);
 	}
 	
-	@DeleteMapping(path = "/servicesTable/{serviceID}")
-	public ResponseEntity<?> deleteService (@PathVariable Long serviceID)
+	@PutMapping(path = "/servicesTable/{serviceID}")
+	public ResponseEntity<?> deleteService (@PathVariable Long serviceID, @RequestBody Services service)
 	{
 		String message;
 		String serviceName;
 		
 		if (serviceRepository.existsById(serviceID))
-		{
+		{			
 			serviceName = serviceRepository.findById(serviceID).get().getName();
-			serviceRepository.deleteById(serviceID);
-			message = serviceName + " foi eliminado.";
+			message = serviceName + " foi atualizado.";
+			
+			serviceRepository.save(service);
+			
 			return new ResponseEntity<>(new ResponseMessage(message), HttpStatus.OK);
 		}
 		else
@@ -95,9 +98,7 @@ public class ServicesController {
 			message = "O serviço não existe.";
 			return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
 		}
-		
 	}
-
 }
 
 
