@@ -1,10 +1,5 @@
 package com.PortalNet.PortalNet;
 
-import java.net.URL;
-
-import javax.sound.sampled.Port;
-import javax.swing.Spring;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +12,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
-
 import com.polarising.PortalNet.PortalNetApplication;
-import com.polarising.PortalNet.model.Client;
 
 
 @RunWith(SpringRunner.class)
