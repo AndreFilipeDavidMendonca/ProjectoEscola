@@ -77,36 +77,61 @@ public class ServicesController {
 		return new ResponseEntity<>(new ResponseMessage(message), HttpStatus.OK);
 	}
 	
-	@PutMapping(path = "/servicesTable/{serviceID}")
-	public ResponseEntity<?> updateService (@PathVariable Long serviceID)
-	{
-		String message;
-		String serviceName;
-		
-		if (serviceRepository.existsById(serviceID))
-		{	
-			if (serviceRepository.findByServiceID(serviceID).get(0).isStatus() == true)
-			{
-				serviceRepository.findByServiceID(serviceID).get(0).setStatus(false);
-				serviceRepository.save(serviceRepository.findByServiceID(serviceID).get(0));
-			}
-			else
-			{
-				serviceRepository.findByServiceID(serviceID).get(0).setStatus(true);
-				serviceRepository.save(serviceRepository.findByServiceID(serviceID).get(0));
-			}
-			
-			serviceName = serviceRepository.findById(serviceID).get().getName();
-			message = serviceName + " foi atualizado.";
-			
-			return new ResponseEntity<>(new ResponseMessage(message), HttpStatus.OK);
-		}
-		else
-		{
-			message = "O serviço não existe.";
-			return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
-		}
-	}
+//	@PutMapping(path = "/servicesTable/{serviceID}")
+//	public ResponseEntity<?> updateService (@PathVariable Long serviceID)
+//	{
+//		String message;
+//		String serviceName;
+//		
+//		if (serviceRepository.existsById(serviceID))
+//		{	
+//			if (serviceRepository.findByServiceID(serviceID).get(0).isStatus() == true)
+//			{
+//				serviceRepository.findByServiceID(serviceID).get(0).setStatus(false);
+//				serviceRepository.save(serviceRepository.findByServiceID(serviceID).get(0));
+//			}
+//			else
+//			{
+//				serviceRepository.findByServiceID(serviceID).get(0).setStatus(true);
+//				serviceRepository.save(serviceRepository.findByServiceID(serviceID).get(0));
+//			}
+//			
+//			serviceName = serviceRepository.findById(serviceID).get().getName();
+//			message = serviceName + " foi atualizado.";
+//			
+//			return new ResponseEntity<>(new ResponseMessage(message), HttpStatus.OK);
+//		}
+//		else
+//		{
+//			message = "O serviço não existe.";
+//			return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+//		}
+//	}
+	
+	@PutMapping(path = "/servicesTable")
+    public ResponseEntity<?> updateService (@RequestBody Services service)
+    {
+        String message;
+        String serviceName;
+       
+        if (serviceRepository.existsById(service.getServiceID()))
+        {   
+           
+            serviceName = serviceRepository.findById(service.getServiceID()).get().getName();
+           
+            message = serviceName + " foi atualizado.";
+           
+            serviceRepository.save(service);
+           
+            return new ResponseEntity<>(new ResponseMessage(message), HttpStatus.OK);
+           
+        }
+        else
+        {
+            message = "O serviço não existe.";
+            return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+        }
+    }
 }
 
 
