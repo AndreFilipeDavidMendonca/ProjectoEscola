@@ -29,7 +29,7 @@ public class Client {
     private String endContract;
     private int numberOfServices;
     private String serviceName;
-    private String monthlyPay;
+    private float monthlyPay;
     private boolean fraudulent;
     private boolean status;
     private String birthDate;
@@ -40,7 +40,7 @@ public class Client {
     
     public Client(String clientNumber, int nif, String name, String address, String postalCode,
 			String city, long mobilePhone, long phone, String email, String gender, String password, String entryDate,
-			String endContract, int numberOfServices, String serviceName, String monthlyPay, boolean fraudulent,
+			String endContract, int numberOfServices, String serviceName, float monthlyPay, boolean fraudulent,
 			boolean status, String birthDate, String role) {
 		super();
 		this.clientNumber = clientNumber;
@@ -193,11 +193,11 @@ public class Client {
 		this.serviceName = serviceName;
 	}
 
-	public String getMonthlyPay() {
+	public float getMonthlyPay() {
 		return monthlyPay;
 	}
 
-	public void setMonthlyPay(String monthlyPay) {
+	public void setMonthlyPay(float monthlyPay) {
 		this.monthlyPay = monthlyPay;
 	}
 

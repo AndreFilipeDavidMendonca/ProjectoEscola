@@ -66,7 +66,7 @@ public class ClientController {
 		
 		int numberOfServices = 1;
 		
-		String monthlyPay = "100€";
+		float monthlyPay = serviceRepository.findByName(clientForm.getServiceName()).get(0).getPrice();
 		
 		boolean fraudulent = false;
 		
@@ -105,7 +105,9 @@ public class ClientController {
 		
 //		Client clientToUpdate = clientRepository.findByClientId(clientId).get(0);
 		
-		String newMonthlyPay = Float.toString(serviceRepository.findByName(client.getServiceName()).get(0).getPrice());
+			
+		float newMonthlyPay = serviceRepository.findByName(client.getServiceName()).get(0).getPrice();
+		client.setMonthlyPay(newMonthlyPay);
 		
 //		clientToUpdate.setClientId(client.getClientId());
 //		clientToUpdate.setAddress(client.getAddress());

@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -79,17 +78,26 @@ public class ServicesController {
 	}
 	
 	@PutMapping(path = "/servicesTable/{serviceID}")
-	public ResponseEntity<?> deleteService (@PathVariable Long serviceID, @RequestBody Services service)
+	public ResponseEntity<?> updateService (@PathVariable Long serviceID)
 	{
 		String message;
 		String serviceName;
 		
 		if (serviceRepository.existsById(serviceID))
-		{			
+		{	
+			if (serviceRepository.findByServiceID(serviceID).get(0).isStatus() == true)
+			{
+				serviceRepository.findByServiceID(serviceID).get(0).setStatus(false);
+				serviceRepository.save(serviceRepository.findByServiceID(serviceID).get(0));
+			}
+			else
+			{
+				serviceRepository.findByServiceID(serviceID).get(0).setStatus(true);
+				serviceRepository.save(serviceRepository.findByServiceID(serviceID).get(0));
+			}
+			
 			serviceName = serviceRepository.findById(serviceID).get().getName();
 			message = serviceName + " foi atualizado.";
-			
-			serviceRepository.save(service);
 			
 			return new ResponseEntity<>(new ResponseMessage(message), HttpStatus.OK);
 		}
