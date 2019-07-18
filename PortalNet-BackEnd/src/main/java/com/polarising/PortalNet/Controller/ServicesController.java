@@ -18,6 +18,7 @@ import com.polarising.PortalNet.Forms.ServiceForm;
 import com.polarising.PortalNet.Repository.ServiceRepository;
 import com.polarising.PortalNet.Response.ResponseMessage;
 import com.polarising.PortalNet.Utilities.PortalNetHttpRequest;
+import com.polarising.PortalNet.model.Client;
 import com.polarising.PortalNet.model.Services;
 
 import ch.qos.logback.core.status.Status;
@@ -36,6 +37,12 @@ public class ServicesController {
 	public List<Services> getServices()
 	{
 		return (List<Services>) serviceRepository.findAll();
+	}
+	
+	@GetMapping(path = "/servicesTable/{serviceID}", produces= {"application/json"})
+	public ResponseEntity<?> getServiceById(@PathVariable Long serviceID)
+	{	
+		return new ResponseEntity<List<Services>>((List<Services>) serviceRepository.findByServiceID(serviceID), HttpStatus.OK);
 	}
 	
 	@GetMapping(path = "/registration/{name}", produces= {"application/json"})
@@ -80,17 +87,16 @@ public class ServicesController {
 		return new ResponseEntity<>(new ResponseMessage(message), HttpStatus.OK);
 	}
 	
-	@PutMapping(path = "/servicesTable/{serviceID}")
-	public ResponseEntity<?> updateService (@PathVariable Long serviceID, @RequestBody Services service)
+	@PutMapping(path = "/servicesTable", consumes = {"application/json"}  )
+	public ResponseEntity<?> updateService (@RequestBody Services service)
 	{
 		String message;
 		String serviceName;
-		boolean serviceStatus;
 		
-		if (serviceRepository.existsById(serviceID))
+		if (serviceRepository.existsById(service.getServiceID()))
 		{	
 			
-			serviceName = serviceRepository.findById(serviceID).get().getName();
+			serviceName = serviceRepository.findById(service.getServiceID()).get().getName();
 			
 			message = serviceName + " foi atualizado.";
 			

@@ -12,7 +12,7 @@ public class Services {
 
 	@javax.persistence.Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-    private Long serviceID;
+    private long serviceID;
     private String name;
     private String internet;
     private String tv;
@@ -58,7 +58,7 @@ public class Services {
 		this.imgUrl = imgUrl;
 	}
 
-	public Long getServiceID() {
+	public long getServiceID() {
 		return serviceID;
 	}
 
@@ -98,7 +98,7 @@ public class Services {
 		return status;
 	}
 
-	public void setServiceID(Long serviceID) {
+	public void setServiceID(long serviceID) {
 		this.serviceID = serviceID;
 	}
 

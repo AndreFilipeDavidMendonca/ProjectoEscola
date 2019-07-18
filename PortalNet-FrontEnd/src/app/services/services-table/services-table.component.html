@@ -42,34 +42,32 @@
                   <td>{{ service.creationDate }}</td>
                   <td>{{ service.status }}</td>
                   <td class="td-actions text-right">
-                    <a  class="edit" (click)="openModalService(content, serviceID)">
+                    <a  routerLink="/servicesTable" class="edit"  (click)="fetchServiceById(service.serviceID); openModalService(content)" >
                       <i class="material-icons" >edit</i>
                     </a>
                   </td>
               </tr>   
               </tbody>
-          </table>
+          </table>   
       </div>
   </div>
-  <ng-template #content let-modal>
-    <div class="modal-header">
-      <h4 class="modal-title">Alterar do Serviço</h4>
-      <a (click)="modal.dismiss('Cross click')" class="close">
-        <i class="material-icons">close</i>
-      </a>
-    </div>
-    <div class="modal-body">
-      <div class="custom-control custom-checkbox">
-        <input type="checkbox" style="margin-left: 10%;" checked="true" class="custom-control-input"  id="status" [(ngModel)]="service.status" name="status"> 
-        <label *ngIf="service.status === true" class="custom-control-label" for="status">Serviço Activo</label>
-        <label *ngIf="service.status === false" class="custom-control-label" for="status">Serviço Desactivo</label>
-      </div>
-    </div>
-    <div class="modal-footer">
-      <button type="submit" class="btn btn-success" (click)="onUpdateService(service.serviceID, service)">Save</button>
-      <button type="button" class="btn btn-danger" (click)="modal.close('Close click')">Close</button>
-    </div>
-  </ng-template>
-
-
 </body>
+    <ng-template #content let-modal>
+            <div class="modal-header">
+              <h4 class="modal-title">Alterar do Serviço</h4>
+              <a (click)="modal.dismiss('Cross click')" class="close">
+                <i class="material-icons">close</i>
+              </a>
+            </div>
+            <div class="modal-body">
+              <div class="custom-control custom-checkbox">
+                <input type="checkbox" style="margin-left: 10%;" checked="true" class="custom-control-input"  id="status" [(ngModel)]="this.service.status" name="status"> 
+                <label *ngIf="service.status === true" class="custom-control-label" for="status">Serviço Activo</label>
+                <label *ngIf="service.status === false" class="custom-control-label" for="status">Serviço Desactivo</label>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-success" (click)="onUpdateService(service)">Save</button>
+              <button type="button" class="btn btn-danger" (click)="modal.close('Close click')">Close</button>
+            </div>
+          </ng-template> 

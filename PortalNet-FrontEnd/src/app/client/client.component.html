@@ -126,9 +126,9 @@
             </td>
           </tr>
           <tr>
-            <td>Fraudulento</td>
-            <td *ngIf="client.fraudulent === true" style="color: red;">Fraudulenta</td>
-            <td *ngIf="client.fraudulent === false">Correcta</td>
+            <td>Pagamentos</td>
+            <td *ngIf="client.fraudulent === true" style="color: red;">Em Dívida</td>
+            <td *ngIf="client.fraudulent === false">Em Ordem</td>
             <td>
               <a (click)="openModalFraudulent(fraudulent)" class="edit">
                   <i class="material-icons">edit</i>
@@ -263,8 +263,9 @@
   </div>
   <div class="modal-body">
     <div class="custom-control custom-checkbox">
-      <input type="checkbox" style="margin-left: 10%;" (click)="changeStatusOutputValue()"checked="true" class="custom-control-input"  id="status" [(ngModel)]="client.status" name="status"> 
-      <label class="custom-control-label" for="status">{{ this.statusOutput }}</label>
+      <input type="checkbox" style="margin-left: 10%;" class="custom-control-input"  id="status" [(ngModel)]="client.status" name="status"> 
+      <label class="custom-control-label" *ngIf="client.status===true" for="status">Activa</label>
+      <label class="custom-control-label" *ngIf="client.status===false" for="status" style="color: red">Desactiva</label>
     </div>
   </div>
   <div class="modal-footer">
@@ -283,8 +284,9 @@
     </div>
     <div class="modal-body">
       <div class="custom-control custom-checkbox">
-        <input type="checkbox" style="margin-left: 10%;" checked="true" class="custom-control-input"  (click)="changeFraudeOutputValue()" id="fraudulent" [(ngModel)]="client.fraudulent" name="fraudulent"> 
-        <label class="custom-control-label" for="fraudulent">{{ this.fraudulentOutput }}</label>
+        <input type="checkbox" style="margin-left: 10%;" checked="true" class="custom-control-input" id="fraudulent" [(ngModel)]="client.fraudulent" name="fraudulent"> 
+        <label class="custom-control-label" *ngIf="client.fraudulent===true" for="fraudulent" style="color: red">Em Dívida</label>
+        <label class="custom-control-label" *ngIf="client.fraudulent===false" for="fraudulent">Em Ordem</label>
       </div>
     </div>
     <div class="modal-footer">

@@ -30,6 +30,10 @@ API = 'http://localhost:8080';
     return this.http.get<Service>(this.API + '/registration' + serviceID);
   }
 
+  getServiceById(serviceID: number) {
+    return this.http.get<Service>(this.API + '/servicesTable/' + serviceID);
+  }
+
   getByName(name: string) {
     return this.http.get<Service>(this.API + '/registration/' + name);
   }
@@ -38,8 +42,8 @@ API = 'http://localhost:8080';
     return this.http.post<any>(this.API + '/createService', service);
   }
 
-  updateService(serviceID: number, service: string) {
-    return this.http.put<any>(this.API + '/servicesTable/' + serviceID, service);
+  updateService(service: Service) {
+    return this.http.put<any>(this.API + '/servicesTable', service);
   }
 }
 

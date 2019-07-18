@@ -19,7 +19,9 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class ServicesTableComponent implements OnInit {
   @Input() serviceID: number;
-  @Input() public service: Service;
+  service: Service;
+  serviceToJSON: string;
+  submitted = false;
   services: Service[] = [];
   success = '';
   message: string;
@@ -27,7 +29,11 @@ export class ServicesTableComponent implements OnInit {
   constructor(private servicesService: ServicesService, private modalService: NgbModal, private alertService: AlertService, private router: Router, private route: ActivatedRoute) { }
 
 
-fetchServices() {
+  ngOnInit() {
+    this.fetchServices();
+  }
+
+  fetchServices() {
     this.servicesService.getAll().pipe(first()).subscribe(services => {
       this.services = services;
      });
@@ -51,32 +57,45 @@ fetchServices() {
     this.modalService.open(content, { centered: true });
   }
 
-  openModalService(content, serviceID) {
+  openModalService(content) {
     this.modalService.open(content, { windowClass: 'dark-modal' });
-    this.serviceID = serviceID;
-    console.log(this.service);
   }
 
-  onUpdateService(serviceID : number, service: string) {
-    console.log(service);
+  fetchServiceById(serviceID: number){
+    this.servicesService.getServiceById(serviceID)
+      .pipe(first())
+      .subscribe(service => {
+        this.service = service[0]; 
+      });
+  }
+
+  onUpdateService(service: Service) {
+    console.log(service); 
+    this.submitted = true;
+
+    // reset alerts on submit
     this.alertService.clear();
-    let alert = confirm('Tem a certeza que deseja desactiva o serviço?');
-    if (alert) {
-      this.servicesService.updateService(serviceID, service).subscribe(success => {
-      this.alertService.success(success.message);
-      // setTimeout(() => { this.alertService.clear(); }, 2000);
-       this.fetchServices();
-      },
-        error => {
-          this.alertService.error(error);
-          this.fetchServices();
-        });
-    } 
+
+
+    // user to JSON
+
+      // this.serviceToJSON = JSON.parse(JSON.stringify(this.service));
+      this.servicesService.updateService(this.service)
+        .pipe(first())
+          .subscribe(
+            success => {
+              this.alertService.success(success.message);
+              this.fetchServices();
+              // setTimeout(() => { this.router.navigate(['/clientTable']); }, 1500);
+            },
+            error => {
+              this.alertService.error(JSON.parse(JSON.stringify(error)));
+              console.log(error);
+      });
   }
-
-  ngOnInit() {
-    this.fetchServices();
-  }
-
-
 }
+
+ 
+
+
+

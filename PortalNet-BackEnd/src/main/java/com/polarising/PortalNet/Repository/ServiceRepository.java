@@ -12,7 +12,7 @@ public interface ServiceRepository extends CrudRepository<Services, Long>{
 	
 	List<Services> findByName(String name);
 	
-	List<Services> findByServiceID(Long serviceID);
+	List<Services> findByServiceID(long serviceID);
 	
 	boolean existsByName(String name);
 }

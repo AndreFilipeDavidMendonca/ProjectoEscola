@@ -1,7 +1,6 @@
-import { Component, OnInit, Input, Output} from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Client } from '../client.model';
 import { ClientService } from '../client.service';
-import { Subscription } from 'rxjs';
 import { first } from 'rxjs/operators';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AlertService } from '../alert.service';
@@ -29,15 +28,16 @@ export class TableClientsComponent implements OnInit {
 @Input() clientId: number;
 // isLoading = true;
 currenClient: Client;
-
 searchText: string;
-
-
-filter = { fraudulent: false, status: false};
-
 clients: Client [] = []; 
 filteredClients: Client[] = [];
 bothFilteredClients: Client[] = [];
+
+
+constructor(private clientService: ClientService, private alertService: AlertService, private router: Router, private route: ActivatedRoute) { }
+
+
+filter = { fraudulent: false, status: false};
 
   filterChange() {
     this.filteredClients = this.clients.filter(x => 
@@ -51,15 +51,6 @@ bothFilteredClients: Client[] = [];
    );
 
   }
-
-
-// error = '';
-
-
-
-
-constructor(private clientService: ClientService, private alertService: AlertService, private router: Router, private route: ActivatedRoute) { }
-
 
 fetchClients() {
     this.clientService.getAll().pipe(first()).subscribe(clients => {

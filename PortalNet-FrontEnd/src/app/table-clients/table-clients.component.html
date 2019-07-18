@@ -31,8 +31,8 @@
                             <th>NIF</th>
                             <th>E-Mail</th>
                             <th>Serviço</th>
-                            <th>Activa</th>
-                            <th>Fraudulenta</th>
+                            <th>Estado</th>
+                            <th>Pagamentos</th>
                             <th class="text-right">Ações</th>
                         </tr>
                     </thead>
@@ -45,8 +45,8 @@
                             <td>{{ client.serviceName }} </td>
                             <td *ngIf="client.status === false" style="color: red;">Desactiva</td>
                             <td *ngIf="client.status === true">Activa</td>
-                            <td *ngIf="client.fraudulent === true" style="color: red;">Fraudulenta</td>
-                            <td *ngIf="client.fraudulent === false">Correcta</td>
+                            <td *ngIf="client.fraudulent === true" style="color: red;">Em Dívida</td>
+                            <td *ngIf="client.fraudulent === false">Em Ordem</td>
                             <td class="td-actions text-right">
                                 <a [routerLink]="['/client/', client.clientId]" class="person">
                                     <i class="material-icons">person</i>
@@ -68,8 +68,8 @@
                                 <th>NIF</th>
                                 <th>E-Mail</th>
                                 <th>Serviço</th>
-                                <th>Activa</th>
-                                <th>Fraudulenta</th>
+                                <th>Estado</th>
+                                <th>Pagamentos</th>
                                 <th class="text-right">Ações</th>
                             </tr>
                         </thead>
@@ -82,8 +82,8 @@
                                 <td>{{ client.serviceName }} </td>
                                 <td *ngIf="client.status === false" style="color: red;">Desactiva</td>
                                 <td *ngIf="client.status === true">Activa</td>
-                                <td *ngIf="client.fraudulent === true" style="color: red;">Fraudulenta</td>
-                                <td *ngIf="client.fraudulent === false">Correcta</td>
+                                <td *ngIf="client.fraudulent === true" style="color: red;">Em Dívida</td>
+                                <td *ngIf="client.fraudulent === false">Em Ordem</td>
                                 <td class="td-actions text-right">
                                     <a [routerLink]="['/client/', client.clientId]" class="person">
                                         <i class="material-icons" >person</i>
@@ -106,8 +106,8 @@
                                 <th>NIF</th>
                                 <th>E-Mail</th>
                                 <th>Serviço</th>
-                                <th>Activa</th>
-                                <th>Fraudulenta</th>
+                                <th>Estado</th>
+                                <th>Pagamentos</th>
                                 <th class="text-right">Ações</th>
                             </tr>
                         </thead>
@@ -120,8 +120,8 @@
                                 <td>{{ client.serviceName }} </td>
                                 <td *ngIf="client.status === false" style="color: red;">Desactiva</td>
                                 <td *ngIf="client.status === true">Activa</td>
-                                <td *ngIf="client.fraudulent === true" style="color: red;">Fraudulenta</td>
-                                <td *ngIf="client.fraudulent === false">Correcta</td>
+                                <td *ngIf="client.fraudulent === true" style="color: red;">Em Dívida</td>
+                                <td *ngIf="client.fraudulent === false">Em Ordem</td>
                                 <td class="td-actions text-right">
                                     <a [routerLink]="['/client/', client.clientId]" class="person">
                                         <i class="material-icons">person</i>
