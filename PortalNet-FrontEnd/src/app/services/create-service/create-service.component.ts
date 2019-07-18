@@ -38,10 +38,10 @@ export class CreateServiceComponent implements OnInit {
   ngOnInit() {
     this.ServiceForm = this.formBuilder.group({
       name: ['', Validators.required],
-      internet: [''],
-      tv: [''],
-      mobilePhone: [''],
-      phone: [''],
+      internet: ['', Validators.required],
+      tv: ['', Validators.required],
+      mobilePhone: ['', Validators.required],
+      phone: ['', Validators.required],
       loyalty: ['', Validators.required],
       price: ['', Validators.required],
       imgName: ['', Validators.required]

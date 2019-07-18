@@ -33,18 +33,18 @@
               <tr *ngFor="let service of services " >
                   <td scope="row">{{ service.serviceID }}</td>
                   <td style="color: blue;">{{ service.name }}</td>
-                  <td *ngIf="service.internet === ''" style="color: lightgray;">Sem Internet</td>
-                  <td *ngIf="service.internet != ''">{{ service.internet }} MB/s</td>
-                  <td *ngIf="service.tv === ''" style="color: lightgray;">Sem Televisão</td>
-                  <td *ngIf="service.tv != ''">{{ service.tv }} Canais</td>
-                  <td *ngIf="service.mobilePhone === ''" style="color: lightgray;">Sem Telemóvel</td>
-                  <td *ngIf="service.mobilePhone != ''">{{ service.mobilePhone }} GB</td>
-                  <td *ngIf="service.phone === ''" style="color: lightgray;">Sem Telefone</td>
-                  <td *ngIf="service.phone != 'Minutos Ilimitados' && service.phone != ''">{{ service.phone }} Minutos</td>
-                  <td *ngIf="service.phone === 'Minutos Ilimitados'">{{ service.phone }}</td>
+                  <td *ngIf="service.internet == 0 || service.internet === ''" style="color: lightgray;">Sem Internet</td>
+                  <td *ngIf="service.internet > 0">{{ service.internet }} MB/s</td>
+                  <td *ngIf="service.tv == 0 || service.tv === ''" style="color: lightgray;">Sem Televisão</td>
+                  <td *ngIf="service.tv > 0 ">{{ service.tv }} Canais</td>
+                  <td *ngIf="service.mobilePhone == 0 || service.mobilePhone === ''" style="color: lightgray;">Sem Telemóvel</td>
+                  <td *ngIf="service.mobilePhone > 0">{{ service.mobilePhone }} GB</td>
+                  <td *ngIf="service.phone === '' || service.phone == 0" style="color: lightgray;">Sem Telefone</td>
+                  <td *ngIf="service.phone != 'Minutos Ilimitados' && service.phone != '' && service.phone != 0">{{ service.phone }} Minutos</td>
+                  <td *ngIf="service.phone == 'Minutos Ilimitados'">{{ service.phone }}</td>
                   <td *ngIf="service.loyalty > 1">{{ service.loyalty }} Anos</td>
-                  <td *ngIf="service.loyalty === 1">{{ service.loyalty }} Ano</td>
-                  <td *ngIf="service.loyalty === 0  || service.loyalty === ''" style="color: lightgray;">Sem Fidelização</td>
+                  <td *ngIf="service.loyalty == 1">{{ service.loyalty }} Ano</td>
+                  <td *ngIf="service.loyalty == 0 || service.loyalty === ''" style="color: lightgray;">Sem Fidelização</td>
                   <td>{{ service.price }}€</td>                  
                   <td>{{ service.creationDate }}</td>
                   <td *ngIf="service.status === true">Activo</td>
