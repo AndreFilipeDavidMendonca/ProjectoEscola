@@ -31,3 +31,8 @@
  .modal-body input.custom-control-input {
      margin-left: 50%;
  }
+
+ #enviar {
+    float: right;
+    margin-right: 10%;
+ }

@@ -147,10 +147,11 @@
           </tr>
         </tbody>
       </table>
-      <br><br>
-      <button type="submit" class="btn btn-success" (click)="onSubmit()">Enviar</button>
   </div>
 </div>
+<button type="submit" class="btn btn-success" id="enviar" (click)="onSubmit()">Enviar</button>
+<br><br><br><br>
+      
 <!--Modal Change Address-->
 <ng-template #address let-modal>
   <div class="modal-header">
@@ -330,8 +331,8 @@
   </div>
   <div class="modal-body">
     <label for="moradaAS">Morada de Instalação</label>
-      <input type="text" class="form-control" placeholder="Introduza a morada de instalação!" (input)="updateData($event)"  name="address" id="address" #adress="ngModel" ngModel required>
-      <span class="help-block" *ngIf="!adress.valid && address.touched">Introduza uma morada para a instalação!</span>
+      <input type="text" class="form-control" placeholder="Introduza a morada de instalação!" (input)="updateData($event)"  name="address" id="address" #address="ngModel" ngModel required>
+      <span class="help-block" *ngIf="!address.valid && address.touched">Introduza uma morada para a instalação!</span>
   </div>
   <div class="modal-body">
       <label for="postCode">Código-Postal</label>

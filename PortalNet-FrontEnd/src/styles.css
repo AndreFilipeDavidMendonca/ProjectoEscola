@@ -14,3 +14,7 @@ a.edit .material-icons {
 a.close .material-icons {
     color: rgb(255, 0, 0);
 }
+
+a.btn.btn-primary .material-icons {
+    font-size: 97%;
+}

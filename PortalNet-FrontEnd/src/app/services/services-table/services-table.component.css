@@ -35,10 +35,7 @@ h2 {
     font-weight: 400;
 }
 
-span {
-    color: red;
-    font-size: 75%;
-}
+
 
 h3 {
     color: rgb(51, 102, 214);
@@ -47,4 +44,13 @@ h3 {
 
 input.ng-invalid.ng-touched, select.ng-invalid.ng-touched {
     border: 1px solid red;
+ }
+
+ span {
+     color: red;
+     font-size: 75%;
+ }
+
+ .title {
+     margin-left: 1%;
  }
