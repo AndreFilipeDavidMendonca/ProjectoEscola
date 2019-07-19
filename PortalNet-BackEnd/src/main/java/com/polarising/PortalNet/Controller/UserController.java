@@ -3,78 +3,57 @@ package com.polarising.PortalNet.Controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.polarising.PortalNet.Forms.LoginCredentials;
 import com.polarising.PortalNet.Repository.ClientRepository;
 import com.polarising.PortalNet.Repository.WorkersRepository;
+import com.polarising.PortalNet.Security.UserPrincipal;
 import com.polarising.PortalNet.jwt.JwtCreator;
 import com.polarising.PortalNet.jwt.JwtResponse;
-import com.polarising.PortalNet.model.Client;
-import com.polarising.PortalNet.model.Workers;
 
 @RestController
 @CrossOrigin(origins = "*")
 public class UserController {
 	
 	@Autowired
+	AuthenticationManager authenticationManager;
+	
+	@Autowired
 	ClientRepository clientRepository;
 	
 	@Autowired
 	WorkersRepository workersRepository;
-	
-	@PostMapping("/home")
+		
+	@GetMapping("/home")
 	public ResponseEntity<?> login(@RequestBody LoginCredentials user)
 	{
-		String message, jwt;
+		try{
+			Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword()));
 		
-		if (clientRepository.existsByEmail(user.getEmail()))
-		{
-			Client client = clientRepository.findByEmail(user.getEmail()).get(0);
-			
-			if (client.getPassword().equals(user.getPassword()))
-			{
-				jwt = new JwtCreator().createJWT("Client");
-				message = "Login bem sucedido.";
-				return new ResponseEntity<>(new JwtResponse(jwt, message), HttpStatus.OK);
-			}
-			else
-			{
-				message = "Password ou email errados.";
-				return new ResponseEntity<>(message, HttpStatus.UNAUTHORIZED);
-			}
+			SecurityContextHolder.getContext().setAuthentication(authentication);
+		
+			String jwt = new JwtCreator().createJWT(authentication);
+		
+			UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
+		
+			String message = "Login bem sucedido.";
+		
+			return new ResponseEntity<>(new JwtResponse(jwt, message, userPrincipal.getAuthorities()), HttpStatus.OK);
+		
 		}
-		else if (workersRepository.existsByEmail(user.getEmail()))
+		catch(AuthenticationException e)
 		{
-			Workers worker = workersRepository.findByEmail(user.getEmail()).get(0);
-			
-			if (worker.getPassword().equals(user.getPassword()))
-			{
-				if (worker.getRole() == "admin")
-				{
-					jwt = new JwtCreator().createJWT("Admin");
-				}
-				else
-				{
-					jwt = new JwtCreator().createJWT("Operator");					
-				}
-				message = "Login bem sucedido.";
-				return new ResponseEntity<>(new JwtResponse(jwt, message), HttpStatus.OK);
-			}
-			else
-			{
-				message = "Password ou email errados.";
-				return new ResponseEntity<>(message, HttpStatus.UNAUTHORIZED);
-			}
-		}
-		else {
-			message = "Password ou email errados.";
-			return new ResponseEntity<>(message, HttpStatus.UNAUTHORIZED);
+			String message = "Password ou email errados.";
+			return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
 		}
 	}
 }

@@ -105,7 +105,6 @@ public class ClientCommandLineRunner implements CommandLineRunner {
 		for (Client client : clientRepository.findAll())
 		{
 			client.setPassword(passwordEncoder.encode(client.getPassword()));
-			
 			clientRepository.save(client);
 		}
 	}

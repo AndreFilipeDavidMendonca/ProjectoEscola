@@ -3,6 +3,7 @@ package com.polarising.PortalNet.Security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -67,6 +68,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 	
 	@Override
+	@Bean
+	public AuthenticationManager authenticationManagerBean() throws Exception {
+	    return super.authenticationManagerBean();
+	}
+	
+	@Override
 	protected void configure(HttpSecurity http)  //Here we configure user access.
 	throws Exception
 	{
@@ -88,13 +95,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.logoutSuccessUrl("/home").permitAll();
 		
 		
-//			.authorizeRequests()
-//				.antMatchers("/home").permitAll()
-//				.antMatchers("/client/{clientId}").hasRole("Client")
-//				.antMatchers("/**").hasRole("Admin")
-//				.antMatchers("/**").hasRole("Operator")
-//				.and().csrf().disable()
-//				.headers().frameOptions().disable();		
+////			.authorizeRequests()
+////				.antMatchers("/home").permitAll()
+////				.antMatchers("/client/{clientId}").hasRole("Client")
+////				.antMatchers("/**").hasRole("Admin")
+////				.antMatchers("/**").hasRole("Operator")
+////				.and().csrf().disable()
+////				.headers().frameOptions().disable();		
 	}
 	
 //	@Bean

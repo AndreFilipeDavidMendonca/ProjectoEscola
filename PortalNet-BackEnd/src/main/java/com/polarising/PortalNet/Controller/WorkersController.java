@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,6 +33,9 @@ public class WorkersController {
 	@Autowired
 	PortalNetHttpRequest httpRequest;
 	
+	@Autowired
+	PasswordEncoder passwordEncoder;
+	
 	@GetMapping(path = "/employeesTable", produces = {"application/json"})
 	public ResponseEntity<?> getWorkers()
 	{
@@ -48,6 +52,9 @@ public class WorkersController {
 		try {
 			Workers worker = new Workers(workersForm.getName(), workersForm.getEmail()
 										, workersForm.getRole(), workersForm.getPassword());
+			
+			//Hash password
+			worker.setPassword(passwordEncoder.encode(worker.getPassword()));
 			
 			List<Workers> workersList = (List<Workers>) workersRepository.findAll();
 
