@@ -5,7 +5,6 @@ import { AlertService } from 'src/app/alert.service';
 import { ServicesService } from 'src/app/services.service';
 import { Service } from 'src/app/service.model';
 import { first } from 'rxjs/operators';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({

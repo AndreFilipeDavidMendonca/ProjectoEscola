@@ -11,49 +11,49 @@
             <label for="name" class="col-sm-4 control-label">Nome do Serviço*</label>
             <div class="col-sm-12">
                 <input type="text" id="name" placeholder="Introduza o nome do novo serviço!" class="form-control" formControlName="name" autofocus>
-                <span class="help-block" *ngIf="ServiceForm.controls['name'].hasError('required') && ServiceForm.controls['name'].touched">Tem de atribuir um nome ao novo serviço!</span>
+                <span class="help-block" *ngIf="ServiceForm.controls['name'].hasError('required') && ServiceForm.controls['name'].touched">Introuza um nome ao novo serviço!</span>
             </div>
         </div>
         <div class="form-group">
             <label for="internet" class="col-sm-4 control-label">Internet</label>
             <div class="col-sm-12">
-                <input type="text" id="internet" placeholder="Introduza o a velocidade da internet em MB/s!" class="form-control" formControlName="internet"> 
-                <span class="help-block" *ngIf="ServiceForm.controls['internet'].hasError('required') && !ServiceForm.controls['internet'].dirty">Insira "0" caso não queira adicionar internet!</span>
+                <input type="number" id="internet" placeholder="Introduza o a velocidade da internet em MB/s!" class="form-control" formControlName="internet"> 
+                <span class="help-block" *ngIf="ServiceForm.controls['internet'].hasError('required') && ServiceForm.controls['internet'].touched">Introduza "0" caso não queira adicionar internet!</span>
             </div>
         </div>
         <div class="form-group">
             <label for="tv" class="col-sm-4 control-label">Televisão</label>
             <div class="col-sm-12">
-                <input type="text" id="tv" placeholder="Introduza o número de canais de televisão!" class="form-control" formControlName="tv">
-                <span class="help-block" *ngIf="ServiceForm.controls['tv'].hasError('required') && !ServiceForm.controls['tv'].dirty">Insira "0" caso não queira adicionar televisão!</span>
+                <input type="number" id="tv" placeholder="Introduza o número de canais de televisão!" class="form-control" formControlName="tv">
+                <span class="help-block" *ngIf="ServiceForm.controls['tv'].hasError('required') && ServiceForm.controls['tv'].touched">Introduza "0" caso não queira adicionar televisão!</span>
             </div>
         </div>
         <div class="form-group">
             <label for="mobilePhone" class="col-sm-4 control-label">Telemóvel</label>
             <div class="col-sm-12">
-                <input type="text" id="mobilePhone" placeholder="Introduza os dados móveis por mês!" class="form-control" formControlName="mobilePhone">
-                <span class="help-block" *ngIf="ServiceForm.controls['mobilePhone'].hasError('required') && !ServiceForm.controls['mobilePhone'].dirty">Insira "0" caso não queira adicionar telemóvel!</span>
+                <input type="number" id="mobilePhone" placeholder="Introduza os dados móveis por mês!" class="form-control" formControlName="mobilePhone">
+                <span class="help-block" *ngIf="ServiceForm.controls['mobilePhone'].hasError('required') && ServiceForm.controls['mobilePhone'].touched">Introduza "0" caso não queira adicionar telemóvel!</span>
             </div>
         </div>
         <div class="form-group">
             <label for="phone" class="col-sm-4 control-label">Telefone</label>
             <div class="col-sm-12">
-                <input type="text" id="phone" placeholder="Introduza os minutos oferecidos por mês!" class="form-control" formControlName="phone">
-                <span class="help-block" *ngIf="ServiceForm.controls['phone'].hasError('required')&& !ServiceForm.controls['phone'].dirty">Insira "0" caso não queira adicionar telefone!</span>
+                <input type="number" id="phone" placeholder="Introduza os minutos oferecidos por mês!" class="form-control" formControlName="phone">
+                <span class="help-block" *ngIf="ServiceForm.controls['phone'].hasError('required')&& ServiceForm.controls['phone'].touched">Introduza "0" caso não queira adicionar telefone!</span>
             </div>
         </div>
         <div class="form-group">
             <label for="loyalty" class="col-sm-4 control-label">Fidelização*</label>
             <div class="col-sm-12">
-                <input type="text" id="loyalty" placeholder="Introduza o periodo de fidelização!" class="form-control" formControlName="loyalty">
-                <span class="help-block" *ngIf="ServiceForm.controls['loyalty'].hasError('required') && ServiceForm.controls['loyalty'].touched">Tem de atribuir um periodo de fidelização!</span>
+                <input type="number" id="loyalty" placeholder="Introduza o periodo de fidelização!" class="form-control" formControlName="loyalty">
+                <span class="help-block" *ngIf="ServiceForm.controls['loyalty'].hasError('required') && ServiceForm.controls['loyalty'].touched">Introduza um periodo de fidelização!</span>
             </div>
         </div>
         <div class="form-group">
             <label for="price" class="col-sm-5 control-label">Preço*</label>
             <div class="col-sm-12">
-                <input type="text" id="price" placeholder="Introduza o preço deste serviço!" class="form-control" formControlName="price">
-                <span class="help-block" *ngIf="ServiceForm.controls['price'].hasError('required') && ServiceForm.controls['price'].touched">Tem de atribuir uma mensalidade a este serviço!</span>
+                <input type="number" id="price" placeholder="Introduza o preço deste serviço!" class="form-control" formControlName="price">
+                <span class="help-block" *ngIf="ServiceForm.controls['price'].hasError('required') && ServiceForm.controls['price'].touched">Introduza uma mensalidade a este serviço!</span>
             </div>
         </div>
         <br>

@@ -26,9 +26,8 @@ export class EmployeesTableComponent implements OnInit {
   }
 
   onDeleteEmployee(employeeId : number) {
-    console.log(employeeId);
     this.alertService.clear();
-    let alert = confirm('Tem a certeza que deseja eliminar o colaborador ' + name + '?');
+    let alert = confirm('Tem a certeza que deseja eliminar o colaborador?');
     if (alert) {
       this.employeesService.deleteEmployee(employeeId).subscribe(success => {
         this.alertService.success(success.message);

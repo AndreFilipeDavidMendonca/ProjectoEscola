@@ -307,7 +307,7 @@
   <div class="form-group">
     <div class="col-sm-9">
         <select id="serviceName" class="form-control" [(ngModel)]="client.serviceName" name="serviceName">
-            <option value="{{ service.name }}" *ngFor="let service of services">{{ service.name }}  ||  {{ service.price }}€</option>
+            <option value="{{ service.name }}" *ngFor="let service of filteredServices">{{ service.name }}  ||  {{ service.price }}€</option>
         </select>
     </div>
 </div>     
@@ -341,21 +341,21 @@
   <div class="modal-body">
       <label for="postCode">Localidade</label>
         <input type="text" class="form-control" placeholder="Introduza a Localidade!" (input)="updateData($event)" name="city" id="city" #city="ngModel" ngModel required>
-        <span class="help-block" *ngIf="!city.valid && city.touched">introduza uma localidade!</span>
+        <span class="help-block" *ngIf="!city.valid && city.touched">Introduza uma localidade!</span>
   </div>
   <div class="modal-body">
     <label for="service">Serviço</label>
     <div class="form-group">
       <div class="col-sm-9">
           <select name="AsService" id="AsService" class="form-control" #AsService="ngModel" ngModel required>
-              <option value="{{ service.name }}" *ngFor="let service of services">{{ service.name }}  ||  {{ service.price }}€</option>
+              <option value="{{ service.name }}" *ngFor="let service of filteredServices">{{ service.name }}  ||  {{ service.price }}€</option>
           </select>
           <span class="help-block" *ngIf="!AsService.valid && AsService.touched">Selecione um serviço!</span>
       </div>
     </div> 
   </div>    
   <div class="modal-footer">
-    <button type="button" class="btn btn-success" (click)="modal.save('saveClick')">Save</button>
+    <button type="button" class="btn btn-success" (click)="modal.save('saveClick')" >Save</button>
     <button type="button" class="btn btn-danger" (click)="modal.close('Close click')">Close</button>
   </div>
 </ng-template>

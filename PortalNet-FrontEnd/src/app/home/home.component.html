@@ -6,7 +6,7 @@
         <h1>PortalNet</h1>
         <div class="services">
             <ngb-carousel>
-               <ng-template *ngFor="let service of services; let i= index" ngbSlide>
+               <ng-template *ngFor="let service of filteredServices; let i= index" ngbSlide>
                  <img src="{{service.imgUrl}}" alt="Random first slide">
                  <div class="carousel-caption">
                   <h1 class="serviceName">{{ service.name }}</h1>

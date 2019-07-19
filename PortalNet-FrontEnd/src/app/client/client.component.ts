@@ -28,13 +28,14 @@ export class ClientComponent implements OnInit {
   placeHolder: string;
   clientToJSON: string;
   submitted = false;
-  
+  filteredServices: Service[] = [];
   
   constructor(private servicesService: ServicesService, private modalService: NgbModal, private clientService: ClientService, private router: Router, private route: ActivatedRoute, private alertService: AlertService) {}
   
   fetchServices() {
     this.servicesService.getAll().pipe(first()).subscribe(services => {
       this.services = services;
+      this.filteredServices = this.services.filter(x =>  (x.status === true));
      });
 
   }

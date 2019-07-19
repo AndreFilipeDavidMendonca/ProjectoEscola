@@ -27,7 +27,6 @@ const options = {
 export class TableClientsComponent implements OnInit { 
 @Input() clientId: number;
 // isLoading = true;
-currenClient: Client;
 searchText: string;
 clients: Client [] = []; 
 filteredClients: Client[] = [];

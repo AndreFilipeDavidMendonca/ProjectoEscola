@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit {
   services: Service[] = [];
 
 
-
+  filteredServices: Service[] = [];
   loginForm: FormGroup;
   loading = false;
   submitted = false;
@@ -37,10 +37,11 @@ export class HomeComponent implements OnInit {
         private alertService: AlertService
     ) { }
 
-    
+  
     fetchServices() {
       this.servicesService.getAll().pipe(first()).subscribe(services => {
         this.services = services;
+        this.filteredServices = this.services.filter(x =>  (x.status === true));
        });
   
     }

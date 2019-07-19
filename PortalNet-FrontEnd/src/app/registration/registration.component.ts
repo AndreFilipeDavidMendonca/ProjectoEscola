@@ -31,7 +31,7 @@ export class RegistrationComponent implements OnInit{
   success = '';
   client: Client;
   message: string;
-
+  filteredServices: Service[] = [];
 
   constructor(private route: ActivatedRoute,
     private router: Router,
@@ -49,6 +49,7 @@ export class RegistrationComponent implements OnInit{
   fetchServices() {
     this.servicesService.getAll().pipe(first()).subscribe(services => {
       this.services = services;
+      this.filteredServices = this.services.filter(x =>  (x.status === true));
      });
 
   }
