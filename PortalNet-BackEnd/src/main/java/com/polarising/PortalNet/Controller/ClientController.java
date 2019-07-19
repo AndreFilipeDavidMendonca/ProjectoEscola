@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,6 +35,9 @@ public class ClientController {
 	
 	@Autowired
 	PortalNetHttpRequest httpRequest;
+	
+	@Autowired
+	PasswordEncoder passwordEncoder;
 	
 	@GetMapping(path = "/clientsTable", produces= {"application/json"})
 	public ResponseEntity<?> getClients()
@@ -79,6 +83,9 @@ public class ClientController {
 										clientForm.getEmail(), clientForm.getGender(), clientForm.getPassword(), entryDate, 
 										endContract, numberOfServices, clientForm.getServiceName(), 
 										monthlyPay, fraudulent, status, clientForm.getBirthDate(), role);
+		
+		//Hashing the password
+		newClient.setPassword(passwordEncoder.encode(newClient.getPassword()));
 		
 		List<Client> clientsList = (List<Client>) clientRepository.findAll();
 		clientName = clientForm.getName();

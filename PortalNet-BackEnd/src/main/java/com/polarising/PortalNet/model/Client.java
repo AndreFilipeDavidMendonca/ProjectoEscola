@@ -231,6 +231,16 @@ public class Client {
 
 	public void setRole(String role) {
 		this.role = role;
+	}
+
+	@Override
+	public String toString() {
+		return "Client [clientId=" + clientId + ", clientNumber=" + clientNumber + ", nif=" + nif + ", name=" + name
+				+ ", address=" + address + ", postalCode=" + postalCode + ", city=" + city + ", mobilePhone="
+				+ mobilePhone + ", phone=" + phone + ", email=" + email + ", gender=" + gender + ", password="
+				+ password + ", entryDate=" + entryDate + ", endContract=" + endContract + ", numberOfServices="
+				+ numberOfServices + ", serviceName=" + serviceName + ", monthlyPay=" + monthlyPay + ", fraudulent="
+				+ fraudulent + ", status=" + status + ", birthDate=" + birthDate + ", role=" + role + "]";
 	}	
 }
 

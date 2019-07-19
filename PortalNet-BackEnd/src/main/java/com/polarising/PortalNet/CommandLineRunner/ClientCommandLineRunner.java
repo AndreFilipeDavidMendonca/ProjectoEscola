@@ -5,6 +5,7 @@ import java.util.Calendar;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import com.polarising.PortalNet.Repository.ClientRepository;
 import com.polarising.PortalNet.model.Client;
@@ -14,6 +15,9 @@ public class ClientCommandLineRunner implements CommandLineRunner {
 	
 	@Autowired
 	private ClientRepository clientRepository;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	public void run(String... args) throws Exception {
 		
@@ -97,7 +101,12 @@ public class ClientCommandLineRunner implements CommandLineRunner {
 		clientRepository.save(new Client(clientNumber, 1311111, "Felipe", "Rua da Alegria", "1000-245",
 				"Lisboa", 911111111, 323232321, "bernardo@polarising.com", "male",
 				"bernardoAdmin", entryDate, "27/06/2020", 2, "Pacote 4 Serviços",  100.0f, true, false, "18/01/1989", "Client"));
-	}
 	
-
+		for (Client client : clientRepository.findAll())
+		{
+			client.setPassword(passwordEncoder.encode(client.getPassword()));
+			
+			clientRepository.save(client);
+		}
+	}
 }
