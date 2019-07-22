@@ -70,6 +70,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	@Bean
 	public AuthenticationManager authenticationManagerBean() throws Exception {
+		
+		//Exposing a bean to be used by the application
 	    return super.authenticationManagerBean();
 	}
 	
