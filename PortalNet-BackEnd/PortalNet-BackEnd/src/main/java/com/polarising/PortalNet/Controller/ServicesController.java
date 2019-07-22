@@ -108,7 +108,7 @@ public class ServicesController {
 //		}
 //	}
 	
-	@PutMapping(path = "/servicesTable")
+	@PutMapping(path = "/servicesTable/")
     public ResponseEntity<?> updateService (@RequestBody Services service)
     {
         String message;

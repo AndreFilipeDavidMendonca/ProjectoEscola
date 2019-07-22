@@ -38,7 +38,7 @@ const appRoutes: Routes =  [
   { path: 'registration', component: RegistrationComponent },
   { path: 'clientsTable', component: TableClientsComponent, canActivate: [AuthGuard] },
   { path: 'administrator', component: AdministratorComponent },
-  { path: 'servicesTable', component: ServicesTableComponent },
+  { path: 'servicesTable', component: ServicesTableComponent, canActivate: [AuthGuard] },
   { path: 'createService', component: CreateServiceComponent },
   { path: 'createEmployee', component: CreateEmployeeComponent },
   { path: 'employeesTable', component: EmployeesTableComponent }

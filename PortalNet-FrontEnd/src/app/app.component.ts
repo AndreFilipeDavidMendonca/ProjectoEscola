@@ -32,6 +32,7 @@ export class AppComponent implements OnInit {
       return false;
     }
     this.currentUser = this.authenticationService.currentUserValue;
+    console.log(this.currentUser);
     return true;
   }
 
