@@ -1,3 +1,5 @@
+import { Authority } from './authority';
+
 export class Client {
     
     public clientId?: number;
@@ -20,12 +22,15 @@ export class Client {
     public status: boolean;
     public fraudulent: boolean;
     public password: string;
+    public role: string;
+    accessToken?: string;
+    authorities: Authority[];
    
 
     
     constructor(clientId: number, name: string, clientNumber: number, address: string, city: string, postalCode: string, nif: number, birthDate: string, email: string, mobilePhone: number, 
                 gender: string, entryDate: string, phone: number, endContract: string, numberOfServices: number, monthlyPay: number, 
-                serviceName: string, status: boolean, fraudulent: boolean, password: string){
+                serviceName: string, status: boolean, fraudulent: boolean, password: string, role: string){
 
             
 
@@ -49,6 +54,8 @@ export class Client {
         this.status = status;
         this.fraudulent = fraudulent;
         this.password = password;
+        this.role = role;
+       
     }
 }
 

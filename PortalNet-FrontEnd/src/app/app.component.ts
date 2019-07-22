@@ -1,28 +1,46 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { AuthenticationService } from './authentication.service';
+import { Component, OnInit } from '@angular/core';
 import { Client } from './client.model';
+import { AuthenticationService } from './authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  title = 'PortalNet';
-  currentClient: Client;
+export class AppComponent implements OnInit {
+
+  currentUser: Client;
+  user: Client;
 
   constructor(
     private router: Router,
     private authenticationService: AuthenticationService
-) {
-    this.authenticationService.currentUser.subscribe(x => this.currentClient = x);
-}
+  ) {
+  }
 
-logout() {
-  this.authenticationService.logout();
-  this.router.navigate(['/login']);
-}
+  ngOnInit() {
+  }
 
-}
+  logout() {
+    this.authenticationService.logout();
+    this.router.navigate(['/home']);
+  }
 
+  isLoggedIn() {
+    if (!localStorage.getItem('currentUser')) {
+      return false;
+    }
+    this.currentUser = this.authenticationService.currentUserValue;
+    return true;
+  }
+
+  isAdmin() {
+    for (let authority of this.currentUser.authorities) {
+      if (authority.authority === 'ROLE_ADMIN') {
+        return true;
+      }
+    }
+    return false;
+  }
+}

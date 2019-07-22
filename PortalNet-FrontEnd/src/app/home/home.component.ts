@@ -7,6 +7,9 @@ import { ErrorInterceptor } from '../interceptors/error.interceptor';
 import { ServicesService } from '../services.service';
 import { AlertService } from '../alert.service';
 import { Service } from '../service.model';
+import { Client } from '../client.model';
+import { Employee } from '../employee.model';
+import { AppComponent } from '../app.component';
 
 
 @Component({
@@ -22,11 +25,12 @@ export class HomeComponent implements OnInit {
 
   filteredServices: Service[] = [];
   loginForm: FormGroup;
-  loading = false;
+  isLoading = false;
   submitted = false;
   returnUrl: string;
-  error = '';
-
+  currentUser: Client;
+  currentEmployee: Employee;
+  message: string;
 
     constructor(
         private formBuilder: FormBuilder,
@@ -34,7 +38,8 @@ export class HomeComponent implements OnInit {
         private router: Router,
         private authenticationService: AuthenticationService,
         private servicesService: ServicesService,
-        private alertService: AlertService
+        private alertService: AlertService,
+        private appComponent: AppComponent
     ) { }
 
   
@@ -42,12 +47,10 @@ export class HomeComponent implements OnInit {
       this.servicesService.getAll().pipe(first()).subscribe(services => {
         this.services = services;
         this.filteredServices = this.services.filter(x =>  (x.status === true));
-       });
-  
+       }); 
     }
   
   ngOnInit() {
-   
     this.fetchServices();
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
@@ -71,17 +74,20 @@ export class HomeComponent implements OnInit {
           return;
       }
 
-      this.loading = true;
+      this.isLoading = true;
       this.authenticationService.login(this.f.email.value, this.f.password.value)
           .pipe(first())
           .subscribe(
-              data => {
-                  this.router.navigate([this.returnUrl]);
+            data => {
+              this.appComponent.isLoggedIn();
+              this.router.navigate([this.returnUrl]);
               },
               error => {
-                  this.error = error;
-                  this.loading = false;
+                this.alertService.error(error.message);
+                  this.isLoading = false;
+                  console.log(error.message);
               });
+              
   }
 }
 

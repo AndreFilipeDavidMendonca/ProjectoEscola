@@ -21,9 +21,10 @@ import { FilterPipe} from './filters/filter.pipe';
 import { AlertComponent } from './alerts/alert.component';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
-import { AuthGuard } from './guards/auth.guard';
+import { AuthGuard } from './auth/auth.guard';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import {NgxPaginationModule} from 'ngx-pagination';
+import { Globals } from './globals';
 
 
 
@@ -33,10 +34,9 @@ import {NgxPaginationModule} from 'ngx-pagination';
 const appRoutes: Routes =  [
   { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
-  { path: 'client/:clientId', component: ClientComponent},
-  { path: 'client/:email', component: ClientComponent},
+  { path: 'client/:clientId', component: ClientComponent, canActivate: [AuthGuard]},
   { path: 'registration', component: RegistrationComponent },
-  { path: 'clientsTable', component: TableClientsComponent },
+  { path: 'clientsTable', component: TableClientsComponent, canActivate: [AuthGuard] },
   { path: 'administrator', component: AdministratorComponent },
   { path: 'servicesTable', component: ServicesTableComponent },
   { path: 'createService', component: CreateServiceComponent },
@@ -84,6 +84,7 @@ const appRoutes: Routes =  [
     ClientService, 
     AuthGuard,
     NgbActiveModal,
+    Globals,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],
