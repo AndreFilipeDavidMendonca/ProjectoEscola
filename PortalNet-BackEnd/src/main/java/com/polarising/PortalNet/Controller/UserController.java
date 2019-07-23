@@ -10,6 +10,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -33,7 +34,7 @@ public class UserController {
 	@Autowired
 	WorkersRepository workersRepository;
 		
-	@GetMapping("/home")
+	@PostMapping(path = "/home")
 	public ResponseEntity<?> login(@RequestBody LoginCredentials user)
 	{
 		try{
@@ -55,5 +56,11 @@ public class UserController {
 			String message = "Password ou email errados.";
 			return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
 		}
+	}
+	
+	@GetMapping("/")
+	public String homePage()
+	{
+		return "Hey!";
 	}
 }

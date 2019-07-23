@@ -80,13 +80,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	throws Exception
 	{
 		http
+			.httpBasic()
+			.and()
 			//We disable some configurations
-			.csrf().disable()
+			.cors().and().csrf().disable()
 			.authorizeRequests().antMatchers("/home").permitAll()
+			.antMatchers("/servicesTable").permitAll()
 			.anyRequest().authenticated()
 			.and()
 			//We specify our own login form
 			.formLogin()
+			.loginProcessingUrl("/").permitAll()
 			.loginPage("/home").permitAll()
 			.and()
 			.logout().invalidateHttpSession(true)
