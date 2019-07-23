@@ -1,7 +1,10 @@
 
 package com.polarising.PortalNet.CommandLineRunner;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -27,7 +30,9 @@ public class ClientCommandLineRunner implements CommandLineRunner {
 	
 		String clientNumber = today + random;
 		
-		String entryDate = Calendar.getInstance().getTime().toString();
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		Date date = new Date();
+		String entryDate = dateFormat.format(date).toString();
 		
 		@SuppressWarnings("unused")
 		String endContract = "08/07/2020";

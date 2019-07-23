@@ -3,7 +3,6 @@ package com.polarising.PortalNet.Security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -76,6 +75,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	    return super.authenticationManagerBean();
 	}
 	
+//	public Authentication attemptAuthentication(HttpServletRequest httpServletRequest)
+//	{
+//		String token = httpServletRequest.getHeader("Authorization");
+//		System.err.println(token);
+//		Authentication requestAuthentication = new UsernamePasswordAuthenticationToken(token, token);
+//	}
+	
 	@Override
 	protected void configure(HttpSecurity http)  //Here we configure user access.
 	throws Exception
@@ -104,13 +110,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			//logout redirect page
 			.logoutSuccessUrl("/home").permitAll();
 		
-		
-////			.authorizeRequests()
-////				.antMatchers("/home").permitAll()
-////				.antMatchers("/client/{clientId}").hasRole("Client")
-////				.antMatchers("/**").hasRole("Admin")
-////				.antMatchers("/**").hasRole("Operator")
-////				.and().csrf().disable()
-////				.headers().frameOptions().disable();		
+//		http.addFilterBefore(filter, beforeFilter);
 	}
 }
