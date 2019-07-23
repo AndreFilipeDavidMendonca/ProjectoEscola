@@ -10,6 +10,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import com.polarising.PortalNet.model.Client;
 import com.polarising.PortalNet.model.Workers;
 
+import javassist.NotFoundException;
+
 public class UserPrincipal implements UserDetails{
 
 	/**
@@ -33,16 +35,24 @@ public class UserPrincipal implements UserDetails{
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
+		try {
 		if(client != null)
 		{
-		return Collections.singleton(new SimpleGrantedAuthority("Client"));
+		return Collections.singleton(new SimpleGrantedAuthority("CLIENT"));
 		}
-		else if (worker.getRole().equals("Employee"))
+		else if (worker.getRole().equals("EMPLOYEE"))
 		{
-		return Collections.singleton(new SimpleGrantedAuthority("Employee"));
+		return Collections.singleton(new SimpleGrantedAuthority("EMPLOYEE"));
+		}
+		else if (worker.getRole().equals("ADMIN")) {
+		return Collections.singleton(new SimpleGrantedAuthority("ADMIN"));
 		}
 		else {
-		return Collections.singleton(new SimpleGrantedAuthority("Admin"));
+				throw new NotFoundException("Authority not found.");
+		}
+		} catch (NotFoundException e) {
+			e.printStackTrace();
+			return null;
 		}
 	}
 

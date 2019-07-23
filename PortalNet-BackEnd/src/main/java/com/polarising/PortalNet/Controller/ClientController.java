@@ -76,7 +76,7 @@ public class ClientController {
 		
 		boolean status = true;
 		
-		String role = "Client";
+		String role = "CLIENT";
 		
 		Client newClient = new Client(clientNumber, clientForm.getNif(), clientForm.getName(), clientForm.getAddress(),
 										clientForm.getPostalCode(), clientForm.getCity(), clientForm.getMobilePhone(), clientForm.getPhone(),

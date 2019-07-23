@@ -19,10 +19,10 @@ public class WorkersCommandLineRunner implements CommandLineRunner{
 	
 	public void run (String... args) throws Exception {
 		
-		workersRepository.save(new Workers("Rui", "rui@worker.com", "worker", "yesno"));
-		workersRepository.save(new Workers("Maria", "maria@worker.com", "worker", "yesno"));
-		workersRepository.save(new Workers("Solange", "solange@admin.com", "admin", "yesno"));
-		workersRepository.save(new Workers("Gonçalo", "rui@admin.com", "admin", "noyes"));
+		workersRepository.save(new Workers("Rui", "rui@worker.com", "EMPLOYEE", "yesno"));
+		workersRepository.save(new Workers("Maria", "maria@worker.com", "EMPLOYEE", "yesno"));
+		workersRepository.save(new Workers("Solange", "solange@admin.com", "ADMIN", "yesno"));
+		workersRepository.save(new Workers("Gonçalo", "rui@admin.com", "ADMIN", "noyes"));
 		
 		for (Workers worker : workersRepository.findAll())
 		{

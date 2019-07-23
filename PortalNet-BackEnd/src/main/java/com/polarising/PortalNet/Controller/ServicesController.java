@@ -2,6 +2,7 @@ package com.polarising.PortalNet.Controller;
 
 import java.util.Calendar;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,6 +32,12 @@ public class ServicesController {
 	
 	@RequestMapping(path = "/servicesTable", produces= {"application/json"})
 	public List<Services> getServices()
+	{
+		return (List<Services>) serviceRepository.findAll();
+	}
+	
+	@GetMapping(path = "/home", produces= {"application/json"})
+	public List<Services> getServicesForHomePage()
 	{
 		return (List<Services>) serviceRepository.findAll();
 	}

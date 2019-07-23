@@ -3,6 +3,7 @@ package com.polarising.PortalNet.Security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -85,7 +86,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			//We disable some configurations
 			.cors().and().csrf().disable()
 			.authorizeRequests().antMatchers("/home").permitAll()
-			.antMatchers("/servicesTable").permitAll()
+			.antMatchers("/registration/**").permitAll()
+			.antMatchers("/client/**").access("hasAuthority('CLIENT') or hasAuthority('EMPLOYEE') or hasAuthority('ADMIN')")
+			.antMatchers("/clientsTable", "/administrator", "/servicesTable", "/employeesTable/**",  "/createEmployee").access("hasAuthority('EMPLOYEE') or hasAuthority('ADMIN')")
+			.antMatchers("/**").access("hasAuthority('ADMIN')")
 			.anyRequest().authenticated()
 			.and()
 			//We specify our own login form
@@ -109,13 +113,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 ////				.and().csrf().disable()
 ////				.headers().frameOptions().disable();		
 	}
-	
-//	@Bean
-//	@Override
-//	protected UserDetailsService userDetailsService() {
-//		
-//		List<UserDetails> users = new ArrayList<>();
-//		users.add(User.withDefaultPasswordEncoder().username("Bernardo").password("123").roles("Client").build());
-//		return new InMemoryUserDetailsManager(users);
-//	}
 }

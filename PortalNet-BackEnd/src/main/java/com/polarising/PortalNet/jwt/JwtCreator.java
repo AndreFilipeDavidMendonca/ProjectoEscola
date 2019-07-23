@@ -16,7 +16,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 @Component
 public class JwtCreator {
 	
-	public String createJWT(Authentication authentication)
+	public String createJWT(Authentication authentication, String Id, String name)
 	{
 		UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
 		
@@ -34,6 +34,8 @@ public class JwtCreator {
 		//Let's set the JWT claims
 		JwtBuilder builder = Jwts.builder()
 				.setSubject(userPrincipal.getUsername())
+				.claim("Id", Id)
+				.claim("Name", name)
 				.claim("authorities", userPrincipal.getAuthorities())
 				.setIssuedAt(now)
 				.signWith(signatureAlgorithm, signingKey);
