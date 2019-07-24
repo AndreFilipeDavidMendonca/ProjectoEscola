@@ -5,23 +5,33 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.logout.LogoutFilter;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.polarising.PortalNet.model.Workers;
 import com.polarising.PortalNet.Repository.ClientRepository;
 import com.polarising.PortalNet.Repository.WorkersRepository;
+import com.polarising.PortalNet.jwt.JwtAuthEntryPoint;
+import com.polarising.PortalNet.jwt.JwtAuthFilter;
 import com.polarising.PortalNet.model.Client;
 
 @Configuration
-@EnableWebSecurity
+@EnableWebSecurity(debug = true)
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
@@ -39,10 +49,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private UserDetailsService userDetailsService;
 	
+	@Autowired
+	private JwtAuthEntryPoint jwtAuthEntryPoint;
+	
 	@Bean
 	public PasswordEncoder PasswordEncoder()
 	{
 		return new BCryptPasswordEncoder();
+	}
+	
+	
+	
+	@Bean
+	public JwtAuthFilter authenticationJwtFilter()
+	{
+		return new JwtAuthFilter();
 	}
 	
 	@Bean
@@ -108,8 +129,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			//logout page
 			.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 			//logout redirect page
-			.logoutSuccessUrl("/home").permitAll();
+			.logoutSuccessUrl("/home").permitAll()
+			.and()
+			.exceptionHandling().authenticationEntryPoint(jwtAuthEntryPoint)
+			.and()
+			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 		
-//		http.addFilterBefore(filter, beforeFilter);
+		
+		http.addFilterBefore(authenticationJwtFilter(), UsernamePasswordAuthenticationFilter.class);
 	}
 }

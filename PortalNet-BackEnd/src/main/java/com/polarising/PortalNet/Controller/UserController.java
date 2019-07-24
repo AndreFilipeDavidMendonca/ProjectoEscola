@@ -53,21 +53,21 @@ public class UserController {
 			if (userPrincipal.getAuthorities().toString().equals("[CLIENT]"))
 				{
 					String clientName = clientRepository.findByEmail(userPrincipal.getUsername()).get(0).getName();
-					String clientId = clientRepository.findByEmail(userPrincipal.getUsername()).get(0).getClientId().toString();
+					int clientId = clientRepository.findByEmail(userPrincipal.getUsername()).get(0).getClientId();
 					jwt = new JwtCreator().createJWT(authentication, clientId, clientName);
 					return new ResponseEntity<>(new JwtResponse(jwt, message, userPrincipal.getAuthorities(), clientId, clientName), HttpStatus.OK);
 				}
 				else if (userPrincipal.getAuthorities().toString().equals("[EMPLOYEE]"))
 				{
 					String employeeName = workersRepository.findByEmail(userPrincipal.getUsername()).get(0).getName();
-					String employeeId = workersRepository.findByEmail(userPrincipal.getUsername()).get(0).getEmployeeId().toString();
+					int employeeId = workersRepository.findByEmail(userPrincipal.getUsername()).get(0).getEmployeeId();
 					jwt = new JwtCreator().createJWT(authentication, employeeId, employeeName);
 					return new ResponseEntity<>(new JwtResponse(jwt, message, userPrincipal.getAuthorities(), employeeId, employeeName), HttpStatus.OK);
 				}
 				else if (userPrincipal.getAuthorities().toString().equals("[ADMIN]"))
 				{
 					String adminName = workersRepository.findByEmail(userPrincipal.getUsername()).get(0).getName();
-					String adminId = workersRepository.findByEmail(userPrincipal.getUsername()).get(0).getEmployeeId().toString();
+					int adminId = workersRepository.findByEmail(userPrincipal.getUsername()).get(0).getEmployeeId();
 					jwt = new JwtCreator().createJWT(authentication, adminId, adminName);
 					return new ResponseEntity<>(new JwtResponse(jwt, message, userPrincipal.getAuthorities(), adminId, adminName), HttpStatus.OK);
 				}
