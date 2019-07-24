@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:ns="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Worker.xsd2" xmlns:tns="http://xmlns.example.com/1563529202131" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/WSDL.xsd" xmlns:ns4="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Invoice.xsd3" xmlns:ns3="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Service.xsd2" targetNamespace="http://xmlns.example.com/1563529202131">
+    <import namespace="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Service.xsd2" location="../../Resources/Schemas/Service.xsd"/>
+    <import namespace="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Invoice.xsd3" location="../../Resources/Schemas/Invoice.xsd"/>
+    <import namespace="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/WSDL.xsd" location="../../Resources/Schemas/WSDL.xsd"/>
+    <import namespace="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Worker.xsd2" location="../../Resources/Schemas/Worker.xsd"/>
+    <message name="New_Worker_In_msg">
+        <part name="header" element="ns2:Standard_In_MSG"/>
+        <part name="body" element="ns:New_Worker_A"/>
+    </message>
+    <message name="New_Worker_Out_msg">
+        <part name="header" element="ns2:Standard_Out_MSG"/>
+    </message>
+    <message name="Change_Worker_In_msg">
+        <part name="header" element="ns2:Standard_In_MSG"/>
+        <part name="body" element="ns:Modify_Worker_A"/>
+    </message>
+    <message name="Change_Worker_Out_msg">
+        <part name="header" element="ns2:Standard_Out_MSG"/>
+    </message>
+    <message name="List_All_Workers_In_msg">
+        <part name="header" element="ns2:Standard_In_MSG"/>
+    </message>
+    <message name="List_All_Workers_Out_msg">
+        <part name="header" element="ns2:Standard_Out_MSG"/>
+        <part name="body" element="ns:Get_Worker_W"/>
+    </message>
+    <message name="Delete_Worker_In_msg">
+        <part name="header" element="ns2:Standard_In_MSG"/>
+        <part name="body" element="ns2:Request_Body"/>
+    </message>
+    <message name="Delete_Worker_Out_msg">
+        <part name="header" element="ns2:Standard_Out_MSG"/>
+    </message>
+    <message name="New_Service_In_msg">
+        <part name="header" element="ns2:Standard_In_MSG"/>
+        <part name="body" element="ns3:New_Service_A"/>
+    </message>
+    <message name="New_Service_Out_msg">
+        <part name="header" element="ns2:Standard_Out_MSG"/>
+    </message>
+    <message name="Change_Service_In_msg">
+        <part name="header" element="ns2:Standard_In_MSG"/>
+        <part name="body" element="ns3:Modify_Service_A"/>
+    </message>
+    <message name="Change_Service_Out_msg">
+        <part name="header" element="ns2:Standard_Out_MSG"/>
+    </message>
+    <message name="Invoices_Launch_In_msg">
+        <part name="header" element="ns2:Standard_In_MSG"/>
+        <part name="body" element="ns4:New_Invoices_A"/>
+    </message>
+    <message name="Invoices_Launch_Out_msg">
+        <part name="header" element="ns2:Standard_Out_MSG"/>
+    </message>
+    <message name="Delete_Invoices_In_msg">
+        <part name="header" element="ns2:Standard_In_MSG"/>
+        <part name="body" element="ns4:New_Invoices_A"/>
+    </message>
+    <message name="Delete_Invoices_Out_msg">
+        <part name="header" element="ns2:Standard_Out_MSG"/>
+    </message>
+    <portType name="AdminGetters">
+        <operation name="GetAllWorkers">
+            <input message="tns:List_All_Workers_In_msg"/>
+            <output message="tns:List_All_Workers_Out_msg"/>
+        </operation>
+    </portType>
+    <portType name="AdminSetters">
+        <operation name="CreateWorker">
+            <input message="tns:New_Worker_In_msg"/>
+            <output message="tns:New_Worker_Out_msg"/>
+        </operation>
+        <operation name="ModifyWorker">
+            <input message="tns:Change_Worker_In_msg"/>
+            <output message="tns:Change_Worker_Out_msg"/>
+        </operation>
+        <operation name="RemoveWorker">
+            <input message="tns:Delete_Worker_In_msg"/>
+            <output message="tns:Delete_Worker_Out_msg"/>
+        </operation>
+        <operation name="CreateService">
+            <input message="tns:New_Service_In_msg"/>
+            <output message="tns:New_Service_Out_msg"/>
+        </operation>
+        <operation name="ModifyService">
+            <input message="tns:Change_Service_In_msg"/>
+            <output message="tns:Change_Service_Out_msg"/>
+        </operation>
+        <operation name="InvoicesLauncher">
+            <input message="tns:Invoices_Launch_In_msg"/>
+            <output message="tns:Invoices_Launch_Out_msg"/>
+        </operation>
+        <operation name="RemoveInvoices">
+            <input message="tns:Delete_Invoices_In_msg"/>
+            <output message="tns:Delete_Invoices_Out_msg"/>
+        </operation>
+    </portType>
+</definitions>

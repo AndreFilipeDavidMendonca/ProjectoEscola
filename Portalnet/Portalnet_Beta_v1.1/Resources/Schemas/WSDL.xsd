@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	 xmlns="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/WSDL.xsd"
+	 targetNamespace="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/WSDL.xsd"
+	 elementFormDefault="qualified"
+	 attributeFormDefault="unqualified">
+	<xs:element name="Login_In">
+		<xs:complexType>
+			<xs:attribute name="email" type="xs:string"/>
+			<xs:attribute name="password" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Login_Out">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Standard_Out_MSG"/>
+			</xs:sequence>
+			<xs:attribute name="role" type="xs:string"/>
+			<xs:attribute name="id" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Standard_Out_MSG">
+		<xs:complexType>
+			<xs:attribute name="message" type="xs:string"/>
+			<xs:attribute name="error" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Standard_In_MSG">
+		<xs:complexType>
+			<xs:attribute name="id" type="xs:string"/>
+			<xs:attribute name="role" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Change_Password">
+		<xs:complexType>
+			<xs:attribute name="id" type="xs:string"/>
+			<xs:attribute name="oldPassword" type="xs:string"/>
+			<xs:attribute name="newPassword" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Request_Body">
+		<xs:complexType>
+			<xs:attribute name="id" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

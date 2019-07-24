@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pd:ProcessDefinition xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:ns="http://www.tibco.com/pe/DeployedVarsType" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <pd:name>Processes/Modify DB/Clients Table/Modify Booleans.process</pd:name>
+    <pd:startName>Start</pd:startName>
+    <pd:startType>
+        <xsd:element name="root">
+            <xsd:complexType>
+                <xsd:sequence>
+                    <xsd:element name="ClientNumber" type="xsd:int"/>
+                    <xsd:element name="Dishonest" type="xsd:boolean"/>
+                    <xsd:element name="Active" type="xsd:boolean"/>
+                    <xsd:element name="WaitConfirmation" type="xsd:boolean"/>
+                </xsd:sequence>
+            </xsd:complexType>
+        </xsd:element>
+    </pd:startType>
+    <pd:startX>27</pd:startX>
+    <pd:startY>35</pd:startY>
+    <pd:returnBindings>
+        <root>
+            <message>
+                <xsl:value-of select="$Var/root/message"/>
+            </message>
+            <xsl:if test="$Var/root/error">
+                <error>
+                    <xsl:value-of select="$Var/root/error"/>
+                </error>
+            </xsl:if>
+        </root>
+    </pd:returnBindings>
+    <pd:endName>End</pd:endName>
+    <pd:endType>
+        <xsd:element name="root">
+            <xsd:complexType>
+                <xsd:sequence>
+                    <xsd:element name="message" type="xsd:string"/>
+                    <xsd:element name="error" type="xsd:string" minOccurs="0"/>
+                </xsd:sequence>
+            </xsd:complexType>
+        </xsd:element>
+    </pd:endType>
+    <pd:endX>445</pd:endX>
+    <pd:endY>34</pd:endY>
+    <pd:errorSchemas/>
+    <pd:processVariables>
+        <Var>
+            <xsd:element name="root">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="message" type="xsd:string"/>
+                        <xsd:element name="error" type="xsd:string" minOccurs="0"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </Var>
+    </pd:processVariables>
+    <pd:targetNamespace>http://xmlns.example.com/1562760287475</pd:targetNamespace>
+    <pd:activity name="JDBC Update">
+        <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
+        <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
+        <pd:x>168</pd:x>
+        <pd:y>35</pd:y>
+        <config>
+            <timeout>10</timeout>
+            <commit>false</commit>
+            <emptyStrAsNil>false</emptyStrAsNil>
+            <statement>UPDATE clients
+SET dishonest = ?, active = ?, waitconfirmation = ?
+WHERE clientnumber = ?</statement>
+            <jdbcSharedConfig>/Resources/JDBC/JDBC Connection.sharedjdbc</jdbcSharedConfig>
+            <Prepared_Param_DataType>
+                <parameter>
+                    <parameterName>Dishonest</parameterName>
+                    <dataType>TINYINT</dataType>
+                </parameter>
+                <parameter>
+                    <parameterName>Active</parameterName>
+                    <dataType>TINYINT</dataType>
+                </parameter>
+                <parameter>
+                    <parameterName>WaitConfirmation</parameterName>
+                    <dataType>TINYINT</dataType>
+                </parameter>
+                <parameter>
+                    <parameterName>ClientNumber</parameterName>
+                    <dataType>INTEGER</dataType>
+                </parameter>
+            </Prepared_Param_DataType>
+        </config>
+        <pd:inputBindings>
+            <jdbcUpdateActivityInput>
+                <xsl:choose>
+                    <xsl:when test="$Start/root/Dishonest = &quot;true&quot;">
+                        <Dishonest>
+                            <xsl:value-of select="1"/>
+                        </Dishonest>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <Dishonest>
+                            <xsl:value-of select="0"/>
+                        </Dishonest>
+                    </xsl:otherwise>
+                </xsl:choose>
+                <xsl:choose>
+                    <xsl:when test="$Start/root/Active = &quot;true&quot;">
+                        <Active>
+                            <xsl:value-of select="1"/>
+                        </Active>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <Active>
+                            <xsl:value-of select="0"/>
+                        </Active>
+                    </xsl:otherwise>
+                </xsl:choose>
+                <xsl:choose>
+                    <xsl:when test="$Start/root/WaitConfirmation = &quot;true&quot;">
+                        <WaitConfirmation>
+                            <xsl:value-of select="1"/>
+                        </WaitConfirmation>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <WaitConfirmation>
+                            <xsl:value-of select="0"/>
+                        </WaitConfirmation>
+                    </xsl:otherwise>
+                </xsl:choose>
+                <ClientNumber>
+                    <xsl:value-of select="$Start/root/ClientNumber"/>
+                </ClientNumber>
+            </jdbcUpdateActivityInput>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Assign Success">
+        <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
+        <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
+        <pd:x>318</pd:x>
+        <pd:y>34</pd:y>
+        <config>
+            <variableName>Var</variableName>
+        </config>
+        <pd:inputBindings>
+            <root>
+                <message>
+                    <xsl:value-of select="$_globalVariables/ns:GlobalVariables/VarAplication/MessageType/Success"/>
+                </message>
+            </root>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Assign Error">
+        <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
+        <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
+        <pd:x>579</pd:x>
+        <pd:y>34</pd:y>
+        <config>
+            <variableName>Var</variableName>
+        </config>
+        <pd:inputBindings>
+            <root>
+                <message>
+                    <xsl:value-of select="$_globalVariables/ns:GlobalVariables/VarAplication/MessageType/Error"/>
+                </message>
+                <error>
+                    <xsl:value-of select="&quot;Modify Client Booleans-Invalid Input&quot;"/>
+                </error>
+            </root>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Catch">
+        <pd:type>com.tibco.pe.core.CatchActivity</pd:type>
+        <pd:resourceType>ae.activities.catch</pd:resourceType>
+        <pd:x>722</pd:x>
+        <pd:y>34</pd:y>
+        <pd:handler>true</pd:handler>
+        <config>
+            <catchAll>true</catchAll>
+        </config>
+        <pd:inputBindings/>
+    </pd:activity>
+    <pd:transition>
+        <pd:from>Start</pd:from>
+        <pd:to>JDBC Update</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>JDBC Update</pd:from>
+        <pd:to>Assign Success</pd:to>
+        <pd:xpathDescription>updated</pd:xpathDescription>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>xpath</pd:conditionType>
+        <pd:xpath>$JDBC-Update/jdbcUpdateActivityOutput/noOfUpdates &gt; 0</pd:xpath>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Assign Success</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Assign Error</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Catch</pd:from>
+        <pd:to>Assign Error</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+</pd:ProcessDefinition>

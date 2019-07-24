@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pd:ProcessDefinition xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:ns="http://www.tibco.com/pe/DeployedVarsType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <pd:name>Processes/Modify DB/Invoices Table/Modify Invoice by ID.process</pd:name>
+    <pd:startName>Start</pd:startName>
+    <pd:startType>
+        <xsd:element name="root">
+            <xsd:complexType>
+                <xsd:sequence>
+                    <xsd:element name="InvoiceID" type="xsd:int"/>
+                    <xsd:element name="ClientNumber" type="xsd:int"/>
+                    <xsd:element name="AmountPaid" type="xsd:float"/>
+                    <xsd:element name="PaymentDate" type="xsd:string"/>
+                    <xsd:element name="PaymentMethod" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+        </xsd:element>
+    </pd:startType>
+    <pd:startX>27</pd:startX>
+    <pd:startY>35</pd:startY>
+    <pd:returnBindings>
+        <root>
+            <message>
+                <xsl:value-of select="$Var/root/message"/>
+            </message>
+            <xsl:if test="$Var/root/error">
+                <error>
+                    <xsl:value-of select="$Var/root/error"/>
+                </error>
+            </xsl:if>
+        </root>
+    </pd:returnBindings>
+    <pd:endName>End</pd:endName>
+    <pd:endType>
+        <xsd:element name="root">
+            <xsd:complexType>
+                <xsd:sequence>
+                    <xsd:element name="message" type="xsd:string"/>
+                    <xsd:element name="error" type="xsd:string" minOccurs="0"/>
+                </xsd:sequence>
+            </xsd:complexType>
+        </xsd:element>
+    </pd:endType>
+    <pd:endX>660</pd:endX>
+    <pd:endY>34</pd:endY>
+    <pd:errorSchemas/>
+    <pd:processVariables>
+        <Var>
+            <xsd:element name="root">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="message" type="xsd:string"/>
+                        <xsd:element name="error" type="xsd:string" minOccurs="0"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </Var>
+    </pd:processVariables>
+    <pd:targetNamespace>http://xmlns.example.com/1562760287475</pd:targetNamespace>
+    <pd:activity name="JDBC Update">
+        <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
+        <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
+        <pd:x>318</pd:x>
+        <pd:y>35</pd:y>
+        <config>
+            <timeout>10</timeout>
+            <commit>false</commit>
+            <emptyStrAsNil>false</emptyStrAsNil>
+            <statement>UPDATE invoices
+SET amountpaid = ?, paymentdate = ?, paymentmethod = ?
+WHERE invoiceid = ?</statement>
+            <jdbcSharedConfig>/Resources/JDBC/JDBC Connection.sharedjdbc</jdbcSharedConfig>
+            <Prepared_Param_DataType>
+                <parameter>
+                    <parameterName>AmountPaid</parameterName>
+                    <dataType>FLOAT</dataType>
+                </parameter>
+                <parameter>
+                    <parameterName>PaymentDate</parameterName>
+                    <dataType>VARCHAR</dataType>
+                </parameter>
+                <parameter>
+                    <parameterName>PaymentMethod</parameterName>
+                    <dataType>VARCHAR</dataType>
+                </parameter>
+                <parameter>
+                    <parameterName>InvoiceID</parameterName>
+                    <dataType>INTEGER</dataType>
+                </parameter>
+            </Prepared_Param_DataType>
+        </config>
+        <pd:inputBindings>
+            <jdbcUpdateActivityInput>
+                <xsl:choose>
+                    <xsl:when test="( $JDBC-Query/resultSet/Record[1]/amountpaid + $Start/root/AmountPaid ) > $JDBC-Query/resultSet/Record[1]/amount">
+                        <AmountPaid>
+                            <xsl:choose>
+                                <xsl:when test="exists($JDBC-Query/resultSet/Record[1]/amount)">
+                                    <xsl:value-of select="$JDBC-Query/resultSet/Record[1]/amount"/>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:attribute name="xsi:nil">true</xsl:attribute>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                        </AmountPaid>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <AmountPaid>
+                            <xsl:value-of select="$JDBC-Query/resultSet/Record[1]/amountpaid + $Start/root/AmountPaid"/>
+                        </AmountPaid>
+                    </xsl:otherwise>
+                </xsl:choose>
+                <PaymentDate>
+                    <xsl:value-of select="$Start/root/PaymentDate"/>
+                </PaymentDate>
+                <PaymentMethod>
+                    <xsl:value-of select="$Start/root/PaymentMethod"/>
+                </PaymentMethod>
+                <InvoiceID>
+                    <xsl:value-of select="$Start/root/InvoiceID"/>
+                </InvoiceID>
+            </jdbcUpdateActivityInput>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Assign Success">
+        <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
+        <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
+        <pd:x>508</pd:x>
+        <pd:y>34</pd:y>
+        <config>
+            <variableName>Var</variableName>
+        </config>
+        <pd:inputBindings>
+            <root>
+                <message>
+                    <xsl:value-of select="$_globalVariables/ns:GlobalVariables/VarAplication/MessageType/Success"/>
+                </message>
+            </root>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Assign Error">
+        <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
+        <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
+        <pd:x>794</pd:x>
+        <pd:y>34</pd:y>
+        <config>
+            <variableName>Var</variableName>
+        </config>
+        <pd:inputBindings>
+            <root>
+                <message>
+                    <xsl:value-of select="$_globalVariables/ns:GlobalVariables/VarAplication/MessageType/Error"/>
+                </message>
+                <error>
+                    <xsl:value-of select="&quot;Modify Invoice-Invalid Input&quot;"/>
+                </error>
+            </root>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Catch">
+        <pd:type>com.tibco.pe.core.CatchActivity</pd:type>
+        <pd:resourceType>ae.activities.catch</pd:resourceType>
+        <pd:x>937</pd:x>
+        <pd:y>34</pd:y>
+        <pd:handler>true</pd:handler>
+        <config>
+            <catchAll>true</catchAll>
+        </config>
+        <pd:inputBindings/>
+    </pd:activity>
+    <pd:activity name="JDBC Query">
+        <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
+        <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
+        <pd:x>151</pd:x>
+        <pd:y>35</pd:y>
+        <config>
+            <timeout>10</timeout>
+            <commit>false</commit>
+            <maxRows>100</maxRows>
+            <emptyStrAsNil>false</emptyStrAsNil>
+            <statement>SELECT amountpaid, amount, clientnumber
+FROM invoices
+WHERE invoiceid = ?</statement>
+            <Prepared_Param_DataType>
+                <parameter>
+                    <parameterName>InvoiceID</parameterName>
+                    <dataType>INTEGER</dataType>
+                </parameter>
+            </Prepared_Param_DataType>
+            <jdbcSharedConfig>/Resources/JDBC/JDBC Connection.sharedjdbc</jdbcSharedConfig>
+            <oraObjects/>
+            <oraTables/>
+            <QueryOutputCachedSchemaColumns>amountpaid</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>7</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>FLOAT</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>amount</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>7</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>FLOAT</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>clientnumber</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>4</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>INT</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+        </config>
+        <pd:inputBindings>
+            <jdbcQueryActivityInput>
+                <InvoiceID>
+                    <xsl:value-of select="$Start/root/InvoiceID"/>
+                </InvoiceID>
+            </jdbcQueryActivityInput>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:transition>
+        <pd:from>Start</pd:from>
+        <pd:to>JDBC Query</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>JDBC Update</pd:from>
+        <pd:to>Assign Success</pd:to>
+        <pd:xpathDescription>updated</pd:xpathDescription>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>xpath</pd:conditionType>
+        <pd:xpath>$JDBC-Update/jdbcUpdateActivityOutput/noOfUpdates &gt; 0</pd:xpath>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Assign Success</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Assign Error</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Catch</pd:from>
+        <pd:to>Assign Error</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>JDBC Query</pd:from>
+        <pd:to>JDBC Update</pd:to>
+        <pd:xpathDescription>not_paid</pd:xpathDescription>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>xpath</pd:conditionType>
+        <pd:xpath>$Start/root/ClientNumber = $JDBC-Query/resultSet/Record[1]/clientnumber
+and
+not( $JDBC-Query/resultSet/Record/amount = $JDBC-Query/resultSet/Record/amountpaid )</pd:xpath>
+    </pd:transition>
+</pd:ProcessDefinition>

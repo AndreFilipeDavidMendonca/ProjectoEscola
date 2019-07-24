@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Created by TIBCO WSDL-->
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://xmlns.example.com/1563555357381" xmlns:ns0="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/WSDL.xsd" xmlns:ns2="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Invoice.xsd3" xmlns:ns1="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Service.xsd2" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap1="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:ns3="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Client.xsd" name="Untitled" targetNamespace="http://xmlns.example.com/1563555357381">
+    <wsdl:types>
+        <xs:schema xmlns="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Invoice.xsd3" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Invoice.xsd3" elementFormDefault="qualified" attributeFormDefault="unqualified">
+            <xs:element name="Get_Invoices_CW">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element ref="ns2:Invoice_Info" minOccurs="0" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Invoice_Info">
+                <xs:complexType>
+                    <xs:attribute name="amountPaid" type="xs:string"/>
+                    <xs:attribute name="amountToPay" type="xs:string"/>
+                    <xs:attribute name="clientNumber" type="xs:string"/>
+                    <xs:attribute name="invoiceDate" type="xs:string"/>
+                    <xs:attribute name="invoiceID" type="xs:string"/>
+                    <xs:attribute name="paymentDate" type="xs:string"/>
+                    <xs:attribute name="paymentMethod" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Modify_Invoice">
+                <xs:complexType>
+                    <xs:attribute name="amountPaid" type="xs:string"/>
+                    <xs:attribute name="clientNumber" type="xs:string"/>
+                    <xs:attribute name="id" type="xs:string"/>
+                    <xs:attribute name="paymentDate" type="xs:string"/>
+                    <xs:attribute name="paymentMethod" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="New_Invoices_A">
+                <xs:complexType>
+                    <xs:attribute name="invoiceDate" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Remove_Invoice">
+                <xs:complexType>
+                    <xs:attribute name="date" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+        <xs:schema xmlns="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/WSDL.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/WSDL.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified">
+            <xs:element name="Change_Password">
+                <xs:complexType>
+                    <xs:attribute name="id" type="xs:string"/>
+                    <xs:attribute name="newPassword" type="xs:string"/>
+                    <xs:attribute name="oldPassword" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Login_In">
+                <xs:complexType>
+                    <xs:attribute name="email" type="xs:string"/>
+                    <xs:attribute name="password" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Login_Out">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element ref="ns0:Standard_Out_MSG"/>
+                    </xs:sequence>
+                    <xs:attribute name="id" type="xs:string"/>
+                    <xs:attribute name="role" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Request_Body">
+                <xs:complexType>
+                    <xs:attribute name="id" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Standard_In_MSG">
+                <xs:complexType>
+                    <xs:attribute name="id" type="xs:string"/>
+                    <xs:attribute name="role" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Standard_Out_MSG">
+                <xs:complexType>
+                    <xs:attribute name="error" type="xs:string"/>
+                    <xs:attribute name="message" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+        <xs:schema xmlns="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Client.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Client.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified">
+            <xs:element name="Associated_Service_Info">
+                <xs:complexType>
+                    <xs:attribute name="associatedServiceID" type="xs:string"/>
+                    <xs:attribute name="modificationDate" type="xs:string"/>
+                    <xs:attribute name="serviceID" type="xs:string"/>
+                    <xs:attribute name="workerNumber" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Change_All_Client_Info_W">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element ref="ns3:Client_Personal_Info"/>
+                    </xs:sequence>
+                    <xs:attribute name="active" type="xs:string"/>
+                    <xs:attribute name="dishonest" type="xs:string"/>
+                    <xs:attribute name="waitConfirmation" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Client_All_Info">
+                <xs:complexType>
+                    <xs:attribute name="accessionDate" type="xs:string"/>
+                    <xs:attribute name="active" type="xs:string"/>
+                    <xs:attribute name="address" type="xs:string"/>
+                    <xs:attribute name="birthDate" type="xs:string"/>
+                    <xs:attribute name="clientName" type="xs:string"/>
+                    <xs:attribute name="clientNumber" type="xs:string"/>
+                    <xs:attribute name="dishonest" type="xs:string"/>
+                    <xs:attribute name="email" type="xs:string"/>
+                    <xs:attribute name="gender" type="xs:string"/>
+                    <xs:attribute name="locality" type="xs:string"/>
+                    <xs:attribute name="mobileNumber" type="xs:string"/>
+                    <xs:attribute name="nif" type="xs:string"/>
+                    <xs:attribute name="phoneNumber" type="xs:string"/>
+                    <xs:attribute name="postalCode" type="xs:string"/>
+                    <xs:attribute name="waitConfirmation" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Client_Personal_Info">
+                <xs:complexType>
+                    <xs:attribute name="accessionDate" type="xs:string"/>
+                    <xs:attribute name="address" type="xs:string"/>
+                    <xs:attribute name="birthDate" type="xs:string"/>
+                    <xs:attribute name="clientName" type="xs:string"/>
+                    <xs:attribute name="clientNumber" type="xs:string"/>
+                    <xs:attribute name="email" type="xs:string"/>
+                    <xs:attribute name="gender" type="xs:string"/>
+                    <xs:attribute name="locality" type="xs:string"/>
+                    <xs:attribute name="mobileNumber" type="xs:string"/>
+                    <xs:attribute name="nif" type="xs:string"/>
+                    <xs:attribute name="phoneNumber" type="xs:string"/>
+                    <xs:attribute name="postalCode" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Get_Associated_Service_C">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element ref="ns3:Associated_Service_Info" minOccurs="0" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Get_Associated_Service_W">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element ref="ns3:Associated_Service_Info" minOccurs="0" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Get_Client_All_Info_W">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element ref="ns3:Client_All_Info" minOccurs="0" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Get_Client_Info_C">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element ref="ns3:Client_Personal_Info" minOccurs="0" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Modify_Associated_Service_W">
+                <xs:complexType>
+                    <xs:attribute name="associatedServiceID" type="xs:string"/>
+                    <xs:attribute name="modificationDate" type="xs:string"/>
+                    <xs:attribute name="serviceID" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Modify_Client_CW">
+                <xs:complexType>
+                    <xs:attribute name="address" type="xs:string"/>
+                    <xs:attribute name="email" type="xs:string"/>
+                    <xs:attribute name="id" type="xs:string"/>
+                    <xs:attribute name="locality" type="xs:string"/>
+                    <xs:attribute name="mobileNumber" type="xs:string"/>
+                    <xs:attribute name="phoneNumber" type="xs:string"/>
+                    <xs:attribute name="postalCode" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="New_Associated_Service_W">
+                <xs:complexType>
+                    <xs:attribute name="clientNumber" type="xs:string"/>
+                    <xs:attribute name="modificationDate" type="xs:string"/>
+                    <xs:attribute name="serviceID" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="New_Client_W">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element ref="ns3:Change_All_Client_Info_W"/>
+                    </xs:sequence>
+                    <xs:attribute name="modificationDate" type="xs:string"/>
+                    <xs:attribute name="password" type="xs:string"/>
+                    <xs:attribute name="serviceID" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+        <xs:schema xmlns="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Service.xsd2" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Service.xsd2" elementFormDefault="qualified" attributeFormDefault="unqualified">
+            <xs:element name="Get_Services_CW">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element ref="ns1:Service_Info" minOccurs="0" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Modify_Service_A">
+                <xs:complexType>
+                    <xs:attribute name="active" type="xs:string"/>
+                    <xs:attribute name="serviceID" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="New_Service_A">
+                <xs:complexType>
+                    <xs:attribute name="ImageURL" type="xs:string"/>
+                    <xs:attribute name="active" type="xs:string"/>
+                    <xs:attribute name="creationDate" type="xs:string"/>
+                    <xs:attribute name="internet" type="xs:string"/>
+                    <xs:attribute name="loyalty" type="xs:string"/>
+                    <xs:attribute name="mobilePhone" type="xs:string"/>
+                    <xs:attribute name="phone" type="xs:string"/>
+                    <xs:attribute name="price" type="xs:string"/>
+                    <xs:attribute name="serviceName" type="xs:string"/>
+                    <xs:attribute name="tv" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Service_Info">
+                <xs:complexType>
+                    <xs:attribute name="ImageURL" type="xs:string"/>
+                    <xs:attribute name="active" type="xs:string"/>
+                    <xs:attribute name="creationDate" type="xs:string"/>
+                    <xs:attribute name="internet" type="xs:string"/>
+                    <xs:attribute name="loyalty" type="xs:string"/>
+                    <xs:attribute name="mobilePhone" type="xs:string"/>
+                    <xs:attribute name="phone" type="xs:string"/>
+                    <xs:attribute name="price" type="xs:string"/>
+                    <xs:attribute name="serviceID" type="xs:string"/>
+                    <xs:attribute name="serviceName" type="xs:string"/>
+                    <xs:attribute name="tv" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:service name="General Service">
+        <wsdl:port name="GeneralGettersEndpoint" binding="tns:GeneralGettersEndpointBinding">
+            <soap:address location="http://localhost:9011/WSDL%2520Services/Aplication/General%2520Service.serviceagent/GeneralGettersEndpoint"/>
+        </wsdl:port>
+        <wsdl:port name="GeneralSettersEndpoint" binding="tns:GeneralSettersEndpointBinding">
+            <soap:address location="http://localhost:9011/WSDL%2520Services/Aplication/General%2520Service.serviceagent/GeneralSettersEndpoint"/>
+        </wsdl:port>
+    </wsdl:service>
+    <wsdl:portType name="GeneralGetters">
+        <wsdl:operation name="GetAllServices">
+            <wsdl:input message="tns:List_All_Services_In_msg"/>
+            <wsdl:output message="tns:List_All_Services_Out_msg"/>
+        </wsdl:operation>
+        <wsdl:operation name="GetInvoices">
+            <wsdl:input message="tns:List_Invoices_In_msg"/>
+            <wsdl:output message="tns:List_Invoices_Out_msg"/>
+        </wsdl:operation>
+        <wsdl:operation name="GetAssociatedServices">
+            <wsdl:input message="tns:List_Associated_Services_In_msg"/>
+            <wsdl:output message="tns:List_Associated_Services_Out_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:portType name="GeneralSetters">
+        <wsdl:operation name="ClientPayment">
+            <wsdl:input message="tns:Client_Payment_In_msg"/>
+            <wsdl:output message="tns:Client_Payment_Out_msg"/>
+        </wsdl:operation>
+        <wsdl:operation name="ClientRegist">
+            <wsdl:input message="tns:New_Client_In_msg"/>
+            <wsdl:output message="tns:New_Client_Out_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="GeneralGettersEndpointBinding" type="tns:GeneralGetters">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="GetAllServices">
+            <soap:operation style="document" soapAction="/WSDL%2520Services/Aplication/General%2520Service.serviceagent/GeneralGettersEndpoint1/GetAllServices"/>
+            <wsdl:input>
+                <soap:body use="literal" parts="header"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" parts="header body"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetInvoices">
+            <soap:operation style="document" soapAction="/WSDL%2520Services/Aplication/General%2520Service.serviceagent/GeneralGettersEndpoint1/GetInvoices"/>
+            <wsdl:input>
+                <soap:body use="literal" parts="header body"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" parts="header body"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetAssociatedServices">
+            <soap:operation style="document" soapAction="/WSDL%2520Services/Aplication/General%2520Service.serviceagent/GeneralGettersEndpoint1/GetAssociatedServices"/>
+            <wsdl:input>
+                <soap:body use="literal" parts="header body"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" parts="header body"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="GeneralSettersEndpointBinding" type="tns:GeneralSetters">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="ClientPayment">
+            <soap:operation style="document" soapAction="/WSDL%2520Services/Aplication/General%2520Service.serviceagent/GeneralSettersEndpoint/ClientPayment"/>
+            <wsdl:input>
+                <soap:body use="literal" parts="header body"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" parts="header"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="ClientRegist">
+            <soap:operation style="document" soapAction="/WSDL%2520Services/Aplication/General%2520Service.serviceagent/GeneralSettersEndpoint/ClientRegist"/>
+            <wsdl:input>
+                <soap:body use="literal" parts="header body"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" parts="header"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:message name="List_All_Services_In_msg">
+        <wsdl:part name="header" element="ns0:Standard_In_MSG"/>
+    </wsdl:message>
+    <wsdl:message name="List_All_Services_Out_msg">
+        <wsdl:part name="header" element="ns0:Standard_Out_MSG"/>
+        <wsdl:part name="body" element="ns1:Get_Services_CW"/>
+    </wsdl:message>
+    <wsdl:message name="List_Invoices_In_msg">
+        <wsdl:part name="header" element="ns0:Standard_In_MSG"/>
+        <wsdl:part name="body" element="ns0:Request_Body"/>
+    </wsdl:message>
+    <wsdl:message name="List_Invoices_Out_msg">
+        <wsdl:part name="header" element="ns0:Standard_Out_MSG"/>
+        <wsdl:part name="body" element="ns2:Get_Invoices_CW"/>
+    </wsdl:message>
+    <wsdl:message name="List_Associated_Services_In_msg">
+        <wsdl:part name="header" element="ns0:Standard_In_MSG"/>
+        <wsdl:part name="body" element="ns0:Request_Body"/>
+    </wsdl:message>
+    <wsdl:message name="List_Associated_Services_Out_msg">
+        <wsdl:part name="header" element="ns0:Standard_Out_MSG"/>
+        <wsdl:part name="body" element="ns3:Get_Associated_Service_W"/>
+    </wsdl:message>
+    <wsdl:message name="Client_Payment_In_msg">
+        <wsdl:part name="header" element="ns0:Standard_In_MSG"/>
+        <wsdl:part name="body" element="ns2:Modify_Invoice"/>
+    </wsdl:message>
+    <wsdl:message name="Client_Payment_Out_msg">
+        <wsdl:part name="header" element="ns0:Standard_Out_MSG"/>
+    </wsdl:message>
+    <wsdl:message name="New_Client_In_msg">
+        <wsdl:part name="header" element="ns0:Standard_In_MSG"/>
+        <wsdl:part name="body" element="ns3:New_Client_W"/>
+    </wsdl:message>
+    <wsdl:message name="New_Client_Out_msg">
+        <wsdl:part name="header" element="ns0:Standard_Out_MSG"/>
+    </wsdl:message>
+</wsdl:definitions>

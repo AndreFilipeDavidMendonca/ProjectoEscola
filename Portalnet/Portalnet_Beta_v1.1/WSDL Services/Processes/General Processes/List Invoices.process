@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pd:ProcessDefinition xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:pfx="http://xmlns.example.com/1562866237851" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:pfx2="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Schema.xsd3" xmlns:ns="http://www.tibco.com/pe/DeployedVarsType" xmlns:pfx3="http://xmlns.example.com/1563379787360" xmlns:pfx4="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/WSDL.xsd" xmlns:pfx5="http://xmlns.example.com/1563532457786" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Invoice.xsd3" xmlns:ns1="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Schema1.xsd">
+    <wsdl:import namespace="http://xmlns.example.com/1562866237851" location="/WSDL Services/Client/Client WSDL.wsdl"/>
+    <wsdl:import namespace="http://xmlns.example.com/1563379787360"/>
+    <wsdl:import namespace="http://xmlns.example.com/1563532457786" location="/WSDL Services/Aplication/General WSDL.wsdl"/>
+    <pd:name>WSDL Services/Processes/General Processes/List Invoices.process</pd:name>
+    <pd:startName>Start</pd:startName>
+    <pd:startType wsMsgRef="pfx5:List_Invoices_In_msg"/>
+    <pd:startX>27</pd:startX>
+    <pd:startY>34</pd:startY>
+    <pd:returnBindings>
+        <pfx5:List_Invoices_Out_msg>
+            <header>
+                <pfx4:Standard_Out_MSG>
+                    <xsl:attribute name="message">
+                        <xsl:value-of select="$Var/root/message"/>
+                    </xsl:attribute>
+                    <xsl:if test="$Var/root/error">
+                        <xsl:attribute name="error">
+                            <xsl:value-of select="$Var/root/error"/>
+                        </xsl:attribute>
+                    </xsl:if>
+                </pfx4:Standard_Out_MSG>
+            </header>
+            <body>
+                <ns2:Get_Invoices_CW>
+                    <xsl:for-each select="$List-All-Invoices-From-Client/root/InvoicesInfo">
+                        <ns2:Invoice_Info>
+                            <xsl:attribute name="invoiceID">
+                                <xsl:value-of select="InvoiceID"/>
+                            </xsl:attribute>
+                            <xsl:attribute name="clientNumber">
+                                <xsl:value-of select="ClientNumber"/>
+                            </xsl:attribute>
+                            <xsl:attribute name="amountToPay">
+                                <xsl:value-of select="AmountToPay"/>
+                            </xsl:attribute>
+                            <xsl:attribute name="invoiceDate">
+                                <xsl:value-of select="InvoiceDate"/>
+                            </xsl:attribute>
+                            <xsl:attribute name="amountPaid">
+                                <xsl:value-of select="AmountPaid"/>
+                            </xsl:attribute>
+                            <xsl:attribute name="paymentDate">
+                                <xsl:value-of select="PaymentDate"/>
+                            </xsl:attribute>
+                            <xsl:attribute name="paymentMethod">
+                                <xsl:value-of select="PaymentMethod"/>
+                            </xsl:attribute>
+                        </ns2:Invoice_Info>
+                    </xsl:for-each>
+                </ns2:Get_Invoices_CW>
+            </body>
+        </pfx5:List_Invoices_Out_msg>
+    </pd:returnBindings>
+    <pd:endName>End</pd:endName>
+    <pd:endType wsMsgRef="pfx5:List_Invoices_Out_msg"/>
+    <pd:endX>490</pd:endX>
+    <pd:endY>34</pd:endY>
+    <pd:errorSchemas/>
+    <pd:processVariables>
+        <Var>
+            <xsd:element name="root">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="message" type="xsd:string"/>
+                        <xsd:element name="error" type="xsd:string" minOccurs="0"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </Var>
+    </pd:processVariables>
+    <pd:targetNamespace>http://xmlns.example.com/1562939117814</pd:targetNamespace>
+    <pd:activity name="List All Invoices From Client">
+        <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
+        <pd:resourceType>ae.process.subprocess</pd:resourceType>
+        <pd:x>189</pd:x>
+        <pd:y>43</pd:y>
+        <config>
+            <processName>/Processes/Read DB/Invoices Table/List All Invoices From Client.process</processName>
+        </config>
+        <pd:inputBindings>
+            <root>
+                <ClientNumber>
+                    <xsl:value-of select="$Start/pfx5:List_Invoices_In_msg/body/pfx4:Request_Body/@id"/>
+                </ClientNumber>
+            </root>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Assign 1">
+        <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
+        <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
+        <pd:x>346</pd:x>
+        <pd:y>34</pd:y>
+        <config>
+            <variableName>Var</variableName>
+        </config>
+        <pd:inputBindings>
+            <root>
+                <message>
+                    <xsl:value-of select="$List-All-Invoices-From-Client/root/message"/>
+                </message>
+                <xsl:if test="$List-All-Invoices-From-Client/root/error">
+                    <error>
+                        <xsl:value-of select="$List-All-Invoices-From-Client/root/error"/>
+                    </error>
+                </xsl:if>
+            </root>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Assign 2">
+        <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
+        <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
+        <pd:x>628</pd:x>
+        <pd:y>34</pd:y>
+        <config>
+            <variableName>Var</variableName>
+        </config>
+        <pd:inputBindings>
+            <root>
+                <message>
+                    <xsl:value-of select="$_globalVariables/ns:GlobalVariables/VarAplication/MessageType/Error"/>
+                </message>
+                <error>
+                    <xsl:value-of select="&quot;List Invoices-Invalid Inputs&quot;"/>
+                </error>
+            </root>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Catch">
+        <pd:type>com.tibco.pe.core.CatchActivity</pd:type>
+        <pd:resourceType>ae.activities.catch</pd:resourceType>
+        <pd:x>762</pd:x>
+        <pd:y>34</pd:y>
+        <pd:handler>true</pd:handler>
+        <config>
+            <catchAll>true</catchAll>
+        </config>
+        <pd:inputBindings/>
+    </pd:activity>
+    <pd:activity name="Get Worker by ID">
+        <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
+        <pd:resourceType>ae.process.subprocess</pd:resourceType>
+        <pd:x>186</pd:x>
+        <pd:y>182</pd:y>
+        <config>
+            <processName>/Processes/Read DB/Workers Table/Get Worker by ID.process</processName>
+        </config>
+        <pd:inputBindings>
+            <root>
+                <WorkerNumber>
+                    <xsl:value-of select="$Start/pfx5:List_Invoices_In_msg/header/pfx4:Standard_In_MSG/@id"/>
+                </WorkerNumber>
+            </root>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:transition>
+        <pd:from>Start</pd:from>
+        <pd:to>List All Invoices From Client</pd:to>
+        <pd:xpathDescription>validation</pd:xpathDescription>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>xpath</pd:conditionType>
+        <pd:xpath>( $Start/pfx5:List_Invoices_In_msg/header/pfx4:Standard_In_MSG/@id &gt; 0 and $Start/pfx5:List_Invoices_In_msg/header/pfx4:Standard_In_MSG/@id &lt; 10000000000 ) 
+and
+( $Start/pfx5:List_Invoices_In_msg/body/pfx4:Request_Body/@id &gt; 0 and $Start/pfx5:List_Invoices_In_msg/body/pfx4:Request_Body/@id &lt; 10000000000 ) 
+and
+(
+	$Start/pfx5:List_Invoices_In_msg/header/pfx4:Standard_In_MSG/@role = $_globalVariables/ns:GlobalVariables/VarAplication/RoleType/Client
+	and
+	$Start/pfx5:List_Invoices_In_msg/header/pfx4:Standard_In_MSG/@id = $Start/pfx5:List_Invoices_In_msg/body/pfx4:Request_Body/@id
+)</pd:xpath>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Catch</pd:from>
+        <pd:to>Assign 2</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Assign 2</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Assign 1</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>List All Invoices From Client</pd:from>
+        <pd:to>Assign 1</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Get Worker by ID</pd:from>
+        <pd:to>List All Invoices From Client</pd:to>
+        <pd:xpathDescription>valid_worker</pd:xpathDescription>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>xpath</pd:conditionType>
+        <pd:xpath>$Get-Worker-by-ID/root/message = $_globalVariables/ns:GlobalVariables/VarAplication/MessageType/Exist
+and
+$Start/pfx5:List_Invoices_In_msg/header/pfx4:Standard_In_MSG/@role = $Get-Worker-by-ID/root/WorkerInfo/Role</pd:xpath>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Start</pd:from>
+        <pd:to>Get Worker by ID</pd:to>
+        <pd:xpathDescription>validation</pd:xpathDescription>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>xpath</pd:conditionType>
+        <pd:xpath>( $Start/pfx5:List_Invoices_In_msg/header/pfx4:Standard_In_MSG/@id &gt; 0 and $Start/pfx5:List_Invoices_In_msg/header/pfx4:Standard_In_MSG/@id &lt; 10000000000 ) 
+and
+( $Start/pfx5:List_Invoices_In_msg/body/pfx4:Request_Body/@id &gt; 0 and $Start/pfx5:List_Invoices_In_msg/body/pfx4:Request_Body/@id &lt; 10000000000 ) 
+and
+(
+	$Start/pfx5:List_Invoices_In_msg/header/pfx4:Standard_In_MSG/@role = $_globalVariables/ns:GlobalVariables/VarAplication/RoleType/Admin 
+	or
+	$Start/pfx5:List_Invoices_In_msg/header/pfx4:Standard_In_MSG/@role = $_globalVariables/ns:GlobalVariables/VarAplication/RoleType/Operator
+)</pd:xpath>
+    </pd:transition>
+</pd:ProcessDefinition>

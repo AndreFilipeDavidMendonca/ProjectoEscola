@@ -1,0 +1,29 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<repository xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance" xmlns = "http://www.tibco.com/xmlns/repo/types/2002">
+	<globalVariables>
+		<globalVariable>
+			<name>Admin</name>
+			<value>administrator</value>
+			<deploymentSettable>true</deploymentSettable>
+			<serviceSettable>false</serviceSettable>
+			<type>String</type>
+			<modTime>1562689984625</modTime>
+		</globalVariable>
+		<globalVariable>
+			<name>Client</name>
+			<value>client</value>
+			<deploymentSettable>true</deploymentSettable>
+			<serviceSettable>false</serviceSettable>
+			<type>String</type>
+			<modTime>1562689984639</modTime>
+		</globalVariable>
+		<globalVariable>
+			<name>Operator</name>
+			<value>operator</value>
+			<deploymentSettable>true</deploymentSettable>
+			<serviceSettable>false</serviceSettable>
+			<type>String</type>
+			<modTime>1562689984653</modTime>
+		</globalVariable>
+	</globalVariables>
+</repository>

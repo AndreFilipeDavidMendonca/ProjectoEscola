@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pd:ProcessDefinition xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:pfx="http://www.tibco.com/pe/DeployedVarsType" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:pfx2="http://xmlns.example.com/1563379787360" xmlns:pfx3="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Schema1.xsd" xmlns:ns="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Schema.xsd3" xmlns:pfx4="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/WSDL.xsd" xmlns:pfx5="http://xmlns.example.com/1563529202131" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tib="http://www.tibco.com/bw/xslt/custom-functions" xmlns:ns1="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Invoice.xsd3">
+    <wsdl:import namespace="http://xmlns.example.com/1563379787360"/>
+    <wsdl:import namespace="http://xmlns.example.com/1563529202131" location="/WSDL Services/Aplication/Admin WSDL.wsdl"/>
+    <pd:name>WSDL Services/Processes/Admin Processes/Delete Invoices.process</pd:name>
+    <pd:startName>Start</pd:startName>
+    <pd:startType wsMsgRef="pfx5:Delete_Invoices_In_msg"/>
+    <pd:startX>27</pd:startX>
+    <pd:startY>34</pd:startY>
+    <pd:returnBindings>
+        <pfx5:Delete_Invoices_Out_msg>
+            <header>
+                <pfx4:Standard_Out_MSG>
+                    <xsl:attribute name="message">
+                        <xsl:value-of select="$Var/root/message"/>
+                    </xsl:attribute>
+                    <xsl:if test="$Var/root/error">
+                        <xsl:attribute name="error">
+                            <xsl:value-of select="$Var/root/error"/>
+                        </xsl:attribute>
+                    </xsl:if>
+                </pfx4:Standard_Out_MSG>
+            </header>
+        </pfx5:Delete_Invoices_Out_msg>
+    </pd:returnBindings>
+    <pd:endName>End</pd:endName>
+    <pd:endType wsMsgRef="pfx5:Delete_Invoices_Out_msg"/>
+    <pd:endX>816</pd:endX>
+    <pd:endY>34</pd:endY>
+    <pd:errorSchemas/>
+    <pd:processVariables>
+        <Var>
+            <xsd:element name="root">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="message" type="xsd:string"/>
+                        <xsd:element name="error" type="xsd:string" minOccurs="0"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </Var>
+    </pd:processVariables>
+    <pd:targetNamespace>http://xmlns.example.com/1563363826934</pd:targetNamespace>
+    <pd:activity name="Get Worker by ID">
+        <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
+        <pd:resourceType>ae.process.subprocess</pd:resourceType>
+        <pd:x>190</pd:x>
+        <pd:y>34</pd:y>
+        <config>
+            <processName>/Processes/Read DB/Workers Table/Get Worker by ID.process</processName>
+        </config>
+        <pd:inputBindings>
+            <root>
+                <WorkerNumber>
+                    <xsl:value-of select="$Start/pfx5:Delete_Invoices_In_msg/header/pfx4:Standard_In_MSG/@id"/>
+                </WorkerNumber>
+            </root>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Remove Invoices by Date">
+        <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
+        <pd:resourceType>ae.process.subprocess</pd:resourceType>
+        <pd:x>522</pd:x>
+        <pd:y>42</pd:y>
+        <config>
+            <processName>/Processes/Modify DB/Invoices Table/Remove Invoices by Date.process</processName>
+        </config>
+        <pd:inputBindings>
+            <root>
+                <Date>
+                    <xsl:value-of select="$Start/pfx5:Delete_Invoices_In_msg/body/ns1:New_Invoices_A/@invoiceDate"/>
+                </Date>
+            </root>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Assign 1">
+        <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
+        <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
+        <pd:x>678</pd:x>
+        <pd:y>34</pd:y>
+        <config>
+            <variableName>Var</variableName>
+        </config>
+        <pd:inputBindings>
+            <root>
+                <message>
+                    <xsl:value-of select="$Remove-Invoices-by-Date/root/message"/>
+                </message>
+                <xsl:if test="$Remove-Invoices-by-Date/root/error">
+                    <error>
+                        <xsl:value-of select="$Remove-Invoices-by-Date/root/error"/>
+                    </error>
+                </xsl:if>
+            </root>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Assign 2">
+        <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
+        <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
+        <pd:x>951</pd:x>
+        <pd:y>34</pd:y>
+        <config>
+            <variableName>Var</variableName>
+        </config>
+        <pd:inputBindings>
+            <root>
+                <message>
+                    <xsl:value-of select="$_globalVariables/pfx:GlobalVariables/VarAplication/MessageType/Error"/>
+                </message>
+                <error>
+                    <xsl:value-of select="&quot;Delete Invoices-Invalid Inputs&quot;"/>
+                </error>
+            </root>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Catch">
+        <pd:type>com.tibco.pe.core.CatchActivity</pd:type>
+        <pd:resourceType>ae.activities.catch</pd:resourceType>
+        <pd:x>1082</pd:x>
+        <pd:y>34</pd:y>
+        <pd:handler>true</pd:handler>
+        <config>
+            <catchAll>true</catchAll>
+        </config>
+        <pd:inputBindings/>
+    </pd:activity>
+    <pd:transition>
+        <pd:from>Start</pd:from>
+        <pd:to>Get Worker by ID</pd:to>
+        <pd:xpathDescription>validation</pd:xpathDescription>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>xpath</pd:conditionType>
+        <pd:xpath>$Start/pfx5:Delete_Invoices_In_msg/header/pfx4:Standard_In_MSG/@id &gt; 0
+and
+$Start/pfx5:Delete_Invoices_In_msg/header/pfx4:Standard_In_MSG/@id &lt; 10000000000
+and
+$Start/pfx5:Delete_Invoices_In_msg/header/pfx4:Standard_In_MSG/@role = $_globalVariables/pfx:GlobalVariables/VarAplication/RoleType/Admin</pd:xpath>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Get Worker by ID</pd:from>
+        <pd:to>Remove Invoices by Date</pd:to>
+        <pd:xpathDescription>valid_worker</pd:xpathDescription>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>xpath</pd:conditionType>
+        <pd:xpath>$Get-Worker-by-ID/root/message = $_globalVariables/pfx:GlobalVariables/VarAplication/MessageType/Exist
+and
+$Start/pfx5:Delete_Invoices_In_msg/header/pfx4:Standard_In_MSG/@role = $Get-Worker-by-ID/root/WorkerInfo/Role</pd:xpath>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Remove Invoices by Date</pd:from>
+        <pd:to>Assign 1</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Assign 1</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Assign 2</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Catch</pd:from>
+        <pd:to>Assign 2</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+</pd:ProcessDefinition>

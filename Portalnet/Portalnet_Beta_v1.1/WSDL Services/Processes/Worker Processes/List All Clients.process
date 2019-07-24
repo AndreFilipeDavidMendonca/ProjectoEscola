@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pd:ProcessDefinition xmlns:pfx6="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/WSDL.xsd" xmlns:pfx7="http://xmlns.example.com/1563380718646" xmlns:pfx8="http://xmlns.example.com/1563529189768" xmlns:pfx="http://xmlns.example.com/1563185633211" xmlns:pfx2="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Schema1.xsd" xmlns:pfx3="http://www.tibco.com/pe/DeployedVarsType" xmlns:ns="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Schema.xsd" xmlns:pfx4="http://xmlns.example.com/1563366424562" xmlns:pfx5="http://xmlns.example.com/1563379787360" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Client.xsd" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:pd="http://xmlns.tibco.com/bw/process/2003">
+    <wsdl:import namespace="http://xmlns.example.com/1563185633211" location="/WSDL Services/Worker/Worker WSDL.wsdl"/>
+    <wsdl:import namespace="http://xmlns.example.com/1563366424562"/>
+    <wsdl:import namespace="http://xmlns.example.com/1563380718646"/>
+    <wsdl:import namespace="http://xmlns.example.com/1563529189768" location="/WSDL Services/Aplication/Worker WSDL.wsdl"/>
+    <pd:name>WSDL Services/Processes/Worker Processes/List All Clients.process</pd:name>
+    <pd:startName>Start</pd:startName>
+    <pd:startType wsMsgRef="pfx8:List_All_Clients_In_msg"/>
+    <pd:startX>27</pd:startX>
+    <pd:startY>34</pd:startY>
+    <pd:returnBindings>
+        <pfx8:List_All_Clients_Out_msg>
+            <header>
+                <pfx6:Standard_Out_MSG>
+                    <xsl:attribute name="message">
+                        <xsl:value-of select="$Var/root/message"/>
+                    </xsl:attribute>
+                    <xsl:if test="$Var/root/error">
+                        <xsl:attribute name="error">
+                            <xsl:value-of select="$Var/root/error"/>
+                        </xsl:attribute>
+                    </xsl:if>
+                </pfx6:Standard_Out_MSG>
+            </header>
+            <body>
+                <ns2:Get_Client_All_Info_W>
+                    <xsl:for-each select="$List-All-Clients/root/ClientInfo">
+                        <ns2:Client_All_Info>
+                            <xsl:attribute name="clientNumber">
+                                <xsl:value-of select="ClientNumber"/>
+                            </xsl:attribute>
+                            <xsl:attribute name="clientName">
+                                <xsl:value-of select="ClientName"/>
+                            </xsl:attribute>
+                            <xsl:attribute name="email">
+                                <xsl:value-of select="Email"/>
+                            </xsl:attribute>
+                            <xsl:attribute name="gender">
+                                <xsl:value-of select="Gender"/>
+                            </xsl:attribute>
+                            <xsl:attribute name="birthDate">
+                                <xsl:value-of select="BirthDate"/>
+                            </xsl:attribute>
+                            <xsl:attribute name="nif">
+                                <xsl:value-of select="NIF"/>
+                            </xsl:attribute>
+                            <xsl:attribute name="mobileNumber">
+                                <xsl:value-of select="MobileNumber"/>
+                            </xsl:attribute>
+                            <xsl:attribute name="phoneNumber">
+                                <xsl:value-of select="PhoneNumber"/>
+                            </xsl:attribute>
+                            <xsl:attribute name="address">
+                                <xsl:value-of select="Address"/>
+                            </xsl:attribute>
+                            <xsl:attribute name="postalCode">
+                                <xsl:value-of select="PostalCode"/>
+                            </xsl:attribute>
+                            <xsl:attribute name="locality">
+                                <xsl:value-of select="Locality"/>
+                            </xsl:attribute>
+                            <xsl:attribute name="accessionDate">
+                                <xsl:value-of select="AccessionDate"/>
+                            </xsl:attribute>
+                            <xsl:attribute name="dishonest">
+                                <xsl:value-of select="Dishonest"/>
+                            </xsl:attribute>
+                            <xsl:attribute name="active">
+                                <xsl:value-of select="Active"/>
+                            </xsl:attribute>
+                            <xsl:attribute name="waitConfirmation">
+                                <xsl:value-of select="WaitConfirmation"/>
+                            </xsl:attribute>
+                        </ns2:Client_All_Info>
+                    </xsl:for-each>
+                </ns2:Get_Client_All_Info_W>
+            </body>
+        </pfx8:List_All_Clients_Out_msg>
+    </pd:returnBindings>
+    <pd:endName>End</pd:endName>
+    <pd:endType wsMsgRef="pfx8:List_All_Clients_Out_msg"/>
+    <pd:endX>647</pd:endX>
+    <pd:endY>34</pd:endY>
+    <pd:errorSchemas/>
+    <pd:processVariables>
+        <Var>
+            <xsd:element name="root">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="message" type="xsd:string"/>
+                        <xsd:element name="error" type="xsd:string" minOccurs="0"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </Var>
+    </pd:processVariables>
+    <pd:targetNamespace>http://xmlns.example.com/1563191429628</pd:targetNamespace>
+    <pd:activity name="List All Clients">
+        <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
+        <pd:resourceType>ae.process.subprocess</pd:resourceType>
+        <pd:x>353</pd:x>
+        <pd:y>34</pd:y>
+        <config>
+            <processName>/Processes/Read DB/Clients Table/List All Clients.process</processName>
+        </config>
+        <pd:inputBindings/>
+    </pd:activity>
+    <pd:activity name="Get Worker by ID">
+        <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
+        <pd:resourceType>ae.process.subprocess</pd:resourceType>
+        <pd:x>184</pd:x>
+        <pd:y>34</pd:y>
+        <config>
+            <processName>/Processes/Read DB/Workers Table/Get Worker by ID.process</processName>
+        </config>
+        <pd:inputBindings>
+            <root>
+                <WorkerNumber>
+                    <xsl:value-of select="$Start/pfx8:List_All_Clients_In_msg/header/pfx6:Standard_In_MSG/@id"/>
+                </WorkerNumber>
+            </root>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Assign 1">
+        <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
+        <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
+        <pd:x>505</pd:x>
+        <pd:y>34</pd:y>
+        <config>
+            <variableName>Var</variableName>
+        </config>
+        <pd:inputBindings>
+            <root>
+                <message>
+                    <xsl:value-of select="$List-All-Clients/root/message"/>
+                </message>
+                <xsl:if test="$List-All-Clients/root/error">
+                    <error>
+                        <xsl:value-of select="$List-All-Clients/root/error"/>
+                    </error>
+                </xsl:if>
+            </root>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Assign 2">
+        <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
+        <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
+        <pd:x>783</pd:x>
+        <pd:y>34</pd:y>
+        <config>
+            <variableName>Var</variableName>
+        </config>
+        <pd:inputBindings>
+            <root>
+                <message>
+                    <xsl:value-of select="$_globalVariables/pfx3:GlobalVariables/VarAplication/MessageType/Error"/>
+                </message>
+                <error>
+                    <xsl:value-of select="&quot;List All Clients-Invalid Inputs&quot;"/>
+                </error>
+            </root>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Catch">
+        <pd:type>com.tibco.pe.core.CatchActivity</pd:type>
+        <pd:resourceType>ae.activities.catch</pd:resourceType>
+        <pd:x>920</pd:x>
+        <pd:y>34</pd:y>
+        <pd:handler>true</pd:handler>
+        <config>
+            <catchAll>true</catchAll>
+        </config>
+        <pd:inputBindings/>
+    </pd:activity>
+    <pd:transition>
+        <pd:from>Start</pd:from>
+        <pd:to>Get Worker by ID</pd:to>
+        <pd:xpathDescription>validation</pd:xpathDescription>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>xpath</pd:conditionType>
+        <pd:xpath>( $Start/pfx8:List_All_Clients_In_msg/header/pfx6:Standard_In_MSG/@id &gt; 0 and $Start/pfx8:List_All_Clients_In_msg/header/pfx6:Standard_In_MSG/@id &lt; 10000000000 )
+and
+(
+	$Start/pfx8:List_All_Clients_In_msg/header/pfx6:Standard_In_MSG/@role = $_globalVariables/pfx3:GlobalVariables/VarAplication/RoleType/Admin
+	or
+	$Start/pfx8:List_All_Clients_In_msg/header/pfx6:Standard_In_MSG/@role = $_globalVariables/pfx3:GlobalVariables/VarAplication/RoleType/Operator
+)</pd:xpath>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Get Worker by ID</pd:from>
+        <pd:to>List All Clients</pd:to>
+        <pd:xpathDescription>valid_worker</pd:xpathDescription>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>xpath</pd:conditionType>
+        <pd:xpath>$Get-Worker-by-ID/root/message = $_globalVariables/pfx3:GlobalVariables/VarAplication/MessageType/Exist
+and
+$Start/pfx8:List_All_Clients_In_msg/header/pfx6:Standard_In_MSG/@role = $Get-Worker-by-ID/root/WorkerInfo/Role</pd:xpath>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>List All Clients</pd:from>
+        <pd:to>Assign 1</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Assign 1</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Assign 2</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Catch</pd:from>
+        <pd:to>Assign 2</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+</pd:ProcessDefinition>

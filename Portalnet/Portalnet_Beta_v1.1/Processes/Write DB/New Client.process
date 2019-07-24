@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pd:ProcessDefinition xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:pfx="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Schema.xsd" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:pfx2="http://www.tibco.com/pe/DeployedVarsType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tib="http://www.tibco.com/bw/xslt/custom-functions" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <xsd:import namespace="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Schema.xsd" schemaLocation="/Resources/Schemas/Client.xsd"/>
+    <pd:name>Processes/Write DB/New Client.process</pd:name>
+    <pd:startName>Start</pd:startName>
+    <pd:startType>
+        <xsd:element name="root">
+            <xsd:complexType>
+                <xsd:sequence>
+                    <xsd:element name="ClientNumber" type="xsd:int"/>
+                    <xsd:element name="Name" type="xsd:string"/>
+                    <xsd:element name="Email" type="xsd:string"/>
+                    <xsd:element name="Password" type="xsd:string"/>
+                    <xsd:element name="Gender" type="xsd:string"/>
+                    <xsd:element name="BirthDate" type="xsd:string"/>
+                    <xsd:element name="NIF" type="xsd:int"/>
+                    <xsd:element name="MobileNumber" type="xsd:int" minOccurs="0"/>
+                    <xsd:element name="PhoneNumber" type="xsd:int" minOccurs="0"/>
+                    <xsd:element name="Address" type="xsd:string"/>
+                    <xsd:element name="PostalCode" type="xsd:string"/>
+                    <xsd:element name="Locality" type="xsd:string"/>
+                    <xsd:element name="AccessionDate" type="xsd:string"/>
+                    <xsd:element name="Dishonest" type="xsd:boolean"/>
+                    <xsd:element name="Active" type="xsd:boolean"/>
+                    <xsd:element name="WaitConfirmation" type="xsd:boolean"/>
+                    <xsd:element name="WorkerNumber" type="xsd:int"/>
+                    <xsd:element name="ServiceID" type="xsd:int"/>
+                </xsd:sequence>
+            </xsd:complexType>
+        </xsd:element>
+    </pd:startType>
+    <pd:startX>27</pd:startX>
+    <pd:startY>83</pd:startY>
+    <pd:returnBindings>
+        <root>
+            <message>
+                <xsl:value-of select="$Var/root/message"/>
+            </message>
+            <xsl:if test="$Var/root/error">
+                <error>
+                    <xsl:value-of select="$Var/root/error"/>
+                </error>
+            </xsl:if>
+        </root>
+    </pd:returnBindings>
+    <pd:endName>End</pd:endName>
+    <pd:endType>
+        <xsd:element name="root">
+            <xsd:complexType>
+                <xsd:sequence>
+                    <xsd:element name="message" type="xsd:string"/>
+                    <xsd:element name="error" type="xsd:string" minOccurs="0"/>
+                </xsd:sequence>
+            </xsd:complexType>
+        </xsd:element>
+    </pd:endType>
+    <pd:endX>744</pd:endX>
+    <pd:endY>85</pd:endY>
+    <pd:errorSchemas/>
+    <pd:processVariables>
+        <Var>
+            <xsd:element name="root">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="message" type="xsd:string"/>
+                        <xsd:element name="error" type="xsd:string" minOccurs="0"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </Var>
+    </pd:processVariables>
+    <pd:targetNamespace>http://xmlns.example.com/1562688164648</pd:targetNamespace>
+    <pd:activity name="Assign Success">
+        <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
+        <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
+        <pd:x>601</pd:x>
+        <pd:y>86</pd:y>
+        <config>
+            <variableName>Var</variableName>
+        </config>
+        <pd:inputBindings>
+            <root>
+                <message>
+                    <xsl:value-of select="$_globalVariables/pfx2:GlobalVariables/VarAplication/MessageType/Success"/>
+                </message>
+            </root>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Assign Error">
+        <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
+        <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
+        <pd:x>884</pd:x>
+        <pd:y>84</pd:y>
+        <config>
+            <variableName>Var</variableName>
+        </config>
+        <pd:inputBindings>
+            <root>
+                <message>
+                    <xsl:value-of select="$_globalVariables/pfx2:GlobalVariables/VarAplication/MessageType/Error"/>
+                </message>
+                <error>
+                    <xsl:value-of select="&quot;New Client-Invalid Input&quot;"/>
+                </error>
+            </root>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Catch">
+        <pd:type>com.tibco.pe.core.CatchActivity</pd:type>
+        <pd:resourceType>ae.activities.catch</pd:resourceType>
+        <pd:x>1027</pd:x>
+        <pd:y>82</pd:y>
+        <pd:handler>true</pd:handler>
+        <config>
+            <catchAll>true</catchAll>
+        </config>
+        <pd:inputBindings/>
+    </pd:activity>
+    <pd:group name="Group">
+        <pd:type>com.tibco.pe.core.TransactionGroup</pd:type>
+        <pd:resourceType>ae.process.group</pd:resourceType>
+        <pd:x>147</pd:x>
+        <pd:y>1</pd:y>
+        <pd:width>323</pd:width>
+        <pd:height>152</pd:height>
+        <pd:collapsedWidth>57</pd:collapsedWidth>
+        <pd:collapsedHeight>70</pd:collapsedHeight>
+        <pd:groupVariables/>
+        <pd:joinToggle>inherit</pd:joinToggle>
+        <config>
+            <pd:groupType>transactionGroup</pd:groupType>
+            <pd:serializable>false</pd:serializable>
+            <pd:transactionType>JDBCTransaction</pd:transactionType>
+            <pd:includeCheckpoint>false</pd:includeCheckpoint>
+        </config>
+        <pd:inputBindings/>
+        <pd:expanded>true</pd:expanded>
+        <pd:transition>
+            <pd:from>start</pd:from>
+            <pd:to>Insert Client</pd:to>
+            <pd:lineType>Default</pd:lineType>
+            <pd:lineColor>-16777216</pd:lineColor>
+            <pd:conditionType>always</pd:conditionType>
+        </pd:transition>
+        <pd:transition>
+            <pd:from>Insert Associated Service</pd:from>
+            <pd:to>end</pd:to>
+            <pd:lineType>Default</pd:lineType>
+            <pd:lineColor>-16777216</pd:lineColor>
+            <pd:conditionType>always</pd:conditionType>
+        </pd:transition>
+        <pd:transition>
+            <pd:from>Insert Client</pd:from>
+            <pd:to>Insert Associated Service</pd:to>
+            <pd:lineType>Default</pd:lineType>
+            <pd:lineColor>-16777216</pd:lineColor>
+            <pd:conditionType>always</pd:conditionType>
+        </pd:transition>
+        <pd:activity name="Insert Client">
+            <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
+            <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
+            <pd:x>228</pd:x>
+            <pd:y>84</pd:y>
+            <config>
+                <timeout>10</timeout>
+                <commit>false</commit>
+                <emptyStrAsNil>false</emptyStrAsNil>
+                <statement>INSERT INTO clients (clientnumber, clientname, email, password, gender, birthdate, nif, mobilenumber, phonenumber, address, postalcode, locality, accessiondate, dishonest, active, waitconfirmation)
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)</statement>
+                <jdbcSharedConfig>/Resources/JDBC/JDBC Connection.sharedjdbc</jdbcSharedConfig>
+                <Prepared_Param_DataType>
+                    <parameter>
+                        <parameterName>ClientNumber</parameterName>
+                        <dataType>INTEGER</dataType>
+                    </parameter>
+                    <parameter>
+                        <parameterName>ClientName</parameterName>
+                        <dataType>VARCHAR</dataType>
+                    </parameter>
+                    <parameter>
+                        <parameterName>Email</parameterName>
+                        <dataType>VARCHAR</dataType>
+                    </parameter>
+                    <parameter>
+                        <parameterName>Password</parameterName>
+                        <dataType>VARCHAR</dataType>
+                    </parameter>
+                    <parameter>
+                        <parameterName>Gender</parameterName>
+                        <dataType>VARCHAR</dataType>
+                    </parameter>
+                    <parameter>
+                        <parameterName>BirthDate</parameterName>
+                        <dataType>VARCHAR</dataType>
+                    </parameter>
+                    <parameter>
+                        <parameterName>NIF</parameterName>
+                        <dataType>INTEGER</dataType>
+                    </parameter>
+                    <parameter>
+                        <parameterName>MobileNumber</parameterName>
+                        <dataType>INTEGER</dataType>
+                    </parameter>
+                    <parameter>
+                        <parameterName>PhoneNumber</parameterName>
+                        <dataType>INTEGER</dataType>
+                    </parameter>
+                    <parameter>
+                        <parameterName>Address</parameterName>
+                        <dataType>VARCHAR</dataType>
+                    </parameter>
+                    <parameter>
+                        <parameterName>PostalCode</parameterName>
+                        <dataType>VARCHAR</dataType>
+                    </parameter>
+                    <parameter>
+                        <parameterName>Locality</parameterName>
+                        <dataType>VARCHAR</dataType>
+                    </parameter>
+                    <parameter>
+                        <parameterName>AccessionDate</parameterName>
+                        <dataType>VARCHAR</dataType>
+                    </parameter>
+                    <parameter>
+                        <parameterName>Dishonest</parameterName>
+                        <dataType>TINYINT</dataType>
+                    </parameter>
+                    <parameter>
+                        <parameterName>Active</parameterName>
+                        <dataType>TINYINT</dataType>
+                    </parameter>
+                    <parameter>
+                        <parameterName>WaitConfirmation</parameterName>
+                        <dataType>TINYINT</dataType>
+                    </parameter>
+                </Prepared_Param_DataType>
+            </config>
+            <pd:inputBindings>
+                <jdbcUpdateActivityInput>
+                    <ClientNumber>
+                        <xsl:value-of select="$Start/root/ClientNumber"/>
+                    </ClientNumber>
+                    <ClientName>
+                        <xsl:value-of select="$Start/root/Name"/>
+                    </ClientName>
+                    <Email>
+                        <xsl:value-of select="$Start/root/Email"/>
+                    </Email>
+                    <Password>
+                        <xsl:value-of select="$Start/root/Password"/>
+                    </Password>
+                    <Gender>
+                        <xsl:value-of select="$Start/root/Gender"/>
+                    </Gender>
+                    <BirthDate>
+                        <xsl:value-of select="$Start/root/BirthDate"/>
+                    </BirthDate>
+                    <NIF>
+                        <xsl:value-of select="$Start/root/NIF"/>
+                    </NIF>
+                    <MobileNumber>
+                        <xsl:choose>
+                            <xsl:when test="exists($Start/root/MobileNumber)">
+                                <xsl:value-of select="$Start/root/MobileNumber"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:attribute name="xsi:nil">true</xsl:attribute>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </MobileNumber>
+                    <PhoneNumber>
+                        <xsl:choose>
+                            <xsl:when test="exists($Start/root/PhoneNumber)">
+                                <xsl:value-of select="$Start/root/PhoneNumber"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:attribute name="xsi:nil">true</xsl:attribute>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </PhoneNumber>
+                    <Address>
+                        <xsl:value-of select="$Start/root/Address"/>
+                    </Address>
+                    <PostalCode>
+                        <xsl:value-of select="$Start/root/PostalCode"/>
+                    </PostalCode>
+                    <Locality>
+                        <xsl:value-of select="$Start/root/Locality"/>
+                    </Locality>
+                    <AccessionDate>
+                        <xsl:value-of select="$Start/root/AccessionDate"/>
+                    </AccessionDate>
+                    <xsl:choose>
+                        <xsl:when test="$Start/root/Dishonest = &quot;true&quot;">
+                            <Dishonest>
+                                <xsl:value-of select="1"/>
+                            </Dishonest>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <Dishonest>
+                                <xsl:value-of select="0"/>
+                            </Dishonest>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                    <xsl:choose>
+                        <xsl:when test="$Start/root/Active = &quot;true&quot;">
+                            <Active>
+                                <xsl:value-of select="1"/>
+                            </Active>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <Active>
+                                <xsl:value-of select="0"/>
+                            </Active>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                    <xsl:choose>
+                        <xsl:when test="$Start/root/WaitConfirmation = &quot;true&quot;">
+                            <WaitConfirmation>
+                                <xsl:value-of select="1"/>
+                            </WaitConfirmation>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <WaitConfirmation>
+                                <xsl:value-of select="0"/>
+                            </WaitConfirmation>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </jdbcUpdateActivityInput>
+            </pd:inputBindings>
+        </pd:activity>
+        <pd:activity name="Insert Associated Service">
+            <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
+            <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
+            <pd:x>363</pd:x>
+            <pd:y>91</pd:y>
+            <config>
+                <timeout>10</timeout>
+                <commit>false</commit>
+                <emptyStrAsNil>false</emptyStrAsNil>
+                <statement>INSERT INTO associatedservices (clientnumber, serviceid, workernumber, modificationdate) 
+VALUES ( ?, ?, ?, ?)
+</statement>
+                <jdbcSharedConfig>/Resources/JDBC/JDBC Connection.sharedjdbc</jdbcSharedConfig>
+                <Prepared_Param_DataType>
+                    <parameter>
+                        <parameterName>ClientNumber</parameterName>
+                        <dataType>INTEGER</dataType>
+                    </parameter>
+                    <parameter>
+                        <parameterName>ServiceID</parameterName>
+                        <dataType>INTEGER</dataType>
+                    </parameter>
+                    <parameter>
+                        <parameterName>WorkerNumber</parameterName>
+                        <dataType>INTEGER</dataType>
+                    </parameter>
+                    <parameter>
+                        <parameterName>ModificationDate</parameterName>
+                        <dataType>VARCHAR</dataType>
+                    </parameter>
+                </Prepared_Param_DataType>
+            </config>
+            <pd:inputBindings>
+                <jdbcUpdateActivityInput>
+                    <ClientNumber>
+                        <xsl:value-of select="$Start/root/ClientNumber"/>
+                    </ClientNumber>
+                    <ServiceID>
+                        <xsl:value-of select="$Start/root/ServiceID"/>
+                    </ServiceID>
+                    <WorkerNumber>
+                        <xsl:value-of select="$Start/root/WorkerNumber"/>
+                    </WorkerNumber>
+                    <ModificationDate>
+                        <xsl:value-of select="$Start/root/AccessionDate"/>
+                    </ModificationDate>
+                </jdbcUpdateActivityInput>
+            </pd:inputBindings>
+        </pd:activity>
+    </pd:group>
+    <pd:transition>
+        <pd:from>Assign Success</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Assign Error</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Catch</pd:from>
+        <pd:to>Assign Error</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Start</pd:from>
+        <pd:to>Group</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Group</pd:from>
+        <pd:to>Assign Success</pd:to>
+        <pd:xpathDescription>updated</pd:xpathDescription>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>xpath</pd:conditionType>
+        <pd:xpath>$Insert-Client/jdbcUpdateActivityOutput/noOfUpdates &gt; 0
+and
+$Insert-Associated-Service/jdbcUpdateActivityOutput/noOfUpdates &gt; 0</pd:xpath>
+    </pd:transition>
+</pd:ProcessDefinition>

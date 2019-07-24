@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:ns="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/WSDL.xsd" xmlns:tns="http://xmlns.example.com/1563532457786" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Service.xsd2" xmlns:ns4="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Invoice.xsd3" xmlns:ns3="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Client.xsd" targetNamespace="http://xmlns.example.com/1563532457786">
+    <import namespace="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Service.xsd2" location="../../Resources/Schemas/Service.xsd"/>
+    <import namespace="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Invoice.xsd3" location="../../Resources/Schemas/Invoice.xsd"/>
+    <import namespace="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Client.xsd" location="../../Resources/Schemas/Client.xsd"/>
+    <import namespace="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/WSDL.xsd" location="../../Resources/Schemas/WSDL.xsd"/>
+    <message name="List_All_Services_In_msg">
+        <part name="header" element="ns:Standard_In_MSG"/>
+    </message>
+    <message name="List_All_Services_Out_msg">
+        <part name="header" element="ns:Standard_Out_MSG"/>
+        <part name="body" element="ns2:Get_Services_CW"/>
+    </message>
+    <message name="List_Associated_Services_In_msg">
+        <part name="header" element="ns:Standard_In_MSG"/>
+        <part name="body" element="ns:Request_Body"/>
+    </message>
+    <message name="List_Associated_Services_Out_msg">
+        <part name="header" element="ns:Standard_Out_MSG"/>
+        <part name="body" element="ns3:Get_Associated_Service_W"/>
+    </message>
+    <message name="List_Invoices_In_msg">
+        <part name="header" element="ns:Standard_In_MSG"/>
+        <part name="body" element="ns:Request_Body"/>
+    </message>
+    <message name="List_Invoices_Out_msg">
+        <part name="header" element="ns:Standard_Out_MSG"/>
+        <part name="body" element="ns4:Get_Invoices_CW"/>
+    </message>
+    <message name="Client_Payment_In_msg">
+        <part name="header" element="ns:Standard_In_MSG"/>
+        <part name="body" element="ns4:Modify_Invoice"/>
+    </message>
+    <message name="Client_Payment_Out_msg">
+        <part name="header" element="ns:Standard_Out_MSG"/>
+    </message>
+    <message name="New_Client_In_msg">
+        <part name="header" element="ns:Standard_In_MSG"/>
+        <part name="body" element="ns3:New_Client_W"/>
+    </message>
+    <message name="New_Client_Out_msg">
+        <part name="header" element="ns:Standard_Out_MSG"/>
+    </message>
+    <portType name="GeneralGetters">
+        <operation name="GetAllServices">
+            <input message="tns:List_All_Services_In_msg"/>
+            <output message="tns:List_All_Services_Out_msg"/>
+        </operation>
+        <operation name="GetInvoices">
+            <input message="tns:List_Invoices_In_msg"/>
+            <output message="tns:List_Invoices_Out_msg"/>
+        </operation>
+        <operation name="GetAssociatedServices">
+            <input message="tns:List_Associated_Services_In_msg"/>
+            <output message="tns:List_Associated_Services_Out_msg"/>
+        </operation>
+    </portType>
+    <portType name="GeneralSetters">
+        <operation name="ClientPayment">
+            <input message="tns:Client_Payment_In_msg"/>
+            <output message="tns:Client_Payment_Out_msg"/>
+        </operation>
+        <operation name="ClientRegist">
+            <input message="tns:New_Client_In_msg"/>
+            <output message="tns:New_Client_Out_msg"/>
+        </operation>
+    </portType>
+</definitions>

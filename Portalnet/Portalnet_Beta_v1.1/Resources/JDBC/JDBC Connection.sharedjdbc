@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BWSharedResource>
+    <name>JDBC Connection</name>
+    <resourceType>ae.shared.JDBCSharedResource</resourceType>
+    <config>
+        <driver>com.mysql.jdbc.Driver</driver>
+        <maxConnections>%%VarSystem/JDBC/MaxConnections%%</maxConnections>
+        <loginTimeout>0</loginTimeout>
+        <connectionType>JDBC</connectionType>
+        <UseSharedJndiConfig>false</UseSharedJndiConfig>
+        <location>jdbc:mysql://%%VarSystem/JDBC/Host%%:%%VarSystem/JDBC/Port%%/%%VarSystem/JDBC/DataBase%%</location>
+        <user>%%VarSystem/JDBC/UserName%%</user>
+        <password>%%VarSystem/JDBC/Password%%</password>
+    </config>
+</BWSharedResource>

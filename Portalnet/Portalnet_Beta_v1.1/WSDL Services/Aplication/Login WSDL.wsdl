@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:ns="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/WSDL.xsd" xmlns:tns="http://xmlns.example.com/1563529122978" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://xmlns.example.com/1563529122978">
+    <import namespace="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/WSDL.xsd" location="../../Resources/Schemas/WSDL.xsd"/>
+    <message name="Login_In_msg">
+        <part name="login_in" element="ns:Login_In"/>
+    </message>
+    <message name="Login_Out_msg">
+        <part name="login_out" element="ns:Login_Out"/>
+    </message>
+    <portType name="Login">
+        <operation name="Verification">
+            <input message="tns:Login_In_msg"/>
+            <output message="tns:Login_Out_msg"/>
+        </operation>
+    </portType>
+</definitions>

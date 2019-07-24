@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="de40c1a8-8ab8-4154-a3fa-58265345769b" activeEnvironment="Default" name="Login" resourceRoot="" soapui-version="5.5.0" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="bf5ffd64-e7a3-4ccd-b780-179e381ca0fe" wsaVersion="NONE" name="LoginEndpointBinding" type="wsdl" bindingName="{http://xmlns.example.com/1563555348233}LoginEndpointBinding" soapVersion="1_1" anonymous="optional" definition="file:/C:/Users/rui.rodrigo.santos/Documents/TIBCO_Projects/Portalnet/SOAPUI%20WSDL%20Files/Login.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:/C:/Users/rui.rodrigo.santos/Documents/TIBCO_Projects/Portalnet/SOAPUI%20WSDL%20Files/Login.wsdl"><con:part><con:url>file:/C:/Users/rui.rodrigo.santos/Documents/TIBCO_Projects/Portalnet/SOAPUI%20WSDL%20Files/Login.wsdl</con:url><con:content><![CDATA[<!--Created by TIBCO WSDL-->
+<wsdl:definitions name="Untitled" targetNamespace="http://xmlns.example.com/1563555348233" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://xmlns.example.com/1563555348233" xmlns:ns0="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/WSDL.xsd" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <wsdl:types>
+    <xs:schema targetNamespace="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/WSDL.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/WSDL.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="Change_Password">
+        <xs:complexType>
+          <xs:attribute name="id" type="xs:string"/>
+          <xs:attribute name="newPassword" type="xs:string"/>
+          <xs:attribute name="oldPassword" type="xs:string"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Login_In">
+        <xs:complexType>
+          <xs:attribute name="email" type="xs:string"/>
+          <xs:attribute name="password" type="xs:string"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Login_Out">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="ns0:Standard_Out_MSG"/>
+          </xs:sequence>
+          <xs:attribute name="id" type="xs:string"/>
+          <xs:attribute name="role" type="xs:string"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Request_Body">
+        <xs:complexType>
+          <xs:attribute name="id" type="xs:string"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Standard_In_MSG">
+        <xs:complexType>
+          <xs:attribute name="id" type="xs:string"/>
+          <xs:attribute name="role" type="xs:string"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Standard_Out_MSG">
+        <xs:complexType>
+          <xs:attribute name="error" type="xs:string"/>
+          <xs:attribute name="message" type="xs:string"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:service name="Login Service">
+    <wsdl:port name="LoginEndpoint" binding="tns:LoginEndpointBinding">
+      <soap:address location="http://localhost:9009/WSDL%2520Services/Aplication/Login%2520Service.serviceagent/LoginEndpoint"/>
+    </wsdl:port>
+  </wsdl:service>
+  <wsdl:portType name="Login">
+    <wsdl:operation name="Verification">
+      <wsdl:input message="tns:Login_In_msg"/>
+      <wsdl:output message="tns:Login_Out_msg"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="LoginEndpointBinding" type="tns:Login">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="Verification">
+      <soap:operation style="document" soapAction="/WSDL%2520Services/Aplication/Service.serviceagent/LoginEndpoint1/Verification"/>
+      <wsdl:input>
+        <soap:body use="literal" parts="login_in"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" parts="login_out"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:message name="Login_In_msg">
+    <wsdl:part name="login_in" element="ns0:Login_In"/>
+  </wsdl:message>
+  <wsdl:message name="Login_Out_msg">
+    <wsdl:part name="login_out" element="ns0:Login_Out"/>
+  </wsdl:message>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:9009/WSDL%20Services/Aplication/Login%20Service.serviceagent/LoginEndpoint</con:endpoint></con:endpoints><con:operation id="de381143-2330-4de1-9890-c8a6b837532a" isOneWay="false" action="/WSDL%2520Services/Aplication/Service.serviceagent/LoginEndpoint1/Verification" name="Verification" bindingOperationName="Verification" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="fc872d12-1ed3-4608-bf94-c45cabc9493e" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:9009/WSDL%20Services/Aplication/Login%20Service.serviceagent/LoginEndpoint</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsdl="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/WSDL.xsd">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <wsdl:Login_In email="rs@portalnet.com" password="123"/>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="/WSDL%2520Services/Aplication/Service.serviceagent/LoginEndpoint1/Verification"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:sensitiveInformation/></con:soapui-project>

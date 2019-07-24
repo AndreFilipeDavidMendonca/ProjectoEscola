@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<serviceResource xmlns:wsdl="http://xmlns.example.com/1563529189768">
+    <ns0:import xmlns:ns0="http://schemas.xmlsoap.org/wsdl/" namespace="http://xmlns.example.com/1563529189768" location="/WSDL Services/Aplication/Worker WSDL.wsdl"/>
+    <config>
+        <wsdl namespace="http://xmlns.example.com/1563555363128" embedWsdlComponents="true" embedSchemaComponents="true" embedJndiProperties="false"/>
+        <class>com.tibco.bw.service.serviceAgent.ServiceServiceAgent</class>
+        <implType>bw</implType>
+        <groups>
+            <row isDefault="true" groupName="Default"/>
+        </groups>
+        <name>Worker Service</name>
+        <serviceChange>Mon Jul 22 10:39:10 WEST 2019</serviceChange>
+        <resourceType>service.definition</resourceType>
+        <interfaceImpl>
+            <tab>
+                <tabName>WorkerGetters</tabName>
+                <tabType>bw</tabType>
+                <config>
+                    <wsdlDetail location="/WSDL Services/Aplication/Worker WSDL.wsdl" portType="WorkerGetters" ns="http://xmlns.example.com/1563529189768"/>
+                    <detail>
+                        <tab>
+                            <tabName>service.definition.impl.tab.label</tabName>
+                            <tabType>impl</tabType>
+                            <config>
+                                <operations>
+                                    <row opName="GetWorkerInfo" opImpl="/WSDL Services/Processes/Worker Processes/Worker Info.process"/>
+                                    <row opName="GetAllClients" opImpl="/WSDL Services/Processes/Worker Processes/List All Clients.process"/>
+                                </operations>
+                            </config>
+                        </tab>
+                        <tab>
+                            <tabName>service.definition.ep.tab.label</tabName>
+                            <tabType>ep</tabType>
+                            <config>
+                                <epBindings>
+                                    <row epName="WorkerGettersEndpoint" epType="soap">
+                                        <config>
+                                            <epDetail>
+                                                <tab>
+                                                    <tabName>soap.service.transport.ui.transport.tab.label</tabName>
+                                                    <tabType>transport</tabType>
+                                                    <config>
+                                                        <sharedChannel>/Resources/HTTP/HTTP Worker.sharedhttp</sharedChannel>
+                                                        <transport>
+                                                            <config>
+                                                                <useBasicAuthentication>false</useBasicAuthentication>
+                                                                <httpURI>/WSDL%20Services/Aplication/Worker%20Service.serviceagent/WorkerGettersEndpoint</httpURI>
+                                                            </config>
+                                                        </transport>
+                                                    </config>
+                                                </tab>
+                                                <tab>
+                                                    <tabName>soap.service.transport.ui.details.tab.label</tabName>
+                                                    <tabType>details</tabType>
+                                                    <config>
+                                                        <operationStyle>document</operationStyle>
+                                                        <soapVersion>SOAP 1.1</soapVersion>
+                                                        <soap>
+                                                            <operation name="GetWorkerInfo">
+                                                                <general>
+                                                                    <config>
+                                                                        <soapAction>/WSDL%2520Services/Aplication/Worker%2520Service.serviceagent/WorkerGettersEndpoint/GetWorkerInfo</soapAction>
+                                                                        <operationStyle/>
+                                                                        <soapUse>literal</soapUse>
+                                                                        <inputNamespace/>
+                                                                        <outputNamespace/>
+                                                                        <faultNamespace/>
+                                                                        <portAddressPrefix/>
+                                                                    </config>
+                                                                </general>
+                                                            </operation>
+                                                            <operation name="GetAllClients">
+                                                                <general>
+                                                                    <config>
+                                                                        <soapAction>/WSDL%2520Services/Aplication/Worker%2520Service.serviceagent/WorkerGettersEndpoint/GetAllClients</soapAction>
+                                                                        <operationStyle/>
+                                                                        <soapUse>literal</soapUse>
+                                                                    </config>
+                                                                </general>
+                                                            </operation>
+                                                        </soap>
+                                                    </config>
+                                                </tab>
+                                            </epDetail>
+                                        </config>
+                                    </row>
+                                </epBindings>
+                            </config>
+                        </tab>
+                    </detail>
+                </config>
+            </tab>
+            <tab>
+                <tabName>WorkerSetters</tabName>
+                <tabType>bw</tabType>
+                <config>
+                    <wsdlDetail location="/WSDL Services/Aplication/Worker WSDL.wsdl" portType="WorkerSetters" ns="http://xmlns.example.com/1563529189768"/>
+                    <detail>
+                        <tab>
+                            <tabName>service.definition.impl.tab.label</tabName>
+                            <tabType>impl</tabType>
+                            <config>
+                                <operations>
+                                    <row opName="ModifyClient" opImpl="/WSDL Services/Processes/Worker Processes/Change Client Info.process"/>
+                                    <row opName="AssociateNewService" opImpl="/WSDL Services/Processes/Worker Processes/Associate New Service.process"/>
+                                    <row opName="ModifyAssociatedService" opImpl="/WSDL Services/Processes/Worker Processes/Change Associated Service.process"/>
+                                    <row opName="RemoveAssociatedService" opImpl="/WSDL Services/Processes/Worker Processes/Delete Associated Service.process"/>
+                                    <row opName="ModifyPassword" opImpl="/WSDL Services/Processes/Worker Processes/Change Password.process"/>
+                                </operations>
+                            </config>
+                        </tab>
+                        <tab>
+                            <tabName>service.definition.ep.tab.label</tabName>
+                            <tabType>ep</tabType>
+                            <config>
+                                <epBindings>
+                                    <row epName="WorkerSettersEndpoint" epType="soap">
+                                        <config>
+                                            <epDetail>
+                                                <tab>
+                                                    <tabName>soap.service.transport.ui.transport.tab.label</tabName>
+                                                    <tabType>transport</tabType>
+                                                    <config>
+                                                        <sharedChannel>/Resources/HTTP/HTTP Worker.sharedhttp</sharedChannel>
+                                                        <transport>
+                                                            <config>
+                                                                <useBasicAuthentication>false</useBasicAuthentication>
+                                                                <httpURI>/WSDL%20Services/Aplication/Worker%20Service.serviceagent/WorkerSettersEndpoint</httpURI>
+                                                            </config>
+                                                        </transport>
+                                                    </config>
+                                                </tab>
+                                                <tab>
+                                                    <tabName>soap.service.transport.ui.details.tab.label</tabName>
+                                                    <tabType>details</tabType>
+                                                    <config>
+                                                        <operationStyle>document</operationStyle>
+                                                        <soapVersion>SOAP 1.1</soapVersion>
+                                                        <soap>
+                                                            <operation name="ModifyClient">
+                                                                <general>
+                                                                    <config>
+                                                                        <soapAction>/WSDL%2520Services/Aplication/Worker%2520Service.serviceagent/WorkerSettersEndpoint/ModifyClient</soapAction>
+                                                                        <operationStyle/>
+                                                                        <soapUse>literal</soapUse>
+                                                                        <inputNamespace/>
+                                                                        <outputNamespace/>
+                                                                        <faultNamespace/>
+                                                                        <portAddressPrefix/>
+                                                                    </config>
+                                                                </general>
+                                                            </operation>
+                                                            <operation name="AssociateNewService">
+                                                                <general>
+                                                                    <config>
+                                                                        <soapAction>/WSDL%2520Services/Aplication/Worker%2520Service.serviceagent/WorkerSettersEndpoint/AssociateNewService</soapAction>
+                                                                        <operationStyle/>
+                                                                        <soapUse>literal</soapUse>
+                                                                    </config>
+                                                                </general>
+                                                            </operation>
+                                                            <operation name="ModifyAssociatedService">
+                                                                <general>
+                                                                    <config>
+                                                                        <soapAction>/WSDL%2520Services/Aplication/Worker%2520Service.serviceagent/WorkerSettersEndpoint/ModifyAssociatedService</soapAction>
+                                                                        <operationStyle/>
+                                                                        <soapUse>literal</soapUse>
+                                                                    </config>
+                                                                </general>
+                                                            </operation>
+                                                            <operation name="RemoveAssociatedService">
+                                                                <general>
+                                                                    <config>
+                                                                        <soapAction>/WSDL%2520Services/Aplication/Worker%2520Service.serviceagent/WorkerSettersEndpoint/RemoveAssociatedService</soapAction>
+                                                                        <operationStyle/>
+                                                                        <soapUse>literal</soapUse>
+                                                                    </config>
+                                                                </general>
+                                                            </operation>
+                                                            <operation name="ModifyPassword">
+                                                                <general>
+                                                                    <config>
+                                                                        <soapAction>/WSDL%2520Services/Aplication/Worker%2520Service.serviceagent/WorkerSettersEndpoint/ModifyPassword</soapAction>
+                                                                        <operationStyle/>
+                                                                        <soapUse>literal</soapUse>
+                                                                    </config>
+                                                                </general>
+                                                            </operation>
+                                                        </soap>
+                                                    </config>
+                                                </tab>
+                                            </epDetail>
+                                        </config>
+                                    </row>
+                                </epBindings>
+                            </config>
+                        </tab>
+                    </detail>
+                </config>
+            </tab>
+        </interfaceImpl>
+    </config>
+</serviceResource>

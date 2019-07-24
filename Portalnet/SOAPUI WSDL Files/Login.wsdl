@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Created by TIBCO WSDL-->
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://xmlns.example.com/1563555348233" xmlns:ns0="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/WSDL.xsd" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="Untitled" targetNamespace="http://xmlns.example.com/1563555348233">
+    <wsdl:types>
+        <xs:schema xmlns="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/WSDL.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/WSDL.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified">
+            <xs:element name="Change_Password">
+                <xs:complexType>
+                    <xs:attribute name="id" type="xs:string"/>
+                    <xs:attribute name="newPassword" type="xs:string"/>
+                    <xs:attribute name="oldPassword" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Login_In">
+                <xs:complexType>
+                    <xs:attribute name="email" type="xs:string"/>
+                    <xs:attribute name="password" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Login_Out">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element ref="ns0:Standard_Out_MSG"/>
+                    </xs:sequence>
+                    <xs:attribute name="id" type="xs:string"/>
+                    <xs:attribute name="role" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Request_Body">
+                <xs:complexType>
+                    <xs:attribute name="id" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Standard_In_MSG">
+                <xs:complexType>
+                    <xs:attribute name="id" type="xs:string"/>
+                    <xs:attribute name="role" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Standard_Out_MSG">
+                <xs:complexType>
+                    <xs:attribute name="error" type="xs:string"/>
+                    <xs:attribute name="message" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:service name="Login Service">
+        <wsdl:port name="LoginEndpoint" binding="tns:LoginEndpointBinding">
+            <soap:address location="http://localhost:9012/WSDL%2520Services/Aplication/Login%2520Service.serviceagent/LoginEndpoint"/>
+        </wsdl:port>
+    </wsdl:service>
+    <wsdl:portType name="Login">
+        <wsdl:operation name="Verification">
+            <wsdl:input message="tns:Login_In_msg"/>
+            <wsdl:output message="tns:Login_Out_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="LoginEndpointBinding" type="tns:Login">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="Verification">
+            <soap:operation style="document" soapAction="/WSDL%2520Services/Aplication/Service.serviceagent/LoginEndpoint1/Verification"/>
+            <wsdl:input>
+                <soap:body use="literal" parts="login_in"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" parts="login_out"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:message name="Login_In_msg">
+        <wsdl:part name="login_in" element="ns0:Login_In"/>
+    </wsdl:message>
+    <wsdl:message name="Login_Out_msg">
+        <wsdl:part name="login_out" element="ns0:Login_Out"/>
+    </wsdl:message>
+</wsdl:definitions>

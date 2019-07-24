@@ -1,0 +1,37 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<repository xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance" xmlns = "http://www.tibco.com/xmlns/repo/types/2002">
+	<globalVariables>
+		<globalVariable>
+			<name>DontExist</name>
+			<value>DONTEXIST</value>
+			<deploymentSettable>true</deploymentSettable>
+			<serviceSettable>false</serviceSettable>
+			<type>String</type>
+			<modTime>1562683602600</modTime>
+		</globalVariable>
+		<globalVariable>
+			<name>Error</name>
+			<value>ERROR</value>
+			<deploymentSettable>true</deploymentSettable>
+			<serviceSettable>false</serviceSettable>
+			<type>String</type>
+			<modTime>1562683602564</modTime>
+		</globalVariable>
+		<globalVariable>
+			<name>Exist</name>
+			<value>EXIST</value>
+			<deploymentSettable>true</deploymentSettable>
+			<serviceSettable>false</serviceSettable>
+			<type>String</type>
+			<modTime>1562683602689</modTime>
+		</globalVariable>
+		<globalVariable>
+			<name>Success</name>
+			<value>SUCCESS</value>
+			<deploymentSettable>true</deploymentSettable>
+			<serviceSettable>false</serviceSettable>
+			<type>String</type>
+			<modTime>1562683602836</modTime>
+		</globalVariable>
+	</globalVariables>
+</repository>

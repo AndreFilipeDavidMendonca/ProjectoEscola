@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Created by TIBCO WSDL-->
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://xmlns.example.com/1563555368164" xmlns:ns0="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/WSDL.xsd" xmlns:ns2="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Service.xsd2" xmlns:ns1="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Worker.xsd2" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap1="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:ns3="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Invoice.xsd3" name="Untitled" targetNamespace="http://xmlns.example.com/1563555368164">
+    <wsdl:types>
+        <xs:schema xmlns="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Invoice.xsd3" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Invoice.xsd3" elementFormDefault="qualified" attributeFormDefault="unqualified">
+            <xs:element name="Get_Invoices_CW">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element ref="ns3:Invoice_Info" minOccurs="0" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Invoice_Info">
+                <xs:complexType>
+                    <xs:attribute name="amountPaid" type="xs:string"/>
+                    <xs:attribute name="amountToPay" type="xs:string"/>
+                    <xs:attribute name="clientNumber" type="xs:string"/>
+                    <xs:attribute name="invoiceDate" type="xs:string"/>
+                    <xs:attribute name="invoiceID" type="xs:string"/>
+                    <xs:attribute name="paymentDate" type="xs:string"/>
+                    <xs:attribute name="paymentMethod" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Modify_Invoice">
+                <xs:complexType>
+                    <xs:attribute name="amountPaid" type="xs:string"/>
+                    <xs:attribute name="clientNumber" type="xs:string"/>
+                    <xs:attribute name="id" type="xs:string"/>
+                    <xs:attribute name="paymentDate" type="xs:string"/>
+                    <xs:attribute name="paymentMethod" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="New_Invoices_A">
+                <xs:complexType>
+                    <xs:attribute name="invoiceDate" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Remove_Invoice">
+                <xs:complexType>
+                    <xs:attribute name="date" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+        <xs:schema xmlns="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/WSDL.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/WSDL.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified">
+            <xs:element name="Change_Password">
+                <xs:complexType>
+                    <xs:attribute name="id" type="xs:string"/>
+                    <xs:attribute name="newPassword" type="xs:string"/>
+                    <xs:attribute name="oldPassword" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Login_In">
+                <xs:complexType>
+                    <xs:attribute name="email" type="xs:string"/>
+                    <xs:attribute name="password" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Login_Out">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element ref="ns0:Standard_Out_MSG"/>
+                    </xs:sequence>
+                    <xs:attribute name="id" type="xs:string"/>
+                    <xs:attribute name="role" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Request_Body">
+                <xs:complexType>
+                    <xs:attribute name="id" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Standard_In_MSG">
+                <xs:complexType>
+                    <xs:attribute name="id" type="xs:string"/>
+                    <xs:attribute name="role" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Standard_Out_MSG">
+                <xs:complexType>
+                    <xs:attribute name="error" type="xs:string"/>
+                    <xs:attribute name="message" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+        <xs:schema xmlns="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Worker.xsd2" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Worker.xsd2" elementFormDefault="qualified" attributeFormDefault="unqualified">
+            <xs:element name="Get_Worker_W">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element ref="ns1:Worker_Info" minOccurs="0" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Modify_Worker_A">
+                <xs:complexType>
+                    <xs:attribute name="role" type="xs:string"/>
+                    <xs:attribute name="workerNumber" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="New_Worker_A">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element ref="ns1:Worker_Info"/>
+                    </xs:sequence>
+                    <xs:attribute name="password" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Worker_Info">
+                <xs:complexType>
+                    <xs:attribute name="email" type="xs:string"/>
+                    <xs:attribute name="role" type="xs:string"/>
+                    <xs:attribute name="workerName" type="xs:string"/>
+                    <xs:attribute name="workerNumber" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+        <xs:schema xmlns="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Service.xsd2" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Service.xsd2" elementFormDefault="qualified" attributeFormDefault="unqualified">
+            <xs:element name="Get_Services_CW">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element ref="ns2:Service_Info" minOccurs="0" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Modify_Service_A">
+                <xs:complexType>
+                    <xs:attribute name="active" type="xs:string"/>
+                    <xs:attribute name="serviceID" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="New_Service_A">
+                <xs:complexType>
+                    <xs:attribute name="ImageURL" type="xs:string"/>
+                    <xs:attribute name="active" type="xs:string"/>
+                    <xs:attribute name="creationDate" type="xs:string"/>
+                    <xs:attribute name="internet" type="xs:string"/>
+                    <xs:attribute name="loyalty" type="xs:string"/>
+                    <xs:attribute name="mobilePhone" type="xs:string"/>
+                    <xs:attribute name="phone" type="xs:string"/>
+                    <xs:attribute name="price" type="xs:string"/>
+                    <xs:attribute name="serviceName" type="xs:string"/>
+                    <xs:attribute name="tv" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Service_Info">
+                <xs:complexType>
+                    <xs:attribute name="ImageURL" type="xs:string"/>
+                    <xs:attribute name="active" type="xs:string"/>
+                    <xs:attribute name="creationDate" type="xs:string"/>
+                    <xs:attribute name="internet" type="xs:string"/>
+                    <xs:attribute name="loyalty" type="xs:string"/>
+                    <xs:attribute name="mobilePhone" type="xs:string"/>
+                    <xs:attribute name="phone" type="xs:string"/>
+                    <xs:attribute name="price" type="xs:string"/>
+                    <xs:attribute name="serviceID" type="xs:string"/>
+                    <xs:attribute name="serviceName" type="xs:string"/>
+                    <xs:attribute name="tv" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:service name="Admin Service">
+        <wsdl:port name="AdminSettersEndpoint" binding="tns:AdminSettersEndpointBinding">
+            <soap:address location="http://localhost:9009/WSDL%2520Services/Aplication/Admin%2520Service.serviceagent/AdminSettersEndpoint"/>
+        </wsdl:port>
+        <wsdl:port name="AdminGettersEndpoint" binding="tns:AdminGettersEndpointBinding">
+            <soap:address location="http://localhost:9009/WSDL%2520Services/Aplication/Admin%2520Service.serviceagent/AdminGettersEndpoint1"/>
+        </wsdl:port>
+    </wsdl:service>
+    <wsdl:portType name="AdminSetters">
+        <wsdl:operation name="ModifyWorker">
+            <wsdl:input message="tns:Change_Worker_In_msg"/>
+            <wsdl:output message="tns:Change_Worker_Out_msg"/>
+        </wsdl:operation>
+        <wsdl:operation name="CreateService">
+            <wsdl:input message="tns:New_Service_In_msg"/>
+            <wsdl:output message="tns:New_Service_Out_msg"/>
+        </wsdl:operation>
+        <wsdl:operation name="RemoveInvoices">
+            <wsdl:input message="tns:Delete_Invoices_In_msg"/>
+            <wsdl:output message="tns:Delete_Invoices_Out_msg"/>
+        </wsdl:operation>
+        <wsdl:operation name="CreateWorker">
+            <wsdl:input message="tns:New_Worker_In_msg"/>
+            <wsdl:output message="tns:New_Worker_Out_msg"/>
+        </wsdl:operation>
+        <wsdl:operation name="RemoveWorker">
+            <wsdl:input message="tns:Delete_Worker_In_msg"/>
+            <wsdl:output message="tns:Delete_Worker_Out_msg"/>
+        </wsdl:operation>
+        <wsdl:operation name="ModifyService">
+            <wsdl:input message="tns:Change_Service_In_msg"/>
+            <wsdl:output message="tns:Change_Service_Out_msg"/>
+        </wsdl:operation>
+        <wsdl:operation name="InvoicesLauncher">
+            <wsdl:input message="tns:Invoices_Launch_In_msg"/>
+            <wsdl:output message="tns:Invoices_Launch_Out_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:portType name="AdminGetters">
+        <wsdl:operation name="GetAllWorkers">
+            <wsdl:input message="tns:List_All_Workers_In_msg"/>
+            <wsdl:output message="tns:List_All_Workers_Out_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="AdminSettersEndpointBinding" type="tns:AdminSetters">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="ModifyWorker">
+            <soap:operation style="document" soapAction="/WSDL%2520Services/Aplication/Admin%2520Service.serviceagent/AdminSettersEndpoint/ModifyWorker"/>
+            <wsdl:input>
+                <soap:body use="literal" parts="header body"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" parts="header"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="CreateService">
+            <soap:operation style="document" soapAction="/WSDL%2520Services/Aplication/Admin%2520Service.serviceagent/AdminSettersEndpoint/CreateService"/>
+            <wsdl:input>
+                <soap:body use="literal" parts="header body"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" parts="header"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="RemoveInvoices">
+            <soap:operation style="document" soapAction="/WSDL%2520Services/Aplication/Admin%2520Service.serviceagent/AdminSettersEndpoint/RemoveInvoices"/>
+            <wsdl:input>
+                <soap:body use="literal" parts="header body"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" parts="header"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="CreateWorker">
+            <soap:operation style="document" soapAction="/WSDL%2520Services/Aplication/Admin%2520Service.serviceagent/AdminSettersEndpoint/CreateWorker"/>
+            <wsdl:input>
+                <soap:body use="literal" parts="header body"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" parts="header"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="RemoveWorker">
+            <soap:operation style="document" soapAction="/WSDL%2520Services/Aplication/Admin%2520Service.serviceagent/AdminSettersEndpoint/RemoveWorker"/>
+            <wsdl:input>
+                <soap:body use="literal" parts="header body"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" parts="header"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="ModifyService">
+            <soap:operation style="document" soapAction="/WSDL%2520Services/Aplication/Admin%2520Service.serviceagent/AdminSettersEndpoint/ModifyService"/>
+            <wsdl:input>
+                <soap:body use="literal" parts="header body"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" parts="header"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="InvoicesLauncher">
+            <soap:operation style="document" soapAction="/WSDL%2520Services/Aplication/Admin%2520Service.serviceagent/AdminSettersEndpoint/InvoicesLauncher"/>
+            <wsdl:input>
+                <soap:body use="literal" parts="header body"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" parts="header"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="AdminGettersEndpointBinding" type="tns:AdminGetters">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="GetAllWorkers">
+            <soap:operation style="document" soapAction="/WSDL%2520Services/Aplication/Admin%2520Service.serviceagent/AdminGettersEndpoint1/GetAllWorkers"/>
+            <wsdl:input>
+                <soap:body use="literal" parts="header"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" parts="header body"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:message name="Change_Worker_In_msg">
+        <wsdl:part name="header" element="ns0:Standard_In_MSG"/>
+        <wsdl:part name="body" element="ns1:Modify_Worker_A"/>
+    </wsdl:message>
+    <wsdl:message name="Change_Worker_Out_msg">
+        <wsdl:part name="header" element="ns0:Standard_Out_MSG"/>
+    </wsdl:message>
+    <wsdl:message name="New_Service_In_msg">
+        <wsdl:part name="header" element="ns0:Standard_In_MSG"/>
+        <wsdl:part name="body" element="ns2:New_Service_A"/>
+    </wsdl:message>
+    <wsdl:message name="New_Service_Out_msg">
+        <wsdl:part name="header" element="ns0:Standard_Out_MSG"/>
+    </wsdl:message>
+    <wsdl:message name="Delete_Invoices_In_msg">
+        <wsdl:part name="header" element="ns0:Standard_In_MSG"/>
+        <wsdl:part name="body" element="ns3:New_Invoices_A"/>
+    </wsdl:message>
+    <wsdl:message name="Delete_Invoices_Out_msg">
+        <wsdl:part name="header" element="ns0:Standard_Out_MSG"/>
+    </wsdl:message>
+    <wsdl:message name="New_Worker_In_msg">
+        <wsdl:part name="header" element="ns0:Standard_In_MSG"/>
+        <wsdl:part name="body" element="ns1:New_Worker_A"/>
+    </wsdl:message>
+    <wsdl:message name="New_Worker_Out_msg">
+        <wsdl:part name="header" element="ns0:Standard_Out_MSG"/>
+    </wsdl:message>
+    <wsdl:message name="Delete_Worker_In_msg">
+        <wsdl:part name="header" element="ns0:Standard_In_MSG"/>
+        <wsdl:part name="body" element="ns0:Request_Body"/>
+    </wsdl:message>
+    <wsdl:message name="Delete_Worker_Out_msg">
+        <wsdl:part name="header" element="ns0:Standard_Out_MSG"/>
+    </wsdl:message>
+    <wsdl:message name="Change_Service_In_msg">
+        <wsdl:part name="header" element="ns0:Standard_In_MSG"/>
+        <wsdl:part name="body" element="ns2:Modify_Service_A"/>
+    </wsdl:message>
+    <wsdl:message name="Change_Service_Out_msg">
+        <wsdl:part name="header" element="ns0:Standard_Out_MSG"/>
+    </wsdl:message>
+    <wsdl:message name="Invoices_Launch_In_msg">
+        <wsdl:part name="header" element="ns0:Standard_In_MSG"/>
+        <wsdl:part name="body" element="ns3:New_Invoices_A"/>
+    </wsdl:message>
+    <wsdl:message name="Invoices_Launch_Out_msg">
+        <wsdl:part name="header" element="ns0:Standard_Out_MSG"/>
+    </wsdl:message>
+    <wsdl:message name="List_All_Workers_In_msg">
+        <wsdl:part name="header" element="ns0:Standard_In_MSG"/>
+    </wsdl:message>
+    <wsdl:message name="List_All_Workers_Out_msg">
+        <wsdl:part name="header" element="ns0:Standard_Out_MSG"/>
+        <wsdl:part name="body" element="ns1:Get_Worker_W"/>
+    </wsdl:message>
+</wsdl:definitions>

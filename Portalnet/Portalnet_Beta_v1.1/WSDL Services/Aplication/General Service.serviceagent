@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<serviceResource xmlns:wsdl="http://xmlns.example.com/1563532457786">
+    <ns0:import xmlns:ns0="http://schemas.xmlsoap.org/wsdl/" namespace="http://xmlns.example.com/1563532457786" location="/WSDL Services/Aplication/General WSDL.wsdl"/>
+    <config>
+        <wsdl namespace="http://xmlns.example.com/1563555357381" embedWsdlComponents="true" embedSchemaComponents="true" embedJndiProperties="false"/>
+        <class>com.tibco.bw.service.serviceAgent.ServiceServiceAgent</class>
+        <implType>bw</implType>
+        <groups>
+            <row isDefault="true" groupName="Default"/>
+        </groups>
+        <serviceChange>Fri Jul 19 18:07:25 WEST 2019</serviceChange>
+        <interfaceImpl>
+            <tab>
+                <tabName>GeneralGetters</tabName>
+                <tabType>bw</tabType>
+                <config>
+                    <wsdlDetail location="/WSDL Services/Aplication/General WSDL.wsdl" portType="GeneralGetters" ns="http://xmlns.example.com/1563532457786"/>
+                    <detail>
+                        <tab>
+                            <tabName>service.definition.impl.tab.label</tabName>
+                            <tabType>impl</tabType>
+                            <config>
+                                <operations>
+                                    <row opName="GetAllServices" opImpl="/WSDL Services/Processes/General Processes/List All Services.process"/>
+                                    <row opName="GetInvoices" opImpl="/WSDL Services/Processes/General Processes/List Invoices.process"/>
+                                    <row opName="GetAssociatedServices" opImpl="/WSDL Services/Processes/General Processes/List Associated Services.process"/>
+                                </operations>
+                            </config>
+                        </tab>
+                        <tab>
+                            <tabName>service.definition.ep.tab.label</tabName>
+                            <tabType>ep</tabType>
+                            <config>
+                                <epBindings>
+                                    <row epName="GeneralGettersEndpoint" epType="soap">
+                                        <config>
+                                            <epDetail>
+                                                <tab>
+                                                    <tabName>soap.service.transport.ui.transport.tab.label</tabName>
+                                                    <tabType>transport</tabType>
+                                                    <config>
+                                                        <sharedChannel>/Resources/HTTP/HTTP General.sharedhttp</sharedChannel>
+                                                        <transport>
+                                                            <config>
+                                                                <useBasicAuthentication>false</useBasicAuthentication>
+                                                                <httpURI>/WSDL%20Services/Aplication/General%20Service.serviceagent/GeneralGettersEndpoint</httpURI>
+                                                            </config>
+                                                        </transport>
+                                                    </config>
+                                                </tab>
+                                                <tab>
+                                                    <tabName>soap.service.transport.ui.details.tab.label</tabName>
+                                                    <tabType>details</tabType>
+                                                    <config>
+                                                        <operationStyle>document</operationStyle>
+                                                        <soapVersion>SOAP 1.1</soapVersion>
+                                                        <soap>
+                                                            <operation name="GetAllServices">
+                                                                <general>
+                                                                    <config>
+                                                                        <soapAction>/WSDL%2520Services/Aplication/General%2520Service.serviceagent/GeneralGettersEndpoint1/GetAllServices</soapAction>
+                                                                        <operationStyle/>
+                                                                        <soapUse>literal</soapUse>
+                                                                        <inputNamespace/>
+                                                                        <outputNamespace/>
+                                                                        <faultNamespace/>
+                                                                        <portAddressPrefix/>
+                                                                    </config>
+                                                                </general>
+                                                            </operation>
+                                                            <operation name="GetInvoices">
+                                                                <general>
+                                                                    <config>
+                                                                        <soapAction>/WSDL%2520Services/Aplication/General%2520Service.serviceagent/GeneralGettersEndpoint1/GetInvoices</soapAction>
+                                                                        <operationStyle/>
+                                                                        <soapUse>literal</soapUse>
+                                                                    </config>
+                                                                </general>
+                                                            </operation>
+                                                            <operation name="GetAssociatedServices">
+                                                                <general>
+                                                                    <config>
+                                                                        <soapAction>/WSDL%2520Services/Aplication/General%2520Service.serviceagent/GeneralGettersEndpoint1/GetAssociatedServices</soapAction>
+                                                                        <operationStyle/>
+                                                                        <soapUse>literal</soapUse>
+                                                                    </config>
+                                                                </general>
+                                                            </operation>
+                                                        </soap>
+                                                    </config>
+                                                </tab>
+                                            </epDetail>
+                                        </config>
+                                    </row>
+                                </epBindings>
+                            </config>
+                        </tab>
+                    </detail>
+                </config>
+            </tab>
+            <tab>
+                <tabName>GeneralSetters</tabName>
+                <tabType>bw</tabType>
+                <config>
+                    <wsdlDetail location="/WSDL Services/Aplication/General WSDL.wsdl" portType="GeneralSetters" ns="http://xmlns.example.com/1563532457786"/>
+                    <detail>
+                        <tab>
+                            <tabName>service.definition.impl.tab.label</tabName>
+                            <tabType>impl</tabType>
+                            <config>
+                                <operations>
+                                    <row opName="ClientPayment" opImpl="/WSDL Services/Processes/General Processes/Payment.process"/>
+                                    <row opName="ClientRegist" opImpl="/WSDL Services/Processes/General Processes/Regist Client.process"/>
+                                </operations>
+                            </config>
+                        </tab>
+                        <tab>
+                            <tabName>service.definition.ep.tab.label</tabName>
+                            <tabType>ep</tabType>
+                            <config>
+                                <epBindings>
+                                    <row epName="GeneralSettersEndpoint" epType="soap">
+                                        <config>
+                                            <epDetail>
+                                                <tab>
+                                                    <tabName>soap.service.transport.ui.transport.tab.label</tabName>
+                                                    <tabType>transport</tabType>
+                                                    <config>
+                                                        <sharedChannel>/Resources/HTTP/HTTP General.sharedhttp</sharedChannel>
+                                                        <transport>
+                                                            <config>
+                                                                <useBasicAuthentication>false</useBasicAuthentication>
+                                                                <httpURI>/WSDL%20Services/Aplication/General%20Service.serviceagent/GeneralSettersEndpoint</httpURI>
+                                                            </config>
+                                                        </transport>
+                                                    </config>
+                                                </tab>
+                                                <tab>
+                                                    <tabName>soap.service.transport.ui.details.tab.label</tabName>
+                                                    <tabType>details</tabType>
+                                                    <config>
+                                                        <operationStyle>document</operationStyle>
+                                                        <soapVersion>SOAP 1.1</soapVersion>
+                                                        <soap>
+                                                            <operation name="ClientPayment">
+                                                                <general>
+                                                                    <config>
+                                                                        <soapAction>/WSDL%2520Services/Aplication/General%2520Service.serviceagent/GeneralSettersEndpoint/ClientPayment</soapAction>
+                                                                        <operationStyle/>
+                                                                        <soapUse>literal</soapUse>
+                                                                        <inputNamespace/>
+                                                                        <outputNamespace/>
+                                                                        <faultNamespace/>
+                                                                        <portAddressPrefix/>
+                                                                    </config>
+                                                                </general>
+                                                            </operation>
+                                                            <operation name="ClientRegist">
+                                                                <general>
+                                                                    <config>
+                                                                        <soapAction>/WSDL%2520Services/Aplication/General%2520Service.serviceagent/GeneralSettersEndpoint/ClientRegist</soapAction>
+                                                                        <operationStyle/>
+                                                                        <soapUse>literal</soapUse>
+                                                                    </config>
+                                                                </general>
+                                                            </operation>
+                                                        </soap>
+                                                    </config>
+                                                </tab>
+                                            </epDetail>
+                                        </config>
+                                    </row>
+                                </epBindings>
+                            </config>
+                        </tab>
+                    </detail>
+                </config>
+            </tab>
+        </interfaceImpl>
+    </config>
+</serviceResource>

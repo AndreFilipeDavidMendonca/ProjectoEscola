@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="8baa2fe0-a703-4fc2-8ddc-d5c3de84551d" activeEnvironment="Default" name="Admin" resourceRoot="" soapui-version="5.5.0" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="822a3413-8af7-4230-aa2b-5df09f9c1ac9" wsaVersion="NONE" name="AdminSettersEndpointBinding" type="wsdl" bindingName="{http://xmlns.example.com/1563555368164}AdminSettersEndpointBinding" soapVersion="1_1" anonymous="optional" definition="file:/C:/Users/rui.rodrigo.santos/Documents/TIBCO_Projects/Portalnet/SOAPUI%20WSDL%20Files/Admin.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache/><con:endpoints><con:endpoint>http://localhost:9008/WSDL%20Services/Aplication/Admin%20Service.serviceagent/AdminSettersEndpoint</con:endpoint></con:endpoints><con:operation id="c98e80c0-ebfe-443b-a343-dce2402191c8" isOneWay="false" action="/WSDL%2520Services/Aplication/Admin%2520Service.serviceagent/AdminSettersEndpoint/CreateService" name="CreateService" bindingOperationName="CreateService" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="f85c1350-8d76-4343-bf1f-4471006827f3" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:9008/WSDL%20Services/Aplication/Admin%20Service.serviceagent/AdminSettersEndpoint</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsdl="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/WSDL.xsd" xmlns:ser="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Service.xsd2">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <wsdl:Standard_In_MSG id="?" role="?"/>\r
+      <ser:New_Service_A ImageURL="?" active="?" creationDate="?" internet="?" loyalty="?" mobilePhone="?" phone="?" price="?" serviceName="?" tv="?"/>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="/WSDL%2520Services/Aplication/Admin%2520Service.serviceagent/AdminSettersEndpoint/CreateService"/></con:call></con:operation><con:operation id="0b26496c-9c6f-418e-88a1-7986c88ae460" isOneWay="false" action="/WSDL%2520Services/Aplication/Admin%2520Service.serviceagent/AdminSettersEndpoint/CreateWorker" name="CreateWorker" bindingOperationName="CreateWorker" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="50142d78-3123-43d2-a8b1-b619f7e988a6" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:9008/WSDL%20Services/Aplication/Admin%20Service.serviceagent/AdminSettersEndpoint</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsdl="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/WSDL.xsd" xmlns:wor="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Worker.xsd2">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <wsdl:Standard_In_MSG id="?" role="?"/>\r
+      <wor:New_Worker_A password="?">\r
+         <wor:Worker_Info email="?" role="?" workerName="?" workerNumber="?"/>\r
+      </wor:New_Worker_A>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="/WSDL%2520Services/Aplication/Admin%2520Service.serviceagent/AdminSettersEndpoint/CreateWorker"/></con:call></con:operation><con:operation id="5f61a241-064a-4f58-96f8-7bba4a49f191" isOneWay="false" action="/WSDL%2520Services/Aplication/Admin%2520Service.serviceagent/AdminSettersEndpoint/InvoicesLauncher" name="InvoicesLauncher" bindingOperationName="InvoicesLauncher" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="24c76c3a-d89d-4289-8ad1-bb19b00c1e70" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:9008/WSDL%20Services/Aplication/Admin%20Service.serviceagent/AdminSettersEndpoint</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsdl="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/WSDL.xsd" xmlns:inv="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Invoice.xsd3">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <wsdl:Standard_In_MSG id="2019000001" role="administrator"/>\r
+      <inv:New_Invoices_A invoiceDate="25/07/2019"/>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="/WSDL%2520Services/Aplication/Admin%2520Service.serviceagent/AdminSettersEndpoint/InvoicesLauncher"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="98d55bdc-dd79-4b30-94e3-c604f6a6b2b5" isOneWay="false" action="/WSDL%2520Services/Aplication/Admin%2520Service.serviceagent/AdminSettersEndpoint/ModifyService" name="ModifyService" bindingOperationName="ModifyService" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="4fab2d83-8693-4c6f-91c6-6ea45a36ce72" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:9008/WSDL%20Services/Aplication/Admin%20Service.serviceagent/AdminSettersEndpoint</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsdl="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/WSDL.xsd" xmlns:ser="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Service.xsd2">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <wsdl:Standard_In_MSG id="?" role="?"/>\r
+      <ser:Modify_Service_A active="?" serviceID="?"/>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="/WSDL%2520Services/Aplication/Admin%2520Service.serviceagent/AdminSettersEndpoint/ModifyService"/></con:call></con:operation><con:operation id="1ab5dfc0-e629-49a9-931f-a7f3f2f19903" isOneWay="false" action="/WSDL%2520Services/Aplication/Admin%2520Service.serviceagent/AdminSettersEndpoint/ModifyWorker" name="ModifyWorker" bindingOperationName="ModifyWorker" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="23f642d7-7571-402e-8327-62d0b4c52aea" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:9008/WSDL%20Services/Aplication/Admin%20Service.serviceagent/AdminSettersEndpoint</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsdl="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/WSDL.xsd" xmlns:wor="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Worker.xsd2">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <wsdl:Standard_In_MSG id="?" role="?"/>\r
+      <wor:Modify_Worker_A role="?" workerNumber="?"/>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="/WSDL%2520Services/Aplication/Admin%2520Service.serviceagent/AdminSettersEndpoint/ModifyWorker"/></con:call></con:operation><con:operation id="a590a466-869b-4020-b963-3fcb56290e36" isOneWay="false" action="/WSDL%2520Services/Aplication/Admin%2520Service.serviceagent/AdminSettersEndpoint/RemoveInvoices" name="RemoveInvoices" bindingOperationName="RemoveInvoices" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="bd2593ac-12c3-4608-9eda-6b9d49a41c72" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:9008/WSDL%20Services/Aplication/Admin%20Service.serviceagent/AdminSettersEndpoint</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsdl="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/WSDL.xsd" xmlns:inv="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Invoice.xsd3">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <wsdl:Standard_In_MSG id="?" role="?"/>\r
+      <inv:New_Invoices_A invoiceDate="?"/>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="/WSDL%2520Services/Aplication/Admin%2520Service.serviceagent/AdminSettersEndpoint/RemoveInvoices"/></con:call></con:operation><con:operation id="ba6c7229-612c-4bfd-be36-21f725574f8f" isOneWay="false" action="/WSDL%2520Services/Aplication/Admin%2520Service.serviceagent/AdminSettersEndpoint/RemoveWorker" name="RemoveWorker" bindingOperationName="RemoveWorker" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="1abf2c7a-d2ea-49fe-9cb9-a1891655493c" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:9008/WSDL%20Services/Aplication/Admin%20Service.serviceagent/AdminSettersEndpoint</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsdl="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/WSDL.xsd">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <wsdl:Standard_In_MSG id="2019000001" role="administrator"/>\r
+      <wsdl:Request_Body id="25/07/2019"/>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="/WSDL%2520Services/Aplication/Admin%2520Service.serviceagent/AdminSettersEndpoint/RemoveWorker"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" id="209efba3-fc48-4eda-beb4-2fc6ae8b0128" wsaVersion="NONE" name="AdminGettersEndpointBinding" type="wsdl" bindingName="{http://xmlns.example.com/1563555368164}AdminGettersEndpointBinding" soapVersion="1_1" anonymous="optional" definition="file:/C:/Users/rui.rodrigo.santos/Documents/TIBCO_Projects/Portalnet/SOAPUI%20WSDL%20Files/Admin.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:/C:/Users/rui.rodrigo.santos/Documents/TIBCO_Projects/Portalnet/SOAPUI%20WSDL%20Files/Admin.wsdl"><con:part><con:url>file:/C:/Users/rui.rodrigo.santos/Documents/TIBCO_Projects/Portalnet/SOAPUI%20WSDL%20Files/Admin.wsdl</con:url><con:content><![CDATA[<!--Created by TIBCO WSDL-->
+<wsdl:definitions name="Untitled" targetNamespace="http://xmlns.example.com/1563555368164" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://xmlns.example.com/1563555368164" xmlns:ns0="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/WSDL.xsd" xmlns:ns2="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Service.xsd2" xmlns:ns1="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Worker.xsd2" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap1="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:ns3="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Invoice.xsd3">
+  <wsdl:types>
+    <xs:schema targetNamespace="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Invoice.xsd3" elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Invoice.xsd3" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="Get_Invoices_CW">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="ns3:Invoice_Info" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Invoice_Info">
+        <xs:complexType>
+          <xs:attribute name="amountPaid" type="xs:string"/>
+          <xs:attribute name="amountToPay" type="xs:string"/>
+          <xs:attribute name="clientNumber" type="xs:string"/>
+          <xs:attribute name="invoiceDate" type="xs:string"/>
+          <xs:attribute name="invoiceID" type="xs:string"/>
+          <xs:attribute name="paymentDate" type="xs:string"/>
+          <xs:attribute name="paymentMethod" type="xs:string"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Modify_Invoice">
+        <xs:complexType>
+          <xs:attribute name="amountPaid" type="xs:string"/>
+          <xs:attribute name="amountToPay" type="xs:string"/>
+          <xs:attribute name="clientNumber" type="xs:string"/>
+          <xs:attribute name="id" type="xs:string"/>
+          <xs:attribute name="paymentDate" type="xs:string"/>
+          <xs:attribute name="paymentMethod" type="xs:string"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="New_Invoices_A">
+        <xs:complexType>
+          <xs:attribute name="invoiceDate" type="xs:string"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Remove_Invoice">
+        <xs:complexType>
+          <xs:attribute name="date" type="xs:string"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+    <xs:schema targetNamespace="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/WSDL.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/WSDL.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="Change_Password">
+        <xs:complexType>
+          <xs:attribute name="id" type="xs:string"/>
+          <xs:attribute name="newPassword" type="xs:string"/>
+          <xs:attribute name="oldPassword" type="xs:string"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Login_In">
+        <xs:complexType>
+          <xs:attribute name="email" type="xs:string"/>
+          <xs:attribute name="password" type="xs:string"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Login_Out">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="ns0:Standard_Out_MSG"/>
+          </xs:sequence>
+          <xs:attribute name="id" type="xs:string"/>
+          <xs:attribute name="role" type="xs:string"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Request_Body">
+        <xs:complexType>
+          <xs:attribute name="id" type="xs:string"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Standard_In_MSG">
+        <xs:complexType>
+          <xs:attribute name="id" type="xs:string"/>
+          <xs:attribute name="role" type="xs:string"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Standard_Out_MSG">
+        <xs:complexType>
+          <xs:attribute name="error" type="xs:string"/>
+          <xs:attribute name="message" type="xs:string"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+    <xs:schema targetNamespace="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Worker.xsd2" elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Worker.xsd2" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="Get_Worker_W">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="ns1:Worker_Info" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Modify_Worker_A">
+        <xs:complexType>
+          <xs:attribute name="role" type="xs:string"/>
+          <xs:attribute name="workerNumber" type="xs:string"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="New_Worker_A">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="ns1:Worker_Info"/>
+          </xs:sequence>
+          <xs:attribute name="password" type="xs:string"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Worker_Info">
+        <xs:complexType>
+          <xs:attribute name="email" type="xs:string"/>
+          <xs:attribute name="role" type="xs:string"/>
+          <xs:attribute name="workerName" type="xs:string"/>
+          <xs:attribute name="workerNumber" type="xs:string"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+    <xs:schema targetNamespace="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Service.xsd2" elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Service.xsd2" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="Get_Services_CW">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="ns2:Service_Info" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Modify_Service_A">
+        <xs:complexType>
+          <xs:attribute name="active" type="xs:string"/>
+          <xs:attribute name="serviceID" type="xs:string"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="New_Service_A">
+        <xs:complexType>
+          <xs:attribute name="ImageURL" type="xs:string"/>
+          <xs:attribute name="active" type="xs:string"/>
+          <xs:attribute name="creationDate" type="xs:string"/>
+          <xs:attribute name="internet" type="xs:string"/>
+          <xs:attribute name="loyalty" type="xs:string"/>
+          <xs:attribute name="mobilePhone" type="xs:string"/>
+          <xs:attribute name="phone" type="xs:string"/>
+          <xs:attribute name="price" type="xs:string"/>
+          <xs:attribute name="serviceName" type="xs:string"/>
+          <xs:attribute name="tv" type="xs:string"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Service_Info">
+        <xs:complexType>
+          <xs:attribute name="ImageURL" type="xs:string"/>
+          <xs:attribute name="active" type="xs:string"/>
+          <xs:attribute name="creationDate" type="xs:string"/>
+          <xs:attribute name="internet" type="xs:string"/>
+          <xs:attribute name="loyalty" type="xs:string"/>
+          <xs:attribute name="mobilePhone" type="xs:string"/>
+          <xs:attribute name="phone" type="xs:string"/>
+          <xs:attribute name="price" type="xs:string"/>
+          <xs:attribute name="serviceID" type="xs:string"/>
+          <xs:attribute name="serviceName" type="xs:string"/>
+          <xs:attribute name="tv" type="xs:string"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:service name="Admin Service">
+    <wsdl:port name="AdminSettersEndpoint" binding="tns:AdminSettersEndpointBinding">
+      <soap:address location="http://localhost:9008/WSDL%2520Services/Aplication/Admin%2520Service.serviceagent/AdminSettersEndpoint"/>
+    </wsdl:port>
+    <wsdl:port name="AdminGettersEndpoint" binding="tns:AdminGettersEndpointBinding">
+      <soap:address location="http://localhost:9008/WSDL%2520Services/Aplication/Admin%2520Service.serviceagent/AdminGettersEndpoint1"/>
+    </wsdl:port>
+  </wsdl:service>
+  <wsdl:portType name="AdminSetters">
+    <wsdl:operation name="ModifyWorker">
+      <wsdl:input message="tns:Change_Worker_In_msg"/>
+      <wsdl:output message="tns:Change_Worker_Out_msg"/>
+    </wsdl:operation>
+    <wsdl:operation name="CreateService">
+      <wsdl:input message="tns:New_Service_In_msg"/>
+      <wsdl:output message="tns:New_Service_Out_msg"/>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveInvoices">
+      <wsdl:input message="tns:Delete_Invoices_In_msg"/>
+      <wsdl:output message="tns:Delete_Invoices_Out_msg"/>
+    </wsdl:operation>
+    <wsdl:operation name="CreateWorker">
+      <wsdl:input message="tns:New_Worker_In_msg"/>
+      <wsdl:output message="tns:New_Worker_Out_msg"/>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveWorker">
+      <wsdl:input message="tns:Delete_Worker_In_msg"/>
+      <wsdl:output message="tns:Delete_Worker_Out_msg"/>
+    </wsdl:operation>
+    <wsdl:operation name="ModifyService">
+      <wsdl:input message="tns:Change_Service_In_msg"/>
+      <wsdl:output message="tns:Change_Service_Out_msg"/>
+    </wsdl:operation>
+    <wsdl:operation name="InvoicesLauncher">
+      <wsdl:input message="tns:Invoices_Launch_In_msg"/>
+      <wsdl:output message="tns:Invoices_Launch_Out_msg"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="AdminGetters">
+    <wsdl:operation name="GetAllWorkers">
+      <wsdl:input message="tns:List_All_Workers_In_msg"/>
+      <wsdl:output message="tns:List_All_Workers_Out_msg"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="AdminSettersEndpointBinding" type="tns:AdminSetters">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="ModifyWorker">
+      <soap:operation style="document" soapAction="/WSDL%2520Services/Aplication/Admin%2520Service.serviceagent/AdminSettersEndpoint/ModifyWorker"/>
+      <wsdl:input>
+        <soap:body use="literal" parts="header body"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" parts="header"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateService">
+      <soap:operation style="document" soapAction="/WSDL%2520Services/Aplication/Admin%2520Service.serviceagent/AdminSettersEndpoint/CreateService"/>
+      <wsdl:input>
+        <soap:body use="literal" parts="header body"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" parts="header"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveInvoices">
+      <soap:operation style="document" soapAction="/WSDL%2520Services/Aplication/Admin%2520Service.serviceagent/AdminSettersEndpoint/RemoveInvoices"/>
+      <wsdl:input>
+        <soap:body use="literal" parts="header body"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" parts="header"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateWorker">
+      <soap:operation style="document" soapAction="/WSDL%2520Services/Aplication/Admin%2520Service.serviceagent/AdminSettersEndpoint/CreateWorker"/>
+      <wsdl:input>
+        <soap:body use="literal" parts="header body"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" parts="header"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveWorker">
+      <soap:operation style="document" soapAction="/WSDL%2520Services/Aplication/Admin%2520Service.serviceagent/AdminSettersEndpoint/RemoveWorker"/>
+      <wsdl:input>
+        <soap:body use="literal" parts="header body"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" parts="header"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModifyService">
+      <soap:operation style="document" soapAction="/WSDL%2520Services/Aplication/Admin%2520Service.serviceagent/AdminSettersEndpoint/ModifyService"/>
+      <wsdl:input>
+        <soap:body use="literal" parts="header body"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" parts="header"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InvoicesLauncher">
+      <soap:operation style="document" soapAction="/WSDL%2520Services/Aplication/Admin%2520Service.serviceagent/AdminSettersEndpoint/InvoicesLauncher"/>
+      <wsdl:input>
+        <soap:body use="literal" parts="header body"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" parts="header"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="AdminGettersEndpointBinding" type="tns:AdminGetters">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="GetAllWorkers">
+      <soap:operation style="document" soapAction="/WSDL%2520Services/Aplication/Admin%2520Service.serviceagent/AdminGettersEndpoint1/GetAllWorkers"/>
+      <wsdl:input>
+        <soap:body use="literal" parts="header"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" parts="header body"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:message name="Change_Worker_In_msg">
+    <wsdl:part name="header" element="ns0:Standard_In_MSG"/>
+    <wsdl:part name="body" element="ns1:Modify_Worker_A"/>
+  </wsdl:message>
+  <wsdl:message name="Change_Worker_Out_msg">
+    <wsdl:part name="header" element="ns0:Standard_Out_MSG"/>
+  </wsdl:message>
+  <wsdl:message name="New_Service_In_msg">
+    <wsdl:part name="header" element="ns0:Standard_In_MSG"/>
+    <wsdl:part name="body" element="ns2:New_Service_A"/>
+  </wsdl:message>
+  <wsdl:message name="New_Service_Out_msg">
+    <wsdl:part name="header" element="ns0:Standard_Out_MSG"/>
+  </wsdl:message>
+  <wsdl:message name="Delete_Invoices_In_msg">
+    <wsdl:part name="header" element="ns0:Standard_In_MSG"/>
+    <wsdl:part name="body" element="ns3:New_Invoices_A"/>
+  </wsdl:message>
+  <wsdl:message name="Delete_Invoices_Out_msg">
+    <wsdl:part name="header" element="ns0:Standard_Out_MSG"/>
+  </wsdl:message>
+  <wsdl:message name="New_Worker_In_msg">
+    <wsdl:part name="header" element="ns0:Standard_In_MSG"/>
+    <wsdl:part name="body" element="ns1:New_Worker_A"/>
+  </wsdl:message>
+  <wsdl:message name="New_Worker_Out_msg">
+    <wsdl:part name="header" element="ns0:Standard_Out_MSG"/>
+  </wsdl:message>
+  <wsdl:message name="Delete_Worker_In_msg">
+    <wsdl:part name="header" element="ns0:Standard_In_MSG"/>
+    <wsdl:part name="body" element="ns0:Request_Body"/>
+  </wsdl:message>
+  <wsdl:message name="Delete_Worker_Out_msg">
+    <wsdl:part name="header" element="ns0:Standard_Out_MSG"/>
+  </wsdl:message>
+  <wsdl:message name="Change_Service_In_msg">
+    <wsdl:part name="header" element="ns0:Standard_In_MSG"/>
+    <wsdl:part name="body" element="ns2:Modify_Service_A"/>
+  </wsdl:message>
+  <wsdl:message name="Change_Service_Out_msg">
+    <wsdl:part name="header" element="ns0:Standard_Out_MSG"/>
+  </wsdl:message>
+  <wsdl:message name="Invoices_Launch_In_msg">
+    <wsdl:part name="header" element="ns0:Standard_In_MSG"/>
+    <wsdl:part name="body" element="ns3:New_Invoices_A"/>
+  </wsdl:message>
+  <wsdl:message name="Invoices_Launch_Out_msg">
+    <wsdl:part name="header" element="ns0:Standard_Out_MSG"/>
+  </wsdl:message>
+  <wsdl:message name="List_All_Workers_In_msg">
+    <wsdl:part name="header" element="ns0:Standard_In_MSG"/>
+  </wsdl:message>
+  <wsdl:message name="List_All_Workers_Out_msg">
+    <wsdl:part name="header" element="ns0:Standard_Out_MSG"/>
+    <wsdl:part name="body" element="ns1:Get_Worker_W"/>
+  </wsdl:message>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:9008/WSDL%20Services/Aplication/Admin%20Service.serviceagent/AdminGettersEndpoint1</con:endpoint></con:endpoints><con:operation id="33b1a237-234c-4e94-af71-c187d6022229" isOneWay="false" action="/WSDL%2520Services/Aplication/Admin%2520Service.serviceagent/AdminGettersEndpoint1/GetAllWorkers" name="GetAllWorkers" bindingOperationName="GetAllWorkers" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="fe555d92-cfdb-421b-8e76-e8bccac089d0" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:9008/WSDL%20Services/Aplication/Admin%20Service.serviceagent/AdminGettersEndpoint1</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsdl="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/WSDL.xsd">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <wsdl:Standard_In_MSG id="?" role="?"/>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="/WSDL%2520Services/Aplication/Admin%2520Service.serviceagent/AdminGettersEndpoint1/GetAllWorkers"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:sensitiveInformation/></con:soapui-project>

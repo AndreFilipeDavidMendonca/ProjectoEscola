@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:ns="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/WSDL.xsd" xmlns:tns="http://xmlns.example.com/1563529152987" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Client.xsd" targetNamespace="http://xmlns.example.com/1563529152987">
+    <import namespace="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Client.xsd" location="../../Resources/Schemas/Client.xsd"/>
+    <import namespace="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/WSDL.xsd" location="../../Resources/Schemas/WSDL.xsd"/>
+    <message name="Change_Client_Password_In_msg">
+        <part name="header" element="ns:Standard_In_MSG"/>
+        <part name="body" element="ns:Change_Password"/>
+    </message>
+    <message name="Change_Client_Password_Out_msg">
+        <part name="header" element="ns:Standard_Out_MSG"/>
+    </message>
+    <message name="Client_Personal_Info_In_msg">
+        <part name="header" element="ns:Standard_In_MSG"/>
+        <part name="body" element="ns:Request_Body"/>
+    </message>
+    <message name="Client_Personal_Info_Out_msg">
+        <part name="header" element="ns:Standard_Out_MSG"/>
+        <part name="body" element="ns2:Get_Client_Info_C"/>
+    </message>
+    <message name="Change_Personal_Info_In_msg">
+        <part name="header" element="ns:Standard_In_MSG"/>
+        <part name="body" element="ns2:Modify_Client_CW"/>
+    </message>
+    <message name="Change_Personal_Info_Out_msg">
+        <part name="header" element="ns:Standard_Out_MSG"/>
+    </message>
+    <portType name="ClientGetters">
+        <operation name="GetPersonalInfo">
+            <input message="tns:Client_Personal_Info_In_msg"/>
+            <output message="tns:Client_Personal_Info_Out_msg"/>
+        </operation>
+    </portType>
+    <portType name="ClientSetters">
+        <operation name="ModifyPersonalInfo">
+            <input message="tns:Change_Personal_Info_In_msg"/>
+            <output message="tns:Change_Personal_Info_Out_msg"/>
+        </operation>
+        <operation name="ModifyPassword">
+            <input message="tns:Change_Client_Password_In_msg"/>
+            <output message="tns:Change_Client_Password_Out_msg"/>
+        </operation>
+    </portType>
+</definitions>

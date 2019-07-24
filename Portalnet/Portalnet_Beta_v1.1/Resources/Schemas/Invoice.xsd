@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	 xmlns="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Invoice.xsd3"
+	 targetNamespace="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Invoice.xsd3"
+	 elementFormDefault="qualified"
+	 attributeFormDefault="unqualified">
+	<xs:element name="Invoice_Info">
+		<xs:complexType>
+			<xs:attribute name="invoiceID" type="xs:string"/>
+			<xs:attribute name="clientNumber" type="xs:string"/>
+			<xs:attribute name="amountToPay" type="xs:string"/>
+			<xs:attribute name="invoiceDate" type="xs:string"/>
+			<xs:attribute name="amountPaid" type="xs:string"/>
+			<xs:attribute name="paymentDate" type="xs:string"/>
+			<xs:attribute name="paymentMethod" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="New_Invoices_A">
+		<xs:complexType>
+			<xs:attribute name="invoiceDate" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Get_Invoices_CW">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Invoice_Info" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Modify_Invoice">
+		<xs:complexType>
+			<xs:attribute name="id" type="xs:string"/>
+			<xs:attribute name="clientNumber" type="xs:string"/>
+			<xs:attribute name="amountPaid" type="xs:string"/>
+			<xs:attribute name="paymentDate" type="xs:string"/>
+			<xs:attribute name="paymentMethod" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Remove_Invoice">
+		<xs:complexType>
+			<xs:attribute name="date" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<serviceResource xmlns:wsdl="http://xmlns.example.com/1563529202131">
+    <ns0:import xmlns:ns0="http://schemas.xmlsoap.org/wsdl/" namespace="http://xmlns.example.com/1563529202131" location="/WSDL Services/Aplication/Admin WSDL.wsdl"/>
+    <config>
+        <wsdl namespace="http://xmlns.example.com/1563555368164" embedWsdlComponents="true" embedSchemaComponents="true" embedJndiProperties="false"/>
+        <class>com.tibco.bw.service.serviceAgent.ServiceServiceAgent</class>
+        <implType>bw</implType>
+        <groups>
+            <row isDefault="true" groupName="Default"/>
+        </groups>
+        <name>Admin Service</name>
+        <serviceChange>Mon Jul 22 10:57:13 WEST 2019</serviceChange>
+        <resourceType>service.definition</resourceType>
+        <interfaceImpl>
+            <tab>
+                <tabName>AdminGetters</tabName>
+                <tabType>bw</tabType>
+                <config>
+                    <wsdlDetail location="/WSDL Services/Aplication/Admin WSDL.wsdl" portType="AdminGetters" ns="http://xmlns.example.com/1563529202131"/>
+                    <detail>
+                        <tab>
+                            <tabName>service.definition.impl.tab.label</tabName>
+                            <tabType>impl</tabType>
+                            <config>
+                                <operations>
+                                    <row opName="GetAllWorkers" opImpl="/WSDL Services/Processes/Admin Processes/List All Workers.process"/>
+                                </operations>
+                            </config>
+                        </tab>
+                        <tab>
+                            <tabName>service.definition.ep.tab.label</tabName>
+                            <tabType>ep</tabType>
+                            <config>
+                                <epBindings>
+                                    <row epName="AdminGettersEndpoint" epType="soap">
+                                        <config>
+                                            <epDetail>
+                                                <tab>
+                                                    <tabName>soap.service.transport.ui.transport.tab.label</tabName>
+                                                    <tabType>transport</tabType>
+                                                    <config>
+                                                        <sharedChannel>/Resources/HTTP/HTTP Admin.sharedhttp</sharedChannel>
+                                                        <transport>
+                                                            <config>
+                                                                <useBasicAuthentication>false</useBasicAuthentication>
+                                                                <httpURI>/WSDL%20Services/Aplication/Admin%20Service.serviceagent/AdminGettersEndpoint1</httpURI>
+                                                            </config>
+                                                        </transport>
+                                                    </config>
+                                                </tab>
+                                                <tab>
+                                                    <tabName>soap.service.transport.ui.details.tab.label</tabName>
+                                                    <tabType>details</tabType>
+                                                    <config>
+                                                        <operationStyle>document</operationStyle>
+                                                        <soapVersion>SOAP 1.1</soapVersion>
+                                                        <soap>
+                                                            <operation name="GetAllWorkers">
+                                                                <general>
+                                                                    <config>
+                                                                        <soapAction>/WSDL%2520Services/Aplication/Admin%2520Service.serviceagent/AdminGettersEndpoint1/GetAllWorkers</soapAction>
+                                                                        <operationStyle/>
+                                                                        <soapUse>literal</soapUse>
+                                                                        <inputNamespace/>
+                                                                        <outputNamespace/>
+                                                                        <faultNamespace/>
+                                                                        <portAddressPrefix/>
+                                                                    </config>
+                                                                </general>
+                                                            </operation>
+                                                        </soap>
+                                                    </config>
+                                                </tab>
+                                            </epDetail>
+                                        </config>
+                                    </row>
+                                </epBindings>
+                            </config>
+                        </tab>
+                    </detail>
+                </config>
+            </tab>
+            <tab>
+                <tabName>AdminSetters</tabName>
+                <tabType>bw</tabType>
+                <config>
+                    <wsdlDetail location="/WSDL Services/Aplication/Admin WSDL.wsdl" portType="AdminSetters" ns="http://xmlns.example.com/1563529202131"/>
+                    <detail>
+                        <tab>
+                            <tabName>service.definition.impl.tab.label</tabName>
+                            <tabType>impl</tabType>
+                            <config>
+                                <operations>
+                                    <row opName="CreateWorker" opImpl="/WSDL Services/Processes/Admin Processes/Regist Worker.process"/>
+                                    <row opName="ModifyWorker" opImpl="/WSDL Services/Processes/Admin Processes/Change Worker.process"/>
+                                    <row opName="RemoveWorker" opImpl="/WSDL Services/Processes/Admin Processes/Delete Worker.process"/>
+                                    <row opName="CreateService" opImpl="/WSDL Services/Processes/Admin Processes/Create New Service.process"/>
+                                    <row opName="ModifyService" opImpl="/WSDL Services/Processes/Admin Processes/Change Service.process"/>
+                                    <row opName="InvoicesLauncher" opImpl="/WSDL Services/Processes/Admin Processes/Invoices Launch.process"/>
+                                    <row opName="RemoveInvoices" opImpl="/WSDL Services/Processes/Admin Processes/Delete Invoices.process"/>
+                                </operations>
+                            </config>
+                        </tab>
+                        <tab>
+                            <tabName>service.definition.ep.tab.label</tabName>
+                            <tabType>ep</tabType>
+                            <config>
+                                <epBindings>
+                                    <row epName="AdminSettersEndpoint" epType="soap">
+                                        <config>
+                                            <epDetail>
+                                                <tab>
+                                                    <tabName>soap.service.transport.ui.transport.tab.label</tabName>
+                                                    <tabType>transport</tabType>
+                                                    <config>
+                                                        <sharedChannel>/Resources/HTTP/HTTP Admin.sharedhttp</sharedChannel>
+                                                        <transport>
+                                                            <config>
+                                                                <useBasicAuthentication>false</useBasicAuthentication>
+                                                                <httpURI>/WSDL%20Services/Aplication/Admin%20Service.serviceagent/AdminSettersEndpoint</httpURI>
+                                                            </config>
+                                                        </transport>
+                                                    </config>
+                                                </tab>
+                                                <tab>
+                                                    <tabName>soap.service.transport.ui.details.tab.label</tabName>
+                                                    <tabType>details</tabType>
+                                                    <config>
+                                                        <operationStyle>document</operationStyle>
+                                                        <soapVersion>SOAP 1.1</soapVersion>
+                                                        <soap>
+                                                            <operation name="CreateWorker">
+                                                                <general>
+                                                                    <config>
+                                                                        <soapAction>/WSDL%2520Services/Aplication/Admin%2520Service.serviceagent/AdminSettersEndpoint/CreateWorker</soapAction>
+                                                                        <operationStyle/>
+                                                                        <soapUse>literal</soapUse>
+                                                                        <inputNamespace/>
+                                                                        <outputNamespace/>
+                                                                        <faultNamespace/>
+                                                                        <portAddressPrefix/>
+                                                                    </config>
+                                                                </general>
+                                                            </operation>
+                                                            <operation name="ModifyWorker">
+                                                                <general>
+                                                                    <config>
+                                                                        <soapAction>/WSDL%2520Services/Aplication/Admin%2520Service.serviceagent/AdminSettersEndpoint/ModifyWorker</soapAction>
+                                                                        <operationStyle/>
+                                                                        <soapUse>literal</soapUse>
+                                                                    </config>
+                                                                </general>
+                                                            </operation>
+                                                            <operation name="RemoveWorker">
+                                                                <general>
+                                                                    <config>
+                                                                        <soapAction>/WSDL%2520Services/Aplication/Admin%2520Service.serviceagent/AdminSettersEndpoint/RemoveWorker</soapAction>
+                                                                        <operationStyle/>
+                                                                        <soapUse>literal</soapUse>
+                                                                    </config>
+                                                                </general>
+                                                            </operation>
+                                                            <operation name="CreateService">
+                                                                <general>
+                                                                    <config>
+                                                                        <soapAction>/WSDL%2520Services/Aplication/Admin%2520Service.serviceagent/AdminSettersEndpoint/CreateService</soapAction>
+                                                                        <operationStyle/>
+                                                                        <soapUse>literal</soapUse>
+                                                                    </config>
+                                                                </general>
+                                                            </operation>
+                                                            <operation name="ModifyService">
+                                                                <general>
+                                                                    <config>
+                                                                        <soapAction>/WSDL%2520Services/Aplication/Admin%2520Service.serviceagent/AdminSettersEndpoint/ModifyService</soapAction>
+                                                                        <operationStyle/>
+                                                                        <soapUse>literal</soapUse>
+                                                                    </config>
+                                                                </general>
+                                                            </operation>
+                                                            <operation name="InvoicesLauncher">
+                                                                <general>
+                                                                    <config>
+                                                                        <soapAction>/WSDL%2520Services/Aplication/Admin%2520Service.serviceagent/AdminSettersEndpoint/InvoicesLauncher</soapAction>
+                                                                        <operationStyle/>
+                                                                        <soapUse>literal</soapUse>
+                                                                    </config>
+                                                                </general>
+                                                            </operation>
+                                                            <operation name="RemoveInvoices">
+                                                                <general>
+                                                                    <config>
+                                                                        <soapAction>/WSDL%2520Services/Aplication/Admin%2520Service.serviceagent/AdminSettersEndpoint/RemoveInvoices</soapAction>
+                                                                        <operationStyle/>
+                                                                        <soapUse>literal</soapUse>
+                                                                    </config>
+                                                                </general>
+                                                            </operation>
+                                                        </soap>
+                                                    </config>
+                                                </tab>
+                                            </epDetail>
+                                        </config>
+                                    </row>
+                                </epBindings>
+                            </config>
+                        </tab>
+                    </detail>
+                </config>
+            </tab>
+        </interfaceImpl>
+    </config>
+</serviceResource>

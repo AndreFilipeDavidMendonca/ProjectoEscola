@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Created by TIBCO WSDL-->
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://xmlns.example.com/1563555363128" xmlns:ns0="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/WSDL.xsd" xmlns:ns2="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Worker.xsd2" xmlns:ns1="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Client.xsd" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap1="http://schemas.xmlsoap.org/wsdl/soap12/" name="Untitled" targetNamespace="http://xmlns.example.com/1563555363128">
+    <wsdl:types>
+        <xs:schema xmlns="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/WSDL.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/WSDL.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified">
+            <xs:element name="Change_Password">
+                <xs:complexType>
+                    <xs:attribute name="id" type="xs:string"/>
+                    <xs:attribute name="newPassword" type="xs:string"/>
+                    <xs:attribute name="oldPassword" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Login_In">
+                <xs:complexType>
+                    <xs:attribute name="email" type="xs:string"/>
+                    <xs:attribute name="password" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Login_Out">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element ref="ns0:Standard_Out_MSG"/>
+                    </xs:sequence>
+                    <xs:attribute name="id" type="xs:string"/>
+                    <xs:attribute name="role" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Request_Body">
+                <xs:complexType>
+                    <xs:attribute name="id" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Standard_In_MSG">
+                <xs:complexType>
+                    <xs:attribute name="id" type="xs:string"/>
+                    <xs:attribute name="role" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Standard_Out_MSG">
+                <xs:complexType>
+                    <xs:attribute name="error" type="xs:string"/>
+                    <xs:attribute name="message" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+        <xs:schema xmlns="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Client.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Client.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified">
+            <xs:element name="Associated_Service_Info">
+                <xs:complexType>
+                    <xs:attribute name="associatedServiceID" type="xs:string"/>
+                    <xs:attribute name="modificationDate" type="xs:string"/>
+                    <xs:attribute name="serviceID" type="xs:string"/>
+                    <xs:attribute name="workerNumber" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Change_All_Client_Info_W">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element ref="ns1:Client_Personal_Info"/>
+                    </xs:sequence>
+                    <xs:attribute name="active" type="xs:string"/>
+                    <xs:attribute name="dishonest" type="xs:string"/>
+                    <xs:attribute name="waitConfirmation" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Client_All_Info">
+                <xs:complexType>
+                    <xs:attribute name="accessionDate" type="xs:string"/>
+                    <xs:attribute name="active" type="xs:string"/>
+                    <xs:attribute name="address" type="xs:string"/>
+                    <xs:attribute name="birthDate" type="xs:string"/>
+                    <xs:attribute name="clientName" type="xs:string"/>
+                    <xs:attribute name="clientNumber" type="xs:string"/>
+                    <xs:attribute name="dishonest" type="xs:string"/>
+                    <xs:attribute name="email" type="xs:string"/>
+                    <xs:attribute name="gender" type="xs:string"/>
+                    <xs:attribute name="locality" type="xs:string"/>
+                    <xs:attribute name="mobileNumber" type="xs:string"/>
+                    <xs:attribute name="nif" type="xs:string"/>
+                    <xs:attribute name="phoneNumber" type="xs:string"/>
+                    <xs:attribute name="postalCode" type="xs:string"/>
+                    <xs:attribute name="waitConfirmation" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Client_Personal_Info">
+                <xs:complexType>
+                    <xs:attribute name="accessionDate" type="xs:string"/>
+                    <xs:attribute name="address" type="xs:string"/>
+                    <xs:attribute name="birthDate" type="xs:string"/>
+                    <xs:attribute name="clientName" type="xs:string"/>
+                    <xs:attribute name="clientNumber" type="xs:string"/>
+                    <xs:attribute name="email" type="xs:string"/>
+                    <xs:attribute name="gender" type="xs:string"/>
+                    <xs:attribute name="locality" type="xs:string"/>
+                    <xs:attribute name="mobileNumber" type="xs:string"/>
+                    <xs:attribute name="nif" type="xs:string"/>
+                    <xs:attribute name="phoneNumber" type="xs:string"/>
+                    <xs:attribute name="postalCode" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Get_Associated_Service_C">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element ref="ns1:Associated_Service_Info" minOccurs="0" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Get_Associated_Service_W">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element ref="ns1:Associated_Service_Info" minOccurs="0" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Get_Client_All_Info_W">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element ref="ns1:Client_All_Info" minOccurs="0" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Get_Client_Info_C">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element ref="ns1:Client_Personal_Info" minOccurs="0" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Modify_Associated_Service_W">
+                <xs:complexType>
+                    <xs:attribute name="associatedServiceID" type="xs:string"/>
+                    <xs:attribute name="modificationDate" type="xs:string"/>
+                    <xs:attribute name="serviceID" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Modify_Client_CW">
+                <xs:complexType>
+                    <xs:attribute name="address" type="xs:string"/>
+                    <xs:attribute name="email" type="xs:string"/>
+                    <xs:attribute name="id" type="xs:string"/>
+                    <xs:attribute name="locality" type="xs:string"/>
+                    <xs:attribute name="mobileNumber" type="xs:string"/>
+                    <xs:attribute name="phoneNumber" type="xs:string"/>
+                    <xs:attribute name="postalCode" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="New_Associated_Service_W">
+                <xs:complexType>
+                    <xs:attribute name="clientNumber" type="xs:string"/>
+                    <xs:attribute name="modificationDate" type="xs:string"/>
+                    <xs:attribute name="serviceID" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="New_Client_W">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element ref="ns1:Change_All_Client_Info_W"/>
+                    </xs:sequence>
+                    <xs:attribute name="modificationDate" type="xs:string"/>
+                    <xs:attribute name="password" type="xs:string"/>
+                    <xs:attribute name="serviceID" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+        <xs:schema xmlns="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Worker.xsd2" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Worker.xsd2" elementFormDefault="qualified" attributeFormDefault="unqualified">
+            <xs:element name="Get_Worker_W">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element ref="ns2:Worker_Info" minOccurs="0" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Modify_Worker_A">
+                <xs:complexType>
+                    <xs:attribute name="role" type="xs:string"/>
+                    <xs:attribute name="workerNumber" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="New_Worker_A">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element ref="ns2:Worker_Info"/>
+                    </xs:sequence>
+                    <xs:attribute name="password" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Worker_Info">
+                <xs:complexType>
+                    <xs:attribute name="email" type="xs:string"/>
+                    <xs:attribute name="role" type="xs:string"/>
+                    <xs:attribute name="workerName" type="xs:string"/>
+                    <xs:attribute name="workerNumber" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:service name="Worker Service">
+        <wsdl:port name="WorkerSettersEndpoint" binding="tns:WorkerSettersEndpointBinding">
+            <soap:address location="http://localhost:9013/WSDL%2520Services/Aplication/Worker%2520Service.serviceagent/WorkerSettersEndpoint"/>
+        </wsdl:port>
+        <wsdl:port name="WorkerGettersEndpoint" binding="tns:WorkerGettersEndpointBinding">
+            <soap:address location="http://localhost:9013/WSDL%2520Services/Aplication/Worker%2520Service.serviceagent/WorkerGettersEndpoint"/>
+        </wsdl:port>
+    </wsdl:service>
+    <wsdl:portType name="WorkerSetters">
+        <wsdl:operation name="AssociateNewService">
+            <wsdl:input message="tns:Associate_Service_In_msg"/>
+            <wsdl:output message="tns:Associate_Service_Out_msg"/>
+        </wsdl:operation>
+        <wsdl:operation name="ModifyPassword">
+            <wsdl:input message="tns:Change_Worker_Password_In_msg"/>
+            <wsdl:output message="tns:Change_Worker_Password_Out_msg"/>
+        </wsdl:operation>
+        <wsdl:operation name="ModifyClient">
+            <wsdl:input message="tns:Change_Client_In_msg"/>
+            <wsdl:output message="tns:Change_Client_Out_msg"/>
+        </wsdl:operation>
+        <wsdl:operation name="RemoveAssociatedService">
+            <wsdl:input message="tns:Delete_Associated_Service_In_msg"/>
+            <wsdl:output message="tns:Delete_Associated_Service_Out_msg"/>
+        </wsdl:operation>
+        <wsdl:operation name="ModifyAssociatedService">
+            <wsdl:input message="tns:Change_Associated_Service_In_msg"/>
+            <wsdl:output message="tns:Change_Associated_Service_Out_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:portType name="WorkerGetters">
+        <wsdl:operation name="GetWorkerInfo">
+            <wsdl:input message="tns:Worker_Info_In_msg"/>
+            <wsdl:output message="tns:Worker_Info_Out_msg"/>
+        </wsdl:operation>
+        <wsdl:operation name="GetAllClients">
+            <wsdl:input message="tns:List_All_Clients_In_msg"/>
+            <wsdl:output message="tns:List_All_Clients_Out_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="WorkerSettersEndpointBinding" type="tns:WorkerSetters">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="AssociateNewService">
+            <soap:operation style="document" soapAction="/WSDL%2520Services/Aplication/Worker%2520Service.serviceagent/WorkerSettersEndpoint/AssociateNewService"/>
+            <wsdl:input>
+                <soap:body use="literal" parts="header body"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" parts="header"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="ModifyPassword">
+            <soap:operation style="document" soapAction="/WSDL%2520Services/Aplication/Worker%2520Service.serviceagent/WorkerSettersEndpoint/ModifyPassword"/>
+            <wsdl:input>
+                <soap:body use="literal" parts="header body"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" parts="header"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="ModifyClient">
+            <soap:operation style="document" soapAction="/WSDL%2520Services/Aplication/Worker%2520Service.serviceagent/WorkerSettersEndpoint/ModifyClient"/>
+            <wsdl:input>
+                <soap:body use="literal" parts="header body"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" parts="header"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="RemoveAssociatedService">
+            <soap:operation style="document" soapAction="/WSDL%2520Services/Aplication/Worker%2520Service.serviceagent/WorkerSettersEndpoint/RemoveAssociatedService"/>
+            <wsdl:input>
+                <soap:body use="literal" parts="header body"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" parts="header"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="ModifyAssociatedService">
+            <soap:operation style="document" soapAction="/WSDL%2520Services/Aplication/Worker%2520Service.serviceagent/WorkerSettersEndpoint/ModifyAssociatedService"/>
+            <wsdl:input>
+                <soap:body use="literal" parts="header body"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" parts="header"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="WorkerGettersEndpointBinding" type="tns:WorkerGetters">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="GetWorkerInfo">
+            <soap:operation style="document" soapAction="/WSDL%2520Services/Aplication/Worker%2520Service.serviceagent/WorkerGettersEndpoint/GetWorkerInfo"/>
+            <wsdl:input>
+                <soap:body use="literal" parts="header body"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" parts="header body"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetAllClients">
+            <soap:operation style="document" soapAction="/WSDL%2520Services/Aplication/Worker%2520Service.serviceagent/WorkerGettersEndpoint/GetAllClients"/>
+            <wsdl:input>
+                <soap:body use="literal" parts="header"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" parts="header body"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:message name="Associate_Service_In_msg">
+        <wsdl:part name="header" element="ns0:Standard_In_MSG"/>
+        <wsdl:part name="body" element="ns1:New_Associated_Service_W"/>
+    </wsdl:message>
+    <wsdl:message name="Associate_Service_Out_msg">
+        <wsdl:part name="header" element="ns0:Standard_Out_MSG"/>
+    </wsdl:message>
+    <wsdl:message name="Change_Worker_Password_In_msg">
+        <wsdl:part name="header" element="ns0:Standard_In_MSG"/>
+        <wsdl:part name="body" element="ns0:Change_Password"/>
+    </wsdl:message>
+    <wsdl:message name="Change_Worker_Password_Out_msg">
+        <wsdl:part name="header" element="ns0:Standard_Out_MSG"/>
+    </wsdl:message>
+    <wsdl:message name="Change_Client_In_msg">
+        <wsdl:part name="header" element="ns0:Standard_In_MSG"/>
+        <wsdl:part name="body" element="ns1:Change_All_Client_Info_W"/>
+    </wsdl:message>
+    <wsdl:message name="Change_Client_Out_msg">
+        <wsdl:part name="header" element="ns0:Standard_Out_MSG"/>
+    </wsdl:message>
+    <wsdl:message name="Delete_Associated_Service_In_msg">
+        <wsdl:part name="header" element="ns0:Standard_In_MSG"/>
+        <wsdl:part name="body" element="ns0:Request_Body"/>
+    </wsdl:message>
+    <wsdl:message name="Delete_Associated_Service_Out_msg">
+        <wsdl:part name="header" element="ns0:Standard_Out_MSG"/>
+    </wsdl:message>
+    <wsdl:message name="Change_Associated_Service_In_msg">
+        <wsdl:part name="header" element="ns0:Standard_In_MSG"/>
+        <wsdl:part name="body" element="ns1:Modify_Associated_Service_W"/>
+    </wsdl:message>
+    <wsdl:message name="Change_Associated_Service_Out_msg">
+        <wsdl:part name="header" element="ns0:Standard_Out_MSG"/>
+    </wsdl:message>
+    <wsdl:message name="Worker_Info_In_msg">
+        <wsdl:part name="header" element="ns0:Standard_In_MSG"/>
+        <wsdl:part name="body" element="ns0:Request_Body"/>
+    </wsdl:message>
+    <wsdl:message name="Worker_Info_Out_msg">
+        <wsdl:part name="header" element="ns0:Standard_Out_MSG"/>
+        <wsdl:part name="body" element="ns2:Get_Worker_W"/>
+    </wsdl:message>
+    <wsdl:message name="List_All_Clients_In_msg">
+        <wsdl:part name="header" element="ns0:Standard_In_MSG"/>
+    </wsdl:message>
+    <wsdl:message name="List_All_Clients_Out_msg">
+        <wsdl:part name="header" element="ns0:Standard_Out_MSG"/>
+        <wsdl:part name="body" element="ns1:Get_Client_All_Info_W"/>
+    </wsdl:message>
+</wsdl:definitions>

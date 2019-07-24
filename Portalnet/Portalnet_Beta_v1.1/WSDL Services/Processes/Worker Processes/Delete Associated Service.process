@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pd:ProcessDefinition xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:pfx="http://xmlns.example.com/1563185633211" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:pfx2="http://xmlns.example.com/1563379787360" xmlns:ns="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Schema1.xsd" xmlns:pfx3="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/WSDL.xsd" xmlns:pfx4="http://xmlns.example.com/1563529189768" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://www.tibco.com/pe/DeployedVarsType">
+    <wsdl:import namespace="http://xmlns.example.com/1563185633211" location="/WSDL Services/Worker/Worker WSDL.wsdl"/>
+    <wsdl:import namespace="http://xmlns.example.com/1563379787360"/>
+    <wsdl:import namespace="http://xmlns.example.com/1563529189768" location="/WSDL Services/Aplication/Worker WSDL.wsdl"/>
+    <pd:name>WSDL Services/Processes/Worker Processes/Delete Associated Service.process</pd:name>
+    <pd:startName>Start</pd:startName>
+    <pd:startType wsMsgRef="pfx4:Delete_Associated_Service_In_msg"/>
+    <pd:startX>27</pd:startX>
+    <pd:startY>34</pd:startY>
+    <pd:returnBindings>
+        <pfx4:Delete_Associated_Service_Out_msg>
+            <header>
+                <pfx3:Standard_Out_MSG>
+                    <xsl:attribute name="message">
+                        <xsl:value-of select="$Var/root/message"/>
+                    </xsl:attribute>
+                    <xsl:if test="$Var/root/error">
+                        <xsl:attribute name="error">
+                            <xsl:value-of select="$Var/root/error"/>
+                        </xsl:attribute>
+                    </xsl:if>
+                </pfx3:Standard_Out_MSG>
+            </header>
+        </pfx4:Delete_Associated_Service_Out_msg>
+    </pd:returnBindings>
+    <pd:endName>End</pd:endName>
+    <pd:endType wsMsgRef="pfx4:Delete_Associated_Service_Out_msg"/>
+    <pd:endX>640</pd:endX>
+    <pd:endY>34</pd:endY>
+    <pd:errorSchemas/>
+    <pd:processVariables>
+        <Var>
+            <xsd:element name="root">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="message" type="xsd:string"/>
+                        <xsd:element name="error" type="xsd:string" minOccurs="0"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </Var>
+    </pd:processVariables>
+    <pd:targetNamespace>http://xmlns.example.com/1563207935353</pd:targetNamespace>
+    <pd:activity name="Remove Associated Service">
+        <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
+        <pd:resourceType>ae.process.subprocess</pd:resourceType>
+        <pd:x>350</pd:x>
+        <pd:y>42</pd:y>
+        <config>
+            <processName>/Processes/Modify DB/Associated Services Table/Remove Associated Service.process</processName>
+        </config>
+        <pd:inputBindings>
+            <root>
+                <AssociatedServiceID>
+                    <xsl:value-of select="$Start/pfx4:Delete_Associated_Service_In_msg/body/pfx3:Request_Body/@id"/>
+                </AssociatedServiceID>
+            </root>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Assign 1">
+        <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
+        <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
+        <pd:x>501</pd:x>
+        <pd:y>34</pd:y>
+        <config>
+            <variableName>Var</variableName>
+        </config>
+        <pd:inputBindings>
+            <root>
+                <message>
+                    <xsl:value-of select="$Remove-Associated-Service/root/message"/>
+                </message>
+                <xsl:if test="$Remove-Associated-Service/root/error">
+                    <error>
+                        <xsl:value-of select="$Remove-Associated-Service/root/error"/>
+                    </error>
+                </xsl:if>
+            </root>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Assign 2">
+        <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
+        <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
+        <pd:x>778</pd:x>
+        <pd:y>34</pd:y>
+        <config>
+            <variableName>Var</variableName>
+        </config>
+        <pd:inputBindings>
+            <root>
+                <message>
+                    <xsl:value-of select="$_globalVariables/ns1:GlobalVariables/VarAplication/MessageType/Error"/>
+                </message>
+                <error>
+                    <xsl:value-of select="&quot;Delete Associated Service-Invalid Inputs&quot;"/>
+                </error>
+            </root>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Catch">
+        <pd:type>com.tibco.pe.core.CatchActivity</pd:type>
+        <pd:resourceType>ae.activities.catch</pd:resourceType>
+        <pd:x>923</pd:x>
+        <pd:y>34</pd:y>
+        <pd:handler>true</pd:handler>
+        <config>
+            <catchAll>true</catchAll>
+        </config>
+        <pd:inputBindings/>
+    </pd:activity>
+    <pd:activity name="Get Worker by ID">
+        <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
+        <pd:resourceType>ae.process.subprocess</pd:resourceType>
+        <pd:x>179</pd:x>
+        <pd:y>34</pd:y>
+        <config>
+            <processName>/Processes/Read DB/Workers Table/Get Worker by ID.process</processName>
+        </config>
+        <pd:inputBindings>
+            <root>
+                <WorkerNumber>
+                    <xsl:value-of select="$Start/pfx4:Delete_Associated_Service_In_msg/header/pfx3:Standard_In_MSG/@id"/>
+                </WorkerNumber>
+            </root>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:transition>
+        <pd:from>Start</pd:from>
+        <pd:to>Get Worker by ID</pd:to>
+        <pd:xpathDescription>validation</pd:xpathDescription>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>xpath</pd:conditionType>
+        <pd:xpath>$Start/pfx4:Delete_Associated_Service_In_msg/header/pfx3:Standard_In_MSG/@id &gt; 0
+and 
+$Start/pfx4:Delete_Associated_Service_In_msg/header/pfx3:Standard_In_MSG/@id &lt; 10000000000
+and
+$Start/pfx4:Delete_Associated_Service_In_msg/body/pfx3:Request_Body/@id &gt; 0
+and
+$Start/pfx4:Delete_Associated_Service_In_msg/body/pfx3:Request_Body/@id &lt; 10000000000
+and
+(
+	$Start/pfx4:Delete_Associated_Service_In_msg/header/pfx3:Standard_In_MSG/@role = $_globalVariables/ns1:GlobalVariables/VarAplication/RoleType/Admin
+	or
+	$Start/pfx4:Delete_Associated_Service_In_msg/header/pfx3:Standard_In_MSG/@role = $_globalVariables/ns1:GlobalVariables/VarAplication/RoleType/Operator
+)</pd:xpath>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Remove Associated Service</pd:from>
+        <pd:to>Assign 1</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Assign 1</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Assign 2</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Catch</pd:from>
+        <pd:to>Assign 2</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Get Worker by ID</pd:from>
+        <pd:to>Remove Associated Service</pd:to>
+        <pd:xpathDescription>valid_worker</pd:xpathDescription>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>xpath</pd:conditionType>
+        <pd:xpath>$Get-Worker-by-ID/root/message = $_globalVariables/ns1:GlobalVariables/VarAplication/MessageType/Exist
+and
+$Start/pfx4:Delete_Associated_Service_In_msg/header/pfx3:Standard_In_MSG/@role = $Get-Worker-by-ID/root/WorkerInfo/Role</pd:xpath>
+    </pd:transition>
+</pd:ProcessDefinition>

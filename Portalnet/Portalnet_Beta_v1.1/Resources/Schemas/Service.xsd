@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	 xmlns="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Service.xsd2"
+	 targetNamespace="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Service.xsd2"
+	 elementFormDefault="qualified"
+	 attributeFormDefault="unqualified">
+	<xs:element name="Service_Info">
+		<xs:complexType>
+			<xs:attribute name="serviceID" type="xs:string"/>
+			<xs:attribute name="serviceName" type="xs:string"/>
+			<xs:attribute name="internet" type="xs:string"/>
+			<xs:attribute name="tv" type="xs:string"/>
+			<xs:attribute name="mobilePhone" type="xs:string"/>
+			<xs:attribute name="phone" type="xs:string"/>
+			<xs:attribute name="loyalty" type="xs:string"/>
+			<xs:attribute name="price" type="xs:string"/>
+			<xs:attribute name="creationDate" type="xs:string"/>
+			<xs:attribute name="active" type="xs:string"/>
+			<xs:attribute name="ImageURL" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="New_Service_A">
+		<xs:complexType>
+			<xs:attribute name="serviceName" type="xs:string"/>
+			<xs:attribute name="internet" type="xs:string"/>
+			<xs:attribute name="tv" type="xs:string"/>
+			<xs:attribute name="mobilePhone" type="xs:string"/>
+			<xs:attribute name="phone" type="xs:string"/>
+			<xs:attribute name="loyalty" type="xs:string"/>
+			<xs:attribute name="price" type="xs:string"/>
+			<xs:attribute name="creationDate" type="xs:string"/>
+			<xs:attribute name="active" type="xs:string"/>
+			<xs:attribute name="ImageURL" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Get_Services_CW">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Service_Info" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Modify_Service_A">
+		<xs:complexType>
+			<xs:attribute name="serviceID" type="xs:string"/>
+			<xs:attribute name="active" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
