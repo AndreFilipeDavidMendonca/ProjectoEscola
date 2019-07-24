@@ -31,7 +31,7 @@ public class ClientCommandLineRunner implements CommandLineRunner {
 		
 		String entryDate = dateFormatHelper.dateFormater();
 		
-		String endContract = dateFormatHelper.addYearToDate(dateFormatHelper.dateFormater(), 1);
+		String endContract = dateFormatHelper.addYearToDate(entryDate, 1);
 		
 		//Filling database
 		
