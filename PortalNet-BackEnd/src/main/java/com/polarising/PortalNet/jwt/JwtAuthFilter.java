@@ -48,12 +48,14 @@ public class JwtAuthFilter extends OncePerRequestFilter{
 		}
 		catch (Exception e)
 		{
-			logger.error("Unable to set user authentication --> " + e);
+			logger.error("Unable to set user authentication --> ", e);
 		}
 		
+		//We say to the authentication to continue to the next filter
 		filterChain.doFilter(request, response);
 	}
 
+	//We take the token from the request header and take the "Bearer " substring from it, so we can then validate and obtain the username from it
 	private String getJwt(HttpServletRequest request)
 	{
 		String jwt = request.getHeader("Authorization");

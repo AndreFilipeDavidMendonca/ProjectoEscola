@@ -40,7 +40,8 @@ public class UserController {
 	{
 		try{
 			Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword()));
-		
+			
+			//Storing the details of the currently authenticated user (changing, if there was already one)
 			SecurityContextHolder.getContext().setAuthentication(authentication);
 		
 			String jwt;

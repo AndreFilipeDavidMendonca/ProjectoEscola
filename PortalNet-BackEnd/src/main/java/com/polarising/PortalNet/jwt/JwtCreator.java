@@ -64,13 +64,13 @@ public class JwtCreator {
 		return builder.compact();
 	}
 	
-	
+	//Gets userName from Token
 	public String getJwtUsername(String jwt)
 	{
 		return Jwts.parser().setSigningKey(signingKey).parseClaimsJws(jwt).getBody().getSubject();
 	}
 	
-	
+	//Validates Token
 	public boolean jwtValidate(String jwt) {
 		try{
 			Jwts.parser().setSigningKey(signingKey).parseClaimsJws(jwt);
