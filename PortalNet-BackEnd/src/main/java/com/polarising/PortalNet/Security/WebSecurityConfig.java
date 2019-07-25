@@ -54,8 +54,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		return new BCryptPasswordEncoder();
 	}
 	
-	
-	
 	@Bean
 	public JwtAuthFilter authenticationJwtFilter()
 	{
@@ -72,11 +70,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		//Inject a Password Encoder
 		provider.setPasswordEncoder(new BCryptPasswordEncoder());
+		
 		return provider;
 	}
 	
 	@Override
-	protected void configure(AuthenticationManagerBuilder auth)  //Here we configure users.
+	protected void configure(AuthenticationManagerBuilder auth)
 	throws Exception {
 		
 		//Inject our authentication provider, created previously
@@ -103,6 +102,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.cors().and().csrf().disable()
 			.authorizeRequests().antMatchers("/home").permitAll()
 			.antMatchers("/registration/**").permitAll()
+			.and()
+			.authorizeRequests()
 			.antMatchers("/client/**").access("hasAuthority('CLIENT') or hasAuthority('EMPLOYEE') or hasAuthority('ADMIN')")
 			.antMatchers("/clientsTable", "/administrator", "/servicesTable", "/employeesTable/**",  "/createEmployee").access("hasAuthority('EMPLOYEE') or hasAuthority('ADMIN')")
 			.antMatchers("/**").access("hasAuthority('ADMIN')")
