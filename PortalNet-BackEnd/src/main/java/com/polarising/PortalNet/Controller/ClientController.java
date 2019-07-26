@@ -60,6 +60,57 @@ public class ClientController {
 		return new ResponseEntity<List<Client>>((List<Client>) clientRepository.findByClientId(clientId), HttpStatus.OK);
 	}
 	
+	//Update Client details
+	@PutMapping(path = "/client/{clientId}")
+	public ResponseEntity<?> updateClient(@PathVariable int clientId, @RequestBody Client client)
+	{
+		try{
+			
+//			Client clientToUpdate = clientRepository.findByClientId(clientId).get(0);
+				
+//			clientToUpdate.setClientId(client.getClientId());
+//			clientToUpdate.setAddress(client.getAddress());
+//			clientToUpdate.setCity(client.getCity());
+//			clientToUpdate.setEmail(client.getEmail());
+//			clientToUpdate.setFraudulent(client.isFraudulent());
+//			clientToUpdate.setMobilePhone(client.getMobilePhone());
+//			clientToUpdate.setMonthlyPay(newMonthlyPay);
+//			clientToUpdate.setName(client.getName());
+//			clientToUpdate.setPassword(client.getPassword());
+//			clientToUpdate.setPostalCode(client.getPostalCode());
+//			clientToUpdate.setServiceName(client.getServiceName());
+//			clientToUpdate.setStatus(client.isStatus());
+
+			float newMonthlyPay = serviceRepository.findByName(client.getServiceName()).get(0).getPrice();
+			client.setMonthlyPay(newMonthlyPay);
+			clientRepository.save(client);
+			String message = "Atualização bem sucedida.";
+			
+			return new ResponseEntity<>(new ResponseMessage(message), HttpStatus.OK);
+		}
+		catch(ClassCastException e)
+		{
+			return new ResponseEntity<Client>(client, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		catch(IndexOutOfBoundsException e)
+		{	
+			String message;
+				
+			if (!clientRepository.existsById(clientId))
+				{
+					message = "Id de cliente não existe.";
+				}
+			else if (!serviceRepository.existsByName(client.getServiceName()))
+				{
+					message = "O nome do novo serviço não se encontra na lista de serviços disponíveis.";
+				}
+			else {
+					message = null;
+				}
+			return new ResponseEntity<String>(message,HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
 	//Client registration
 	@PostMapping(path = "/registration", consumes = {"application/json"})
 	public ResponseEntity<?> registerClient(@RequestBody ClientForm clientForm)
@@ -99,56 +150,5 @@ public class ClientController {
 		clientRepository.save(newClient);
 		message = clientForm.getName() + " foi registado com sucesso!";
 		return new ResponseEntity<>(new ResponseMessage(message), HttpStatus.OK);
-	}
-	
-	//Update Client details
-	@PutMapping(path = "/client/{clientId}")
-	public ResponseEntity<?> updateClient(@PathVariable int clientId, @RequestBody Client client)
-	{
-		try{
-		
-//		Client clientToUpdate = clientRepository.findByClientId(clientId).get(0);
-			
-//		clientToUpdate.setClientId(client.getClientId());
-//		clientToUpdate.setAddress(client.getAddress());
-//		clientToUpdate.setCity(client.getCity());
-//		clientToUpdate.setEmail(client.getEmail());
-//		clientToUpdate.setFraudulent(client.isFraudulent());
-//		clientToUpdate.setMobilePhone(client.getMobilePhone());
-//		clientToUpdate.setMonthlyPay(newMonthlyPay);
-//		clientToUpdate.setName(client.getName());
-//		clientToUpdate.setPassword(client.getPassword());
-//		clientToUpdate.setPostalCode(client.getPostalCode());
-//		clientToUpdate.setServiceName(client.getServiceName());
-//		clientToUpdate.setStatus(client.isStatus());
-
-		float newMonthlyPay = serviceRepository.findByName(client.getServiceName()).get(0).getPrice();
-		client.setMonthlyPay(newMonthlyPay);
-		clientRepository.save(client);
-		String message = "Atualização bem sucedida.";
-		
-		return new ResponseEntity<>(new ResponseMessage(message), HttpStatus.OK);
-		}
-		catch(ClassCastException e)
-		{
-			return new ResponseEntity<Client>(client, HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-		catch(IndexOutOfBoundsException e)
-		{	
-			String message;
-			
-			if (!clientRepository.existsById(clientId))
-			{
-				message = "Id de cliente não existe.";
-			}
-			else if (!serviceRepository.existsByName(client.getServiceName()))
-			{
-				message = "O nome do novo serviço não se encontra na lista de serviços disponíveis.";
-			}
-			else {
-				message = null;
-			}
-			return new ResponseEntity<String>(message,HttpStatus.INTERNAL_SERVER_ERROR);
-		}
 	}
 }

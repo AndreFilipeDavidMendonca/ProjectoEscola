@@ -34,11 +34,34 @@ public class ServicesController {
 	DateFormatHelper dateFormatHelper;
 	
 	//Obtain list of services (accessible to ADMIN and EMPLOYEE)
-	@RequestMapping(path = "/servicesTable", produces= {"application/json"})
+	@GetMapping(path = "/servicesTable", produces= {"application/json"})
 	public List<Services> getServices()
 	{
 		return (List<Services>) serviceRepository.findAll();
 	}
+	
+	//Update service details
+	@PutMapping(path = "/servicesTable")
+	public ResponseEntity<?> updateService (@RequestBody Services service)
+	{
+		String message;
+	               
+	 if (serviceRepository.existsById(service.getServiceID()))
+	 	{   
+		 String serviceName = serviceRepository.findById(service.getServiceID()).get().getName();
+	          
+	     message = serviceName + " foi atualizado.";
+	           
+	     serviceRepository.save(service);
+	           
+	     return new ResponseEntity<>(new ResponseMessage(message), HttpStatus.OK);
+	     }
+	 else
+	     {
+		 message = "O serviço não existe.";
+		 return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+	     }
+	}	
 	
 	//Obtain list of services for home page (accessible to all)
 	@GetMapping(path = "/home", produces= {"application/json"})
@@ -85,29 +108,6 @@ public class ServicesController {
 		message = "O serviço " + name + " foi registado com sucesso!";
 		return new ResponseEntity<>(new ResponseMessage(message), HttpStatus.OK);
 	}
-	
-	//Update service details
-	@PutMapping(path = "/servicesTable")
-    public ResponseEntity<?> updateService (@RequestBody Services service)
-    {
-        String message;
-               
-        if (serviceRepository.existsById(service.getServiceID()))
-        {   
-            String serviceName = serviceRepository.findById(service.getServiceID()).get().getName();
-          
-            message = serviceName + " foi atualizado.";
-           
-            serviceRepository.save(service);
-           
-            return new ResponseEntity<>(new ResponseMessage(message), HttpStatus.OK);
-        }
-        else
-        {
-            message = "O serviço não existe.";
-            return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
-        }
-    }
 }
 
 
