@@ -11,6 +11,9 @@
                     <xsd:element name="ServiceID" type="xsd:int"/>
                     <xsd:element name="WorkerNumber" type="xsd:int"/>
                     <xsd:element name="ModificationDate" type="xsd:string"/>
+                    <xsd:element name="Address" type="xsd:string"/>
+                    <xsd:element name="PostalCode" type="xsd:string"/>
+                    <xsd:element name="Locality" type="xsd:string"/>
                 </xsd:sequence>
             </xsd:complexType>
         </xsd:element>
@@ -59,14 +62,14 @@
     <pd:activity name="Insert Associated Service">
         <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
-        <pd:x>176</pd:x>
+        <pd:x>175</pd:x>
         <pd:y>43</pd:y>
         <config>
             <timeout>10</timeout>
             <commit>false</commit>
             <emptyStrAsNil>false</emptyStrAsNil>
-            <statement>INSERT INTO associatedservices (clientnumber, serviceid, workernumber, modificationdate)
-VALUES (?, ?, ?, ?)</statement>
+            <statement>INSERT INTO associatedservices (clientnumber, serviceid, workernumber, modificationdate, address, postalcode, locality)
+VALUES (?, ?, ?, ?, ?, ?, ?)</statement>
             <jdbcSharedConfig>/Resources/JDBC/JDBC Connection.sharedjdbc</jdbcSharedConfig>
             <Prepared_Param_DataType>
                 <parameter>
@@ -85,6 +88,18 @@ VALUES (?, ?, ?, ?)</statement>
                     <parameterName>ModificationDate</parameterName>
                     <dataType>VARCHAR</dataType>
                 </parameter>
+                <parameter>
+                    <parameterName>Address</parameterName>
+                    <dataType>VARCHAR</dataType>
+                </parameter>
+                <parameter>
+                    <parameterName>PostalCode</parameterName>
+                    <dataType>VARCHAR</dataType>
+                </parameter>
+                <parameter>
+                    <parameterName>Locality</parameterName>
+                    <dataType>VARCHAR</dataType>
+                </parameter>
             </Prepared_Param_DataType>
         </config>
         <pd:inputBindings>
@@ -101,6 +116,15 @@ VALUES (?, ?, ?, ?)</statement>
                 <ModificationDate>
                     <xsl:value-of select="$Start/root/ModificationDate"/>
                 </ModificationDate>
+                <Address>
+                    <xsl:value-of select="$Start/root/Address"/>
+                </Address>
+                <PostalCode>
+                    <xsl:value-of select="$Start/root/PostalCode"/>
+                </PostalCode>
+                <Locality>
+                    <xsl:value-of select="$Start/root/Locality"/>
+                </Locality>
             </jdbcUpdateActivityInput>
         </pd:inputBindings>
     </pd:activity>

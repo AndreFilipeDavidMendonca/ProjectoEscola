@@ -46,8 +46,11 @@
         <xs:schema xmlns="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Client.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Client.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified">
             <xs:element name="Associated_Service_Info">
                 <xs:complexType>
+                    <xs:attribute name="address" type="xs:string"/>
                     <xs:attribute name="associatedServiceID" type="xs:string"/>
+                    <xs:attribute name="locality" type="xs:string"/>
                     <xs:attribute name="modificationDate" type="xs:string"/>
+                    <xs:attribute name="postalCode" type="xs:string"/>
                     <xs:attribute name="serviceID" type="xs:string"/>
                     <xs:attribute name="workerNumber" type="xs:string"/>
                 </xs:complexType>
@@ -104,13 +107,6 @@
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
-            <xs:element name="Get_Associated_Service_W">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element ref="ns1:Associated_Service_Info" minOccurs="0" maxOccurs="unbounded"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
             <xs:element name="Get_Client_All_Info_W">
                 <xs:complexType>
                     <xs:sequence>
@@ -127,8 +123,11 @@
             </xs:element>
             <xs:element name="Modify_Associated_Service_W">
                 <xs:complexType>
+                    <xs:attribute name="address" type="xs:string"/>
                     <xs:attribute name="associatedServiceID" type="xs:string"/>
+                    <xs:attribute name="locality" type="xs:string"/>
                     <xs:attribute name="modificationDate" type="xs:string"/>
+                    <xs:attribute name="postalCode" type="xs:string"/>
                     <xs:attribute name="serviceID" type="xs:string"/>
                 </xs:complexType>
             </xs:element>
@@ -145,8 +144,11 @@
             </xs:element>
             <xs:element name="New_Associated_Service_W">
                 <xs:complexType>
+                    <xs:attribute name="address" type="xs:string"/>
                     <xs:attribute name="clientNumber" type="xs:string"/>
+                    <xs:attribute name="locality" type="xs:string"/>
                     <xs:attribute name="modificationDate" type="xs:string"/>
+                    <xs:attribute name="postalCode" type="xs:string"/>
                     <xs:attribute name="serviceID" type="xs:string"/>
                 </xs:complexType>
             </xs:element>

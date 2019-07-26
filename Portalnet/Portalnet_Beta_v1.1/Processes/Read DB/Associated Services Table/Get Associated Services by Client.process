@@ -37,6 +37,15 @@
                     <ModificationDate>
                         <xsl:value-of select="modificationdate"/>
                     </ModificationDate>
+                    <Address>
+                        <xsl:value-of select="address"/>
+                    </Address>
+                    <PostalCode>
+                        <xsl:value-of select="postalcode"/>
+                    </PostalCode>
+                    <Locality>
+                        <xsl:value-of select="locality"/>
+                    </Locality>
                 </AssociatedServices>
             </xsl:for-each>
         </root>
@@ -55,6 +64,9 @@
                                 <xsd:element name="ServiceID" type="xsd:int"/>
                                 <xsd:element name="WorkerNumber" type="xsd:int"/>
                                 <xsd:element name="ModificationDate" type="xsd:string"/>
+                                <xsd:element name="Address" type="xsd:string"/>
+                                <xsd:element name="PostalCode" type="xsd:string"/>
+                                <xsd:element name="Locality" type="xsd:string"/>
                             </xsd:sequence>
                         </xsd:complexType>
                     </xsd:element>
@@ -116,8 +128,8 @@ WHERE clientnumber = ?</statement>
     <pd:activity name="Query Associated Services">
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-        <pd:x>333</pd:x>
-        <pd:y>42</pd:y>
+        <pd:x>336</pd:x>
+        <pd:y>43</pd:y>
         <config>
             <timeout>10</timeout>
             <commit>false</commit>
@@ -152,6 +164,18 @@ WHERE clientnumber = ?</statement>
             <QueryOutputCachedSchemaDataTypesName>INT</QueryOutputCachedSchemaDataTypesName>
             <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
             <QueryOutputCachedSchemaColumns>modificationdate</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>address</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>postalcode</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>locality</QueryOutputCachedSchemaColumns>
             <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
             <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
             <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>

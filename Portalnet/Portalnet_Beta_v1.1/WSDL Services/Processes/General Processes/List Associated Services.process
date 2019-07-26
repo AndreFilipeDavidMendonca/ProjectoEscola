@@ -23,7 +23,7 @@
                 </pfx5:Standard_Out_MSG>
             </header>
             <body>
-                <ns2:Get_Associated_Service_W>
+                <ns2:Get_Associated_Service_C>
                     <xsl:for-each select="$Get-Associated-Services-by-Client/root/AssociatedServices">
                         <ns2:Associated_Service_Info>
                             <xsl:attribute name="associatedServiceID">
@@ -32,15 +32,24 @@
                             <xsl:attribute name="serviceID">
                                 <xsl:value-of select="ServiceID"/>
                             </xsl:attribute>
-                            <xsl:attribute name="workerNumber">
-                                <xsl:value-of select="WorkerNumber"/>
-                            </xsl:attribute>
                             <xsl:attribute name="modificationDate">
                                 <xsl:value-of select="ModificationDate"/>
                             </xsl:attribute>
+                            <xsl:attribute name="workerNumber">
+                                <xsl:value-of select="WorkerNumber"/>
+                            </xsl:attribute>
+                            <xsl:attribute name="address">
+                                <xsl:value-of select="Address"/>
+                            </xsl:attribute>
+                            <xsl:attribute name="postalCode">
+                                <xsl:value-of select="PostalCode"/>
+                            </xsl:attribute>
+                            <xsl:attribute name="locality">
+                                <xsl:value-of select="Locality"/>
+                            </xsl:attribute>
                         </ns2:Associated_Service_Info>
                     </xsl:for-each>
-                </ns2:Get_Associated_Service_W>
+                </ns2:Get_Associated_Service_C>
             </body>
         </pfx6:List_Associated_Services_Out_msg>
     </pd:returnBindings>

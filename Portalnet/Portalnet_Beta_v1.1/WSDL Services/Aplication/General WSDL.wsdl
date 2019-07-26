@@ -2,8 +2,8 @@
 <definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:ns="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/WSDL.xsd" xmlns:tns="http://xmlns.example.com/1563532457786" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Service.xsd2" xmlns:ns4="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Invoice.xsd3" xmlns:ns3="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Client.xsd" targetNamespace="http://xmlns.example.com/1563532457786">
     <import namespace="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Service.xsd2" location="../../Resources/Schemas/Service.xsd"/>
     <import namespace="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Invoice.xsd3" location="../../Resources/Schemas/Invoice.xsd"/>
-    <import namespace="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Client.xsd" location="../../Resources/Schemas/Client.xsd"/>
     <import namespace="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/WSDL.xsd" location="../../Resources/Schemas/WSDL.xsd"/>
+    <import namespace="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Client.xsd" location="../../Resources/Schemas/Client.xsd"/>
     <message name="List_All_Services_In_msg">
         <part name="header" element="ns:Standard_In_MSG"/>
     </message>
@@ -17,7 +17,7 @@
     </message>
     <message name="List_Associated_Services_Out_msg">
         <part name="header" element="ns:Standard_Out_MSG"/>
-        <part name="body" element="ns3:Get_Associated_Service_W"/>
+        <part name="body" element="ns3:Get_Associated_Service_C"/>
     </message>
     <message name="List_Invoices_In_msg">
         <part name="header" element="ns:Standard_In_MSG"/>
