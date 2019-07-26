@@ -18,6 +18,7 @@ import com.polarising.PortalNet.Forms.LoginCredentials;
 import com.polarising.PortalNet.Repository.ClientRepository;
 import com.polarising.PortalNet.Repository.WorkersRepository;
 import com.polarising.PortalNet.Security.UserPrincipal;
+import com.polarising.PortalNet.Utilities.PortalNetHttpRequest;
 import com.polarising.PortalNet.jwt.JwtCreator;
 import com.polarising.PortalNet.jwt.JwtResponse;
 
@@ -34,11 +35,28 @@ public class UserController {
 	@Autowired
 	WorkersRepository workersRepository;
 	
+	@Autowired
+	PortalNetHttpRequest portalNetHttpRequest;
+	
 	//User login
 	@PostMapping(path = "/home")
 	public ResponseEntity<?> login(@RequestBody LoginCredentials user)
 	{
 		try{
+			
+			String requestBody = String.format("<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:wsdl=\"http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/WSDL.xsd\">"
+					+ "<soapenv:Header/>"
+					+ "<soapenv:Body>"
+					+ "<wsdl:Login_In email=\"%s\" password=\"%s\"/>"
+					+ "</soapenv:Body>"
+					+ "</soapenv:Envelope>", user.getEmail(),user.getPassword());			
+			
+			String soapAction = "/WSDL%2520Services/Aplication/Service.serviceagent/LoginEndpoint1/Verification";
+			
+			String response = portalNetHttpRequest.postToTibco("/WSDL%20Services/Aplication/Login%20Service.serviceagent/LoginEndpoint", requestBody, soapAction, 9012);
+			
+			System.err.println(response);
+			
 			Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword()));
 			
 			//Storing the details of the currently authenticated user (changing, if there was already one)

@@ -105,7 +105,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.and()
 			.authorizeRequests()
 			.antMatchers("/client/**").access("hasAuthority('CLIENT') or hasAuthority('EMPLOYEE') or hasAuthority('ADMIN')")
-			.antMatchers("/clientsTable", "/administrator", "/servicesTable", "/employeesTable/**",  "/createEmployee").access("hasAuthority('EMPLOYEE') or hasAuthority('ADMIN')")
+			.antMatchers("/clientsTable", "/administrator", "/servicesTable", "/employeesTable").access("hasAuthority('EMPLOYEE') or hasAuthority('ADMIN')")
 			.antMatchers("/**").access("hasAuthority('ADMIN')")
 			.anyRequest().authenticated()
 			.and()

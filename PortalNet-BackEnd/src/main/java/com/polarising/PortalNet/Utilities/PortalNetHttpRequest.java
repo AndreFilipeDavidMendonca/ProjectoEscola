@@ -14,37 +14,38 @@ import org.springframework.web.client.RestTemplate;
 @Component
 public class PortalNetHttpRequest {
 	
-	private final String url = "http://localhost:8080";
+	private final String url = "http://192.168.0.136:";
 	
 	private final RestTemplate restTemplate = new RestTemplate();
 	
-	public String get(String subPath)
-	{	
-		HttpHeaders headers = new HttpHeaders();
-		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-		HttpEntity<String> entity = new HttpEntity<String>(headers);
-		ResponseEntity<String> response = restTemplate.exchange(url + subPath,HttpMethod.GET,entity,String.class);
-		
-		return response.getBody();		
-	}
+//	public String get(String subPath)
+//	{	
+//		HttpHeaders headers = new HttpHeaders();
+//		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+//		HttpEntity<String> entity = new HttpEntity<String>(headers);
+//		ResponseEntity<String> response = restTemplate.exchange(url + subPath,HttpMethod.GET,entity,String.class);
+//		
+//		return response.getBody();		
+//	}
+//	
+//	public String post(String subPath, Object body)
+//	{
+//		HttpHeaders headers = new HttpHeaders();
+//		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+//		HttpEntity<Object> entity = new HttpEntity<Object>(body, headers);
+//		ResponseEntity<String> response = restTemplate.exchange(url + subPath,HttpMethod.POST,entity,String.class);
+//		
+//		return response.getBody();		
+//	}
 	
-	public String post(String subPath, Object body)
-	{
-		HttpHeaders headers = new HttpHeaders();
-		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-		HttpEntity<Object> entity = new HttpEntity<Object>(body, headers);
-		ResponseEntity<String> response = restTemplate.exchange(url + subPath,HttpMethod.POST,entity,String.class);
-		
-		return response.getBody();		
-	}
-	
-	public String postToTibco(String subPath, String body, String soapHeaderValue)
+	public String postToTibco(String subPath, String body, String soapHeaderValue, int port)
 	{
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_XML);
 		headers.add("SOAPAction", soapHeaderValue);
 		HttpEntity<Object> entity = new HttpEntity<Object>(body, headers);
-		ResponseEntity<String> response = restTemplate.exchange(url + subPath,HttpMethod.POST,entity,String.class);
+		System.err.println(url + port + subPath);
+		ResponseEntity<String> response = restTemplate.exchange(url + port + subPath,HttpMethod.POST,entity,String.class);
 		
 		return response.getBody();
 	}
