@@ -338,8 +338,8 @@ VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)</statement>
                 <timeout>10</timeout>
                 <commit>false</commit>
                 <emptyStrAsNil>false</emptyStrAsNil>
-                <statement>INSERT INTO associatedservices (clientnumber, serviceid, workernumber, modificationdate) 
-VALUES ( ?, ?, ?, ?)
+                <statement>INSERT INTO associatedservices (clientnumber, serviceid, workernumber, modificationdate, address, postalcode, locality) 
+VALUES ( ?, ?, ?, ?, ?, ?, ?)
 </statement>
                 <jdbcSharedConfig>/Resources/JDBC/JDBC Connection.sharedjdbc</jdbcSharedConfig>
                 <Prepared_Param_DataType>
@@ -359,6 +359,18 @@ VALUES ( ?, ?, ?, ?)
                         <parameterName>ModificationDate</parameterName>
                         <dataType>VARCHAR</dataType>
                     </parameter>
+                    <parameter>
+                        <parameterName>Address</parameterName>
+                        <dataType>VARCHAR</dataType>
+                    </parameter>
+                    <parameter>
+                        <parameterName>PostalCode</parameterName>
+                        <dataType>VARCHAR</dataType>
+                    </parameter>
+                    <parameter>
+                        <parameterName>Locality</parameterName>
+                        <dataType>VARCHAR</dataType>
+                    </parameter>
                 </Prepared_Param_DataType>
             </config>
             <pd:inputBindings>
@@ -375,6 +387,15 @@ VALUES ( ?, ?, ?, ?)
                     <ModificationDate>
                         <xsl:value-of select="$Start/root/AccessionDate"/>
                     </ModificationDate>
+                    <Address>
+                        <xsl:value-of select="$Start/root/Address"/>
+                    </Address>
+                    <PostalCode>
+                        <xsl:value-of select="$Start/root/PostalCode"/>
+                    </PostalCode>
+                    <Locality>
+                        <xsl:value-of select="$Start/root/Locality"/>
+                    </Locality>
                 </jdbcUpdateActivityInput>
             </pd:inputBindings>
         </pd:activity>

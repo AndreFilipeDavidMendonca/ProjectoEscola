@@ -10,6 +10,9 @@
                     <xsd:element name="ServiceID" type="xsd:int"/>
                     <xsd:element name="WorkerNumber" type="xsd:int"/>
                     <xsd:element name="ModificationDate" type="xsd:string"/>
+                    <xsd:element name="Address" type="xsd:string"/>
+                    <xsd:element name="PostalCode" type="xsd:string"/>
+                    <xsd:element name="Locality" type="xsd:string"/>
                 </xsd:sequence>
             </xsd:complexType>
         </xsd:element>
@@ -40,7 +43,7 @@
         </xsd:element>
     </pd:endType>
     <pd:endX>445</pd:endX>
-    <pd:endY>34</pd:endY>
+    <pd:endY>35</pd:endY>
     <pd:errorSchemas/>
     <pd:processVariables>
         <Var>
@@ -65,7 +68,7 @@
             <commit>false</commit>
             <emptyStrAsNil>false</emptyStrAsNil>
             <statement>UPDATE associatedservices 
-SET serviceid = ?, workernumber = ?, modificationdate = ?
+SET serviceid = ?, workernumber = ?, modificationdate = ?, address = ?, postalcode = ?, locality = ?
 WHERE associatedserviceid = ?</statement>
             <jdbcSharedConfig>/Resources/JDBC/JDBC Connection.sharedjdbc</jdbcSharedConfig>
             <Prepared_Param_DataType>
@@ -85,6 +88,18 @@ WHERE associatedserviceid = ?</statement>
                     <parameterName>AssociatedServiceID</parameterName>
                     <dataType>INTEGER</dataType>
                 </parameter>
+                <parameter>
+                    <parameterName>Address</parameterName>
+                    <dataType>VARCHAR</dataType>
+                </parameter>
+                <parameter>
+                    <parameterName>PostalCode</parameterName>
+                    <dataType>VARCHAR</dataType>
+                </parameter>
+                <parameter>
+                    <parameterName>Locality</parameterName>
+                    <dataType>VARCHAR</dataType>
+                </parameter>
             </Prepared_Param_DataType>
         </config>
         <pd:inputBindings>
@@ -101,6 +116,15 @@ WHERE associatedserviceid = ?</statement>
                 <AssociatedServiceID>
                     <xsl:value-of select="$Start/root/AssociatedServiceID"/>
                 </AssociatedServiceID>
+                <Address>
+                    <xsl:value-of select="$Start/root/Address"/>
+                </Address>
+                <PostalCode>
+                    <xsl:value-of select="$Start/root/PostalCode"/>
+                </PostalCode>
+                <Locality>
+                    <xsl:value-of select="$Start/root/Locality"/>
+                </Locality>
             </jdbcUpdateActivityInput>
         </pd:inputBindings>
     </pd:activity>

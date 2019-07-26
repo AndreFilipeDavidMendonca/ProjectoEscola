@@ -96,6 +96,15 @@
                 <ModificationDate>
                     <xsl:value-of select="$Start/pfx8:Associate_Service_In_msg/body/pfx7:New_Associated_Service_W/@modificationDate"/>
                 </ModificationDate>
+                <Address>
+                    <xsl:value-of select="$Start/pfx8:Associate_Service_In_msg/body/pfx7:New_Associated_Service_W/@address"/>
+                </Address>
+                <PostalCode>
+                    <xsl:value-of select="$Start/pfx8:Associate_Service_In_msg/body/pfx7:New_Associated_Service_W/@postalCode"/>
+                </PostalCode>
+                <Locality>
+                    <xsl:value-of select="$Start/pfx8:Associate_Service_In_msg/body/pfx7:New_Associated_Service_W/@locality"/>
+                </Locality>
             </root>
         </pd:inputBindings>
     </pd:activity>
