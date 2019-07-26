@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,7 +19,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import com.polarising.PortalNet.Security.UserDetailsService;
 
 public class JwtAuthFilter extends OncePerRequestFilter{
-
+	
 	@Autowired
 	JwtCreator jwtCreator;
 	
@@ -38,11 +39,14 @@ public class JwtAuthFilter extends OncePerRequestFilter{
 			{
 				String userName = jwtCreator.getJwtUsername(jwt);
 				
+				//If we can load the user, then we have authenticated it using the jwt
 				UserDetails user = userDetails.loadUserByUsername(userName);
 				UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
 				
+				//Optional
 				authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 				
+				//Needed to hold user details
 				SecurityContextHolder.getContext().setAuthentication(authentication);
 			}
 		}
