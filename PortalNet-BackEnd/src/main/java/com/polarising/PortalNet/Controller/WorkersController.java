@@ -50,7 +50,7 @@ public class WorkersController {
 		String message;
 		
 		try {
-			Workers worker = new Workers(workersForm.getName(), workersForm.getEmail()
+			Workers worker = new Workers(null, workersForm.getName(), workersForm.getEmail()
 										, workersForm.getRole(), workersForm.getPassword());
 			
 			//Hash password

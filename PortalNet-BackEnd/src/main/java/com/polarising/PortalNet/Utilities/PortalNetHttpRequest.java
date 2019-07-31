@@ -44,7 +44,6 @@ public class PortalNetHttpRequest {
 		headers.setContentType(MediaType.APPLICATION_XML);
 		headers.add("SOAPAction", soapHeaderValue);
 		HttpEntity<Object> entity = new HttpEntity<Object>(body, headers);
-		System.err.println(url + port + subPath);
 		ResponseEntity<String> response = restTemplate.exchange(url + port + subPath,HttpMethod.POST,entity,String.class);
 		
 		return response.getBody();

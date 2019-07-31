@@ -40,11 +40,11 @@ public class UserPrincipal implements UserDetails{
 		{
 		return Collections.singleton(new SimpleGrantedAuthority("CLIENT"));
 		}
-		else if (worker.getRole().equals("EMPLOYEE"))
+		else if (worker.getRole().equalsIgnoreCase("operator"))
 		{
 		return Collections.singleton(new SimpleGrantedAuthority("EMPLOYEE"));
 		}
-		else if (worker.getRole().equals("ADMIN")) {
+		else if (worker.getRole().equalsIgnoreCase("administrator")) {
 		return Collections.singleton(new SimpleGrantedAuthority("ADMIN"));
 		}
 		else {
