@@ -2,9 +2,13 @@ package com.polarising.PortalNet.Controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,18 +17,30 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.polarising.PortalNet.Forms.ServiceForm;
+import com.polarising.PortalNet.Repository.ClientRepository;
 import com.polarising.PortalNet.Repository.ServiceRepository;
+import com.polarising.PortalNet.Repository.WorkersRepository;
 import com.polarising.PortalNet.Response.ResponseMessage;
+import com.polarising.PortalNet.Security.UserPrincipal;
 import com.polarising.PortalNet.Utilities.DateFormatHelper;
 import com.polarising.PortalNet.Utilities.PortalNetHttpRequest;
+import com.polarising.PortalNet.Utilities.TibcoService;
 import com.polarising.PortalNet.model.Services;
 
 @RestController
 @CrossOrigin(origins = "*")
 public class ServicesController {
 	
+	private static final Logger logger = LoggerFactory.getLogger(ServicesController.class);
+	
 	@Autowired
 	ServiceRepository serviceRepository;
+	
+	@Autowired
+	ClientRepository clientRepository;
+	
+	@Autowired
+	WorkersRepository workersRepository;
 	
 	@Autowired
 	PortalNetHttpRequest httpRequest;
@@ -32,11 +48,19 @@ public class ServicesController {
 	@Autowired
 	DateFormatHelper dateFormatHelper;
 	
+	@Autowired
+	TibcoService tibcoService;
+	
 	//Obtain list of services (accessible to ADMIN and EMPLOYEE)
+	@SuppressWarnings("unchecked")
 	@GetMapping(path = "/servicesTable", produces= {"application/json"})
 	public List<Services> getServices()
 	{
-		return (List<Services>) serviceRepository.findAll();
+		UserPrincipal userPrincipal = (UserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String id = userPrincipal.getUsername();
+		String role = userPrincipal.getRole();
+		
+		return (List<Services>) tibcoService.transformList("Service", id, role, null);
 	}
 	
 	//Update service details
@@ -44,66 +68,74 @@ public class ServicesController {
 	public ResponseEntity<?> updateService (@RequestBody Services service)
 	{
 		String message;
-	               
-	 if (serviceRepository.existsById(service.getServiceID()))
-	 	{   
-		 String serviceName = serviceRepository.findById(service.getServiceID()).get().getName();
-	          
-	     message = serviceName + " foi atualizado.";
-	           
-	     serviceRepository.save(service);
-	           
-	     return new ResponseEntity<>(new ResponseMessage(message), HttpStatus.OK);
-	     }
-	 else
-	     {
-		 message = "O serviço não existe.";
-		 return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
-	     }
+		try{
+			UserPrincipal userPrincipal = (UserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			String id = userPrincipal.getUsername();
+			String role = userPrincipal.getRole();
+			
+			if (!tibcoService.compareServiceName(service.getName(), id, role))
+			{   	          
+				message = "O serviço não existe.";
+				return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+			}
+			else
+			{
+				tibcoService.performServiceModification(id, role, service);
+				message = service.getName() + " foi atualizado.";
+				return new ResponseEntity<>(new ResponseMessage(message), HttpStatus.OK);
+			}			
+		}
+		catch (AuthenticationCredentialsNotFoundException e) {
+			logger.error(e.getMessage());
+			message = "Falhou o acesso à base de dados.";
+			return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+		}
 	}	
 	
 	//Obtain list of services for home page (accessible to all)
+	@SuppressWarnings("unchecked")
 	@GetMapping(path = "/home", produces= {"application/json"})
 	public List<Services> getServicesForHomePage()
 	{
-		return (List<Services>) serviceRepository.findAll();
+		return (List<Services>) tibcoService.transformList("Service", null, null, null);
 	}
 	
 	//Get service by name
 	@GetMapping(path = "/registration/{name}", produces= {"application/json"})
 	public ResponseEntity<?> getByName(@PathVariable String name)
 	{	
-		return new ResponseEntity<List<Services>>((List<Services>) serviceRepository.findByName(name), HttpStatus.OK);
+		UserPrincipal userPrincipal = (UserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String id = userPrincipal.getUsername();
+		String role = userPrincipal.getRole();
+		
+		return new ResponseEntity<>(tibcoService.getServiceIDFromServiceList(name, id, role), HttpStatus.OK);
 	} 
 	
 	//Create a service
 	@PostMapping(path = "/createService", consumes = {"application/json"})
 	public ResponseEntity<?> registerService(@RequestBody ServiceForm serviceForm)
 	{	
+		UserPrincipal userPrincipal = (UserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String id = userPrincipal.getUsername();
+		String role = userPrincipal.getRole();
 		String message;
 
 		String name = serviceForm.getName();
-		String imgUrl = "assets/img/" + serviceForm.getImgName();
 		String creationDate = dateFormatHelper.dateFormater();
 		boolean status = true;
 		
 		Services newService = new Services(serviceForm.getName(), serviceForm.getTv(), serviceForm.getInternet(), serviceForm.getPhone(),
-											serviceForm.getMobilePhone(), serviceForm.getLoyalty(), serviceForm.getPrice(), creationDate, status, imgUrl, serviceForm.getImgName());
+											serviceForm.getMobilePhone(), serviceForm.getLoyalty(), serviceForm.getPrice(), creationDate, status, serviceForm.getImgUrl(), serviceForm.getImgName());
 
-		List<Services> servicesList = (List<Services>) serviceRepository.findAll();
 		
-		//Checking for services with the same name
-		for (Services service : servicesList)
+		if (tibcoService.compareServiceName(newService.getName(), id, role))
 		{
-			if (service.getName().equals(newService.getName()))
-			{
-				message = "Já existe um serviço com este nome!";
+			message = "Já existe um serviço com este nome!";
 				
-				return new ResponseEntity<String> (message, HttpStatus.CONFLICT);
-			} 
-		}
+			return new ResponseEntity<String> (message, HttpStatus.CONFLICT);
+		} 
 		
-		serviceRepository.save(newService);		
+		tibcoService.performServiceCreation(id, role, newService);
 		message = "O serviço " + name + " foi registado com sucesso!";
 		return new ResponseEntity<>(new ResponseMessage(message), HttpStatus.OK);
 	}

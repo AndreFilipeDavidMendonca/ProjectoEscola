@@ -3,9 +3,11 @@ package com.polarising.PortalNet.Security;
 import java.util.Collection;
 import java.util.Collections;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.polarising.PortalNet.model.Client;
 import com.polarising.PortalNet.model.Workers;
@@ -14,6 +16,9 @@ import javassist.NotFoundException;
 
 public class UserPrincipal implements UserDetails{
 
+	@Autowired
+	PasswordEncoder passwordEncoder;
+	
 	/**
 	 * 
 	 */
@@ -22,6 +27,8 @@ public class UserPrincipal implements UserDetails{
 	private Client client;
 	
 	private Workers worker;
+	
+	private String role;
 	
 	public UserPrincipal(Client client) {
 		super();
@@ -38,14 +45,17 @@ public class UserPrincipal implements UserDetails{
 		try {
 		if(client != null)
 		{
-		return Collections.singleton(new SimpleGrantedAuthority("CLIENT"));
+			this.role = "client";
+			return Collections.singleton(new SimpleGrantedAuthority("CLIENT"));
 		}
 		else if (worker.getRole().equalsIgnoreCase("operator"))
 		{
-		return Collections.singleton(new SimpleGrantedAuthority("EMPLOYEE"));
+			this.role = "operator";
+			return Collections.singleton(new SimpleGrantedAuthority("EMPLOYEE"));
 		}
 		else if (worker.getRole().equalsIgnoreCase("administrator")) {
-		return Collections.singleton(new SimpleGrantedAuthority("ADMIN"));
+			this.role = "administrator";
+			return Collections.singleton(new SimpleGrantedAuthority("ADMIN"));
 		}
 		else {
 				throw new NotFoundException("Authority not found.");
@@ -74,12 +84,20 @@ public class UserPrincipal implements UserDetails{
 		
 		if(client != null)
 		{
-		return client.getEmail();
+		return client.getClientId().toString();
 		}
 		else
 		{
-			return worker.getEmail();
+			return worker.getEmployeeId().toString();
 		}
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
 	}
 
 	@Override

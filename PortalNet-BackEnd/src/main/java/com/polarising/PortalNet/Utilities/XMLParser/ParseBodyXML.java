@@ -4,9 +4,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+
+@Service
 public class ParseBodyXML {
 	
-	public ArrayList<Map<String, String>> parseResponseXML( String response, String[] standardVars, String[] expectedVars) {
+	@Value("${portalnet.tibco.standardVars}")
+	private String[] standardVars;
+	
+	public ArrayList<Map<String, String>> parseResponseXML( String response, String[] specificVars) {
 		
 		ArrayList<Map<String, String>> mapList = new ArrayList<Map<String,String>>();
 
@@ -15,23 +22,28 @@ public class ParseBodyXML {
 			
 		String[] lines = aux2[0].split("<");
 		
-		mapList.add( getExpectedVarsByRow(response, standardVars) );
+		mapList.add( getVarsByRow(response, standardVars) );
 		
 		for (String line : lines) {
-			if( getExpectedVarsByRow(line, expectedVars) != null) {
-				mapList.add( getExpectedVarsByRow(line, expectedVars ) );
+			if( getVarsByRow(line, specificVars) != null) {
+				mapList.add( getVarsByRow(line, specificVars ) );
 			}
 		}
 					
 		return mapList;
 	}
 	
-	private static Map<String, String> getExpectedVarsByRow(String line, String[] expectedVars) {
+	private static Map<String, String> getVarsByRow(String line, String[] Vars) {
 		
 		boolean isEmpty = true;
-		Map<String, String> map = new HashMap<String, String>();	
+		Map<String, String> map = new HashMap<String, String>();
+		
+		if (Vars == null)
+		{
+			return null;
+		}
 
-		for (String var : expectedVars) {
+		for (String var : Vars) {
 			if(line.contains( var + "=" )) {
 				isEmpty = false;
 				String[] aux1 = line.split( var + "=\"");
@@ -44,5 +56,12 @@ public class ParseBodyXML {
 			return null;
 		}
 		return map;
+	}
+	
+	public void displayResponse(ArrayList<Map<String, String>> mapList)
+	{
+		for (Map<String, String> map : mapList) {
+			System.out.println(map);
+		}
 	}
 }

@@ -26,6 +26,14 @@ public class Workers {
         this.password = password;
     }
 
+	public Workers(Integer employeeId, String name, String email, String role) {
+		super();
+		this.employeeId = employeeId;
+		this.name = name;
+		this.email = email;
+		this.role = role;
+	}
+
 	public Integer getEmployeeId() {
 		return employeeId;
 	}

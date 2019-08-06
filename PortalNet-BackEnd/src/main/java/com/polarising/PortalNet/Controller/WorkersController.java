@@ -1,5 +1,6 @@
 package com.polarising.PortalNet.Controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -21,6 +22,7 @@ import com.polarising.PortalNet.Forms.WorkersForm;
 import com.polarising.PortalNet.Repository.WorkersRepository;
 import com.polarising.PortalNet.Response.ResponseMessage;
 import com.polarising.PortalNet.Utilities.PortalNetHttpRequest;
+import com.polarising.PortalNet.Utilities.TibcoService;
 import com.polarising.PortalNet.model.Workers;
 
 @RestController
@@ -36,11 +38,16 @@ public class WorkersController {
 	@Autowired
 	PasswordEncoder passwordEncoder;
 	
+	@Autowired
+	TibcoService tibcoService;
+	
 	//Obtains the employees table
 	@GetMapping(path = "/employeesTable", produces = {"application/json"})
 	public ResponseEntity<?> getWorkers()
 	{
-		return new ResponseEntity<List<Workers>>((List<Workers>) workersRepository.findAll(), HttpStatus.OK);
+		String[] credentials = tibcoService.getSecurityCredentials();
+				
+		return new ResponseEntity<>(tibcoService.transformList("Worker", credentials[0], credentials[1], null), HttpStatus.OK);
 	}
 	
 	//Creates an employee
