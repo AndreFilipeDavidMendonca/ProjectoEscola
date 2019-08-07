@@ -17,9 +17,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.polarising.PortalNet.Forms.ServiceForm;
-import com.polarising.PortalNet.Repository.ClientRepository;
-import com.polarising.PortalNet.Repository.ServiceRepository;
-import com.polarising.PortalNet.Repository.WorkersRepository;
 import com.polarising.PortalNet.Response.ResponseMessage;
 import com.polarising.PortalNet.Security.UserPrincipal;
 import com.polarising.PortalNet.Utilities.DateFormatHelper;
@@ -32,15 +29,6 @@ import com.polarising.PortalNet.model.Services;
 public class ServicesController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(ServicesController.class);
-	
-	@Autowired
-	ServiceRepository serviceRepository;
-	
-	@Autowired
-	ClientRepository clientRepository;
-	
-	@Autowired
-	WorkersRepository workersRepository;
 	
 	@Autowired
 	PortalNetHttpRequest httpRequest;
@@ -80,7 +68,7 @@ public class ServicesController {
 			}
 			else
 			{
-				tibcoService.performServiceModification(id, role, service);
+				tibcoService.modifyService(id, role, service);
 				message = service.getName() + " foi atualizado.";
 				return new ResponseEntity<>(new ResponseMessage(message), HttpStatus.OK);
 			}			
@@ -135,7 +123,7 @@ public class ServicesController {
 			return new ResponseEntity<String> (message, HttpStatus.CONFLICT);
 		} 
 		
-		tibcoService.performServiceCreation(id, role, newService);
+		tibcoService.createService(id, role, newService);
 		message = "O serviço " + name + " foi registado com sucesso!";
 		return new ResponseEntity<>(new ResponseMessage(message), HttpStatus.OK);
 	}

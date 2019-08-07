@@ -6,7 +6,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import com.polarising.PortalNet.Repository.ClientRepository;
-import com.polarising.PortalNet.Utilities.ClientNumberGenerator;
+import com.polarising.PortalNet.Utilities.NumberGenerator;
 import com.polarising.PortalNet.Utilities.DateFormatHelper;
 import com.polarising.PortalNet.model.Client;
 
@@ -23,7 +23,7 @@ public class ClientCommandLineRunner implements CommandLineRunner {
 	private DateFormatHelper dateFormatHelper;
 	
 	@Autowired
-	private ClientNumberGenerator clientNumberGenerator;
+	private NumberGenerator clientNumberGenerator;
 
 	public void run(String... args) throws Exception {
 	

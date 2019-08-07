@@ -4,9 +4,9 @@ import org.springframework.stereotype.Component;
 
 
 @Component
-public class ClientNumberGenerator {
+public class NumberGenerator {
 
-	public String generateClientNumber()
+	public String generateNumber()
 	{		
 		Long currentMillis = (System.currentTimeMillis() /1000);
 		

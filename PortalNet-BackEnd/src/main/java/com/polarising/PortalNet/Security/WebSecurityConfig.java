@@ -29,12 +29,6 @@ import com.polarising.PortalNet.model.Client;
 @EnableWebSecurity(debug = true)
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-
-	@Autowired
-	Client client;
-	
-	@Autowired
-	Workers worker;
 	
 	@Autowired
 	ClientRepository clientRepository;
@@ -43,7 +37,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	WorkersRepository workersRepository;
 	
 	@Autowired
-	private UserDetailsService userDetailsService;
+	private UserDetailsService
+	userDetailsService;
 	
 	@Autowired
 	private JwtAuthEntryPoint jwtAuthEntryPoint;

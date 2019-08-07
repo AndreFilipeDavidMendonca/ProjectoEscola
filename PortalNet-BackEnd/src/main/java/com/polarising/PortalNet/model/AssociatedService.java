@@ -5,11 +5,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class AssociatedService {
 
-    private int id;
+    private int associatedServiceID;
     private String serviceName;
     private String serviceID;
     private String installationAddress;
     private String postalCode;
+    private String locality;
     private String alterationDate;
     private String contractEndDate;
     private int workerNumber;
@@ -17,14 +18,15 @@ public class AssociatedService {
     
     public AssociatedService() {}
 
-    public AssociatedService(int id, String serviceName, String serviceID, String installationAddress, String postalCode,
-			String alterationDate, String contractEndDate, int workerNumber, float monthlyPay) {
+    public AssociatedService(int associatedServiceID, String serviceName, String serviceID, String installationAddress, String postalCode,
+			String locality, String alterationDate, String contractEndDate, int workerNumber, float monthlyPay) {
 		super();
-		this.id = id;
+		this.associatedServiceID = associatedServiceID;
 		this.serviceName = serviceName;
 		this.serviceID = serviceID;
 		this.installationAddress = installationAddress;
 		this.postalCode = postalCode;
+		this.locality = locality;
 		this.alterationDate = alterationDate;
 		this.contractEndDate = contractEndDate;
 		this.workerNumber = workerNumber;
@@ -32,24 +34,25 @@ public class AssociatedService {
 	}
     
 	public AssociatedService(String serviceName, String serviceID, String installationAddress, String postalCode,
-			String alterationDate, String contractEndDate, int workerNumber, float monthlyPay) {
+			String locality, String alterationDate, String contractEndDate, int workerNumber, float monthlyPay) {
 		super();
 		this.serviceName = serviceName;
 		this.serviceID = serviceID;
 		this.installationAddress = installationAddress;
 		this.postalCode = postalCode;
+		this.locality = locality;
 		this.alterationDate = alterationDate;
 		this.contractEndDate = contractEndDate;
 		this.workerNumber = workerNumber;
 		this.monthlyPay = monthlyPay;
 	}
 
-	public int getId() {
-		return id;
+	public int getAssociatedServiceID() {
+		return associatedServiceID;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setAssociatedServiceID(int associatedServiceID) {
+		this.associatedServiceID = associatedServiceID;
 	}
 
 	public String getServiceName() {
@@ -82,6 +85,14 @@ public class AssociatedService {
 
 	public void setPostalCode(String postalCode) {
 		this.postalCode = postalCode;
+	}
+
+	public String getLocality() {
+		return locality;
+	}
+
+	public void setLocality(String locality) {
+		this.locality = locality;
 	}
 
 	public String getAlterationDate() {
@@ -118,7 +129,7 @@ public class AssociatedService {
 
 	@Override
 	public String toString() {
-		return "AssociatedService [id=" + id + ", serviceName=" + serviceName + ", serviceID=" + serviceID
+		return "AssociatedService [id=" + associatedServiceID + ", serviceName=" + serviceName + ", serviceID=" + serviceID
 				+ ", installationAddress=" + installationAddress + ", postalCode=" + postalCode + ", alterationDate="
 				+ alterationDate + ", contractEndDate=" + contractEndDate + ", workerNumber=" + workerNumber
 				+ ", monthlyPay=" + monthlyPay + "]";

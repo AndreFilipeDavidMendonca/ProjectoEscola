@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -21,11 +20,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.polarising.PortalNet.Forms.ClientForm;
-import com.polarising.PortalNet.Repository.ClientRepository;
-import com.polarising.PortalNet.Repository.ServiceRepository;
 import com.polarising.PortalNet.Response.ResponseMessage;
 import com.polarising.PortalNet.Security.UserPrincipal;
-import com.polarising.PortalNet.Utilities.ClientNumberGenerator;
+import com.polarising.PortalNet.Utilities.NumberGenerator;
 import com.polarising.PortalNet.Utilities.DateFormatHelper;
 import com.polarising.PortalNet.Utilities.PortalNetHttpRequest;
 import com.polarising.PortalNet.Utilities.TibcoService;
@@ -42,19 +39,13 @@ public class ClientController {
 	private static final Logger logger = LoggerFactory.getLogger(ClientController.class);
 	
 	@Autowired
-	ClientRepository clientRepository;
-	
-	@Autowired
-	ServiceRepository serviceRepository;
-	
-	@Autowired
 	PortalNetHttpRequest httpRequest;
 	
 	@Autowired
 	PasswordEncoder passwordEncoder;
 	
 	@Autowired
-	ClientNumberGenerator clientNumberGenerator;
+	NumberGenerator clientNumberGenerator;
 	
 	@Autowired
 	PortalNetHttpRequest portalNetHttpRequest;
@@ -185,7 +176,7 @@ public class ClientController {
 		String role = userPrincipal.getRole();
 		
 		try{
-			tibcoService.performModifyClient(id, role, client, clientId);
+			tibcoService.modifyClient(id, role, client, clientId);
 			
 			return new ResponseEntity<String> ("Atualização bem sucedida.", HttpStatus.OK);
 		}
@@ -215,7 +206,7 @@ public class ClientController {
 			String id = userPrincipal.getUsername();
 			String role = userPrincipal.getRole();
 			
-			String clientNumber = clientNumberGenerator.generateClientNumber();
+			String clientNumber = clientNumberGenerator.generateNumber();
 			String entryDate = dateFormatHelper.dateFormater();
 			String endContract = dateFormatHelper.addYearToDate(entryDate, 1);
 			int numberOfServices = 1;
@@ -260,11 +251,11 @@ public class ClientController {
 				
 				if (client.getClientId() == newClient.getClientId())
 				{
-					clientNumber = clientNumberGenerator.generateClientNumber();
+					clientNumber = clientNumberGenerator.generateNumber();
 				}
 			}
 			
-			tibcoService.performClientRegist(id, role, newClient);
+			tibcoService.registClient(id, role, newClient);
 			
 			message = clientForm.getName() + " foi registado com sucesso!";
 			return new ResponseEntity<>(new ResponseMessage(message), HttpStatus.OK);

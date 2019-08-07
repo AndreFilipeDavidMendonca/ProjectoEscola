@@ -2,9 +2,6 @@ package com.polarising.PortalNet.Utilities;
 
 import java.util.Map;
 
-import static org.hamcrest.Matchers.emptyArray;
-import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,6 +25,7 @@ import javassist.NotFoundException;
 @Service
 public class TibcoService {
 	
+	@SuppressWarnings("unused")
 	private static final Logger logger = LoggerFactory.getLogger(TibcoService.class);
 	
 	//PORTS
@@ -122,7 +120,7 @@ public class TibcoService {
 	@Value("${portalnet.tibco.general.clientRegist.soapRequestBody}")
 	private String getClientRegistSoapRequestBody;
 	
-	//SERVICE CREATION
+	//CREATE SERVICE
 	@Value("${portalnet.tibco.admin.createService.subPath}")
 	private String getCreateServiceSubPath;
 	
@@ -142,7 +140,57 @@ public class TibcoService {
 	@Value("${portalnet.tibco.admin.modifyService.soapRequestBody}")
 	private String getModifyServiceSoapRequestBody;
 	
-
+	//CREATE WORKER
+	@Value("${portalnet.tibco.admin.createWorker.subPath}")
+	private String getCreateWorkerSubPath;
+	
+	@Value("${portalnet.tibco.admin.createWorker.soapAction}")
+	private String getCreateWorkerSoapAction;
+	
+	@Value("${portalnet.tibco.admin.createWorker.soapRequestBody}")
+	private String getCreateWorkerSoapRequestBody;
+	
+	//REMOVE WORKER
+	@Value("${portalnet.tibco.admin.removeWorker.subPath}")
+	private String getRemoveWorkerSubPath;
+	
+	@Value("${portalnet.tibco.admin.removeWorker.soapAction}")
+	private String getRemoveWorkerSoapAction;
+	
+	@Value("${portalnet.tibco.admin.removeWorker.soapRequestBody}")
+	private String getRemoveWorkerSoapRequestBody;
+	
+	//ASSOCIATE NEW SERVICE
+	@Value("${portalnet.tibco.worker.associateNewService.subPath}")
+	private String getAssociateNewServiceSubPath;
+	
+	@Value("${portalnet.tibco.worker.associateNewService.soapAction}")
+	private String getAssociateNewServiceSoapAction;
+	
+	@Value("${portalnet.tibco.worker.associateNewService.soapRequestBody}")
+	private String getAssociateNewServiceSoapRequestBody;
+	
+	//MODIFY ASSOCIATED SERVICE
+	@Value("${portalnet.tibco.worker.modifyAssociatedService.subPath}")
+	private String getModifyAssociatedServiceSubPath;
+	
+	@Value("${portalnet.tibco.worker.modifyAssociatedService.soapAction}")
+	private String getModifyAssociatedServiceSoapAction;
+	
+	@Value("${portalnet.tibco.worker.modifyAssociatedService.soapRequestBody}")
+	private String getModifyAssociatedServiceSoapRequestBody;
+	
+	//REMOVE ASSOCIATED SERVICE
+	@Value("${portalnet.tibco.worker.removeAssociatedService.subPath}")
+	private String getRemoveAssociatedServiceSubPath;
+	
+	@Value("${portalnet.tibco.worker.removeAssociatedService.soapAction}")
+	private String getRemoveAssociatedServiceSoapAction;
+	
+	@Value("${portalnet.tibco.worker.removeAssociatedService.soapRequestBody}")
+	private String getRemoveAssociatedServiceSoapRequestBody;
+	
+	
 	@Autowired
 	ParseBodyXML parseBodyXML;
 	
@@ -153,7 +201,7 @@ public class TibcoService {
 	DateFormatHelper dateFormatHelper;
 	
 	@Autowired
-	ClientNumberGenerator clientNumberGenerator;
+	NumberGenerator clientNumberGenerator;
 	
 	
 	/**
@@ -224,7 +272,7 @@ public class TibcoService {
 		return getListGeneric(idAuth, roleAuth, idUser, filledSoapRequestBody, subPath, soapAction, port, specificVars, objectName);
 	}
 	
-	public void performModifyClient(String idAuth, String roleAuth, Client client, int clientId)
+	public void modifyClient(String idAuth, String roleAuth, Client client, int clientId)
 	{		
 		String filledSoapRequestBody = String.format(getModifyClientSoapRequestBody, idAuth, roleAuth, client.isStatus(), client.isFraudulent(), "false",
 													client.getEntryDate(), client.getAddress(), client.getBirthDate(), client.getName(),
@@ -238,7 +286,7 @@ public class TibcoService {
 		tibcoSuccessCheck(mapList);
 	}
 	
-	public void performClientRegist(String idAuth, String roleAuth, Client client)
+	public void registClient(String idAuth, String roleAuth, Client client)
 	{
 		String filledSoapRequestBody = String.format(getClientRegistSoapRequestBody, idAuth, roleAuth,
 				client.getEntryDate(), client.getPassword(), getServiceIDFromServiceList(client.getServiceName(), idAuth, roleAuth), client.isStatus(), client.isFraudulent(),
@@ -253,7 +301,7 @@ public class TibcoService {
 		tibcoSuccessCheck(mapList);
 	}
 	
-	public void performServiceCreation(String idAuth, String roleAuth, Services service)
+	public void createService(String idAuth, String roleAuth, Services service)
 	{
 		String filledSoapRequestBody = String.format(getCreateServiceSoapRequestBody, idAuth, roleAuth, service.getImgUrl(),
 													service.isStatus(), service.getCreationDate(), service.getInternet(),
@@ -267,11 +315,75 @@ public class TibcoService {
 		tibcoSuccessCheck(mapList);
 	}
 	
-	public void performServiceModification(String idAuth, String roleAuth, Services service)
+	public void modifyService(String idAuth, String roleAuth, Services service)
 	{
 		String filledSoapRequestBody = String.format(getModifyServiceSoapRequestBody, idAuth, roleAuth, service.isStatus(), service.getServiceID());
 		
 		String response = portalNetHttpRequest.postToTibco(getModifyServiceSubPath, filledSoapRequestBody, getModifyServiceSoapAction, getAdminPort);
+		ArrayList<Map<String, String>> mapList = parseBodyXML.parseResponseXML(response, null);
+		
+		//Checking if the operation was successful
+		tibcoSuccessCheck(mapList);
+	}
+	
+	public void createWorker(String idAuth, String roleAuth, Workers worker)
+	{
+		String filledSoapRequestBody = String.format(getCreateWorkerSoapRequestBody, idAuth, roleAuth, worker.getPassword(), worker.getEmail(), worker.getRole(), worker.getName(), worker.getEmployeeId());
+		
+		String response = portalNetHttpRequest.postToTibco(getCreateWorkerSubPath, filledSoapRequestBody, getCreateWorkerSoapAction, getAdminPort);
+		ArrayList<Map<String, String>> mapList = parseBodyXML.parseResponseXML(response, null);
+		
+		//Checking if the operation was successful
+		tibcoSuccessCheck(mapList);
+	}
+	
+	public void removeWorker(String idAuth, String roleAuth, Integer employeeId)
+	{
+		String filledSoapRequestBody = String.format(getRemoveWorkerSoapRequestBody, idAuth, roleAuth, employeeId);
+		
+		String response = portalNetHttpRequest.postToTibco(getRemoveWorkerSubPath, filledSoapRequestBody, getRemoveWorkerSoapAction, getAdminPort);
+		ArrayList<Map<String, String>> mapList = parseBodyXML.parseResponseXML(response, null);
+		
+		//Checking if the operation was successful
+		tibcoSuccessCheck(mapList);
+	}
+	
+	public void associateNewService(String idAuth, String roleAuth, AssociatedService newAssociatedService, Integer clientNumber)
+	{
+		String filledSoapRequestBody = String.format(getAssociateNewServiceSoapRequestBody, idAuth, roleAuth,
+													newAssociatedService.getInstallationAddress(), clientNumber,
+													newAssociatedService.getLocality(), newAssociatedService.getAlterationDate(),
+													newAssociatedService.getPostalCode(), newAssociatedService.getServiceID());
+		
+		String response = portalNetHttpRequest.postToTibco(getAssociateNewServiceSubPath, filledSoapRequestBody, getAssociateNewServiceSoapAction, getWorkerPort);
+		ArrayList<Map<String, String>> mapList = parseBodyXML.parseResponseXML(response, null);
+		
+		//Checking if the operation was successful
+		tibcoSuccessCheck(mapList);
+	}
+	
+	public void updateAssociatedService(String idAuth, String roleAuth, AssociatedService updatedAssociatedService)
+	{
+		String filledSoapRequestBody = String.format(getModifyAssociatedServiceSoapRequestBody, idAuth, roleAuth,
+													updatedAssociatedService.getInstallationAddress(),
+													updatedAssociatedService.getAssociatedServiceID(),
+													updatedAssociatedService.getLocality(),
+													updatedAssociatedService.getAlterationDate(),
+													updatedAssociatedService.getPostalCode(),
+													updatedAssociatedService.getServiceID());
+		
+		String response = portalNetHttpRequest.postToTibco(getModifyAssociatedServiceSubPath, filledSoapRequestBody, getModifyAssociatedServiceSoapAction, getWorkerPort);
+		ArrayList<Map<String, String>> mapList = parseBodyXML.parseResponseXML(response, null);
+		
+		//Checking if the operation was successful
+		tibcoSuccessCheck(mapList);
+	}
+	
+	public void removeAssociatedService(String idAuth, String roleAuth, String associatedServiceID)
+	{
+		String filledSoapRequestBody = String.format(getRemoveAssociatedServiceSoapRequestBody, idAuth, roleAuth, associatedServiceID);
+		
+		String response = portalNetHttpRequest.postToTibco(getRemoveAssociatedServiceSubPath, filledSoapRequestBody, getRemoveAssociatedServiceSoapAction, getWorkerPort);
 		ArrayList<Map<String, String>> mapList = parseBodyXML.parseResponseXML(response, null);
 		
 		//Checking if the operation was successful
@@ -324,7 +436,7 @@ public class TibcoService {
 				
 				for (Map<String, String> map : mapList) {
 					AssociatedService associatedService = new AssociatedService(Integer.parseInt(map.get("associatedServiceID")), "serviceName empty", map.get("serviceID"), map.get("address"), 
-							map.get("postalCode"), map.get("modificationDate"), "endDate empty", Integer.parseInt(map.get("workerNumber")), 0);
+							map.get("postalCode"), map.get("locality"), map.get("modificationDate"), "endDate empty", Integer.parseInt(map.get("workerNumber")), 0);
 					
 					for (int i = 0; i < servicesList.size(); i++)
 					{
@@ -333,6 +445,7 @@ public class TibcoService {
 							associatedService.setServiceName(servicesList.get(i).getName());
 							associatedService.setContractEndDate(dateFormatHelper.addYearToDate(associatedService.getAlterationDate(), (servicesList.get(i).getLoyalty() / 12)));
 							associatedService.setMonthlyPay(servicesList.get(i).getPrice());
+							continue;
 						}
 					}
 					
@@ -347,7 +460,7 @@ public class TibcoService {
 																map.get("email"), map.get("gender"), map.get("accessionDate"), Boolean.parseBoolean(map.get("dishonest")), Boolean.parseBoolean(map.get("active")), map.get("birthDate"), "client");
 				
 					@SuppressWarnings("unchecked")
-					ArrayList<AssociatedService> associatedServicesList = (ArrayList<AssociatedService>) transformList("AssociatedService", idAuth, roleAuth, client);
+					ArrayList<AssociatedService> associatedServicesList = (ArrayList<AssociatedService>) transformList("AssociatedService", idAuth, roleAuth, client.getClientId());
 						
 					client.setServicesList(associatedServicesList);
 					client.setEndContract(dateFormatHelper.getLatestDate(associatedServicesList));
@@ -357,6 +470,7 @@ public class TibcoService {
 					
 					list.add(client);
 				}
+				break;
 				
 			case "Worker":
 				for (Map<String, String> map : mapList) {
@@ -364,6 +478,7 @@ public class TibcoService {
 					
 					list.add(worker);
 				}
+				break;
 		}
 	}
 	
@@ -416,6 +531,21 @@ public class TibcoService {
 		return totalMonthlyPay;
 	}
 	
+	public float getServiceMonthlyPay (String serviceID, String idAuth, String roleAuth)
+	{
+		@SuppressWarnings("unchecked")
+		List<Services> serviceslist = (List<Services>) transformList("Service", idAuth, roleAuth, null);
+		
+		for (Services service : serviceslist) {
+			if (serviceID.equals(service.getServiceID()))
+			{
+				return service.getPrice();
+			}
+		}
+		
+		return 0;
+	}
+	
 	public Client getClient (List<Object> clientList, int clientId) throws NotFoundException
 	{
 		Client client = null;
@@ -439,7 +569,7 @@ public class TibcoService {
 		return client;
 	}
 	
-	public ArrayList<?> transformList (String objectName, String idAuth, String roleAuth, Client client)
+	public ArrayList<?> transformList (String objectName, String idAuth, String roleAuth, Integer clientNumber)
 	{
 		
 		switch (objectName) {
@@ -455,7 +585,7 @@ public class TibcoService {
 			return servicesList;
 
 		case "AssociatedService":
-			List<Object> associatedServicesObjectList = performTibcoListAction("getAssociatedServices", idAuth, roleAuth, client.getClientId().toString());
+			List<Object> associatedServicesObjectList = performTibcoListAction("getAssociatedServices", idAuth, roleAuth, clientNumber.toString());
 			ArrayList<AssociatedService> associatedServicesList = new ArrayList<AssociatedService>();
 			for (Object associatedService : associatedServicesObjectList)
 			{
@@ -517,6 +647,23 @@ public class TibcoService {
 		return serviceID;
 	}
 	
+	public String getServiceNameFromServiceList(String serviceID, String idAuth, String roleAuth)
+	{
+		String serviceName = null;
+		
+		@SuppressWarnings("unchecked")
+		List<Services> services = (List<Services>) transformList("Service", idAuth, roleAuth, null);
+		
+		for (Services service : services) {
+			if (serviceID.equals(service.getServiceID()))
+			{
+				serviceName = service.getName();
+			}
+		}
+		
+		return serviceName;
+	}
+	
 	public boolean compareServiceName (String serviceName, String idAuth, String roleAuth)
 	{
 		@SuppressWarnings("unchecked")
@@ -529,6 +676,22 @@ public class TibcoService {
 			{				
 				return true;
 			} 
+		}
+		
+		return false;
+	}
+	
+	public boolean compareWorkerId (Integer employeeId, String idAuth, String roleAuth)
+	{
+		@SuppressWarnings("unchecked")
+		List<Workers> workersList = (List<Workers>) transformList("Worker", idAuth, roleAuth, null);
+		
+		//Checking for workers with the same Id
+		for (Workers worker : workersList) {
+			if (worker.getEmployeeId().equals(employeeId))
+			{
+				return true;
+			}
 		}
 		
 		return false;
