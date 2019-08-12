@@ -96,7 +96,8 @@ public class ServicesController {
 		String id = userPrincipal.getUsername();
 		String role = userPrincipal.getRole();
 		
-		return new ResponseEntity<>(tibcoService.getServiceIDFromServiceList(name, id, role), HttpStatus.OK);
+		System.err.println(name);
+		return new ResponseEntity<>(tibcoService.getServiceWithName(name, id, role), HttpStatus.OK);
 	} 
 	
 	//Create a service

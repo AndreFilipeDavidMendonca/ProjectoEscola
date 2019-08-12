@@ -178,7 +178,7 @@ public class ClientController {
 		try{
 			tibcoService.modifyClient(id, role, client, clientId);
 			
-			return new ResponseEntity<String> ("Atualização bem sucedida.", HttpStatus.OK);
+			return new ResponseEntity<> (new ResponseMessage("Atualização bem sucedida."), HttpStatus.OK);
 		}
 		catch(AuthenticationCredentialsNotFoundException e)
 		{

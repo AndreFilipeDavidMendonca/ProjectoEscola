@@ -70,7 +70,7 @@ public class AssociatedServiceController {
 	}
 	
 	//Updates an Associated Service
-	@PutMapping(path = "/client/{associatedServiceID}")
+	@PutMapping(path = "/client/{associatedServiceID}/andre")
 	public ResponseEntity<?> updateAssociatedService(@PathVariable String associatedServiceID, @RequestBody AssociatedServiceForm associatedService)
 	{
 		
