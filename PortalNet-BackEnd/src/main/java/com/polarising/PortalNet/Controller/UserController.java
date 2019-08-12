@@ -28,6 +28,7 @@ import com.polarising.PortalNet.Repository.WorkersRepository;
 import com.polarising.PortalNet.Security.UserDetailsService;
 import com.polarising.PortalNet.Security.UserPrincipal;
 import com.polarising.PortalNet.Utilities.PortalNetHttpRequest;
+import com.polarising.PortalNet.Utilities.TibcoService;
 import com.polarising.PortalNet.Utilities.XMLParser.ParseBodyXML;
 import com.polarising.PortalNet.jwt.JwtCreator;
 import com.polarising.PortalNet.jwt.JwtResponse;
@@ -60,6 +61,9 @@ public class UserController {
 	
 	@Autowired
 	ParseBodyXML parseBodyXML;
+	
+	@Autowired
+	TibcoService tibcoService;
 	
 	@Value("${portalnet.tibco.login.verification.soapAction}")
 	private String loginSoapAction;
@@ -101,27 +105,21 @@ public class UserController {
 	@PostMapping(path = "/home")
 	public ResponseEntity<?> login(@RequestBody LoginCredentials user)
 	{
-		try{			
-			String loginSoapRequestBody = String.format(getLoginSoapRequestBody, user.getEmail(), user.getPassword());
-			String response = portalNetHttpRequest.postToTibco(loginSubPath, loginSoapRequestBody, loginSoapAction, getLoginPort);
-			ArrayList<Map<String, String>> mapList = parseBodyXML.parseResponseXML(response, getLoginVars);	
+		try{	
+			String response;
+			ArrayList<Map<String, String>> mapList;
+
+			String[] credentials = tibcoService.login(user.getEmail(), user.getPassword());
 			
-			if (!mapList.get(0).get("message").equals("SUCCESS"))
-			{
-				throw new AuthenticationCredentialsNotFoundException(mapList.get(0).get("message") + "--> TIBCO action: " + mapList.get(0).get("error"));
-			}
+			String requestUserSoapRequestBody = String.format(getClientInfoSoapRequestBody, credentials[0], credentials[1], credentials[0]);
 			
-			String id = mapList.get(1).get("id");
-			String role = mapList.get(1).get("role");
-			String requestUserSoapRequestBody = String.format(getClientInfoSoapRequestBody, id, role, id);
-			
-			if (role.equalsIgnoreCase("client"))
+			if (credentials[1].equalsIgnoreCase("client"))
 			{
 				response = portalNetHttpRequest.postToTibco(getClientSubPath, requestUserSoapRequestBody, getClientSoapAction, 9010);
 				mapList = parseBodyXML.parseResponseXML(response, getClientInfoSpecificVars);
 				Client client = new Client();
 				client.setName(mapList.get(1).get("clientName"));
-				client.setClientId(Integer.parseInt(id));
+				client.setClientId(Integer.parseInt(credentials[0]));
 				client.setPassword(passwordEncoder.encode(user.getPassword()));
 				clientRepository.save(client);
 			}
@@ -132,7 +130,7 @@ public class UserController {
 				workersRepository.save(new Workers(Integer.parseInt(mapList.get(1).get("workerNumber")), mapList.get(1).get("workerName"), mapList.get(1).get("email"), mapList.get(1).get("role"), passwordEncoder.encode(user.getPassword())));
 			}
 				
-			Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(id, user.getPassword()));
+			Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(credentials[0], user.getPassword()));
 			
 			//Storing the details of the currently authenticated user (changing, if there was already one)
 			SecurityContextHolder.getContext().setAuthentication(authentication);

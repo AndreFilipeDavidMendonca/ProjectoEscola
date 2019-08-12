@@ -1,12 +1,16 @@
 package com.polarising.PortalNet.Controller;
 
 import org.slf4j.LoggerFactory;
+
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -66,9 +70,11 @@ public class AssociatedServiceController {
 	}
 	
 	//Updates an Associated Service
-	@PutMapping(path = "/updateAssociatedService")
-	public ResponseEntity<?> updateAssociatedService(@RequestBody AssociatedServiceForm associatedService)
+	@PutMapping(path = "/client/{associatedServiceID}")
+	public ResponseEntity<?> updateAssociatedService(@PathVariable String associatedServiceID, @RequestBody AssociatedServiceForm associatedService)
 	{
+		
+		//Estou a ir buscar o associatedServiceID ao form, e não ao Path. Ver isso com o André
 		String message;
 		
 		try{
@@ -109,6 +115,27 @@ public class AssociatedServiceController {
 			
 			message = "Serviço foi removido!";
 			return new ResponseEntity<>(new ResponseMessage(message), HttpStatus.OK);
+		}
+		catch (AuthenticationCredentialsNotFoundException e) {
+			logger.error(e.getMessage());
+			message = "Falhou o acesso à base de dados.";
+			return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	//Get a client's associated services
+	@GetMapping(path = "/associatedServices/{clientID}")
+	public ResponseEntity<?> getClientAssociatedServices(@PathVariable Integer clientID)
+	{
+		String message;
+		
+		try{
+			String[] credentials = tibcoService.getSecurityCredentials();
+			
+			@SuppressWarnings("unchecked")
+			List<AssociatedService> associatedServicesList = (List<AssociatedService>) tibcoService.transformList("AssociatedService", credentials[0], credentials[1], clientID);
+			
+			return new ResponseEntity<List<AssociatedService>>(associatedServicesList, HttpStatus.OK);
 		}
 		catch (AuthenticationCredentialsNotFoundException e) {
 			logger.error(e.getMessage());

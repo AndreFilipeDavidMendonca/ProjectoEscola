@@ -47,6 +47,19 @@ public class TibcoService {
 	//STANDARD VARS
 	@Value("${portalnet.tibco.standardVars}")
 	private String[] getStandardVars;
+	
+	//LOGIN
+	@Value("${portalnet.tibco.login.verification.soapAction}")
+	private String loginSoapAction;
+	
+	@Value("${portalnet.tibco.login.verification.subPath}")
+	private String loginSubPath;
+	
+	@Value("${portalnet.tibco.login.verification.specificVars}")
+	private String[] getLoginVars;
+	
+	@Value("${portalnet.tibco.login.verification.soapRequestBody}")
+	private String getLoginSoapRequestBody;
 
 	//GET ALL SERVICES
 	@Value("${portalnet.tibco.general.getAllServices.soapAction}")
@@ -209,6 +222,7 @@ public class TibcoService {
 	 * <ul>
 	 * <li> <i>getAllServices</i> <p>
 	 * <li> <i>getAllClients</i> <p>
+	 * <li> <i>getAllWorkers</i> <p>
 	 * </ul>
 	 * To obtain information about a specific user provide an <b>idUser</b> and pick one of the following actions:
 	 * <ul>
@@ -269,7 +283,7 @@ public class TibcoService {
 				break;
 		}
 		
-		return getListGeneric(idAuth, roleAuth, idUser, filledSoapRequestBody, subPath, soapAction, port, specificVars, objectName);
+		return getListGeneric(idAuth, roleAuth, filledSoapRequestBody, subPath, soapAction, port, specificVars, objectName);
 	}
 	
 	public void modifyClient(String idAuth, String roleAuth, Client client, int clientId)
@@ -389,6 +403,23 @@ public class TibcoService {
 		//Checking if the operation was successful
 		tibcoSuccessCheck(mapList);
 	}
+	
+	public String[] login(String userEmail, String userPassword)
+	{
+		String filledSoapRequestBody = String.format(getLoginSoapRequestBody, userEmail, userPassword);
+		
+		String response = portalNetHttpRequest.postToTibco(loginSubPath, filledSoapRequestBody, loginSoapAction, getLoginPort);
+		ArrayList<Map<String, String>> mapList = parseBodyXML.parseResponseXML(response, getLoginVars);
+		
+		//Checking if the operation was successful
+		tibcoSuccessCheck(mapList);
+		
+		String[] credentials;
+		
+		credentials = new String[] {mapList.get(1).get("id"), mapList.get(1).get("role")};
+		
+		return credentials;
+	}
 
 	/**
 	 * Method created to check if the id and role authentication made by TIBCO is successful.
@@ -417,7 +448,7 @@ public class TibcoService {
 	 * @param roleAuth
 	 * @param idUser
 	 */
-	public void getFillObject(ArrayList<Map<String, String>> mapList, List<Object> list, String objectName, String idAuth, String roleAuth, String idUser)
+	public void getFillObject(ArrayList<Map<String, String>> mapList, List<Object> list, String objectName, String idAuth, String roleAuth)
 	{
 		switch(objectName)
 		{
@@ -495,7 +526,7 @@ public class TibcoService {
 	 * @param objectName
 	 * @return
 	 */
-	public List<Object> getListGeneric(String idAuth, String roleAuth, String idUser, String filledSoapRequestBody, String subPath, String soapAction, int port, String[] specificVars, String objectName)
+	public List<Object> getListGeneric(String idAuth, String roleAuth, String filledSoapRequestBody, String subPath, String soapAction, int port, String[] specificVars, String objectName)
 	{
 		List<Object> list = new ArrayList<Object>();
 		String response = portalNetHttpRequest.postToTibco(subPath, filledSoapRequestBody, soapAction, port);
@@ -505,7 +536,7 @@ public class TibcoService {
 		tibcoSuccessCheck(mapList);
 		mapList.remove(0);
 		
-		getFillObject(mapList, list, objectName, idAuth, roleAuth, idUser);
+		getFillObject(mapList, list, objectName, idAuth, roleAuth);
 		
 		return list;
 	}
