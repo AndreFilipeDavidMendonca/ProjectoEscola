@@ -246,6 +246,19 @@ public class ClientController {
 			return new ResponseEntity<>(new ResponseMessage(message), HttpStatus.OK);
 		}
 		catch (AuthenticationCredentialsNotFoundException e) {
+			
+			if (e.getMessage().contains("Mobile Number"))
+			{
+				message = "Número de telemóvel já existe.";
+			}
+			else if(e.getMessage().contains("Nif"))
+			{
+				message = "Nif já existe.";
+			}
+			else if(e.getMessage().contains("email"))
+			{
+				message = "Email já existe.";
+			}
 			logger.error(e.getMessage());
 			message = "Falhou o acesso à base de dados.";
 			return new ResponseEntity<>(message, HttpStatus.UNAUTHORIZED);

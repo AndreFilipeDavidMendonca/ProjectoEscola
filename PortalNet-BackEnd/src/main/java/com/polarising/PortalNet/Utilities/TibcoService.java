@@ -700,6 +700,21 @@ public class TibcoService {
 		return null;
 	}
 	
+	public Services getServiceWithId(String serviceId, String idAuth, String roleAuth)
+	{
+		@SuppressWarnings("unchecked")
+		ArrayList<Services> servicesList = (ArrayList<Services>) transformList("Service", idAuth, roleAuth, null);
+		
+		for (Services service : servicesList) {
+			if (serviceId.equals(service.getServiceID().toString()))
+			{
+				return service;
+			}
+		}
+		
+		return null;
+	}
+	
 	public String getServiceNameFromServiceList(String serviceID, String idAuth, String roleAuth)
 	{
 		String serviceName = null;

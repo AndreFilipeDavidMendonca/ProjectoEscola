@@ -1,7 +1,6 @@
 package com.polarising.PortalNet.Controller;
 
 import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -89,7 +88,16 @@ public class ServicesController {
 		String[] credentials = tibcoService.getSecurityCredentials();
 		
 		return new ResponseEntity<>(tibcoService.getServiceWithName(name, credentials[0], credentials[1]), HttpStatus.OK);
-	} 
+	}
+	
+	//Get service by Id
+	@GetMapping(path = "/servicesTable/{serviceId}", produces= {"application/json"})
+	public ResponseEntity<?> getById(@PathVariable String serviceId)
+	{	
+		String[] credentials = tibcoService.getSecurityCredentials();
+			
+		return new ResponseEntity<>(tibcoService.getServiceWithId(serviceId, credentials[0], credentials[1]), HttpStatus.OK);
+	}
 	
 	//Create a service
 	@PostMapping(path = "/createService", consumes = {"application/json"})
