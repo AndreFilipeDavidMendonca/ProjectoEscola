@@ -3,6 +3,7 @@ package com.polarising.PortalNet.Security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -98,7 +99,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.and()
 			.authorizeRequests()
 			.antMatchers("/client/**").access("hasAuthority('CLIENT') or hasAuthority('EMPLOYEE') or hasAuthority('ADMIN')")
-			.antMatchers("/clientsTable", "/administrator", "/servicesTable", "/employeesTable").access("hasAuthority('EMPLOYEE') or hasAuthority('ADMIN')")
+			.antMatchers("/clientsTable", "/administrator", "/employeesTable").access("hasAuthority('EMPLOYEE') or hasAuthority('ADMIN')")
+			.antMatchers(HttpMethod.GET, "/servicesTable").access("hasAuthority('EMPLOYEE') or hasAuthority('ADMIN')")
 			.antMatchers("/**").access("hasAuthority('ADMIN')")
 			.anyRequest().authenticated()
 			.and()

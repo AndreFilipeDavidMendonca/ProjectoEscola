@@ -333,6 +333,8 @@ public class TibcoService {
 	{
 		String filledSoapRequestBody = String.format(getModifyServiceSoapRequestBody, idAuth, roleAuth, service.isStatus(), service.getServiceID());
 		
+		System.err.println(service.isStatus());
+		
 		String response = portalNetHttpRequest.postToTibco(getModifyServiceSubPath, filledSoapRequestBody, getModifyServiceSoapAction, getAdminPort);
 		ArrayList<Map<String, String>> mapList = parseBodyXML.parseResponseXML(response, null);
 		
@@ -719,6 +721,23 @@ public class TibcoService {
 		for (Services service : servicesList)
 		{
 			if (service.getName().equals(serviceName))
+			{				
+				return true;
+			} 
+		}
+		
+		return false;
+	}
+	
+	public boolean compareServiceId (String serviceId, String idAuth, String roleAuth)
+	{
+		@SuppressWarnings("unchecked")
+		List<Services> servicesList = (List<Services>) transformList("Service", idAuth, roleAuth, null);
+		
+		//Checking for services with the same name
+		for (Services service : servicesList)
+		{
+			if (service.getServiceID().toString().equals(serviceId))
 			{				
 				return true;
 			} 

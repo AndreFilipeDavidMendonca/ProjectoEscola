@@ -57,18 +57,16 @@ public class ServicesController {
 	{
 		String message;
 		try{
-			UserPrincipal userPrincipal = (UserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-			String id = userPrincipal.getUsername();
-			String role = userPrincipal.getRole();
+			String[] credentials = tibcoService.getSecurityCredentials();
 			
-			if (!tibcoService.compareServiceName(service.getName(), id, role))
+			if (!tibcoService.compareServiceId(service.getServiceID().toString(), credentials[0], credentials[1]))
 			{   	          
 				message = "O serviço não existe.";
 				return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
 			}
 			else
 			{
-				tibcoService.modifyService(id, role, service);
+				tibcoService.modifyService(credentials[0], credentials[1], service);
 				message = service.getName() + " foi atualizado.";
 				return new ResponseEntity<>(new ResponseMessage(message), HttpStatus.OK);
 			}			
@@ -92,21 +90,16 @@ public class ServicesController {
 	@GetMapping(path = "/registration/{name}", produces= {"application/json"})
 	public ResponseEntity<?> getByName(@PathVariable String name)
 	{	
-		UserPrincipal userPrincipal = (UserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		String id = userPrincipal.getUsername();
-		String role = userPrincipal.getRole();
+		String[] credentials = tibcoService.getSecurityCredentials();
 		
-		System.err.println(name);
-		return new ResponseEntity<>(tibcoService.getServiceWithName(name, id, role), HttpStatus.OK);
+		return new ResponseEntity<>(tibcoService.getServiceWithName(name, credentials[0], credentials[1]), HttpStatus.OK);
 	} 
 	
 	//Create a service
 	@PostMapping(path = "/createService", consumes = {"application/json"})
 	public ResponseEntity<?> registerService(@RequestBody ServiceForm serviceForm)
 	{	
-		UserPrincipal userPrincipal = (UserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		String id = userPrincipal.getUsername();
-		String role = userPrincipal.getRole();
+		String[] credentials = tibcoService.getSecurityCredentials();
 		String message;
 
 		String name = serviceForm.getName();
@@ -117,14 +110,14 @@ public class ServicesController {
 											serviceForm.getMobilePhone(), serviceForm.getLoyalty(), serviceForm.getPrice(), creationDate, status, serviceForm.getImgUrl(), serviceForm.getImgName());
 
 		
-		if (tibcoService.compareServiceName(newService.getName(), id, role))
+		if (tibcoService.compareServiceName(newService.getName(), credentials[0], credentials[1]))
 		{
 			message = "Já existe um serviço com este nome!";
 				
 			return new ResponseEntity<String> (message, HttpStatus.CONFLICT);
 		} 
 		
-		tibcoService.createService(id, role, newService);
+		tibcoService.createService(credentials[0], credentials[1], newService);
 		message = "O serviço " + name + " foi registado com sucesso!";
 		return new ResponseEntity<>(new ResponseMessage(message), HttpStatus.OK);
 	}
