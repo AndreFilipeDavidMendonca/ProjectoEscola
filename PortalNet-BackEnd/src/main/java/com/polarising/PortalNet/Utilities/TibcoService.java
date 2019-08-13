@@ -404,9 +404,9 @@ public class TibcoService {
 		tibcoSuccessCheck(mapList);
 	}
 	
-	public String[] login(String userEmail, String userPassword)
+	public String[] login(String userEmail)
 	{
-		String filledSoapRequestBody = String.format(getLoginSoapRequestBody, userEmail, userPassword);
+		String filledSoapRequestBody = String.format(getLoginSoapRequestBody, userEmail);
 		
 		String response = portalNetHttpRequest.postToTibco(loginSubPath, filledSoapRequestBody, loginSoapAction, getLoginPort);
 		ArrayList<Map<String, String>> mapList = parseBodyXML.parseResponseXML(response, getLoginVars);
@@ -416,7 +416,7 @@ public class TibcoService {
 		
 		String[] credentials;
 		
-		credentials = new String[] {mapList.get(1).get("id"), mapList.get(1).get("role")};
+		credentials = new String[] {mapList.get(1).get("id"), mapList.get(1).get("role"), mapList.get(1).get("password")};
 		
 		return credentials;
 	}

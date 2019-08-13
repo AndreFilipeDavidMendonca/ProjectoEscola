@@ -32,8 +32,6 @@ import com.polarising.PortalNet.Utilities.TibcoService;
 import com.polarising.PortalNet.Utilities.XMLParser.ParseBodyXML;
 import com.polarising.PortalNet.jwt.JwtCreator;
 import com.polarising.PortalNet.jwt.JwtResponse;
-import com.polarising.PortalNet.model.Client;
-import com.polarising.PortalNet.model.Workers;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -105,53 +103,46 @@ public class UserController {
 	@PostMapping(path = "/home")
 	public ResponseEntity<?> login(@RequestBody LoginCredentials user)
 	{
+		String jwt, name, message, response;
+		int id;
+		ArrayList<Map<String, String>> mapList;		
+		
 		try{	
-			String response;
-			ArrayList<Map<String, String>> mapList;
-
-			String[] credentials = tibcoService.login(user.getEmail(), user.getPassword());
-			
-			String requestUserSoapRequestBody = String.format(getClientInfoSoapRequestBody, credentials[0], credentials[1], credentials[0]);
-			
-			if (credentials[1].equalsIgnoreCase("client"))
-			{
-				response = portalNetHttpRequest.postToTibco(getClientSubPath, requestUserSoapRequestBody, getClientSoapAction, 9010);
-				mapList = parseBodyXML.parseResponseXML(response, getClientInfoSpecificVars);
-				Client client = new Client();
-				client.setName(mapList.get(1).get("clientName"));
-				client.setClientId(Integer.parseInt(credentials[0]));
-				client.setPassword(passwordEncoder.encode(user.getPassword()));
-				clientRepository.save(client);
-			}
-			else
-			{
-				response = portalNetHttpRequest.postToTibco(getWorkerSubPath, requestUserSoapRequestBody, getWorkerSoapAction, 9013);
-				mapList = parseBodyXML.parseResponseXML(response, getWorkerInfoSpecificVars);
-				workersRepository.save(new Workers(Integer.parseInt(mapList.get(1).get("workerNumber")), mapList.get(1).get("workerName"), mapList.get(1).get("email"), mapList.get(1).get("role"), passwordEncoder.encode(user.getPassword())));
-			}
-				
-			Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(credentials[0], user.getPassword()));
+			Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword()));
 			
 			//Storing the details of the currently authenticated user (changing, if there was already one)
 			SecurityContextHolder.getContext().setAuthentication(authentication);
 			
 			UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
-			String jwt;
-			String message = "Login bem sucedido.";
+			
+			//We make this request to obtain the user's name
+			String requestUserSoapRequestBody = String.format(getClientInfoSoapRequestBody, userPrincipal.getUsername(), userPrincipal.getRole(), userPrincipal.getUsername());
+			if (userPrincipal.getRole().equalsIgnoreCase("client"))
+			{
+				response = portalNetHttpRequest.postToTibco(getClientSubPath, requestUserSoapRequestBody, getClientSoapAction, 9010);
+				mapList = parseBodyXML.parseResponseXML(response, getClientInfoSpecificVars);
+			}
+			else
+			{
+				response = portalNetHttpRequest.postToTibco(getWorkerSubPath, requestUserSoapRequestBody, getWorkerSoapAction, 9013);
+				mapList = parseBodyXML.parseResponseXML(response, getWorkerInfoSpecificVars);
+			}
+			
+			message = "Login bem sucedido.";
 			
 			if (userPrincipal.getAuthorities().toString().equals("[CLIENT]"))
 				{
-					String clientName = clientRepository.findByClientId(Integer.parseInt(userPrincipal.getUsername())).get(0).getName();
-					int clientId = clientRepository.findByClientId(Integer.parseInt(userPrincipal.getUsername())).get(0).getClientId();
-					jwt = new JwtCreator().createJWT(authentication, clientId, clientName);
-					return new ResponseEntity<>(new JwtResponse(jwt, message, userPrincipal.getAuthorities(), clientId, clientName), HttpStatus.OK);
+					name = mapList.get(1).get("clientName");
+					id = Integer.parseInt(userPrincipal.getUsername());
+					jwt = new JwtCreator().createJWT(authentication, id, name);
+					return new ResponseEntity<>(new JwtResponse(jwt, message, userPrincipal.getAuthorities(), id, name), HttpStatus.OK);
 				}
 				else if (userPrincipal.getAuthorities().toString().equals("[EMPLOYEE]") || userPrincipal.getAuthorities().toString().equals("[ADMIN]"))
 				{
-					String employeeName = workersRepository.findByEmployeeId(Integer.parseInt(userPrincipal.getUsername())).get(0).getName();
-					int employeeId = workersRepository.findByEmployeeId(Integer.parseInt(userPrincipal.getUsername())).get(0).getEmployeeId();
-					jwt = new JwtCreator().createJWT(authentication, employeeId, employeeName);
-					return new ResponseEntity<>(new JwtResponse(jwt, message, userPrincipal.getAuthorities(), employeeId, employeeName), HttpStatus.OK);
+					name = mapList.get(1).get("workerName");
+					id = Integer.parseInt(userPrincipal.getUsername());
+					jwt = new JwtCreator().createJWT(authentication, Integer.parseInt(userPrincipal.getUsername()), name);
+					return new ResponseEntity<>(new JwtResponse(jwt, message, userPrincipal.getAuthorities(), id , name), HttpStatus.OK);
 				}
 				else {
 					throw new AuthenticationCredentialsNotFoundException("Não foi possível encontrar o role do user.");
@@ -160,12 +151,12 @@ public class UserController {
 		catch(AuthenticationException e)
 		{
 			logger.error(e.getMessage());
-			String message = "Password ou email errados.";
+			message = "Password ou email errados.";
 			return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
 		}
 		catch (IndexOutOfBoundsException e) {
 			logger.error(e.getMessage());
-			String message = "Erro a verificar email ou a criar token.";
+			message = "Erro a verificar email ou a criar token.";
 			return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
 		}
 	}

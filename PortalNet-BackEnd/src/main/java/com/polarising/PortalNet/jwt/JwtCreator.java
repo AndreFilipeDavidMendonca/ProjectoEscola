@@ -45,7 +45,7 @@ public class JwtCreator {
 		
 		//Let's set the JWT claims
 		JwtBuilder builder = Jwts.builder()
-				.setSubject(userPrincipal.getUsername())
+				.setSubject(userPrincipal.getEmail())
 				.claim("userId", Id)
 				.claim("userName", name)
 				.claim("authorities", userPrincipal.getAuthorities())

@@ -46,6 +46,8 @@ public class AssociatedService {
 		this.workerNumber = workerNumber;
 		this.monthlyPay = monthlyPay;
 	}
+	
+	
 
 	public int getAssociatedServiceID() {
 		return associatedServiceID;

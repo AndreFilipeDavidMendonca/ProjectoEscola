@@ -18,12 +18,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import com.polarising.PortalNet.model.Workers;
 import com.polarising.PortalNet.Repository.ClientRepository;
 import com.polarising.PortalNet.Repository.WorkersRepository;
 import com.polarising.PortalNet.jwt.JwtAuthEntryPoint;
 import com.polarising.PortalNet.jwt.JwtAuthFilter;
-import com.polarising.PortalNet.model.Client;
 
 @Configuration
 @EnableWebSecurity(debug = true)

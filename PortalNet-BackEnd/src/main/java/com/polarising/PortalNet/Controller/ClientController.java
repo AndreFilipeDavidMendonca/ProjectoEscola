@@ -27,7 +27,9 @@ import com.polarising.PortalNet.Utilities.DateFormatHelper;
 import com.polarising.PortalNet.Utilities.PortalNetHttpRequest;
 import com.polarising.PortalNet.Utilities.TibcoService;
 import com.polarising.PortalNet.Utilities.XMLParser.ParseBodyXML;
+import com.polarising.PortalNet.model.AssociatedService;
 import com.polarising.PortalNet.model.Client;
+import com.polarising.PortalNet.model.Services;
 
 import javassist.NotFoundException;
 

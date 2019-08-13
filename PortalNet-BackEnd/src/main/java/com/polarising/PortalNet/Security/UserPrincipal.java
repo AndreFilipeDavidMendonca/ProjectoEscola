@@ -3,57 +3,46 @@ package com.polarising.PortalNet.Security;
 import java.util.Collection;
 import java.util.Collections;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.password.PasswordEncoder;
-
-import com.polarising.PortalNet.model.Client;
-import com.polarising.PortalNet.model.Workers;
 
 import javassist.NotFoundException;
 
 public class UserPrincipal implements UserDetails{
-
-	@Autowired
-	PasswordEncoder passwordEncoder;
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -278630287843293797L;
-
-	private Client client;
 	
-	private Workers worker;
-	
+	private String id;
 	private String role;
+	private String password;
+	private String email;
 	
-	public UserPrincipal(Client client) {
+	public UserPrincipal(String id, String role, String password, String email) {
 		super();
-		this.client = client;
+		this.id = id;
+		this.role = role;
+		this.password = password;
+		this.email = email;
 	}
-	
-	public UserPrincipal(Workers worker) {
-		super();
-		this.worker = worker;
-	}
-	
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		try {
-		if(client != null)
+		if(role.equalsIgnoreCase("client"))
 		{
 			this.role = "client";
 			return Collections.singleton(new SimpleGrantedAuthority("CLIENT"));
 		}
-		else if (worker.getRole().equalsIgnoreCase("operator"))
+		else if (role.equalsIgnoreCase("operator"))
 		{
 			this.role = "operator";
 			return Collections.singleton(new SimpleGrantedAuthority("EMPLOYEE"));
 		}
-		else if (worker.getRole().equalsIgnoreCase("administrator")) {
+		else if (role.equalsIgnoreCase("administrator")) {
 			this.role = "administrator";
 			return Collections.singleton(new SimpleGrantedAuthority("ADMIN"));
 		}
@@ -69,27 +58,13 @@ public class UserPrincipal implements UserDetails{
 	@Override
 	public String getPassword() {
 		
-		if(client != null)
-		{
-		return client.getPassword();
-		}
-		else
-		{
-			return worker.getPassword();
-		}
+		return password;
 	}
 
 	@Override
 	public String getUsername() {
 		
-		if(client != null)
-		{
-		return client.getClientId().toString();
-		}
-		else
-		{
-			return worker.getEmployeeId().toString();
-		}
+		return id;
 	}
 
 	public String getRole() {
@@ -118,6 +93,14 @@ public class UserPrincipal implements UserDetails{
 	@Override
 	public boolean isEnabled() {
 		return true;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 }

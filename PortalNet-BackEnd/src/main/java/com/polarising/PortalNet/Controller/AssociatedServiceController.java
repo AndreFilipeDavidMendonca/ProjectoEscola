@@ -124,8 +124,8 @@ public class AssociatedServiceController {
 	}
 	
 	//Get a client's associated services
-	@GetMapping(path = "/associatedServices/{clientID}")
-	public ResponseEntity<?> getClientAssociatedServices(@PathVariable Integer clientID)
+	@GetMapping(path = "/asServices/{clientId}")
+	public ResponseEntity<?> getClientAssociatedServices(@PathVariable Integer clientId)
 	{
 		String message;
 		
@@ -133,7 +133,7 @@ public class AssociatedServiceController {
 			String[] credentials = tibcoService.getSecurityCredentials();
 			
 			@SuppressWarnings("unchecked")
-			List<AssociatedService> associatedServicesList = (List<AssociatedService>) tibcoService.transformList("AssociatedService", credentials[0], credentials[1], clientID);
+			List<AssociatedService> associatedServicesList = (List<AssociatedService>) tibcoService.transformList("AssociatedService", credentials[0], credentials[1], clientId);
 			
 			return new ResponseEntity<List<AssociatedService>>(associatedServicesList, HttpStatus.OK);
 		}
