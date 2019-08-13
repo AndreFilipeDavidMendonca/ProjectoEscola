@@ -288,10 +288,15 @@ public class TibcoService {
 	
 	public void modifyClient(String idAuth, String roleAuth, Client client, int clientId)
 	{		
+		
+		System.err.println(client.isStatus());
+		System.err.println(client.isFraudulent());
 		String filledSoapRequestBody = String.format(getModifyClientSoapRequestBody, idAuth, roleAuth, client.isStatus(), client.isFraudulent(), "false",
 													client.getEntryDate(), client.getAddress(), client.getBirthDate(), client.getName(),
 													clientId, client.getEmail(), client.getGender(), client.getCity(), client.getMobilePhone(),
 													client.getNif(), client.getPhone(), client.getPostalCode());
+		
+		System.err.println(filledSoapRequestBody);
 		String response = portalNetHttpRequest.postToTibco(getModifyClientSubPath, filledSoapRequestBody, getModifyClientSoapAction, getWorkerPort);
 		
 		ArrayList<Map<String, String>> mapList = parseBodyXML.parseResponseXML(response, null);
@@ -300,10 +305,10 @@ public class TibcoService {
 		tibcoSuccessCheck(mapList);
 	}
 	
-	public void registClient(String idAuth, String roleAuth, Client client)
+	public void registClient(Client client)
 	{
-		String filledSoapRequestBody = String.format(getClientRegistSoapRequestBody, idAuth, roleAuth,
-				client.getEntryDate(), client.getPassword(), getServiceIDFromServiceList(client.getServiceName(), idAuth, roleAuth), client.isStatus(), client.isFraudulent(),
+		String filledSoapRequestBody = String.format(getClientRegistSoapRequestBody, client.getClientId(), client.getRole(),
+				client.getEntryDate(), client.getPassword(), getServiceIDFromServiceList(client.getServiceName(), "", ""), client.isStatus(), client.isFraudulent(),
 				"false", client.getEntryDate(), client.getAddress(), client.getBirthDate(), client.getName(), client.getClientId(),
 				client.getEmail(), client.getGender(), client.getCity(), client.getMobilePhone(), client.getNif(),
 				client.getPhone(), client.getPostalCode());
@@ -653,10 +658,10 @@ public class TibcoService {
 		@SuppressWarnings("unchecked")
 		ArrayList<Services> servicesList = (ArrayList<Services>) transformList("Service", idAuth, roleAuth, null);
 		
-		for (Services services : servicesList) {
-			if (serviceName.equals(services.getName()))
+		for (Services service : servicesList) {
+			if (serviceName.equals(service.getName()))
 			{
-				monthlyPay = services.getPrice();
+				monthlyPay = service.getPrice();
 			}
 		}
 		
