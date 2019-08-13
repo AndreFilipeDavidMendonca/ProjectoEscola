@@ -685,10 +685,10 @@ public class TibcoService {
 		return serviceID;
 	}
 	
-	public Services getServiceWithName(String serviceName, String idAuth, String roleAuth)
+	public Services getServiceWithName(String serviceName)
 	{
 		@SuppressWarnings("unchecked")
-		ArrayList<Services> servicesList = (ArrayList<Services>) transformList("Service", idAuth, roleAuth, null);
+		ArrayList<Services> servicesList = (ArrayList<Services>) transformList("Service", "", "", null);
 		
 		for (Services service : servicesList) {
 			if (serviceName.equals(service.getName()))
@@ -700,10 +700,10 @@ public class TibcoService {
 		return null;
 	}
 	
-	public Services getServiceWithId(String serviceId, String idAuth, String roleAuth)
+	public Services getServiceWithId(String serviceId)
 	{
 		@SuppressWarnings("unchecked")
-		ArrayList<Services> servicesList = (ArrayList<Services>) transformList("Service", idAuth, roleAuth, null);
+		ArrayList<Services> servicesList = (ArrayList<Services>) transformList("Service", "", "", null);
 		
 		for (Services service : servicesList) {
 			if (serviceId.equals(service.getServiceID().toString()))

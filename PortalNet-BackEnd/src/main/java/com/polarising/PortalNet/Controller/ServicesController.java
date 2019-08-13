@@ -87,7 +87,7 @@ public class ServicesController {
 	{	
 		String[] credentials = tibcoService.getSecurityCredentials();
 		
-		return new ResponseEntity<>(tibcoService.getServiceWithName(name, credentials[0], credentials[1]), HttpStatus.OK);
+		return new ResponseEntity<>(tibcoService.getServiceWithName(name), HttpStatus.OK);
 	}
 	
 	//Get service by Id
@@ -96,7 +96,7 @@ public class ServicesController {
 	{	
 		String[] credentials = tibcoService.getSecurityCredentials();
 			
-		return new ResponseEntity<>(tibcoService.getServiceWithId(serviceId, credentials[0], credentials[1]), HttpStatus.OK);
+		return new ResponseEntity<>(tibcoService.getServiceWithId(serviceId), HttpStatus.OK);
 	}
 	
 	//Create a service
