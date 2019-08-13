@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.polarising.PortalNet.Forms.ServiceForm;
 import com.polarising.PortalNet.Response.ResponseMessage;
-import com.polarising.PortalNet.Security.UserPrincipal;
 import com.polarising.PortalNet.Utilities.DateFormatHelper;
 import com.polarising.PortalNet.Utilities.PortalNetHttpRequest;
 import com.polarising.PortalNet.Utilities.TibcoService;
@@ -44,11 +42,9 @@ public class ServicesController {
 	@GetMapping(path = "/servicesTable", produces= {"application/json"})
 	public List<Services> getServices()
 	{
-		UserPrincipal userPrincipal = (UserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		String id = userPrincipal.getUsername();
-		String role = userPrincipal.getRole();
+		String[] credentials = tibcoService.getSecurityCredentials();
 		
-		return (List<Services>) tibcoService.transformList("Service", id, role, null);
+		return (List<Services>) tibcoService.transformList("Service", credentials[0], credentials[1], null);
 	}
 	
 	//Update service details

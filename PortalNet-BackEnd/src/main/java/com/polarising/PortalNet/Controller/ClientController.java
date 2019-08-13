@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,15 +20,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.polarising.PortalNet.Forms.ClientForm;
 import com.polarising.PortalNet.Response.ResponseMessage;
-import com.polarising.PortalNet.Security.UserPrincipal;
 import com.polarising.PortalNet.Utilities.NumberGenerator;
 import com.polarising.PortalNet.Utilities.DateFormatHelper;
 import com.polarising.PortalNet.Utilities.PortalNetHttpRequest;
 import com.polarising.PortalNet.Utilities.TibcoService;
 import com.polarising.PortalNet.Utilities.XMLParser.ParseBodyXML;
-import com.polarising.PortalNet.model.AssociatedService;
 import com.polarising.PortalNet.model.Client;
-import com.polarising.PortalNet.model.Services;
 
 import javassist.NotFoundException;
 
@@ -113,12 +109,9 @@ public class ClientController {
 		String message;
 		
 		try{
-			
-			UserPrincipal userPrincipal = (UserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-			String id = userPrincipal.getUsername();
-			String role = userPrincipal.getRole();
+			String[] credentials = tibcoService.getSecurityCredentials();
 
-			List<Object> clientsList = tibcoService.performTibcoListAction("getAllClients", id, role, null);
+			List<Object> clientsList = tibcoService.performTibcoListAction("getAllClients", credentials[0], credentials[1], null);
 			
 			return new ResponseEntity<List<Object>>((List<Object>) clientsList, HttpStatus.OK);
 		}
@@ -142,14 +135,10 @@ public class ClientController {
 	public ResponseEntity<?> getClientById(@PathVariable int clientId)
 	{	
 		String message;
-		
-		UserPrincipal userPrincipal = (UserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		String id = userPrincipal.getUsername();
-		String role = userPrincipal.getRole();
-		
-		List<Object> clientList = tibcoService.performTibcoListAction("getAllClients", id, role, null);
+		String[] credentials = tibcoService.getSecurityCredentials();
 		
 		try{
+			List<Object> clientList = tibcoService.performTibcoListAction("getAllClients", credentials[0], credentials[1], null);
 			Client client = tibcoService.getClient(clientList, clientId);
 			
 			return new ResponseEntity<Client> (client, HttpStatus.OK);
@@ -172,13 +161,10 @@ public class ClientController {
 	public ResponseEntity<?> updateClient(@PathVariable int clientId, @RequestBody Client client)
 	{
 		String message;
-		
-		UserPrincipal userPrincipal = (UserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		String id = userPrincipal.getUsername();
-		String role = userPrincipal.getRole();
+		String[] credentials = tibcoService.getSecurityCredentials();
 		
 		try{
-			tibcoService.modifyClient(id, role, client, clientId);
+			tibcoService.modifyClient(credentials[0], credentials[1], client, clientId);
 			
 			return new ResponseEntity<> (new ResponseMessage("Atualização bem sucedida."), HttpStatus.OK);
 		}
@@ -202,17 +188,15 @@ public class ClientController {
 	public ResponseEntity<?> registerClient(@RequestBody ClientForm clientForm)
 	{	
 		String message;
+		String[] credentials = tibcoService.getSecurityCredentials();
 		
 		try{
-			UserPrincipal userPrincipal = (UserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-			String id = userPrincipal.getUsername();
-			String role = userPrincipal.getRole();
 			
 			String clientNumber = clientNumberGenerator.generateNumber();
 			String entryDate = dateFormatHelper.dateFormater();
 			String endContract = dateFormatHelper.addYearToDate(entryDate, 1);
 			int numberOfServices = 1;
-			float monthlyPay = tibcoService.getServicePriceFromServiceList(clientForm.getServiceName(), id, role);
+			float monthlyPay = tibcoService.getServicePriceFromServiceList(clientForm.getServiceName(), credentials[0], credentials[1]);
 			boolean fraudulent = false;
 			boolean status = true;
 			String clientRole = "client";
@@ -227,7 +211,7 @@ public class ClientController {
 			newClient.setPassword(passwordEncoder.encode(newClient.getPassword()));
 			
 			@SuppressWarnings("unchecked")
-			List<Client> clientsList = (List<Client>) tibcoService.transformList("Client", id, role, null);
+			List<Client> clientsList = (List<Client>) tibcoService.transformList("Client", credentials[0], credentials[1], null);
 			
 			//Checking for already existing clients
 			for (Client client : clientsList)
@@ -257,7 +241,7 @@ public class ClientController {
 				}
 			}
 			
-			tibcoService.registClient(id, role, newClient);
+			tibcoService.registClient(credentials[0], credentials[1], newClient);
 			
 			message = clientForm.getName() + " foi registado com sucesso!";
 			return new ResponseEntity<>(new ResponseMessage(message), HttpStatus.OK);

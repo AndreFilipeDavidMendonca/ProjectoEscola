@@ -50,8 +50,9 @@ public class WorkersController {
 	public ResponseEntity<?> getWorkers()
 	{
 		String message;
+		String[] credentials = tibcoService.getSecurityCredentials();
+
 		try{
-			String[] credentials = tibcoService.getSecurityCredentials();
 			
 			return new ResponseEntity<>(tibcoService.transformList("Worker", credentials[0], credentials[1], null), HttpStatus.OK);
 		}
@@ -67,9 +68,9 @@ public class WorkersController {
 	public ResponseEntity<?> registerWorker(@Valid @RequestBody WorkersForm workersForm)
 	{
 		String message;
+		String[] credentials = tibcoService.getSecurityCredentials();
 		
 		try {
-			String[] credentials = tibcoService.getSecurityCredentials();
 
 			Workers worker = new Workers(Integer.parseInt(numberGenerator.generateNumber()), workersForm.getName(), workersForm.getEmail()
 										, workersForm.getRole(), workersForm.getPassword());
@@ -122,8 +123,9 @@ public class WorkersController {
 	public ResponseEntity<?> deleteWorker(@PathVariable Integer employeeId)
 	{
 		String message;
+		String[] credentials = tibcoService.getSecurityCredentials();
+
 		try{
-			String[] credentials = tibcoService.getSecurityCredentials();
 			
 			if (tibcoService.compareWorkerId(employeeId, credentials[0], credentials[1]))
 			{
