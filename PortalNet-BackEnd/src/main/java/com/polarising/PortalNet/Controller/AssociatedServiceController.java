@@ -42,7 +42,7 @@ public class AssociatedServiceController {
 	
 	
 	//Associates a new service to a client
-	@PostMapping(path = "/client")
+	@PostMapping(path = "/")
 	public ResponseEntity<?> associateNewService(@RequestBody AssociatedServiceForm associatedService)
 	{
 		String message;
@@ -60,7 +60,7 @@ public class AssociatedServiceController {
 																			Integer.parseInt(credentials[0]),
 																			tibcoService.getServicePrice(associatedService.getServiceID(), false));
 			
-			tibcoService.associateNewService(credentials[0], credentials[1], newAssociatedService, Integer.parseInt(associatedService.getClientNumber()));
+			tibcoService.associateNewService(credentials[0], credentials[1], newAssociatedService, Integer.parseInt(associatedService.getClientId()));
 			message = "Serviço foi associado!";
 			return new ResponseEntity<>(new ResponseMessage(message), HttpStatus.OK);
 		}
@@ -105,7 +105,7 @@ public class AssociatedServiceController {
 	}
 	
 	//Remove an associated service from a client
-	@DeleteMapping(path = "/deleteAssociatedService/{associatedServiceID}")
+	@DeleteMapping(path = "client/deleteAsService/{associatedServiceID}")
 	public ResponseEntity<?> removeAssociatedService(@PathVariable String associatedServiceID)
 	{
 		String message;
@@ -119,14 +119,23 @@ public class AssociatedServiceController {
 			return new ResponseEntity<>(new ResponseMessage(message), HttpStatus.OK);
 		}
 		catch (AuthenticationCredentialsNotFoundException e) {
+			
+			if(e.getMessage().contains("Remove"))
+			{
+				message = "Não pode remover o último serviço.";
+			}
+			else
+			{
+				message = "Falhou o acesso à base de dados.";				
+			}
+
 			logger.error(e.getMessage());
-			message = "Falhou o acesso à base de dados.";
-			return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(message, HttpStatus.CONFLICT);
 		}
 	}
 	
 	//Get a client's associated services
-	@GetMapping(path = "/asServices/{clientId}")
+	@GetMapping(path = "client/asServices/{clientId}")
 	public ResponseEntity<?> getClientAssociatedServices(@PathVariable Integer clientId)
 	{
 		String message;
@@ -140,8 +149,9 @@ public class AssociatedServiceController {
 			return new ResponseEntity<List<AssociatedService>>(associatedServicesList, HttpStatus.OK);
 		}
 		catch (AuthenticationCredentialsNotFoundException e) {
+			
+			message = "Falhou o acesso à base de dados.";					
 			logger.error(e.getMessage());
-			message = "Falhou o acesso à base de dados.";
 			return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
 		}
 	}

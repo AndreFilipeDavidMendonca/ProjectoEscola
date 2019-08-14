@@ -150,8 +150,16 @@ public class UserController {
 		}
 		catch(AuthenticationException e)
 		{
+			if(e.getMessage().contains("Connection timed out"))
+			{
+				message = "Foi atingido o limite de tempo de espera.";
+			}
+			else
+			{
+				message = "Password ou email errados.";				
+			}
+			
 			logger.error(e.getMessage());
-			message = "Password ou email errados.";
 			return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
 		}
 		catch (IndexOutOfBoundsException e) {
