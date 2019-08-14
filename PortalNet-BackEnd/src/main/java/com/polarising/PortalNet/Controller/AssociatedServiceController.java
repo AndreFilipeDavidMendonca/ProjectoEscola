@@ -50,15 +50,15 @@ public class AssociatedServiceController {
 		try{
 			String[] credentials = tibcoService.getSecurityCredentials();
 			
-			AssociatedService newAssociatedService = new AssociatedService(tibcoService.getServiceNameFromServiceList(associatedService.getServiceID(),
-																			credentials[0], credentials[1]), associatedService.getServiceID(),
+			AssociatedService newAssociatedService = new AssociatedService(tibcoService.getServiceWithId(associatedService.getServiceID()).getName(),
+																			associatedService.getServiceID(),
 																			associatedService.getInstallationAddress(),
 																			associatedService.getPostalCode(),
 																			associatedService.getLocality(),
 																			dateFormatHelper.dateFormater(),
 																			dateFormatHelper.addYearToDate(dateFormatHelper.dateFormater(), 1),
 																			Integer.parseInt(credentials[0]),
-																			tibcoService.getServiceMonthlyPay(associatedService.getServiceID(),credentials[0], credentials[1]));
+																			tibcoService.getServicePrice(associatedService.getServiceID(), false));
 			
 			tibcoService.associateNewService(credentials[0], credentials[1], newAssociatedService, Integer.parseInt(associatedService.getClientNumber()));
 			message = "Serviço foi associado!";
@@ -82,15 +82,15 @@ public class AssociatedServiceController {
 		try{
 			String[] credentials = tibcoService.getSecurityCredentials();
 			
-			AssociatedService updatedAssociatedService = new AssociatedService(Integer.parseInt(associatedService.getAssociatedServiceID()), tibcoService.getServiceNameFromServiceList(associatedService.getServiceID(),
-					credentials[0], credentials[1]), associatedService.getServiceID(),
-					associatedService.getInstallationAddress(),
-					associatedService.getPostalCode(),
-					associatedService.getLocality(),
-					dateFormatHelper.dateFormater(),
-					dateFormatHelper.addYearToDate(dateFormatHelper.dateFormater(), 1),
-					Integer.parseInt(credentials[0]),
-					tibcoService.getServiceMonthlyPay(associatedService.getServiceID(),credentials[0], credentials[1]));
+			AssociatedService updatedAssociatedService = new AssociatedService(Integer.parseInt(associatedService.getAssociatedServiceID()), tibcoService.getServiceWithId(associatedService.getServiceID()).getName(),
+																			associatedService.getServiceID(),
+																			associatedService.getInstallationAddress(),
+																			associatedService.getPostalCode(),
+																			associatedService.getLocality(),
+																			dateFormatHelper.dateFormater(),
+																			dateFormatHelper.addYearToDate(dateFormatHelper.dateFormater(), 1),
+																			Integer.parseInt(credentials[0]),
+																			tibcoService.getServicePrice(associatedServiceID, false));
 
 			tibcoService.updateAssociatedService(credentials[0], credentials[1], updatedAssociatedService);
 			

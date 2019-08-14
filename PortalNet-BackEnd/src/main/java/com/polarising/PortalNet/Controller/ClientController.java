@@ -195,7 +195,7 @@ public class ClientController {
 			String entryDate = dateFormatHelper.dateFormater();
 			String endContract = dateFormatHelper.addYearToDate(entryDate, 1);
 			int numberOfServices = 1;
-			float monthlyPay = tibcoService.getServicePriceFromServiceList(clientForm.getServiceName(), "", "");
+			float monthlyPay = tibcoService.getServicePrice(clientForm.getServiceName(), true);
 			boolean fraudulent = false;
 			boolean status = true;
 			String clientRole = "client";
@@ -220,17 +220,19 @@ public class ClientController {
 			{
 				message = "Número de telemóvel já existe.";
 			}
-			else if(e.getMessage().contains("Nif"))
+			else if(e.getMessage().contains("NIF"))
 			{
 				message = "Nif já existe.";
 			}
-			else if(e.getMessage().contains("email"))
+			else if(e.getMessage().contains("Email"))
 			{
 				message = "Email já existe.";
 			}
+			else {
+				message = "Falhou o acesso à base de dados.";				
+			}
 			logger.error(e.getMessage());
-			message = "Falhou o acesso à base de dados.";
-			return new ResponseEntity<>(message, HttpStatus.UNAUTHORIZED);
+			return new ResponseEntity<>(message, HttpStatus.CONFLICT);
 		}
 	}
 }
