@@ -209,37 +209,6 @@ public class ClientController {
 			//Hashing the password
 			newClient.setPassword(passwordEncoder.encode(newClient.getPassword()));
 			
-//			@SuppressWarnings("unchecked")
-//			List<Client> clientsList = (List<Client>) tibcoService.transformList("Client", credentials[0], credentials[1], null);
-//			
-//			//Checking for already existing clients
-//			for (Client client : clientsList)
-//			{
-//				if (client.getNif() == newClient.getNif())
-//				{
-//					message = "Já existe um utilizador com este NIF!";
-//					
-//					return new ResponseEntity<String> (message, HttpStatus.CONFLICT);
-//				}
-//				else if (client.getEmail().equals(newClient.getEmail()))
-//				{
-//					message = "Já existe um utilizador com este email!";
-//					
-//					return new ResponseEntity<String> (message, HttpStatus.CONFLICT);
-//				}
-//				else if ((client.getMobilePhone() == newClient.getMobilePhone()) && newClient.getMobilePhone() != -1)
-//				{
-//					message = "Já existe um utilizador com este número de telemóvel!";
-//					
-//					return new ResponseEntity<String> (message, HttpStatus.CONFLICT);
-//				}
-//				
-//				if (client.getClientId() == newClient.getClientId())
-//				{
-//					clientNumber = clientNumberGenerator.generateNumber();
-//				}
-//			}
-			
 			tibcoService.registClient(newClient);
 			
 			message = clientForm.getName() + " foi registado com sucesso!";
