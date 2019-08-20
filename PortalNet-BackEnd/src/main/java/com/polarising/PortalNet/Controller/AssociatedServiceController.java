@@ -42,7 +42,7 @@ public class AssociatedServiceController {
 	
 	
 	//Associates a new service to a client
-	@PostMapping(path = "/")
+	@PostMapping(path = "client/registerAsServices")
 	public ResponseEntity<?> associateNewService(@RequestBody AssociatedServiceForm associatedService)
 	{
 		String message;
@@ -72,7 +72,7 @@ public class AssociatedServiceController {
 	}
 	
 	//Updates an Associated Service
-	@PutMapping(path = "/client/{associatedServiceID}/andre")
+	@PutMapping(path = "client/asServiceslol/{associatedServiceID}")
 	public ResponseEntity<?> updateAssociatedService(@PathVariable String associatedServiceID, @RequestBody AssociatedServiceForm associatedService)
 	{
 		
