@@ -24,6 +24,11 @@
                                     <xsl:value-of select="$Var/root/id"/>
                                 </xsl:attribute>
                             </xsl:if>
+                            <xsl:if test="$Var/root/password">
+                                <xsl:attribute name="password">
+                                    <xsl:value-of select="$Var/root/password"/>
+                                </xsl:attribute>
+                            </xsl:if>
                             <pfx2:Standard_Out_MSG>
                                 <xsl:attribute name="message">
                                     <xsl:value-of select="$Var/root/message"/>
@@ -68,6 +73,7 @@
                         <xsd:element name="error" type="xsd:string" minOccurs="0"/>
                         <xsd:element name="role" type="xsd:string" minOccurs="0"/>
                         <xsd:element name="id" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="password" type="xsd:string" minOccurs="0"/>
                     </xsd:sequence>
                 </xsd:complexType>
             </xsd:element>
@@ -87,17 +93,14 @@
                 <Email>
                     <xsl:value-of select="$Start/pfx4:Login_In_msg/login_in/pfx2:Login_In/@email"/>
                 </Email>
-                <Password>
-                    <xsl:value-of select="$Start/pfx4:Login_In_msg/login_in/pfx2:Login_In/@password"/>
-                </Password>
             </root>
         </pd:inputBindings>
     </pd:activity>
     <pd:activity name="Verify Worker Password">
         <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
         <pd:resourceType>ae.process.subprocess</pd:resourceType>
-        <pd:x>160</pd:x>
-        <pd:y>233</pd:y>
+        <pd:x>156</pd:x>
+        <pd:y>238</pd:y>
         <config>
             <processName>/Processes/Read DB/Workers Table/Verify Worker Password.process</processName>
         </config>
@@ -106,9 +109,6 @@
                 <Email>
                     <xsl:value-of select="$Start/pfx4:Login_In_msg/login_in/pfx2:Login_In/@email"/>
                 </Email>
-                <Password>
-                    <xsl:value-of select="$Start/pfx4:Login_In_msg/login_in/pfx2:Login_In/@password"/>
-                </Password>
             </root>
         </pd:inputBindings>
     </pd:activity>
@@ -167,6 +167,11 @@
                     <id>
                         <xsl:value-of select="$Verify-Client-Password/root/ClientNumber"/>
                     </id>
+                </xsl:if>
+                <xsl:if test="$Verify-Client-Password/root/Password">
+                    <password>
+                        <xsl:value-of select="$Verify-Client-Password/root/Password"/>
+                    </password>
                 </xsl:if>
             </root>
         </pd:inputBindings>

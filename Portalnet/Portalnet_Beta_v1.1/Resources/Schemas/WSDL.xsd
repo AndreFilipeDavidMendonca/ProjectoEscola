@@ -8,7 +8,6 @@
 	<xs:element name="Login_In">
 		<xs:complexType>
 			<xs:attribute name="email" type="xs:string"/>
-			<xs:attribute name="password" type="xs:string"/>
 		</xs:complexType>
 	</xs:element>
 	<xs:element name="Login_Out">
@@ -18,6 +17,7 @@
 			</xs:sequence>
 			<xs:attribute name="role" type="xs:string"/>
 			<xs:attribute name="id" type="xs:string"/>
+			<xs:attribute name="password" type="xs:string"/>
 		</xs:complexType>
 	</xs:element>
 	<xs:element name="Standard_Out_MSG">

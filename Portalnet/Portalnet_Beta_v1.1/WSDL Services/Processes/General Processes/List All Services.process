@@ -101,38 +101,6 @@
         </config>
         <pd:inputBindings/>
     </pd:activity>
-    <pd:activity name="Get Client by ID">
-        <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
-        <pd:resourceType>ae.process.subprocess</pd:resourceType>
-        <pd:x>175</pd:x>
-        <pd:y>34</pd:y>
-        <config>
-            <processName>/Processes/Read DB/Clients Table/Get Client by ID.process</processName>
-        </config>
-        <pd:inputBindings>
-            <root>
-                <ClientNumber>
-                    <xsl:value-of select="$Start/pfx6:List_All_Services_In_msg/header/pfx5:Standard_In_MSG/@id"/>
-                </ClientNumber>
-            </root>
-        </pd:inputBindings>
-    </pd:activity>
-    <pd:activity name="Get Worker by ID">
-        <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
-        <pd:resourceType>ae.process.subprocess</pd:resourceType>
-        <pd:x>173</pd:x>
-        <pd:y>139</pd:y>
-        <config>
-            <processName>/Processes/Read DB/Workers Table/Get Worker by ID.process</processName>
-        </config>
-        <pd:inputBindings>
-            <root>
-                <WorkerNumber>
-                    <xsl:value-of select="$Start/pfx6:List_All_Services_In_msg/header/pfx5:Standard_In_MSG/@id"/>
-                </WorkerNumber>
-            </root>
-        </pd:inputBindings>
-    </pd:activity>
     <pd:activity name="Assign 1">
         <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
         <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
@@ -185,52 +153,6 @@
         <pd:inputBindings/>
     </pd:activity>
     <pd:transition>
-        <pd:from>Start</pd:from>
-        <pd:to>Get Client by ID</pd:to>
-        <pd:xpathDescription>validation</pd:xpathDescription>
-        <pd:lineType>Default</pd:lineType>
-        <pd:lineColor>-16777216</pd:lineColor>
-        <pd:conditionType>xpath</pd:conditionType>
-        <pd:xpath>$Start/pfx6:List_All_Services_In_msg/header/pfx5:Standard_In_MSG/@id &gt; 0 and $Start/pfx6:List_All_Services_In_msg/header/pfx5:Standard_In_MSG/@id &lt; 10000000000
-and
-$Start/pfx6:List_All_Services_In_msg/header/pfx5:Standard_In_MSG/@role = $_globalVariables/ns:GlobalVariables/VarAplication/RoleType/Client</pd:xpath>
-    </pd:transition>
-    <pd:transition>
-        <pd:from>Start</pd:from>
-        <pd:to>Get Worker by ID</pd:to>
-        <pd:xpathDescription>validation</pd:xpathDescription>
-        <pd:lineType>Default</pd:lineType>
-        <pd:lineColor>-16777216</pd:lineColor>
-        <pd:conditionType>xpath</pd:conditionType>
-        <pd:xpath>$Start/pfx6:List_All_Services_In_msg/header/pfx5:Standard_In_MSG/@id &gt; 0 and $Start/pfx6:List_All_Services_In_msg/header/pfx5:Standard_In_MSG/@id &lt; 10000000000
-and
-(
-	$Start/pfx6:List_All_Services_In_msg/header/pfx5:Standard_In_MSG/@role = $_globalVariables/ns:GlobalVariables/VarAplication/RoleType/Admin
-	or
-	$Start/pfx6:List_All_Services_In_msg/header/pfx5:Standard_In_MSG/@role = $_globalVariables/ns:GlobalVariables/VarAplication/RoleType/Operator
-)</pd:xpath>
-    </pd:transition>
-    <pd:transition>
-        <pd:from>Get Client by ID</pd:from>
-        <pd:to>List All Services</pd:to>
-        <pd:xpathDescription>exist</pd:xpathDescription>
-        <pd:lineType>Default</pd:lineType>
-        <pd:lineColor>-16777216</pd:lineColor>
-        <pd:conditionType>xpath</pd:conditionType>
-        <pd:xpath>$Get-Client-by-ID/root/message = $_globalVariables/ns:GlobalVariables/VarAplication/MessageType/Exist</pd:xpath>
-    </pd:transition>
-    <pd:transition>
-        <pd:from>Get Worker by ID</pd:from>
-        <pd:to>List All Services</pd:to>
-        <pd:xpathDescription>exist</pd:xpathDescription>
-        <pd:lineType>Default</pd:lineType>
-        <pd:lineColor>-16777216</pd:lineColor>
-        <pd:conditionType>xpath</pd:conditionType>
-        <pd:xpath>$Get-Worker-by-ID/root/message = $_globalVariables/ns:GlobalVariables/VarAplication/MessageType/Exist
-and
-$Start/pfx6:List_All_Services_In_msg/header/pfx5:Standard_In_MSG/@role = $Get-Worker-by-ID/root/WorkerInfo/Role</pd:xpath>
-    </pd:transition>
-    <pd:transition>
         <pd:from>Catch</pd:from>
         <pd:to>Assign 2</pd:to>
         <pd:lineType>Default</pd:lineType>
@@ -254,6 +176,13 @@ $Start/pfx6:List_All_Services_In_msg/header/pfx5:Standard_In_MSG/@role = $Get-Wo
     <pd:transition>
         <pd:from>List All Services</pd:from>
         <pd:to>Assign 1</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Start</pd:from>
+        <pd:to>List All Services</pd:to>
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>
         <pd:conditionType>always</pd:conditionType>
