@@ -75,8 +75,8 @@
     </pd:returnBindings>
     <pd:endName>End</pd:endName>
     <pd:endType wsMsgRef="pfx6:List_All_Services_Out_msg"/>
-    <pd:endX>619</pd:endX>
-    <pd:endY>34</pd:endY>
+    <pd:endX>425</pd:endX>
+    <pd:endY>35</pd:endY>
     <pd:errorSchemas/>
     <pd:processVariables>
         <Var>
@@ -94,8 +94,8 @@
     <pd:activity name="List All Services">
         <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
         <pd:resourceType>ae.process.subprocess</pd:resourceType>
-        <pd:x>348</pd:x>
-        <pd:y>34</pd:y>
+        <pd:x>154</pd:x>
+        <pd:y>35</pd:y>
         <config>
             <processName>/Processes/Read DB/Services Table/List All Services.process</processName>
         </config>
@@ -104,8 +104,8 @@
     <pd:activity name="Assign 1">
         <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
         <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-        <pd:x>487</pd:x>
-        <pd:y>34</pd:y>
+        <pd:x>293</pd:x>
+        <pd:y>35</pd:y>
         <config>
             <variableName>Var</variableName>
         </config>
@@ -125,8 +125,8 @@
     <pd:activity name="Assign 2">
         <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
         <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-        <pd:x>748</pd:x>
-        <pd:y>34</pd:y>
+        <pd:x>554</pd:x>
+        <pd:y>35</pd:y>
         <config>
             <variableName>Var</variableName>
         </config>
@@ -144,8 +144,8 @@
     <pd:activity name="Catch">
         <pd:type>com.tibco.pe.core.CatchActivity</pd:type>
         <pd:resourceType>ae.activities.catch</pd:resourceType>
-        <pd:x>895</pd:x>
-        <pd:y>34</pd:y>
+        <pd:x>701</pd:x>
+        <pd:y>35</pd:y>
         <pd:handler>true</pd:handler>
         <config>
             <catchAll>true</catchAll>

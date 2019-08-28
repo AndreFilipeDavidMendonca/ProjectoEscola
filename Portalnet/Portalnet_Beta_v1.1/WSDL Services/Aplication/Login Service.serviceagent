@@ -8,8 +8,9 @@
         <groups>
             <row isDefault="true" groupName="Default"/>
         </groups>
-        <serviceChange>Tue Jul 23 12:33:45 BST 2019</serviceChange>
+        <serviceChange>Mon Aug 12 17:43:13 BST 2019</serviceChange>
         <name>Login Service</name>
+        <resourceType>service.definition</resourceType>
         <interfaceImpl>
             <tab>
                 <tabName>Login</tabName>
@@ -22,7 +23,7 @@
                             <tabType>impl</tabType>
                             <config>
                                 <operations>
-                                    <row opName="Verification" opImpl="/WSDL Services/Processes/Login/Login Process.process"/>
+                                    <row opName="Verification" opImpl="/WSDL Services/Processes/Login/Login.process"/>
                                 </operations>
                             </config>
                         </tab>
@@ -80,6 +81,5 @@
                 </config>
             </tab>
         </interfaceImpl>
-        <resourceType>service.definition</resourceType>
     </config>
 </serviceResource>

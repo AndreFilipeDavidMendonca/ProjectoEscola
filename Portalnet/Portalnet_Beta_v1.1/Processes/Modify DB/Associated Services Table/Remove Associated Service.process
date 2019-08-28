@@ -55,8 +55,8 @@
     <pd:activity name="JDBC Update">
         <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
-        <pd:x>568</pd:x>
-        <pd:y>34</pd:y>
+        <pd:x>565</pd:x>
+        <pd:y>36</pd:y>
         <config>
             <timeout>10</timeout>
             <commit>false</commit>

@@ -90,7 +90,7 @@
     <pd:activity name="Assign 2">
         <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
         <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-        <pd:x>991</pd:x>
+        <pd:x>985</pd:x>
         <pd:y>35</pd:y>
         <config>
             <variableName>Var</variableName>
@@ -175,9 +175,7 @@ and
 	$Start/pfx9:New_Worker_In_msg/body/pfx8:New_Worker_A/pfx8:Worker_Info/@role = $_globalVariables/pfx3:GlobalVariables/VarAplication/RoleType/Operator
 )
 and
-string-length($Start/pfx9:New_Worker_In_msg/body/pfx8:New_Worker_A/pfx8:Worker_Info/@workerName) &gt; 0 and string-length($Start/pfx9:New_Worker_In_msg/body/pfx8:New_Worker_A/pfx8:Worker_Info/@workerName) &lt; 100
-and
-string-length($Start/pfx9:New_Worker_In_msg/body/pfx8:New_Worker_A/@password) &gt; 0 and string-length($Start/pfx9:New_Worker_In_msg/body/pfx8:New_Worker_A/@password) &lt; 50</pd:xpath>
+string-length($Start/pfx9:New_Worker_In_msg/body/pfx8:New_Worker_A/pfx8:Worker_Info/@workerName) &gt; 0 and string-length($Start/pfx9:New_Worker_In_msg/body/pfx8:New_Worker_A/pfx8:Worker_Info/@workerName) &lt; 100</pd:xpath>
     </pd:transition>
     <pd:transition>
         <pd:from>Get Worker by ID 1</pd:from>

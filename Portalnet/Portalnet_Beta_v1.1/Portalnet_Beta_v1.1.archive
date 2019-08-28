@@ -10,7 +10,7 @@
             <authorProperty>rui.rodrigo.santos</authorProperty>
             <processProperty>/WSDL Services/Aplication/Admin Service.serviceagent,/WSDL Services/Aplication/Client Service.serviceagent,/WSDL Services/Aplication/General Service.serviceagent,/WSDL Services/Aplication/Login Service.serviceagent,/WSDL Services/Aplication/Worker Service.serviceagent</processProperty>
         </processArchive>
-        <versionProperty>7</versionProperty>
+        <versionProperty>18</versionProperty>
         <authorProperty>rui.rodrigo.santos</authorProperty>
         <addServiceSettableGvars>true</addServiceSettableGvars>
         <name>Portalnet_Beta_v1.1</name>
@@ -19,6 +19,6 @@
             <fixedChildren/>
             <resourceDescriptions/>
         </designer>
-        <fileLocationProperty>C:\Users\rui.rodrigo.santos\Documents\TIBCO_Projects\Portalnet\Portalnet_Beta_v1.1\Portalnet_Beta_v1.1.ear</fileLocationProperty>
+        <fileLocationProperty>C:\Users\rui.rodrigo.santos\Documents\Portalnet_TIBCO\Portalnet\Portalnet_Beta_v1.1\Portalnet_Beta_v1.1.ear</fileLocationProperty>
     </enterpriseArchive>
 </Repository:repository>

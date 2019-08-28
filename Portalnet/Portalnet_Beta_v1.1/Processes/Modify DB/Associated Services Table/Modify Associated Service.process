@@ -61,8 +61,8 @@
     <pd:activity name="JDBC Update">
         <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
-        <pd:x>171</pd:x>
-        <pd:y>35</pd:y>
+        <pd:x>170</pd:x>
+        <pd:y>36</pd:y>
         <config>
             <timeout>10</timeout>
             <commit>false</commit>
@@ -85,10 +85,6 @@ WHERE associatedserviceid = ?</statement>
                     <dataType>VARCHAR</dataType>
                 </parameter>
                 <parameter>
-                    <parameterName>AssociatedServiceID</parameterName>
-                    <dataType>INTEGER</dataType>
-                </parameter>
-                <parameter>
                     <parameterName>Address</parameterName>
                     <dataType>VARCHAR</dataType>
                 </parameter>
@@ -99,6 +95,10 @@ WHERE associatedserviceid = ?</statement>
                 <parameter>
                     <parameterName>Locality</parameterName>
                     <dataType>VARCHAR</dataType>
+                </parameter>
+                <parameter>
+                    <parameterName>AssociatedServiceID</parameterName>
+                    <dataType>INTEGER</dataType>
                 </parameter>
             </Prepared_Param_DataType>
         </config>
@@ -113,9 +113,6 @@ WHERE associatedserviceid = ?</statement>
                 <ModificationDate>
                     <xsl:value-of select="$Start/root/ModificationDate"/>
                 </ModificationDate>
-                <AssociatedServiceID>
-                    <xsl:value-of select="$Start/root/AssociatedServiceID"/>
-                </AssociatedServiceID>
                 <Address>
                     <xsl:value-of select="$Start/root/Address"/>
                 </Address>
@@ -125,6 +122,9 @@ WHERE associatedserviceid = ?</statement>
                 <Locality>
                     <xsl:value-of select="$Start/root/Locality"/>
                 </Locality>
+                <AssociatedServiceID>
+                    <xsl:value-of select="$Start/root/AssociatedServiceID"/>
+                </AssociatedServiceID>
             </jdbcUpdateActivityInput>
         </pd:inputBindings>
     </pd:activity>

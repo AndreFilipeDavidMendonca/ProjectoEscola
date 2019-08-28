@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pd:ProcessDefinition xmlns:pfx6="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/WSDL.xsd" xmlns:pfx7="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Client.xsd" xmlns:pfx8="http://xmlns.example.com/1563529189768" xmlns:pfx="http://xmlns.example.com/1563185633211" xmlns:pfx9="http://xmlns.example.com/1563532457786" xmlns:pfx2="http://www.tibco.com/pe/DeployedVarsType" xmlns:pfx3="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Schema1.xsd" xmlns:pfx4="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Schema.xsd" xmlns:pfx5="http://xmlns.example.com/1563379787360" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tib="http://www.tibco.com/bw/xslt/custom-functions" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:pd="http://xmlns.tibco.com/bw/process/2003">
+<pd:ProcessDefinition xmlns:pfx6="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/WSDL.xsd" xmlns:pfx7="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Client.xsd" xmlns:pfx8="http://xmlns.example.com/1563529189768" xmlns:pfx="http://xmlns.example.com/1563185633211" xmlns:pfx9="http://xmlns.example.com/1563532457786" xmlns:pfx2="http://www.tibco.com/pe/DeployedVarsType" xmlns:pfx3="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Schema1.xsd" xmlns:pfx4="http://www.tibco.com/schemas/Portalnet_Beta_v1.0/Resources/Schemas/Schema.xsd" xmlns:pfx5="http://xmlns.example.com/1563379787360" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tib="http://www.tibco.com/bw/xslt/custom-functions" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:pd="http://xmlns.tibco.com/bw/process/2003">
     <wsdl:import namespace="http://xmlns.example.com/1563185633211" location="/WSDL Services/Worker/Worker WSDL.wsdl"/>
     <wsdl:import namespace="http://xmlns.example.com/1563379787360"/>
     <wsdl:import namespace="http://xmlns.example.com/1563529189768" location="/WSDL Services/Aplication/Worker WSDL.wsdl"/>
@@ -27,8 +27,8 @@
     </pd:returnBindings>
     <pd:endName>End</pd:endName>
     <pd:endType wsMsgRef="pfx9:New_Client_Out_msg"/>
-    <pd:endX>1176</pd:endX>
-    <pd:endY>34</pd:endY>
+    <pd:endX>1010</pd:endX>
+    <pd:endY>182</pd:endY>
     <pd:errorSchemas/>
     <pd:processVariables>
         <Var>
@@ -163,8 +163,8 @@
     <pd:activity name="Assign 1">
         <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
         <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-        <pd:x>1042</pd:x>
-        <pd:y>34</pd:y>
+        <pd:x>1009</pd:x>
+        <pd:y>35</pd:y>
         <config>
             <variableName>Var</variableName>
         </config>
@@ -184,8 +184,8 @@
     <pd:activity name="Assign 2">
         <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
         <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-        <pd:x>1335</pd:x>
-        <pd:y>34</pd:y>
+        <pd:x>1188</pd:x>
+        <pd:y>183</pd:y>
         <config>
             <variableName>Var</variableName>
         </config>
@@ -203,8 +203,8 @@
     <pd:activity name="Catch">
         <pd:type>com.tibco.pe.core.CatchActivity</pd:type>
         <pd:resourceType>ae.activities.catch</pd:resourceType>
-        <pd:x>1477</pd:x>
-        <pd:y>34</pd:y>
+        <pd:x>1190</pd:x>
+        <pd:y>35</pd:y>
         <pd:handler>true</pd:handler>
         <config>
             <catchAll>true</catchAll>
@@ -214,8 +214,8 @@
     <pd:activity name="Get Service by ID">
         <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
         <pd:resourceType>ae.process.subprocess</pd:resourceType>
-        <pd:x>372</pd:x>
-        <pd:y>34</pd:y>
+        <pd:x>356</pd:x>
+        <pd:y>35</pd:y>
         <config>
             <processName>/Processes/Read DB/Services Table/Get Service by ID.process</processName>
         </config>
@@ -225,6 +225,182 @@
                     <xsl:value-of select="$Start/pfx9:New_Client_In_msg/body/pfx7:New_Client_W/@serviceID"/>
                 </ServiceID>
             </root>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="NIF Query">
+        <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
+        <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
+        <pd:x>511</pd:x>
+        <pd:y>35</pd:y>
+        <config>
+            <timeout>10</timeout>
+            <commit>false</commit>
+            <maxRows>100</maxRows>
+            <emptyStrAsNil>false</emptyStrAsNil>
+            <jdbcSharedConfig>/Resources/JDBC/JDBC Connection.sharedjdbc</jdbcSharedConfig>
+            <statement>SELECT COUNT(*)
+FROM clients
+Where nif = ?</statement>
+            <Prepared_Param_DataType>
+                <parameter>
+                    <parameterName>NIF</parameterName>
+                    <dataType>INTEGER</dataType>
+                </parameter>
+            </Prepared_Param_DataType>
+            <oraObjects/>
+            <oraTables/>
+            <QueryOutputCachedSchemaColumns>COUNT</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>-5</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>BIGINT</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+        </config>
+        <pd:inputBindings>
+            <jdbcQueryActivityInput>
+                <NIF>
+                    <xsl:choose>
+                        <xsl:when test="exists($Start/pfx9:New_Client_In_msg/body/pfx7:New_Client_W/pfx7:Change_All_Client_Info_W/pfx7:Client_Personal_Info/@nif)">
+                            <xsl:value-of select="$Start/pfx9:New_Client_In_msg/body/pfx7:New_Client_W/pfx7:Change_All_Client_Info_W/pfx7:Client_Personal_Info/@nif"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:attribute name="xsi:nil">true</xsl:attribute>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </NIF>
+            </jdbcQueryActivityInput>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Email Query">
+        <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
+        <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
+        <pd:x>760</pd:x>
+        <pd:y>35</pd:y>
+        <config>
+            <timeout>10</timeout>
+            <commit>false</commit>
+            <maxRows>100</maxRows>
+            <emptyStrAsNil>false</emptyStrAsNil>
+            <jdbcSharedConfig>/Resources/JDBC/JDBC Connection.sharedjdbc</jdbcSharedConfig>
+            <statement>SELECT COUNT(*)
+FROM clients
+Where email = ?</statement>
+            <oraObjects/>
+            <oraTables/>
+            <QueryOutputCachedSchemaColumns>COUNT</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>-5</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>BIGINT</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <Prepared_Param_DataType>
+                <parameter>
+                    <parameterName>Email</parameterName>
+                    <dataType>VARCHAR</dataType>
+                </parameter>
+            </Prepared_Param_DataType>
+        </config>
+        <pd:inputBindings>
+            <jdbcQueryActivityInput>
+                <Email>
+                    <xsl:choose>
+                        <xsl:when test="exists($Start/pfx9:New_Client_In_msg/body/pfx7:New_Client_W/pfx7:Change_All_Client_Info_W/pfx7:Client_Personal_Info/@email)">
+                            <xsl:value-of select="$Start/pfx9:New_Client_In_msg/body/pfx7:New_Client_W/pfx7:Change_All_Client_Info_W/pfx7:Client_Personal_Info/@email"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:attribute name="xsi:nil">true</xsl:attribute>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </Email>
+            </jdbcQueryActivityInput>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Assign ERROR">
+        <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
+        <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
+        <pd:x>760</pd:x>
+        <pd:y>178</pd:y>
+        <config>
+            <variableName>Var</variableName>
+        </config>
+        <pd:inputBindings>
+            <xsl:choose>
+                <xsl:when test="$Mobile-Number-Query/resultSet/Record/COUNT > 0">
+                    <root>
+                        <message>
+                            <xsl:value-of select="$_globalVariables/pfx2:GlobalVariables/VarAplication/MessageType/Error"/>
+                        </message>
+                        <error>
+                            <xsl:value-of select="&quot;Regist Client-Mobile Number Already Exist&quot;"/>
+                        </error>
+                    </root>
+                </xsl:when>
+                <xsl:when test="not($NIF-Query/resultSet/Record/COUNT = 0)">
+                    <root>
+                        <message>
+                            <xsl:value-of select="$_globalVariables/pfx2:GlobalVariables/VarAplication/MessageType/Error"/>
+                        </message>
+                        <error>
+                            <xsl:value-of select="&quot;Regist Client-NIF Already Exist&quot;"/>
+                        </error>
+                    </root>
+                </xsl:when>
+                <xsl:when test="not($Email-Query/resultSet/Record/COUNT = 0)">
+                    <root>
+                        <message>
+                            <xsl:value-of select="$_globalVariables/pfx2:GlobalVariables/VarAplication/MessageType/Error"/>
+                        </message>
+                        <error>
+                            <xsl:value-of select="&quot;Regist Client-Email Already Exist&quot;"/>
+                        </error>
+                    </root>
+                </xsl:when>
+                <xsl:otherwise>
+                    <root>
+                        <message>
+                            <xsl:value-of select="$_globalVariables/pfx2:GlobalVariables/VarAplication/MessageType/Error"/>
+                        </message>
+                    </root>
+                </xsl:otherwise>
+            </xsl:choose>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Mobile Number Query">
+        <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
+        <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
+        <pd:x>638</pd:x>
+        <pd:y>122</pd:y>
+        <config>
+            <timeout>10</timeout>
+            <commit>false</commit>
+            <maxRows>100</maxRows>
+            <emptyStrAsNil>false</emptyStrAsNil>
+            <jdbcSharedConfig>/Resources/JDBC/JDBC Connection.sharedjdbc</jdbcSharedConfig>
+            <statement>SELECT COUNT(*)
+FROM clients
+Where mobilenumber = ?</statement>
+            <oraObjects/>
+            <oraTables/>
+            <QueryOutputCachedSchemaColumns>COUNT</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>-5</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>BIGINT</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <Prepared_Param_DataType>
+                <parameter>
+                    <parameterName>MobileNumber</parameterName>
+                    <dataType>INTEGER</dataType>
+                </parameter>
+            </Prepared_Param_DataType>
+        </config>
+        <pd:inputBindings>
+            <jdbcQueryActivityInput>
+                <MobileNumber>
+                    <xsl:choose>
+                        <xsl:when test="exists($Start/pfx9:New_Client_In_msg/body/pfx7:New_Client_W/pfx7:Change_All_Client_Info_W/pfx7:Client_Personal_Info/@mobileNumber)">
+                            <xsl:value-of select="$Start/pfx9:New_Client_In_msg/body/pfx7:New_Client_W/pfx7:Change_All_Client_Info_W/pfx7:Client_Personal_Info/@mobileNumber"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:attribute name="xsi:nil">true</xsl:attribute>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </MobileNumber>
+            </jdbcQueryActivityInput>
         </pd:inputBindings>
     </pd:activity>
     <pd:transition>
@@ -312,11 +488,76 @@ $Start/pfx9:New_Client_In_msg/header/pfx6:Standard_In_MSG/@id = $Start/pfx9:New_
     </pd:transition>
     <pd:transition>
         <pd:from>Get Service by ID</pd:from>
-        <pd:to>New Client</pd:to>
+        <pd:to>NIF Query</pd:to>
         <pd:xpathDescription>valid_service</pd:xpathDescription>
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>
         <pd:conditionType>xpath</pd:conditionType>
         <pd:xpath>$Get-Service-by-ID/root/message = $_globalVariables/pfx2:GlobalVariables/VarAplication/MessageType/Exist</pd:xpath>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Email Query</pd:from>
+        <pd:to>New Client</pd:to>
+        <pd:xpathDescription>success</pd:xpathDescription>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>xpath</pd:conditionType>
+        <pd:xpath>$NIF-Query/resultSet/Record/COUNT = 0
+and
+$Email-Query/resultSet/Record/COUNT = 0</pd:xpath>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Email Query</pd:from>
+        <pd:to>Assign ERROR</pd:to>
+        <pd:xpathDescription>error</pd:xpathDescription>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>xpath</pd:conditionType>
+        <pd:xpath>$NIF-Query/resultSet/Record/COUNT &gt; 0
+or
+$Email-Query/resultSet/Record/COUNT &gt; 0</pd:xpath>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Assign ERROR</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>NIF Query</pd:from>
+        <pd:to>Mobile Number Query</pd:to>
+        <pd:xpathDescription>not(-1)</pd:xpathDescription>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>xpath</pd:conditionType>
+        <pd:xpath>$Start/pfx9:New_Client_In_msg/body/pfx7:New_Client_W/pfx7:Change_All_Client_Info_W/pfx7:Client_Personal_Info/@mobileNumber  !=-1</pd:xpath>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Mobile Number Query</pd:from>
+        <pd:to>Email Query</pd:to>
+        <pd:xpathDescription>not_exist</pd:xpathDescription>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>xpath</pd:conditionType>
+        <pd:xpath>$Mobile-Number-Query/resultSet/Record/COUNT = 0</pd:xpath>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>NIF Query</pd:from>
+        <pd:to>Email Query</pd:to>
+        <pd:xpathDescription>is-1</pd:xpathDescription>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>xpath</pd:conditionType>
+        <pd:xpath>$Start/pfx9:New_Client_In_msg/body/pfx7:New_Client_W/pfx7:Change_All_Client_Info_W/pfx7:Client_Personal_Info/@mobileNumber = -1</pd:xpath>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Mobile Number Query</pd:from>
+        <pd:to>Assign ERROR</pd:to>
+        <pd:xpathDescription>exist</pd:xpathDescription>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>xpath</pd:conditionType>
+        <pd:xpath>$Mobile-Number-Query/resultSet/Record/COUNT &gt; 0</pd:xpath>
     </pd:transition>
 </pd:ProcessDefinition>

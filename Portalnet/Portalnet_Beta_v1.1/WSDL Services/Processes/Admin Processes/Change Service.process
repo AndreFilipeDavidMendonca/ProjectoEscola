@@ -118,8 +118,8 @@
     <pd:activity name="Assign 2">
         <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
         <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-        <pd:x>896</pd:x>
-        <pd:y>34</pd:y>
+        <pd:x>899</pd:x>
+        <pd:y>35</pd:y>
         <config>
             <variableName>Var</variableName>
         </config>

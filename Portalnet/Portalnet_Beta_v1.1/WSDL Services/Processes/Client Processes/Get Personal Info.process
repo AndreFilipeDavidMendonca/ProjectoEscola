@@ -117,7 +117,7 @@
                     <xsl:value-of select="$_globalVariables/pfx3:GlobalVariables/VarAplication/MessageType/Error"/>
                 </message>
                 <error>
-                    <xsl:value-of select="&quot;Get Personal Info-Invalid input&quot;"/>
+                    <xsl:value-of select="&quot;Get Personal Info-Invalid Input&quot;"/>
                 </error>
             </root>
         </pd:inputBindings>

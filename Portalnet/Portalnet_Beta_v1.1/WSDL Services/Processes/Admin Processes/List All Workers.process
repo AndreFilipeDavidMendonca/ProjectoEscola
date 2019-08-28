@@ -112,8 +112,8 @@
     <pd:activity name="Assign 2">
         <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
         <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-        <pd:x>798</pd:x>
-        <pd:y>34</pd:y>
+        <pd:x>799</pd:x>
+        <pd:y>35</pd:y>
         <config>
             <variableName>Var</variableName>
         </config>
@@ -123,7 +123,7 @@
                     <xsl:value-of select="$_globalVariables/pfx3:GlobalVariables/VarAplication/MessageType/Error"/>
                 </message>
                 <error>
-                    <xsl:value-of select="&quot;List All Workers-Invalid Inputs&quot;"/>
+                    <xsl:value-of select="&quot;List Al Workers-Invalid Inputs&quot;"/>
                 </error>
             </root>
         </pd:inputBindings>
@@ -148,7 +148,11 @@
         <pd:conditionType>xpath</pd:conditionType>
         <pd:xpath>$Start/pfx9:List_All_Workers_In_msg/header/pfx8:Standard_In_MSG/@id &gt; 0 and $Start/pfx9:List_All_Workers_In_msg/header/pfx8:Standard_In_MSG/@id &lt; 10000000000
 and
-$Start/pfx9:List_All_Workers_In_msg/header/pfx8:Standard_In_MSG/@role = $_globalVariables/pfx3:GlobalVariables/VarAplication/RoleType/Admin</pd:xpath>
+(
+$Start/pfx9:List_All_Workers_In_msg/header/pfx8:Standard_In_MSG/@role = $_globalVariables/pfx3:GlobalVariables/VarAplication/RoleType/Admin
+or
+$Start/pfx9:List_All_Workers_In_msg/header/pfx8:Standard_In_MSG/@role = $_globalVariables/pfx3:GlobalVariables/VarAplication/RoleType/Operator
+)</pd:xpath>
     </pd:transition>
     <pd:transition>
         <pd:from>Get Worker by ID</pd:from>
