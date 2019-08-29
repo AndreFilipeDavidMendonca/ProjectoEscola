@@ -168,8 +168,7 @@ and
 
 (
 	$Start/pfx6:List_Associated_Services_In_msg/header/pfx5:Standard_In_MSG/@role = $_globalVariables/pfx3:GlobalVariables/VarAplication/RoleType/Client
-	and
-	$Start/pfx6:List_Associated_Services_In_msg/header/pfx5:Standard_In_MSG/@id = $Start/pfx6:List_Associated_Services_In_msg/body/pfx5:Request_Body/@id
+
 )</pd:xpath>
     </pd:transition>
     <pd:transition>

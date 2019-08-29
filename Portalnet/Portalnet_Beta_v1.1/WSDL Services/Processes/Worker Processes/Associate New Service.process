@@ -7,7 +7,7 @@
     <pd:startName>Start</pd:startName>
     <pd:startType wsMsgRef="pfx8:Associate_Service_In_msg"/>
     <pd:startX>27</pd:startX>
-    <pd:startY>34</pd:startY>
+    <pd:startY>35</pd:startY>
     <pd:returnBindings>
         <pfx8:Associate_Service_Out_msg>
             <header>
